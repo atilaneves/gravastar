@@ -2,6 +2,7 @@
 #include "CCanvas.hpp"
 #include "CSpriteFinder.hpp"
 #include <assert.h>
+#include <stdio.h>
 #include <iostream>
 
 
