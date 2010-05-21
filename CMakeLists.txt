@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 project(gravastar)
 
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR})
+find_package(Allegro REQUIRED)
+
 file(GLOB SRCS_ROOT src/*.cpp)
 file(GLOB SRCS_AI src/ai/*.cpp)
 file(GLOB SRCS_MP3 src/AllegroMP3/*.c)
@@ -24,4 +27,4 @@ include_directories(src/ships)
 
 
 add_executable(Gravastar ${SRCS})
-target_link_libraries(Gravastar -lalleg-4.2.2)
+target_link_libraries(Gravastar ${ALLEGRO_LIBRARIES})
