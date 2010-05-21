@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
 
+find_path(ALLEGRO_INCLUDE_DIR allegro.h
+          PATHS
+          /usr/local/include
+          /usr/include
+          c:/allegro/include)
 
-find_path(ALLEGRO_INCLUDE_DIR allegro.h)
-find_library(ALLEGRO_LIBRARY alleg
+find_library(ALLEGRO_LIBRARY NAMES alleg liballeg
              PATHS ${ALLEGRO_INCLUDE_DIR}/../lib
 	     NO_DEFAULT_PATH)
 
