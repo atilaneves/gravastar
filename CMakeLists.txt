@@ -14,7 +14,7 @@ set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.txt")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   message("Setting CPACK generators for Linux")
-  set(CPACK_GENERATOR "DEB;RPM")
+  set(CPACK_GENERATOR "DEB")
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER ATILA <atila.neves>)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "liballegro4.2")
   set(CPACK_DEBIAN_PACKAGE_SECTION "Games")
@@ -53,4 +53,15 @@ add_executable(Gravastar ${SRCS})
 target_link_libraries(Gravastar ${ALLEGRO_LIBRARIES})
 
 install(TARGETS Gravastar
-        RUNTIME DESTINATION bin)
+        RUNTIME DESTINATION games)
+
+file(GLOB EXPLOSIONS Explosions/*)
+file(GLOB LEVELS Levels/*)
+file(GLOB POWERUPS Powerups/*)
+file(GLOB SHIPS Ships/*)
+file(GLOB SOUNDS Sounds/*)
+file(GLOB WEAPONS Weapoms/*)
+
+install(FILES ${EXPLOSIONS} ${LEVELS} ${POWERUPS} ${SHIPS}
+        ${SOUNDS} ${WEAPONS} fonts.dat Gravastar.mp3
+        grav.dat menu.dat DESTINATION share/Gravastar)
