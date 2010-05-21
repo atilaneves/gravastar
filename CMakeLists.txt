@@ -20,6 +20,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 include(CPack)
 
+include_directories(${ALLEGRO_INCLUDE_DIR})
+
 file(GLOB SRCS_ROOT src/*.cpp)
 file(GLOB SRCS_AI src/ai/*.cpp)
 file(GLOB SRCS_MP3 src/AllegroMP3/*.c)
