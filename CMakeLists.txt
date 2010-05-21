@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(gravastar)
+project(Gravastar)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR})
 find_package(Allegro REQUIRED)
@@ -8,6 +8,9 @@ find_package(Allegro REQUIRED)
 set(CPACK_PACKAGE_VERSION_MAJOR 0)
 set(CPACK_PACKAGE_VERSION_MINOR 7)
 set(CPACK_PACKAGE_VERSION_PATCH 0)
+set(CPACK_PACKAGE_EXECUTABLES Gravastar;Gravastar)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.txt")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   message("Setting CPACK generators for Linux")
@@ -48,3 +51,6 @@ include_directories(src/ships)
 
 add_executable(Gravastar ${SRCS})
 target_link_libraries(Gravastar ${ALLEGRO_LIBRARIES})
+
+install(TARGETS Gravastar
+        RUNTIME DESTINATION bin)
