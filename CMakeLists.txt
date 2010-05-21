@@ -23,6 +23,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   message("Setting CPACK generators for Windows")
   set(CPACK_GENERATOR NSIS)
+  set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/delta.ico")
 endif()
 include(CPack)
 
@@ -37,7 +38,7 @@ file(GLOB SRCS_POWERUPS src/powerups/*.cpp)
 file(GLOB SRCS_SHIPS src/ships/*.cpp)
 
 set(SRCS ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
-         ${SRCS_POWERUPS} ${SRCS_SHIPS})
+         ${SRCS_POWERUPS} ${SRCS_SHIPS} ${CMAKE_SOURCE_DIR}/src/grav.rc)
 
 
 include_directories(src)
@@ -48,20 +49,44 @@ include_directories(src/menu)
 include_directories(src/powerups)
 include_directories(src/ships)
 
+set(GRAVRC_SRC "${CMAKE_SOURCE_DIR}/src/grav.rc")
+set(GRAVRC_OBJ "${CMAKE_BINARY_DIR}/grav.rc.o")
+set(WINDRES windres ${GRAVRC_SRC} ${GRAVRC_OBJ})
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  add_custom_target(gravrc COMMAND ${WINDRES})
+endif()
 
 add_executable(Gravastar ${SRCS})
 target_link_libraries(Gravastar ${ALLEGRO_LIBRARIES})
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  add_dependencies(Gravastar gravrc)
+endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  set(BIN_DIR games)
+  set(DATA_DIR share/Gravastar)
+else()
+  set(BIN_DIR foo/..)
+  set(DATA_DIR foo/..)
+endif()
+
+
 install(TARGETS Gravastar
-        RUNTIME DESTINATION games)
+        RUNTIME DESTINATION ${BIN_DIR})
 
 file(GLOB EXPLOSIONS Explosions/*)
 file(GLOB LEVELS Levels/*)
 file(GLOB POWERUPS Powerups/*)
 file(GLOB SHIPS Ships/*)
 file(GLOB SOUNDS Sounds/*)
-file(GLOB WEAPONS Weapoms/*)
+file(GLOB WEAPONS Weapons/*)
 
-install(FILES ${EXPLOSIONS} ${LEVELS} ${POWERUPS} ${SHIPS}
-        ${SOUNDS} ${WEAPONS} fonts.dat Gravastar.mp3
-        grav.dat menu.dat DESTINATION share/Gravastar)
+install(FILES ${EXPLOSIONS} DESTINATION ${DATA_DIR}/Explosions)
+install(FILES ${LEVELS}     DESTINATION ${DATA_DIR}/Levels)
+install(FILES ${POWERUPS}   DESTINATION ${DATA_DIR}/Powerups)
+install(FILES ${SHIPS}      DESTINATION ${DATA_DIR}/Ships)
+install(FILES ${SOUNDS}     DESTINATION ${DATA_DIR}/Sounds)
+install(FILES ${WEAPONS}    DESTINATION ${DATA_DIR}/Weapons)
+install(FILES fonts.dat Gravastar.mp3
+        grav.dat menu.dat DESTINATION ${DATA_DIR})
