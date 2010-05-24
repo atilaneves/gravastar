@@ -22,5 +22,5 @@ CSong* CRandomSong::CreateSong() const {
 
 std::string CRandomSong::GetSongName() const {
   CDirectory dir("Music");
-  return dir.GetNbEntries() <= 0 ? "" : dir.GetRandomNoExt();
+  return dir.GetNbEntries() <= 1 ? "" : dir.GetRandomNoExt();
 }
