@@ -18,6 +18,14 @@ file(GLOB SRCS_SHIPS src/ships/*.cpp)
 set(SRCS ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
          ${SRCS_POWERUPS} ${SRCS_SHIPS} ${CMAKE_SOURCE_DIR}/src/grav.rc)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  set(GRAV_BIN_DIR games)
+  set(GRAV_DATA_DIR share/games/Gravastar)
+else()
+  set(GRAV_BIN_DIR "foo/..")  #hack to keep it in the same dir
+  set(GRAV_DATA_DIR "foo/..") #same
+endif()
+
 
 include_directories(src)
 include_directories(src/ai)
@@ -26,6 +34,17 @@ include_directories(src/AllegroAPI)
 include_directories(src/menu)
 include_directories(src/powerups)
 include_directories(src/ships)
+
+add_definitions("-DDEV_DATAFILE_DIR=\"${CMAKE_SOURCE_DIR}\"")
+if(UNIX)
+  set(CMAKE_INSTALL_PREFIX "/usr")
+  add_definitions("-DDATAFILE_DIR=\"${CMAKE_INSTALL_PREFIX}/${GRAV_DATA_DIR}\"")
+else()
+  add_definitions("-DDATAFILE_DIR=\"${CMAKE_INSTALL_PREFIX}\"")
+endif()
+
+message("Installation would be to ${CMAKE_INSTALL_PREFIX}/${GRAV_BIN_DIR}")
+
 
 set(GRAVRC_SRC "${CMAKE_SOURCE_DIR}/src/grav.rc")
 set(GRAVRC_OBJ "${CMAKE_BINARY_DIR}/grav.rc.o")
@@ -46,9 +65,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   add_dependencies(Gravastar gravrc)
 endif()
 
-set(CPACK_PACKAGE_VERSION_MAJOR 0)
-set(CPACK_PACKAGE_VERSION_MINOR 7)
-set(CPACK_PACKAGE_VERSION_PATCH 0)
+set(CPACK_PACKAGE_VERSION_MAJOR 1)
+set(CPACK_PACKAGE_VERSION_MINOR 0)
+set(CPACK_PACKAGE_VERSION_PATCH 1)
 set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_SOURCE_DIR}/README.txt)
 set(CPACK_PACKAGE_EXECUTABLES Gravastar;Gravastar)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING.txt")
@@ -70,14 +89,6 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 include(CPack)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  set(BIN_DIR games)
-  set(DATA_DIR share/Gravastar)
-else()
-  set(BIN_DIR "foo/..")
-  set(DATA_DIR "foo/..")
-endif()
-
 
 file(GLOB CFG cfg/*.cfg)
 file(GLOB CFG_COLOURS cfg/colours/*.cfg)
@@ -87,17 +98,19 @@ file(GLOB POWERUPS Powerups/*)
 file(GLOB SHIPS Ships/*)
 file(GLOB SOUNDS Sounds/*)
 file(GLOB WEAPONS Weapons/*)
+file(GLOB MUSIC Music/*)
 
-install(FILES ${CFG}         DESTINATION ${DATA_DIR}/cfg)
-install(FILES ${CFG_COLOURS} DESTINATION ${DATA_DIR}/cfg/colours)
-install(FILES ${EXPLOSIONS}  DESTINATION ${DATA_DIR}/Explosions)
-install(FILES ${LEVELS}      DESTINATION ${DATA_DIR}/Levels)
-install(FILES ${POWERUPS}    DESTINATION ${DATA_DIR}/Powerups)
-install(FILES ${SHIPS}       DESTINATION ${DATA_DIR}/Ships)
-install(FILES ${SOUNDS}      DESTINATION ${DATA_DIR}/Sounds)
-install(FILES ${WEAPONS}     DESTINATION ${DATA_DIR}/Weapons)
+install(FILES ${CFG}         DESTINATION ${GRAV_DATA_DIR}/cfg)
+install(FILES ${CFG_COLOURS} DESTINATION ${GRAV_DATA_DIR}/cfg/colours)
+install(FILES ${EXPLOSIONS}  DESTINATION ${GRAV_DATA_DIR}/Explosions)
+install(FILES ${LEVELS}      DESTINATION ${GRAV_DATA_DIR}/Levels)
+install(FILES ${POWERUPS}    DESTINATION ${GRAV_DATA_DIR}/Powerups)
+install(FILES ${SHIPS}       DESTINATION ${GRAV_DATA_DIR}/Ships)
+install(FILES ${SOUNDS}      DESTINATION ${GRAV_DATA_DIR}/Sounds)
+install(FILES ${WEAPONS}     DESTINATION ${GRAV_DATA_DIR}/Weapons)
+install(FILES ${MUSIC}       DESTINATION ${GRAV_DATA_DIR}/Music)
 install(FILES fonts.dat grav.dat menu.dat stars.dat Gravastar.mp3
-        DESTINATION ${DATA_DIR})
+        DESTINATION ${GRAV_DATA_DIR})
 
 install(TARGETS Gravastar
-        RUNTIME DESTINATION ${BIN_DIR})
+        RUNTIME DESTINATION ${GRAV_BIN_DIR})

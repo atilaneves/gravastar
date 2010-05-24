@@ -1,4 +1,5 @@
 #include "CClientOptions.hpp"
+#include "CDataFile.hpp"
 #include <allegro.h>
 
 
@@ -67,14 +68,17 @@ void CClientOptions::SetDefaults() {
   }
 }
 
-static const char gFileName[] = "cfg/grav.cfg";
+
+static std::string getFileName() {
+  return CDataFile::GetFileName("cfg/grav.cfg");
+}
 
 void CClientOptions::Load() {
-  FILE *fp = fopen(gFileName, "r");
+  FILE *fp = fopen(getFileName().c_str(), "r");
   if(fp == NULL) return;
   mPilots.clear();
-  fscanf(fp, "%d %d %d", &mScreenWidth, &mScreenHeight, &mWindowed);
-  fscanf(fp, "%d %d %d", &mSoundVolume, &mMusicVolume, &mSmartSplit);
+  fscanf(fp, "%d %d %d", &mScreenWidth, &mScreenHeight, (int*)&mWindowed);
+  fscanf(fp, "%d %d %d", &mSoundVolume, &mMusicVolume, (int*)&mSmartSplit);
   for(int i = 0; i < kMaxNbPilots; i++) {
     char controlType[100];
     fscanf(fp, "%s", controlType);
@@ -94,7 +98,7 @@ void CClientOptions::Load() {
 
 
 void CClientOptions::Save() const {
-  FILE *fp=fopen(gFileName, "w");
+  FILE *fp=fopen(getFileName().c_str(), "w");
   if(fp != NULL) {
     int windowed = mWindowed ? 0 : 1;
     fprintf(fp,"%d %d %d\n", mScreenWidth, mScreenHeight, windowed);
@@ -110,7 +114,8 @@ void CClientOptions::Save() const {
     fclose(fp);
   }
   else
-    fprintf(stderr,"\n*** Error: Could not open %s to write ***\n\n", gFileName);
+    fprintf(stderr,"\n*** Error: Could not open %s to write ***\n\n",
+	    getFileName().c_str());
 }
 
 

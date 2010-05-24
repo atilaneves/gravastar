@@ -1,5 +1,6 @@
 #include "CTeam.hpp"
 #include "CColour.hpp"
+#include "CDataFile.hpp"
 #include <stdlib.h>
 
 
@@ -58,7 +59,7 @@ void CTeam::LoadMyColours() {
 
 FILE* CTeam::OpenFile() {
 
-  std::string fileName = "cfg/colours/" + mName + ".cfg";
+  std::string fileName = CDataFile::GetFileName("cfg/colours/" + mName + ".cfg");
   FILE *fp = fopen(fileName.c_str(), "r");
   
   if(fp == NULL) {

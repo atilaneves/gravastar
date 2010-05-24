@@ -1,5 +1,6 @@
 #include "CSoundMP3.hpp"
 #include "CBinaryFile.hpp"
+#include "CDataFile.hpp"
 #include <algorithm>
 #include <allegro.h>
 #include <stdio.h>
@@ -11,7 +12,7 @@ std::list<CSoundMP3*> CSoundMP3::sMP3s;
 
 CSoundMP3::CSoundMP3(const std::string &fileName):
   CSong(fileName) {
-  mFile = new CBinaryFile("Music/" + fileName + ".mp3");
+  mFile = new CBinaryFile(CDataFile::GetFileName("Music/" + fileName + ".mp3"));
   mMP3 = almp3_create_mp3(mFile->GetData(),mFile->GetLength());
   sMP3s.push_back(this);
 }

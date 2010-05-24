@@ -1,6 +1,7 @@
 #include "CIndLoader.hpp"
 #include "CCanvas.hpp"
 #include "CSpriteFinder.hpp"
+#include "CDataFile.hpp"
 #include <assert.h>
 #include <stdio.h>
 #include <iostream>
@@ -11,7 +12,7 @@ extern bool gDebug;
 
 CIndLoader::CIndLoader(std::string &fileName, const CCanvas &canvas,
 		       IndsBmp_t indBmps, void *baseBmp):
-  mFileName(fileName), mCanvas(canvas) {
+  mFileName(CDataFile::GetFileName(fileName)), mCanvas(canvas) {
 
   bool loaded = LoadCoords();
 

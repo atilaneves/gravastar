@@ -15,6 +15,7 @@ public:
  ~CDataFile();
 
  static bool FileExists(const std::string &fileName);
+ static std::string GetFileName(const std::string &wantedFileName);
 
  //inlines
  void *GetData(int i) const { return mFile[i].dat; }

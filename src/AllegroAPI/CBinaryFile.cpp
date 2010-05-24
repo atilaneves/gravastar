@@ -5,8 +5,7 @@
 
 CBinaryFile::CBinaryFile(const std::string &fileName) {
 
-  //open file
-  FILE *fp=fopen (fileName.c_str(), "rb");
+  FILE *fp=fopen(fileName.c_str(), "rb");
   if(fp==NULL) {
     fprintf(stderr, "\n*** Error: could not open %s ***\n\n",
 	    fileName.c_str());

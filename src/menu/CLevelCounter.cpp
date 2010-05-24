@@ -18,7 +18,7 @@ int CLevelCounter::FindNbLevels() {
   char fileName[100];
   do { //find out how many levels there are
     sprintf(fileName, "Levels/level%02d.dat", ++nbLevels);
-  } while(CDataFile::FileExists(fileName));
+  } while(CDataFile::FileExists(CDataFile::GetFileName(fileName)));
 
   return nbLevels - 1; //ends up at 1 too many
 }

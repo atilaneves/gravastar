@@ -8,14 +8,21 @@ CDirectory::CDirectory(const std::string& dirName) {
 
  DIR *dir;
  dirent *ent;
+ std::string dataDirName = DATAFILE_DIR"/" + dirName;
+ std::string devDataDirName = DEV_DATAFILE_DIR"/" + dirName;
 
- if((dir = opendir(dirName.c_str())) == NULL) {
-    perror("Can't open directory");
+ dir = opendir(dirName.c_str());
+ if(dir == NULL) {
+   dir = opendir(dataDirName.c_str());
+   if(dir == NULL) 
+     dir = opendir(devDataDirName.c_str());
  }
+ if(dir == NULL)
+   perror("Can't open directory");
  else {
-    while ((ent = readdir(dir)) != NULL)
+   while ((ent = readdir(dir)) != NULL)
        if(ent->d_name[0] != '.') //nth that starts with "."
-	  mEntries.push_back(std::string(ent->d_name));
+	 mEntries.push_back(std::string(ent->d_name));
  }
 
  FillNoExt();

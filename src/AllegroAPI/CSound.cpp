@@ -1,5 +1,5 @@
 #include "CSound.hpp"
-//#include "CPilotMan.h"
+#include "CDataFile.hpp"
 #include <stdio.h>
 #include <math.h>
 
@@ -12,7 +12,7 @@ CSound::CSound(const std::string &name, float volume, float frequency):
    mDeleteSample(true), mIsPlaying(false),
    mVolume(volume), mFrequency(frequency) {
 
- std::string fileName = "Sounds/" + name + ".wav";
+ std::string fileName = CDataFile::GetFileName("Sounds/" + name + ".wav");
  mSample = load_sample(fileName.c_str());
  if(mSample == NULL)
     fprintf(stderr,"*** Error: Unable to open %s ***\n\n",fileName.c_str());
