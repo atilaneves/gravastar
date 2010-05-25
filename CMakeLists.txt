@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(Gravastar)
+project(gravastar)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR})
 find_package(Allegro REQUIRED)
@@ -20,7 +20,7 @@ set(SRCS ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   set(GRAV_BIN_DIR games)
-  set(GRAV_DATA_DIR share/games/Gravastar)
+  set(GRAV_DATA_DIR share/games/gravastar)
 else()
   set(GRAV_BIN_DIR "foo/..")  #hack to keep it in the same dir
   set(GRAV_DATA_DIR "foo/..") #same
@@ -55,24 +55,24 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  add_executable(Gravastar ${SRCS} ${GRAVRC_OBJ})
+  add_executable(gravastar ${SRCS} ${GRAVRC_OBJ})
 else()
-  add_executable(Gravastar ${SRCS})
+  add_executable(gravastar ${SRCS})
 endif()
-target_link_libraries(Gravastar ${ALLEGRO_LIBRARIES})
+target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  add_dependencies(Gravastar gravrc)
+  add_dependencies(gravastar gravrc)
 endif()
 
 set(CPACK_PACKAGE_VERSION_MAJOR 1)
 set(CPACK_PACKAGE_VERSION_MINOR 0)
 set(CPACK_PACKAGE_VERSION_PATCH 1)
 set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_SOURCE_DIR}/README.txt)
-set(CPACK_PACKAGE_EXECUTABLES Gravastar;Gravastar)
+set(CPACK_PACKAGE_EXECUTABLES gravastar;gravastar)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING.txt")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.txt")
-set(CPACK_PACKAGE_NAME Gravastar)
+set(CPACK_PACKAGE_NAME gravastar)
 
 if(UNIX)
   message("Setting CPACK generators for Linux/Unix")
@@ -115,10 +115,10 @@ install(FILES fonts.dat grav.dat menu.dat stars.dat Gravastar.mp3
 
 if(UNIX)
   install(FILES src/delta.png DESTINATION "${GRAV_DATA_DIR}/../../pixmaps")
-  install(FILES src/menu/Gravastar DESTINATION "${GRAV_DATA_DIR}/../../menu")
+  install(FILES src/menu/gravastar DESTINATION "${GRAV_DATA_DIR}/../../menu")
   install(FILES src/gravastar.desktop DESTINATION "${GRAV_DATA_DIR}/../../applications")
-  install(FILES COPYING.txt LGPL.txt README.txt DESTINATION "${GRAV_DATA_DIR}/../../doc/Gravastar")
+  install(FILES COPYING.txt LGPL.txt README.txt DESTINATION "${GRAV_DATA_DIR}/../../doc/gravastar")
 endif()
 
-install(TARGETS Gravastar
+install(TARGETS gravastar
         RUNTIME DESTINATION ${GRAV_BIN_DIR})

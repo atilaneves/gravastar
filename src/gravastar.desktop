@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Gravastar
+Name=gravastar
 GenericName=Arcade Shoot-em-up
 Comment=Pick a ship and blow the other ships to smithereens
 Icon=delta
-Exec=Gravastar
+Exec=gravastar
 Terminal=false
 Categories=Game;
