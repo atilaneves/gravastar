@@ -77,7 +77,7 @@ set(CPACK_PACKAGE_NAME Gravastar)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   message("Setting CPACK generators for Linux")
   set(CPACK_GENERATOR "DEB")
-  set(CPACK_DEBIAN_PACKAGE_MAINTAINER ATILA <atila.neves>)
+  set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Atila Neves <regdae@gmail.com>")
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "liballegro4.2")
   set(CPACK_DEBIAN_PACKAGE_SECTION "Games")
   set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Arcade multiplayer shoot-em-up")
@@ -111,6 +111,11 @@ install(FILES ${WEAPONS}     DESTINATION ${GRAV_DATA_DIR}/Weapons)
 install(FILES ${MUSIC}       DESTINATION ${GRAV_DATA_DIR}/Music)
 install(FILES fonts.dat grav.dat menu.dat stars.dat Gravastar.mp3
         DESTINATION ${GRAV_DATA_DIR})
+
+install(FILES src/delta.png DESTINATION "${GRAV_DATA_DIR}/../../pixmaps")
+install(FILES src/menu/Gravastar DESTINATION "${GRAV_DATA_DIR}/../../menu")
+install(FILES src/gravastar.desktop DESTINATION "${GRAV_DATA_DIR}/../../applications")
+install(FILES COPYING.txt LGPL.txt README.txt DESTINATION "${GRAV_DATA_DIR}/../../doc/Gravastar")
 
 install(TARGETS Gravastar
         RUNTIME DESTINATION ${GRAV_BIN_DIR})

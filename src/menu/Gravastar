@@ -1,0 +1,6 @@
+?package(Gravastar): \
+    needs="X11" \
+    section="Games/Arcade" \
+    title="Gravastar" \
+    command="/usr/games/Gravastar" \
+    icon="/usr/share/pixmaps/delta.png"

@@ -5,6 +5,16 @@
 
 
 CDirectory::CDirectory(const std::string& dirName) {
+  Constructor(dirName, NULL);
+}
+
+
+CDirectory::CDirectory(const std::string& dirName, const std::string& extension) {
+  Constructor(dirName, &extension);
+}
+
+
+void CDirectory::Constructor(const std::string& dirName, const std::string *extension) {
 
  DIR *dir;
  dirent *ent;
@@ -17,11 +27,13 @@ CDirectory::CDirectory(const std::string& dirName) {
    if(dir == NULL) 
      dir = opendir(devDataDirName.c_str());
  }
+
  if(dir == NULL)
    perror("Can't open directory");
  else {
    while ((ent = readdir(dir)) != NULL)
-       if(ent->d_name[0] != '.') //nth that starts with "."
+       if(ent->d_name[0] != '.' && //nth that starts with "."
+	  (extension == NULL || strstr(ent->d_name, extension->c_str()) != NULL))
 	 mEntries.push_back(std::string(ent->d_name));
  }
 
