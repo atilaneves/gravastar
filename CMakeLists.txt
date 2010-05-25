@@ -43,6 +43,10 @@ else()
   add_definitions("-DDATAFILE_DIR=\"${CMAKE_INSTALL_PREFIX}\"")
 endif()
 
+if(WIN32)
+  set(CMAKE_EXE_LINKER_FLAGS "-mwindows")
+endif()
+
 message("Installation would be to ${CMAKE_INSTALL_PREFIX}/${GRAV_BIN_DIR}")
 
 
