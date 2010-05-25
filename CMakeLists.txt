@@ -90,7 +90,7 @@ elseif(WIN32)
 endif()
 include(CPack)
 
-
+message("prefix is ${CMAKE_INSTALL_PREFIX}")
 file(GLOB CFG cfg/*.cfg)
 file(GLOB CFG_COLOURS cfg/colours/*.cfg)
 file(GLOB EXPLOSIONS Explosions/*)
@@ -118,6 +118,10 @@ if(UNIX)
   install(FILES src/menu/gravastar DESTINATION "${GRAV_DATA_DIR}/../../menu")
   install(FILES src/gravastar.desktop DESTINATION "${GRAV_DATA_DIR}/../../applications")
   install(FILES COPYING.txt LGPL.txt README.txt DESTINATION "${GRAV_DATA_DIR}/../../doc/gravastar")
+endif()
+
+if(WIN32)
+  install(FILES alleg42.dll DESTINATION ${GRAV_BIN_DIR})
 endif()
 
 install(TARGETS gravastar
