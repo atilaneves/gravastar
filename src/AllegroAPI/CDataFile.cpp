@@ -15,6 +15,9 @@ CDataFile::CDataFile(const std::string &filename) {
 
 void CDataFile::Constructor(const std::string &filename) {
 
+  printf("Asked to open    file %s\n", filename.c_str());
+  printf("Actually opening file %s\n", filename.c_str());
+
   if(FileExists(filename))
     mFile = load_datafile(filename.c_str());
 #ifdef DATAFILE_DIR

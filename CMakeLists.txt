@@ -65,7 +65,7 @@ else()
   add_definitions("-DDATAFILE_DIR=\"${CMAKE_INSTALL_PREFIX}\"")
 endif()
 
-if(WIN32)
+if(WIN32 AND ${CMAKE_BUILD_TYPE} STREQUAL "Release")
   set(CMAKE_EXE_LINKER_FLAGS "-mwindows")
 endif()
 
