@@ -12,9 +12,10 @@ CExplosiveBluePrint::CExplosiveBluePrint(int startPos,
 
 
   std::string fileName = "Explosions/" + name + "Exp.dat";
+  fileName = CDataFile::GetFileName(fileName);
 
   if(!CDataFile::FileExists(fileName))
-    fileName = "Explosions/shipExp.dat";
+    fileName = CDataFile::GetFileName("Explosions/shipExp.dat"); //default
 
   CDataFile expData(fileName);
 
