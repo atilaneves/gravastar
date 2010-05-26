@@ -5,6 +5,28 @@ project(gravastar)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR})
 find_package(Allegro REQUIRED)
 
+#set default build type
+IF(NOT CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE Release CACHE STRING
+      "Choose the type of build, options are: Debug Release"
+      FORCE)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+
+set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline")
+set(GRAV_FLAGS_RELEASE "-Wall -O1")
+
+set(CMAKE_C_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
+set(CMAKE_CXX_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
+
+set(CMAKE_C_FLAGS_RELEASE ${GRAV_FLAGS_RELEASE})
+set(CMAKE_CXX_FLAGS_RELEASE ${GRAV_FLAGS_RELEASE})
+
+message("Release C   flags are ${CMAKE_C_FLAGS_RELEASE}")
+message("Debug   C   flags are ${CMAKE_C_FLAGS_DEBUG}")
+message("Release C++ flags are ${CMAKE_CXX_FLAGS_RELEASE}")
+message("Debug   C++ flags are ${CMAKE_CXX_FLAGS_DEBUG}")
+message("Build type is ${CMAKE_BUILD_TYPE}")
+
 include_directories(${ALLEGRO_INCLUDE_DIR})
 
 file(GLOB SRCS_ROOT src/*.cpp)
