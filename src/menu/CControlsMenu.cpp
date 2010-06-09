@@ -19,8 +19,8 @@ CControlsMenu::CControlsMenu(const CVersusMenu &versus,
   strings_t titles(ctrlNames, ctrlNames + sizeof(ctrlNames) / sizeof(char*));
   for(int i = 0; i < kMaxNbPilots; i++) {
     const CPilotInputOptions &op=options.GetPilotOptions(i).GetInputOptions();
-    mRedefines.push_back(new CRedefineMenu(versus, i, op));
-    mControlTypes.push_back(new CControlTypeMenu(*mRedefines[i], op,"",
+    mRedefines.push_back(new CRedefineMenu(versus, i, *this, op));
+    mControlTypes.push_back(new CControlTypeMenu(*mRedefines[i], op, "",
 						 titles, 1, 0));
     AddMenu(mControlTypes[i], i);
     AddMenu(mRedefines[i], i);
@@ -40,10 +40,10 @@ CPilotInputOptions CControlsMenu::GetPilotInputOptions(int i) {
 }
 
 
-int CControlsMenu::GetJoyIndex(int i) {
+int CControlsMenu::GetJoyIndex(int i) const {
   int joyIndex = -1;
   for(int j = 0; j <= i; j++)
-    if(mControlTypes[i]->GetString() == "Joystick")
+    if(mControlTypes[j]->GetString() == "Joystick")
       joyIndex++;
   return joyIndex;
 }

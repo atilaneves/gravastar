@@ -50,11 +50,11 @@ bool CMenuInput::Cancel() {
 bool CMenuInput::PressedNow(bool pressed, bool &wasPressing) {
 
   if(pressed && !wasPressing) {
-    wasPressing=true;
+    wasPressing = true;
     return true;
   }
   if(!pressed)
-    wasPressing=false;
+    wasPressing = false;
 
   return false;
 

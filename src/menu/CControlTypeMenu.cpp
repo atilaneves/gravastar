@@ -11,6 +11,7 @@ CControlTypeMenu::CControlTypeMenu(CRedefineMenu &redefine,
   CCycleStringEnter(title, strings, max, min),
   mRedefine(redefine) {
 
+  //set the menu to "Joystick" as well by going to index 1
   if(options.Type() == "Joystick") SetCycle(1);
 
 }
@@ -20,5 +21,5 @@ CControlTypeMenu::CControlTypeMenu(CRedefineMenu &redefine,
 void CControlTypeMenu::Run(CRootMenu &rootMenu) {
   CCycleStringEnter::Run(rootMenu);
   mRedefine.SetControlType(GetString());
-  mRedefine.Run(rootMenu);
+  mRedefine.Run(rootMenu); //run now since joy and key buttons are incomp.
 }

@@ -31,6 +31,5 @@ CPilotInputOptions::CPilotInputOptions(CCycleStringEnter &typeMenu,
   mSuper(menu.GetButton("Super").GetButton()),
   mStart(menu.GetButton("Start").GetButton()),
   mIndex(index) {
-  
-  //printf("old: %d  new: %d\n", menu.GetIndex(), index);
+
 }

@@ -8,12 +8,18 @@
 #include "CPilotInput.hpp"
 #include "CRootMenu.hpp"
 #include "CPilotInputOptions.hpp"
+#include "CMenuInputRedefine.hpp"
+#include "CControlsMenu.hpp"
 
 
 CRedefineMenu::CRedefineMenu(const CVersusMenu &versus, int pilotNb,
+			     const CControlsMenu &controlsMenu,
 			     const CPilotInputOptions &options):
   CMenu(new CRedefineIcon(*this, versus, pilotNb)),
-  mCursor(*this), mIndex(pilotNb) {
+  mCursor(*this), mIndex(pilotNb), mControlsMenu(controlsMenu) {
+
+  mMenuInputRedefine = new CMenuInputRedefine;
+  mCursor.AdoptInput(mMenuInputRedefine);
 
   for(int i = 0; i < CPilotInput::GetNbControls(); i++) {
     const std::string& name = CPilotInput::GetName(i);
@@ -30,38 +36,54 @@ void CRedefineMenu::Run(CRootMenu &rootMenu) {
   if(mButtons["Left"]->GetType() == "Keyboard")
     mCursor.SetRow(0);
   else
-    mCursor.SetRow(2); //skip left & right for 
+    mCursor.SetRow(2); //skip left & right for joystick
 
   CKeyboard::Clear(); //fresh start for below
 
-  while(true) {
+  while(true && !mMenuInputRedefine->Cancel()) {
     int y = mCursor.GetRow();
-    if(mButtons[CPilotInput::GetName(y)]->GetType() == "Keyboard")
-      mButtons[CPilotInput::GetName(y)]->SetButton(ReadScan(rootMenu));
-    else //joystick it is then
-      mButtons[CPilotInput::GetName(y)]->SetButton(ReadNextButton(rootMenu,
-								  mIndex));
+    int button = mButtons[CPilotInput::GetName(y)]->GetType() == "Keyboard" ?
+      ReadScan(rootMenu) :
+      ReadNextButton(rootMenu, mControlsMenu.GetJoyIndex(mIndex));
+
+    if(!mMenuInputRedefine->Cancelled())
+      mButtons[CPilotInput::GetName(y)]->SetButton(button);
+    else
+      break;
+
     CKeyboard::Clear();
     rootMenu.AfterMenu();
     if(mCursor.GetRow() == mCursor.GetNbRows()) break;
     mCursor.SetRow(mCursor.GetRow() + 1); //next button
   }
+
+  mMenuInputRedefine->Reset();
 }
 
 
 int CRedefineMenu::ReadScan(CRootMenu &rootMenu) {
- while(CKeyboard::KeyPressedAny()) RunStep(rootMenu);
- while(true) {
-   for(int i=1; i<KEY_MAX; i++)
-     if(key[i]) return i;
-   RunStep(rootMenu);
- }
+  //1st, wait til key is no longer pressed
+  while(CKeyboard::KeyPressedAny()) RunStep(rootMenu);
+  CKeyboard::Clear();
+  while(true) {
+    if(mMenuInputRedefine->Cancel()) return 0;
+    
+    for(int i = 1; i < KEY_MAX; i++) {
+      if(i == CKeyboard::kEsc)     continue;
+      if(CKeyboard::KeyPressed(i)) return i;
+    }
+
+    RunStep(rootMenu);
+  }
 }
 
 
 int CRedefineMenu::ReadNextButton(CRootMenu &rootMenu, int joyNb) { 
-  while(CJoystick::IsPressedAny()) RunStep(rootMenu);
+  //1st, wait til no button is pressed
+  while(CJoystick::IsPressedAny(joyNb)) RunStep(rootMenu);
   while(true) { 
+    if(mMenuInputRedefine->Cancel()) return 0;
+
     poll_joystick();
     for(int buttonNb = 0; buttonNb < joy[joyNb].num_buttons; buttonNb++)
       if(joy[joyNb].button[buttonNb].b) return buttonNb;

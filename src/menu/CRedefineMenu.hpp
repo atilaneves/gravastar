@@ -9,6 +9,8 @@
 class CVersusMenu;
 class CDefineButtonMenu;
 class CPilotInputOptions;
+class CMenuInputRedefine;
+class CControlsMenu;
 
 
 class CRedefineMenu: public CMenu {
@@ -16,6 +18,7 @@ class CRedefineMenu: public CMenu {
 public:
 
   CRedefineMenu(const CVersusMenu &versus, int pilotNb,
+		const CControlsMenu& controlsMenu,
 		const CPilotInputOptions& options);
   virtual ~CRedefineMenu() { }
 
@@ -30,8 +33,10 @@ public:
 
 private:
 
+  CMenuInputRedefine* mMenuInputRedefine;
   CMenuCursor mCursor;
   int mIndex;
+  const CControlsMenu &mControlsMenu;
   std::map<std::string, CDefineButtonMenu*> mButtons;
 
   int ReadNextButton(CRootMenu &rootMenu, int joyNb);

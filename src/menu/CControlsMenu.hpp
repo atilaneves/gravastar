@@ -21,8 +21,9 @@ public:
   CControlsMenu(const CVersusMenu &versus, const CClientOptions& options);
   virtual ~CControlsMenu() { }
 
-  virtual  void Draw(CCanvas &canvas);
+  virtual  void      Draw(CCanvas &canvas);
   CPilotInputOptions GetPilotInputOptions(int i);
+           int       GetJoyIndex(int i) const;
 
 
 private:
@@ -32,7 +33,6 @@ private:
   std::vector<CCycleStringEnter*> mControlTypes;
   std::vector<CRedefineMenu*> mRedefines;
 
-          int GetJoyIndex(int i);
   virtual int GetSubMenuX(int column) const;
 
 };

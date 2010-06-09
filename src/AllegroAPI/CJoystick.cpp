@@ -21,7 +21,7 @@ bool CJoystick::JoyPressed(int buttonNb,int joyNb) {
 bool CJoystick::JoyLeft(int joyNb) {
   if(GetNbJoysticks() > 0) { 
     poll_joystick();
-    return joy[0].stick[0].axis[0].d1; 
+    return joy[joyNb].stick[0].axis[0].d1; 
   } 
   else return false;
 }
@@ -30,7 +30,7 @@ bool CJoystick::JoyLeft(int joyNb) {
 bool CJoystick::JoyRight(int joyNb) {
   if(GetNbJoysticks() > 0) { 
     poll_joystick();
-    return joy[0].stick[0].axis[0].d2; 
+    return joy[joyNb].stick[0].axis[0].d2; 
   } 
   else return false;
 }
@@ -39,7 +39,7 @@ bool CJoystick::JoyRight(int joyNb) {
 bool CJoystick::JoyUp(int joyNb) {
   if(GetNbJoysticks() > 0) { 
     poll_joystick();
-    return joy[0].stick[0].axis[1].d1; 
+    return joy[joyNb].stick[0].axis[1].d1; 
   } 
   else return false;
 }
@@ -48,7 +48,7 @@ bool CJoystick::JoyUp(int joyNb) {
 bool CJoystick::JoyDown(int joyNb) {
   if(GetNbJoysticks() > 0) { 
     poll_joystick();
-    return joy[0].stick[0].axis[1].d2; 
+    return joy[joyNb].stick[0].axis[1].d2; 
   } 
   else return false;
 }

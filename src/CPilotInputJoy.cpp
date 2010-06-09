@@ -8,6 +8,7 @@ CPilotInputJoy::CPilotInputJoy(const CPilotInputOptions& options):
   mThrust(options.Thrust()), mWeapon(options.Weapon()),
   mSpecial(options.Special()), mSuper(options.Super()),
   mStart(options.Start()), mIndex(options.GetIndex()) {
+
 }
 
 
@@ -61,10 +62,10 @@ bool CPilotInputJoy::MenuDown() const {
 
 
 bool CPilotInputJoy::MenuSelect() const {
-  return CJoystick::JoyPressed(0);
+  return CJoystick::JoyPressed(0, mIndex);
 }
 
 
 bool CPilotInputJoy::MenuCancel() const {
-  return CJoystick::JoyPressed(1);
+  return CJoystick::JoyPressed(1, mIndex);
 }
