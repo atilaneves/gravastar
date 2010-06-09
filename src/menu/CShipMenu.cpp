@@ -5,6 +5,7 @@
 #include "CDirectory.hpp"
 #include "CResolution.hpp"
 #include "CMenuInputPilot.hpp"
+#include "CMenuInputBot.hpp"
 #include "CGravMenu.hpp"
 #include <algorithm>
 
@@ -47,6 +48,8 @@ void CShipMenu::CreateCursors() {
     if(mVersus.GetPilotType(i) == "Human")
       nbHumans++;
 
+  CMenuInputPilot *firstMenuInputPilot = NULL; //might be used below
+
   //when calling new, cursor gets added to mCursors automatically
   for(int i = 0; i < mVersus.GetNbPilots(); i++) {
     new CShipMenuCursor(*this, i, mVersus.GetPilotTeam(i),
@@ -54,9 +57,18 @@ void CShipMenu::CreateCursors() {
     mCursors[i]->SetRowsCols();
     mCursors[i]->SetCol(mCursorsPos[i].GetX());
     mCursors[i]->SetRow(mCursorsPos[i].GetY());
-    if(i < nbHumans && nbHumans > 1) {
-      CGravOptions options = mGravMenu.GetGravOptions();
-      mCursors[i]->AdoptInput(new CMenuInputPilot(i, options));
+
+    if(nbHumans > 1) { //more than 1 human, special menu controls
+      if(i < nbHumans) {
+	CGravOptions options = mGravMenu.GetGravOptions();
+	CMenuInputPilot *input = new CMenuInputPilot(i, options);
+	mCursors[i]->AdoptInput(input);
+	if(i == 0) firstMenuInputPilot = input;
+      }
+      else {
+	assert(firstMenuInputPilot != NULL);
+	mCursors[i]->AdoptInput(new CMenuInputBot(*firstMenuInputPilot));
+      }
     }
   }
 }

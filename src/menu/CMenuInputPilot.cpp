@@ -1,4 +1,5 @@
 #include "CMenuInputPilot.hpp"
+#include "CMenuInputBot.hpp"
 #include "CGravOptions.hpp"
 #include "CPilotInputFactory.hpp"
 
@@ -10,15 +11,25 @@ CMenuInputPilot::CMenuInputPilot(int index, const CGravOptions& options):
 
 }
 
+CMenuInputPilot::~CMenuInputPilot() {
+  //turn on the bot inputs when we die
+  for(unsigned int i = 0; i < mBots.size(); ++i)
+    mBots[i]->SetActive();
+}
+
+
+void CMenuInputPilot::AddBot(CMenuInputBot* bot) {
+  mBots.push_back(bot);
+}
+
 
 bool CMenuInputPilot::Up() {
-  return PressedNow(mInput->Thrust(), mUp);
+  return PressedNow(mInput->MenuUp(), mUp);
 }
 
 
 bool CMenuInputPilot::Down() {
-  //return PressedNow(mInput->Super(), mDown);
-  return false;
+  return PressedNow(mInput->MenuDown(), mDown);
 }
 
 
@@ -33,12 +44,12 @@ bool CMenuInputPilot::Right() {
 
 
 bool CMenuInputPilot::Select() {
-  return PressedNow(mInput->Weapon(), mSelect);
+  return PressedNow(mInput->MenuSelect(), mSelect);
 }
 
 
 bool CMenuInputPilot::Cancel() {
-  return PressedNow(mInput->Special(), mCancel) ||
+  return PressedNow(mInput->MenuCancel(), mCancel) ||
          CMenuInput::Cancel();
 }
 

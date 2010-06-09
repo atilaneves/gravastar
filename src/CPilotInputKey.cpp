@@ -44,3 +44,22 @@ bool CPilotInputKey::Super() const {
 bool CPilotInputKey::Start() const {
   return CKeyboard::KeyPressed(mStart);
 }
+
+
+bool CPilotInputKey::MenuUp() const {
+  return Thrust();
+}
+
+
+bool CPilotInputKey::MenuDown() const {
+  return false;
+}
+
+bool CPilotInputKey::MenuSelect() const {
+  return Weapon();
+}
+
+
+bool CPilotInputKey::MenuCancel() const {
+  return Special();
+}

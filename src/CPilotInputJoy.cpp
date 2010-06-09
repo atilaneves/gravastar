@@ -48,3 +48,23 @@ bool CPilotInputJoy::Super() const {
 bool CPilotInputJoy::Start() const {
   return CJoystick::JoyPressed(mStart, mIndex);
 }
+
+
+bool CPilotInputJoy::MenuUp() const {
+  return CJoystick::JoyUp(mIndex);
+}
+
+
+bool CPilotInputJoy::MenuDown() const {
+  return CJoystick::JoyDown(mIndex);
+}
+
+
+bool CPilotInputJoy::MenuSelect() const {
+  return CJoystick::JoyPressed(0);
+}
+
+
+bool CPilotInputJoy::MenuCancel() const {
+  return CJoystick::JoyPressed(1);
+}

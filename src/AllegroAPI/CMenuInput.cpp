@@ -13,37 +13,37 @@ bool CMenuInput::sCancel=false;
 
 bool CMenuInput::Up() { 
   return PressedNow(CKeyboard::KeyPressed(CKeyboard::kUp) ||
-		    CJoystick::JoyUp(),sUp);
+		    CJoystick::JoyUp(), sUp);
 }
 
 
 bool CMenuInput::Down() {
   return PressedNow(CKeyboard::KeyPressed(CKeyboard::kDown) ||
-		    CJoystick::JoyDown(),sDown);
+		    CJoystick::JoyDown(), sDown);
 }
 
 
 bool CMenuInput::Left() {
   return PressedNow(CKeyboard::KeyPressed(CKeyboard::kLeft) ||
-		    CJoystick::JoyLeft(),sLeft);
+		    CJoystick::JoyLeft(), sLeft);
 }
 
 
 bool CMenuInput::Right() {
   return PressedNow(CKeyboard::KeyPressed(CKeyboard::kRight) ||
-		    CJoystick::JoyRight(),sRight);
+		    CJoystick::JoyRight(), sRight);
 }
 
 
 bool CMenuInput::Select() {
   return PressedNow(CKeyboard::KeyPressed(CKeyboard::kEnter) ||
-		    CJoystick::JoyPressed(0),sSelect);
+		    CJoystick::JoyPressed(0), sSelect);
 }
 
 
 bool CMenuInput::Cancel() {
   return PressedNow(CKeyboard::KeyPressed(CKeyboard::kEsc) ||
-		    CJoystick::JoyPressed(1),sCancel);
+		    CJoystick::JoyPressed(1), sCancel);
 }
 
 
