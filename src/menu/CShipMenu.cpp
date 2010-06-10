@@ -8,6 +8,7 @@
 #include "CMenuInputBot.hpp"
 #include "CGravMenu.hpp"
 #include <algorithm>
+#include <assert.h>
 
 
 CShipMenu::CShipMenu(const CGravMenu &gravMenu, const CVersusMenu &versus):
