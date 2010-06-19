@@ -15,6 +15,7 @@ objs_t CSpriteObjs::sObjs;
 void CSpriteObjs::Update(float dt) {
   
   for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o) {
+    //DEBUG("Update  obj %p of type %s\n", *o, typeid(**o).name());
     (*o)->Update(dt);
     if((*o)->IsActive()) DrawObj(*o);
   }
@@ -36,7 +37,7 @@ void CSpriteObjs::Erase() {
 
 void CSpriteObjs::AddObj(CSpriteObj *obj, bool back) {
   DEBUG("Adding   obj %p of type %s, total will be %d\n",
-		    obj, typeid(*obj).name(), sObjs.size() + 1);
+	obj, typeid(*obj).name(), sObjs.size() + 1);
   if(back) sObjs.push_back(obj);
   else     sObjs.push_front(obj);
 }
@@ -101,6 +102,9 @@ void CSpriteObjs::Stop(const CVector2& pos, const CSpriteObj &ship,
 
 
 void CSpriteObjs::DrawObj(CSpriteObj* sprObj) {
+  DEBUG("Drawing  obj %p of type %s at (%d, %d)\n",
+	sprObj, typeid(*sprObj).name(),
+	int(sprObj->GetPos().GetX()), int(sprObj->GetPos().GetY()));
   sprObj->Draw();
   sprObj->SetUpdated(true);
 }

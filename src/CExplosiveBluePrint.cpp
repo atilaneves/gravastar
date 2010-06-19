@@ -23,7 +23,8 @@ CExplosiveBluePrint::CExplosiveBluePrint(int startPos,
     mExplosionSprites.push_back(new CGravSprite(expData.GetData(i),
 						team));
 
-  if(CDataFile::FileExists("Sounds/" + name + "Exp.wav"))
+  std::string wavFileName = "Sounds/" + name + "Exp.wav";
+  if(CDataFile::FileExists(CDataFile::GetFileName(wavFileName)))
     mSound.reset(new CSound(name + "Exp"));
   else
     mSound.reset(new CSound("shipExp"));
