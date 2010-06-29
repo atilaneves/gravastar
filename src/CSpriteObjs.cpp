@@ -102,9 +102,9 @@ void CSpriteObjs::Stop(const CVector2& pos, const CSpriteObj &ship,
 
 
 void CSpriteObjs::DrawObj(CSpriteObj* sprObj) {
-  DEBUG("Drawing  obj %p of type %s at (%d, %d)\n",
-	sprObj, typeid(*sprObj).name(),
-	int(sprObj->GetPos().GetX()), int(sprObj->GetPos().GetY()));
+  // DEBUG("Drawing  obj %p of type %s at (%d, %d)\n",
+  // 	sprObj, typeid(*sprObj).name(),
+  // 	int(sprObj->GetPos().GetX()), int(sprObj->GetPos().GetY()));
   sprObj->Draw();
   sprObj->SetUpdated(true);
 }

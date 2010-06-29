@@ -42,12 +42,14 @@ void CGravSprite::Transform(BITMAP *bmp, const CTeam &team, int colour,
 }
 
 void CGravSprite::Draw(CCanvas &canvas, int x, int y) const {
-  mSprite->Draw(canvas, x, y);
+  if(x < canvas.GetWidth() && y < canvas.GetHeight())
+    mSprite->Draw(canvas, x, y);
 }
 
 
 void CGravSprite::Erase(CCanvas &canvas, int x, int y) const {
-  mErase->Draw(canvas, x, y);
+  if(x < canvas.GetWidth() && y < canvas.GetHeight())
+    mErase->Draw(canvas, x, y);
 }
 
 
