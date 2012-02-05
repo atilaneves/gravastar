@@ -1,12 +1,17 @@
 #include "test_library.hpp"
 #include <memory>
-#include <assert.h>
+#include <iostream>
 
-
-void TestCase::doTest() {
+bool TestCase::doTest() {
   setup();
   test();
   shutdown();
+  return !_failed;
+}
+
+bool TestCase::verifyTrue(bool condition) {
+  _failed = !condition;
+  return condition;
 }
 
 
@@ -15,18 +20,20 @@ TestSuite& TestSuite::getInstance() {
   return instance;
 }
 
-bool TestSuite::registerTest(TestCaseCreator creator) {
-  _creators.push_back(creator);
-  return true;
+bool TestSuite::registerTest(const std::string& name, TestCaseCreator creator) {
+  return _creators.insert(std::make_pair(name, creator)).second;
+}
+
+void TestSuite::addFailure(const std::string& name) {
+  _failures.push_back(name);
 }
 
 void TestSuite::runTests() {
-  for(auto creator: _creators) {
-    std::unique_ptr<TestCase> testCase {creator()};
-    testCase->doTest();
+  for(auto it: _creators) {
+    std::unique_ptr<TestCase> testCase { it.second() };
+    if(!testCase->doTest()) addFailure(it.first);
   }
-}
 
-void checkTrue(bool condition) {
-  assert(condition);
+  for(auto failure: _failures)
+    std::cout << "Test " << failure << " failed." << std::endl;
 }

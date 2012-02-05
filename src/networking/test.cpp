@@ -1,6 +1,6 @@
 #include "test_library.hpp"
 #include <string>
-#include <stdio.h>
+#include <iostream>
 
 struct TestTestCase: public TestCase {
   virtual void test() {
@@ -14,7 +14,8 @@ REGISTER_TEST(TestTestCase)
 
 
 int main() {
-  printf("Running tests...\n");
+  std::cout << "Running tests..." << std::endl;
   TestSuite::getInstance().runTests();
-  printf("%d test(s) run.\n\n", TestSuite::getInstance().getNumTests());
+  std::cout << TestSuite::getInstance().getNumTests() << " test(s) run, " <<
+    TestSuite::getInstance().getNumFailures() << " failed.\n\n";
 }

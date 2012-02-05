@@ -1,20 +1,34 @@
 #ifndef TEST_LIBRARY_HPP
 #define TEST_LIBRARY_HPP
 
+#include <map>
 #include <vector>
-#include <assert.h>
+#include <string>
+#include <iostream>
 
 class TestCase {
 public:
 
+  TestCase():_failed(false) { }
   virtual ~TestCase() { }
-  void doTest();
+  bool doTest();
 
 protected:
 
+  template<typename T, typename U>
+  bool verifyEqual(T t, U u) {
+    if(t != u) _failed = true;
+    return t == u;
+  }
+
+  bool verifyTrue(bool condition);
   virtual void test() = 0;
   virtual void setup()    { }
   virtual void shutdown() { }
+
+private:
+
+  bool _failed;
 
 };
 
@@ -24,13 +38,16 @@ class TestSuite {
 public:
 
   static TestSuite& getInstance();
-  bool registerTest(TestCaseCreator creator);
+  bool registerTest(const std::string& name, TestCaseCreator creator);
+  void addFailure(const std::string& name);
   void runTests();
-  int getNumTests() const { return _creators.size(); }
+  int getNumTests()    const { return _creators.size(); }
+  int getNumFailures() const { return _failures.size(); }
 
 private:
 
-  std::vector<TestCaseCreator> _creators;
+  std::map<std::string, TestCaseCreator> _creators;
+  std::vector<std::string> _failures;
 
   TestSuite() { }
   TestSuite(const TestSuite&);
@@ -39,19 +56,31 @@ private:
 };
 
 
-void checkTrue(bool condition);
-
-template<typename T, typename U>
-inline void checkEqual(T t, U u) {
-  assert(t == u);
-}
-
 #define REGISTER_TEST(test) \
 namespace { \
     TestCase* create_##test() { \
         return new test; \
     } \
-    bool result_##test = TestSuite::getInstance().registerTest(create_##test); \
+    bool result_##test = TestSuite::getInstance().registerTest(#test, create_##test); \
 }
+
+
+#define checkEqual(value, expected) \
+  { \
+     bool check = verifyEqual(value, expected); \
+     if(!check) \
+       std::cout << __FILE__ << ":" << __LINE__ << \
+	 " Value " #value " is not the expected " << expected << std::endl; \
+  }
+
+#define checkTrue(value) \
+  { \
+     bool check = verifyTrue(value); \
+     if(!check) \
+       std::cout << __FILE__ << ":" << __LINE__ << \
+	 " Value " #value " is not true" << std::endl; \
+  }
+
+
 
 #endif
