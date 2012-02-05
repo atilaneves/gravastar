@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --std=c++0x")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} --std=c++0x")
 
+include_directories(../AllegroAPI)
+
 set(SRC foo.cpp)
 add_library(networking ${SRC})
 
