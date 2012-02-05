@@ -27,7 +27,7 @@ message("Release C++ flags are ${CMAKE_CXX_FLAGS_RELEASE}")
 message("Debug   C++ flags are ${CMAKE_CXX_FLAGS_DEBUG}")
 message("Build type is ${CMAKE_BUILD_TYPE}")
 
-add_subdirectory(networking)
+add_subdirectory(src/networking)
 
 include_directories(${ALLEGRO_INCLUDE_DIR})
 

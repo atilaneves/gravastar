@@ -1,5 +1,6 @@
 #include "test_library.hpp"
 #include <string>
+#include <stdio.h>
 
 struct TestTestCase: public TestCase {
   virtual void test() {
@@ -13,5 +14,7 @@ REGISTER_TEST(TestTestCase)
 
 
 int main() {
+  printf("Running tests...\n");
   TestSuite::getInstance().runTests();
+  printf("%d test(s) run.\n\n", TestSuite::getInstance().getNumTests());
 }

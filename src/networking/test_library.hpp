@@ -26,6 +26,7 @@ public:
   static TestSuite& getInstance();
   bool registerTest(TestCaseCreator creator);
   void runTests();
+  int getNumTests() const { return _creators.size(); }
 
 private:
 
@@ -41,16 +42,16 @@ private:
 void checkTrue(bool condition);
 
 template<typename T, typename U>
-void checkEqual(T t, U u) {
+inline void checkEqual(T t, U u) {
   assert(t == u);
 }
 
 #define REGISTER_TEST(test) \
-  namespace { \
-      TestCase* create_##test() { \
-          return new test; \
-      } \
-      bool result_##test = TestSuite::getInstance().registerTest(create_##test); \
-  }
+namespace { \
+    TestCase* create_##test() { \
+        return new test; \
+    } \
+    bool result_##test = TestSuite::getInstance().registerTest(create_##test); \
+}
 
 #endif

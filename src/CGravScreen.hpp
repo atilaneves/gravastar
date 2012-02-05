@@ -8,6 +8,7 @@
 #include "CFourSplitScreens.hpp"
 #include "CTimeCounter.hpp"
 #include "CFont.hpp"
+#include "CScreenPos.hpp"
 #include <vector>
 
 
@@ -41,6 +42,7 @@ private:
   CTimeCounter mTimeCounter;
 
   void PrintSongTitle();
+  CSplitScreens& GetSplitScreens(const CScreenPos& pos, const pilots_t& pilots);
 
 };
 
