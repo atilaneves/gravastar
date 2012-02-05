@@ -9,7 +9,7 @@
 #include "CShip.hpp"
 
 
-objs_t CSpriteObjs::sObjs;
+CSpriteObjs::objs_t CSpriteObjs::sObjs;
 
 
 void CSpriteObjs::Update(float dt) {

@@ -7,14 +7,12 @@
 #include "CVector2.hpp"
 #include <list>
 
-typedef std::list<CSpriteObj*> objs_t;
-typedef objs_t::iterator objPlace_t;
-typedef objs_t::reverse_iterator robjPlace_t;
-
-
 class CSpriteObjs {
-
 public:
+
+  typedef std::list<CSpriteObj*> objs_t;
+  typedef objs_t::iterator objPlace_t;
+  typedef objs_t::reverse_iterator robjPlace_t;
 
   static void        AddObj(CSpriteObj *sprObj, bool back = true);
   static void        DeleteAll();
