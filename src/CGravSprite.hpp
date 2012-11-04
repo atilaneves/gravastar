@@ -34,8 +34,8 @@ public:
 
 private:
 
-  std::auto_ptr<CSprite> mSprite; //what you draw with
-  std::auto_ptr<CSprite> mErase;  //what you erase with
+  std::unique_ptr<CSprite> mSprite; //what you draw with
+  std::unique_ptr<CSprite> mErase;  //what you erase with
   CSpriteCollision mCollision;
 
   void Transform(BITMAP *bmp, const CTeam &team, int colour, 

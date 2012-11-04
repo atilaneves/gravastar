@@ -38,18 +38,18 @@ public:
 
 protected:
 
-  std::auto_ptr<CCanvas>         mCanvas;
+  std::unique_ptr<CCanvas>         mCanvas;
 
 
 private:
 
-  CMenu                          mMenu;
-  CMenuCursor                    mCursor;
-  CFont                          mFont;
-  std::vector<CMenu*>            mMenus;
-  std::auto_ptr<CMenuBackground> mTitle;
-  std::auto_ptr<CMenuBackground> mBackground;
-  std::auto_ptr<CSong>           mSong;
+  CMenu                            mMenu;
+  CMenuCursor                      mCursor;
+  CFont                            mFont;
+  std::vector<CMenu*>              mMenus;
+  std::unique_ptr<CMenuBackground> mTitle;
+  std::unique_ptr<CMenuBackground> mBackground;
+  std::unique_ptr<CSong>           mSong;
 
   virtual void AtExit() { }
           bool Exit();

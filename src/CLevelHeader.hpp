@@ -24,10 +24,10 @@ public:
 
 protected:
 
-  std::string            mFileName;
-  std::string            mCfgName;
-  std::string            mTitle; //name of the level
-  std::auto_ptr<CCanvas> mCanvas;
+  std::string              mFileName;
+  std::string              mCfgName;
+  std::string              mTitle; //name of the level
+  std::unique_ptr<CCanvas> mCanvas;
   int   mNbInds;
   float mGravity, mAirFriction, mLandFriction;
 

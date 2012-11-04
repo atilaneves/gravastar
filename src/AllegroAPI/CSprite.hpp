@@ -1,7 +1,6 @@
 #ifndef CSPRITE_H
 #define CSPRITE_H
 
-
 #include "CDrawable.hpp"
 #include <allegro.h>
 

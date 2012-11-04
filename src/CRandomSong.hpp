@@ -22,7 +22,7 @@ public:
 
 private:
 
-  std::auto_ptr<CSong> mSong;
+  std::unique_ptr<CSong> mSong;
 
   CSong*      CreateSong()  const;
   std::string GetSongName() const;

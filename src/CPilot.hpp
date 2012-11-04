@@ -21,7 +21,7 @@ class CPilot {
 public:
 
   CPilot(const CPilotOptions &options, const CShipYard &shipYard,
-	 CMeleeScore& meleeScore);
+         CMeleeScore& meleeScore);
   virtual ~CPilot() { }
 
           void AddDamage(float amount, CPilot &pilot);
@@ -36,8 +36,7 @@ public:
           int  GetScore()   const;
           CShip& GetShip() const { return *mShip; }
           int GetShipIndex() const { return mOptions.GetNbShips() - mNbShips; }
-  const std::string& GetShipName(int i=0) const { return
-						    mOptions.GetShipName(i); }
+  const std::string& GetShipName(int i=0) const { return mOptions.GetShipName(i); }
   const CShipStatSprite& GetShipStatSprite(int index=0) const;
   const CTeam& GetTeam()    const { return mOptions.GetTeam(); }
   virtual bool HasSplitScreen() const = 0;
@@ -63,7 +62,7 @@ private:
 
 protected:
 
-  std::auto_ptr<CPilotInput> mInput;
+  std::unique_ptr<CPilotInput> mInput;
   const CPilotOptions& mOptions;
   const CShipYard&     mShipYard;
   CMeleeScore&         mMeleeScore;

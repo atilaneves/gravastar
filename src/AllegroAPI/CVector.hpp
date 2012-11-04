@@ -1,9 +1,7 @@
 #ifndef CVECTOR_H
 #define CVECTOR_H
 
-
-#include <cmath>
-
+#include "pi.hpp"
 
 template<typename T>
 class CVector {
@@ -141,7 +139,7 @@ void CVector<T>::SetTheta(T theta) {
 template<typename T>
 T CVector<T>::Angle(const CVector<T>& v) const {
   float theta = std::acos((*this * v) / (Radius() * v.Radius()));
-  if(theta < 0) theta += 2*M_PI;
+  if(theta < 0) theta += 2 * M_PI;
   return theta;
 }
 
@@ -149,8 +147,8 @@ T CVector<T>::Angle(const CVector<T>& v) const {
 template<typename T>
 T CVector<T>::Theta() const {
   T theta = atan2(mY, mX);
-  if(theta < 0)      theta += 2*M_PI;
-  if(theta > 2*M_PI) theta -= 2*M_PI;
+  if(theta < 0)      theta += 2 * M_PI;
+  if(theta > 2*M_PI) theta -= 2 * M_PI;
   return theta;
 }
 

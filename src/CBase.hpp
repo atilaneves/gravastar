@@ -13,7 +13,7 @@ class CBase: public CIndestructible {
 public:
 
   CBase(CLevel &level, const CVector2 &pos, CGravSprite *sprite,
-	const CSound& klang);
+        const CSound& klang);
 
   CVector2 GetFreePos(const CGravSprite& sprite) const;
 
@@ -21,7 +21,7 @@ public:
 private:
 
   const CCanvas& mCanvas;
-  std::auto_ptr<CGravSprite> mSprite;
+  std::unique_ptr<CGravSprite> mSprite;
 
   virtual void ShipLanded(CShip &ship, float dt);
 

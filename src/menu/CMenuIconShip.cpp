@@ -1,7 +1,7 @@
 #include "CMenuIconShip.hpp"
 #include "CDataFile.hpp"
 #include "deltadat.h"
-#include <math.h>
+#include "pi.hpp"
 
 
 static CSprite* gSprite;

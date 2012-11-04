@@ -15,19 +15,18 @@ public:
   virtual void Draw()  { if(mDraw) mDecorated->Draw();  }
           void Die() { mActive = false; }
   virtual void Erase() { mDecorated->Erase(); }
-  virtual const CGravSprite& GetSprite() const {
-    return mDecorated->GetSprite(); }
+  virtual const CGravSprite& GetSprite() const { return mDecorated->GetSprite(); }
   virtual bool IsActive()  { return mActive && mDecorated->IsActive(); }
   virtual void Update(float dt);
 
 
 private:
 
-  std::auto_ptr<CSpriteObj> mDecorated;
-  float                     mFrequency;
-  float                     mFlicker;
-  bool                      mDraw;
-  bool                      mActive;
+  std::unique_ptr<CSpriteObj> mDecorated;
+  float                       mFrequency;
+  float                       mFlicker;
+  bool                        mDraw;
+  bool                        mActive;
 
 
 };

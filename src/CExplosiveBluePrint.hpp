@@ -20,7 +20,7 @@ public:
   enum { kNbExpFrames = 4 };
 
   CExplosiveBluePrint(int startPos, const std::string &name,
-		      const CDataFile &dataFile, const CTeam &team);
+                      const CDataFile &dataFile, const CTeam &team);
 
   const CSpriteVector& GetSprites() const {
     return mMoverBluePrint.GetSprites(); }
@@ -33,7 +33,7 @@ private:
 
   CMoverBluePrint mMoverBluePrint;
   CSpriteVector   mExplosionSprites;
-  std::auto_ptr<CSound> mSound;
+  std::unique_ptr<CSound> mSound;
 
 };
 

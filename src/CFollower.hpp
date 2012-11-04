@@ -12,7 +12,7 @@ class CFollower: public CMoverObj {
 public:
 
   CFollower(const CSpriteVector &sprites, CLevel &level, CMoverObj &mover,
-	    CSound *sound = 0, const CVector2& offset = CVector2(0, 0));
+            CSound *sound = 0, const CVector2& offset = CVector2(0, 0));
   virtual ~CFollower();
 
   virtual CVector2 CalcAcc() { return CVector2(0, 0); }
@@ -25,11 +25,11 @@ public:
 
 protected:
 
-  bool                  mActive;
-  int                   mSpriteIndex;
-  CMoverObj&            mFollowed;
-  std::auto_ptr<CSound> mSound;
-  CVector2              mOffset;
+  bool                    mActive;
+  int                     mSpriteIndex;
+  CMoverObj&              mFollowed;
+  std::unique_ptr<CSound> mSound;
+  CVector2                mOffset;
 
 };
 

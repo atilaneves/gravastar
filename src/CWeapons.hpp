@@ -19,7 +19,7 @@ class CWeapons {
 public:
 
   CWeapons(const std::string& name, const CShipBluePrint& bluePrint,
-	   CShip &ship, CLevel &level);
+           CShip &ship, CLevel &level);
   
   const CGravSprite& GetSpecialSprite() const {
     return mSpecial->GetSprite();
@@ -47,17 +47,17 @@ public:
   void  SetSuperGauge(float amount)   { mSuper.SetGauge(amount); }
   void  Update(float dt);
   CMoverObj* UseSpecialAt(const CVector2& pos, const CVector2& vel,
-			  const std::string& name, bool shadow = false) {
+                          const std::string& name, bool shadow = false) {
           return mSpecial->UseAt(pos, vel, name, shadow); }
   CProjectile* UseWeaponAt(const CVector2& pos, const CVector2& vel,
-		    const std::string& name = "") {
+                           const std::string& name = "") {
           return mWeapon->UseAt(pos, vel, name); }
 
 
 private:
 
-  std::auto_ptr<CWeapon>  mWeapon;
-  std::auto_ptr<CSpecial> mSpecial;
+  std::unique_ptr<CWeapon>  mWeapon;
+  std::unique_ptr<CSpecial> mSpecial;
   CSuper mSuper;
 
 };

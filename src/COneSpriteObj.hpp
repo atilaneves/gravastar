@@ -18,7 +18,7 @@ public:
 
 private:
 
-  std::auto_ptr<CGravSprite> mSprite;
+  std::unique_ptr<CGravSprite> mSprite;
 
 };
 

@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <functional>
 
 class TestCase {
 public:
@@ -18,7 +19,7 @@ protected:
   template<typename T, typename U>
   bool verifyEqual(T t, U u) {
     if(t != u) _failed = true;
-    return t == u;
+    return !_failed;
   }
 
   bool verifyTrue(bool condition);
@@ -32,13 +33,13 @@ private:
 
 };
 
-typedef TestCase* (*TestCaseCreator)();
+typedef std::function<TestCase*()> TestCaseCreator;
 
 class TestSuite {
 public:
 
   static TestSuite& getInstance();
-  bool registerTest(const std::string& name, TestCaseCreator creator);
+  bool registerTest(const std::string& name, const TestCaseCreator& creator);
   void addFailure(const std::string& name);
   void runTests();
   int getNumTests()    const { return _creators.size(); }

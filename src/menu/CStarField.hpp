@@ -33,9 +33,9 @@ private:
   int mBackgroundX;
   int mBackgroundStep;
   Stars2D mStars[kLayersStars][kNbStars];
-  std::auto_ptr<CCanvas> mBackground;
-  std::auto_ptr<CCanvas> mStar1;
-  std::auto_ptr<CCanvas> mStar2;
+  std::unique_ptr<CCanvas> mBackground;
+  std::unique_ptr<CCanvas> mStar1;
+  std::unique_ptr<CCanvas> mStar2;
   
   void AnimateStars();
   void InitStars();

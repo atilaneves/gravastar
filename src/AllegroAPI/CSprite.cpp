@@ -1,7 +1,7 @@
 #include "CSprite.hpp"
 #include "CCanvas.hpp"
 #include "CColour.hpp"
-#include <math.h>
+#include "pi.hpp"
 
 
 CSprite::CSprite(void *data) {

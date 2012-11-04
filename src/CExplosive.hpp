@@ -14,8 +14,8 @@ class CExplosive: public CMoverObj {
 public:
 
   CExplosive(const CExplosiveBluePrint &bluePrint, CLevel &level,
-	     CPilot& pilot,
-	     const CVector2 &pos, const CVector2 &vel, float maxHull);
+             CPilot& pilot,
+             const CVector2 &pos, const CVector2 &vel, float maxHull);
 
   virtual void        AtDeath();
   virtual void        Die()              { LoseHull(mHull); }

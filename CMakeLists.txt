@@ -12,8 +12,8 @@ if(NOT CMAKE_BUILD_TYPE)
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline")
-set(GRAV_FLAGS_RELEASE "-Wall -O1")
+set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline -std=c++0x")
+set(GRAV_FLAGS_RELEASE "-Wall -O1 -std=c++0x")
 
 set(CMAKE_C_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
 set(CMAKE_CXX_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})

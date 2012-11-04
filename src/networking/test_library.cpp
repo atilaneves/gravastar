@@ -20,7 +20,7 @@ TestSuite& TestSuite::getInstance() {
   return instance;
 }
 
-bool TestSuite::registerTest(const std::string& name, TestCaseCreator creator) {
+bool TestSuite::registerTest(const std::string& name, const TestCaseCreator& creator) {
   return _creators.insert(std::make_pair(name, creator)).second;
 }
 
@@ -29,7 +29,7 @@ void TestSuite::addFailure(const std::string& name) {
 }
 
 void TestSuite::runTests() {
-  for(auto it: _creators) {
+  for(const auto& it: _creators) {
     std::unique_ptr<TestCase> testCase { it.second() };
     if(!testCase->doTest()) addFailure(it.first);
   }

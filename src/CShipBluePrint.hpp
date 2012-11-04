@@ -62,11 +62,11 @@ private:
   CMoverBluePrint       mInvulnerableBluePrint;
   CMoverBluePrint       mScrambleBluePrint;
   CMoverBluePrint       mEMPBluePrint;
-  std::auto_ptr<CProjBluePrint>  mWeaponBluePrint;
-  std::auto_ptr<CProjBluePrint>  mExtraProjBluePrint;
-  std::auto_ptr<CProjBluePrint>  mProjSpecBluePrint;
-  std::auto_ptr<CFollowBluePrint> mFollowSpecBluePrint;
-  std::auto_ptr<CFollowBluePrint> mExtraFollowBluePrint;
+  std::unique_ptr<CProjBluePrint>  mWeaponBluePrint;
+  std::unique_ptr<CProjBluePrint>  mExtraProjBluePrint;
+  std::unique_ptr<CProjBluePrint>  mProjSpecBluePrint;
+  std::unique_ptr<CFollowBluePrint> mFollowSpecBluePrint;
+  std::unique_ptr<CFollowBluePrint> mExtraFollowBluePrint;
   float mMass, mMaxHull, mThrust, mMaxVel, mTurnPower;
   int mFastRate, mSlowRate;
   float mMaxTemperature, mCoolingRate;
