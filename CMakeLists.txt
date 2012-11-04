@@ -3,7 +3,14 @@ cmake_minimum_required(VERSION 2.8)
 project(gravastar)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR})
+
 find_package(Allegro REQUIRED)
+include_directories(${ALLEGRO_INCLUDE_DIR})
+find_package(Boost REQUIRED COMPONENTS system)
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIR})
+ENDIF()
+
 
 #set default build type
 if(NOT CMAKE_BUILD_TYPE)
@@ -12,8 +19,8 @@ if(NOT CMAKE_BUILD_TYPE)
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline -std=c++0x")
-set(GRAV_FLAGS_RELEASE "-Wall -O1 -std=c++0x")
+set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline -std=gnu++0x")
+set(GRAV_FLAGS_RELEASE "-Wall -O1 -std=gnu++0x")
 
 set(CMAKE_C_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
 set(CMAKE_CXX_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
@@ -27,9 +34,7 @@ message("Release C++ flags are ${CMAKE_CXX_FLAGS_RELEASE}")
 message("Debug   C++ flags are ${CMAKE_CXX_FLAGS_DEBUG}")
 message("Build type is ${CMAKE_BUILD_TYPE}")
 
-add_subdirectory(src/networking)
 
-include_directories(${ALLEGRO_INCLUDE_DIR})
 
 file(GLOB SRCS_ROOT src/*.cpp)
 file(GLOB SRCS_AI src/ai/*.cpp)
@@ -38,9 +43,12 @@ file(GLOB SRCS_API src/AllegroAPI/*.cpp)
 file(GLOB SRCS_MENU src/menu/*.cpp)
 file(GLOB SRCS_POWERUPS src/powerups/*.cpp)
 file(GLOB SRCS_SHIPS src/ships/*.cpp)
+file(GLOB SRCS_NETWORKING src/networking/*.cpp)
 
-set(SRCS ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
-         ${SRCS_POWERUPS} ${SRCS_SHIPS} ${CMAKE_SOURCE_DIR}/src/grav.rc)
+set(SRCS ${SRCS_NETWORKING} ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
+         ${SRCS_POWERUPS} ${SRCS_SHIPS} 
+         ${CMAKE_SOURCE_DIR}/src/grav.rc)
+
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   set(GRAV_BIN_DIR games)
@@ -58,8 +66,10 @@ include_directories(src/AllegroAPI)
 include_directories(src/menu)
 include_directories(src/powerups)
 include_directories(src/ships)
+include_directories(src/networking)
 
 add_definitions("-DDEV_DATAFILE_DIR=\"${CMAKE_SOURCE_DIR}\"")
+add_definitions("-D_WIN32_WINNT=0x0700") #boost asio
 if(UNIX)
   set(CMAKE_INSTALL_PREFIX "/usr")
   add_definitions("-DDATAFILE_DIR=\"${CMAKE_INSTALL_PREFIX}/${GRAV_DATA_DIR}\"")
@@ -88,6 +98,10 @@ else()
   add_executable(gravastar ${SRCS})
 endif()
 target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
+target_link_libraries(gravastar ${Boost_LIBRARIES}) 
+if(WIN32)
+    target_link_libraries(gravastar ws2_32)
+endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   add_dependencies(gravastar gravrc)
