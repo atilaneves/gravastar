@@ -10,6 +10,7 @@ class CPilot;
 #include "CMeleeScore.hpp"
 #include "CTimeCounter.hpp"
 #include "CRandomSong.hpp"
+#include "CMeleeServer.hpp"
 #include <vector>
 
 
@@ -17,33 +18,34 @@ class CMelee {
 
 public:
 
-  enum { kMaxNbPilots = 4 };
+    enum { kMaxNbPilots = 4 };
 
-  CMelee(const CGravOptions &options);
-  virtual ~CMelee();
+    CMelee(const CGravOptions &options);
+    virtual ~CMelee();
 
-  void Run();
+    void Run();
 
 
 protected:
 
-  pilots_t mPilots;
+    pilots_t mPilots;
 
-  CGravMedia   mGravMedia;
-  CGravScreen  mGravScreen;
-  CPowerups    mPowerups;
-  CRandomSong  mSong;
-  CMeleeScore  mMeleeScore;
-  CTimeCounter mEndCounter;
-  int          mWinner;
+    CGravMedia   mGravMedia;
+    CGravScreen  mGravScreen;
+    CPowerups    mPowerups;
+    CRandomSong  mSong;
+    CMeleeScore  mMeleeScore;
+    CTimeCounter mEndCounter;
+    int          mWinner;
+    CMeleeServer mServer;
 
-           void    CheckGameOver();
-          CPilot*  CreatePilot(const CGravOptions &options, int p);
-          void     End(float avgFPS);
-          pilots_t GetActivePilots() const;
-  virtual int      GetWinner()  = 0;
-  virtual bool     IsGameOver() = 0;
-          void     Update(float dt);
+    void    CheckGameOver();
+    CPilot*  CreatePilot(const CGravOptions &options, int p);
+    void     End(float avgFPS);
+    pilots_t GetActivePilots() const;
+    virtual int      GetWinner()  = 0;
+    virtual bool     IsGameOver() = 0;
+    void     Update(float dt);
 
 };
 
