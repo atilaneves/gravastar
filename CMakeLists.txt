@@ -43,12 +43,11 @@ file(GLOB SRCS_API src/AllegroAPI/*.cpp)
 file(GLOB SRCS_MENU src/menu/*.cpp)
 file(GLOB SRCS_POWERUPS src/powerups/*.cpp)
 file(GLOB SRCS_SHIPS src/ships/*.cpp)
-file(GLOB SRCS_NETWORKING src/networking/*.cpp)
+file(GLOB SRCS_NETWORKING src/networking/CMeleeServer.cpp)
 
 set(SRCS ${SRCS_NETWORKING} ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
          ${SRCS_POWERUPS} ${SRCS_SHIPS} 
          ${CMAKE_SOURCE_DIR}/src/grav.rc)
-
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   set(GRAV_BIN_DIR games)
@@ -94,7 +93,7 @@ endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   add_executable(gravastar ${SRCS} ${GRAVRC_OBJ})
-  add_executable(client src/networking/client.cpp)
+  add_executable(client src/testing/client.cpp)
 else()
   add_executable(gravastar ${SRCS})
 endif()

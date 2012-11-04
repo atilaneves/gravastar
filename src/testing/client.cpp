@@ -4,17 +4,16 @@
 
 using boost::asio::ip::udp;
 
-int main(int argc, char* argv[]) {
+int main() {
     boost::asio::io_service service;
-    udp::resolver resolver(service);
-    udp::resolver::query query(udp::v4(), argv[1], "Gravastar");
-    udp::endpoint endpoint = *resolver.resolve(query);
+    const boost::asio::ip::address_v4 addr({{0x7f, 0, 0, 1}}); //local
+    udp::endpoint receiver_endpoint(addr, 12345);
 
     udp::socket socket(service);
     socket.open(udp::v4());
 
     std::array<char, 1> sendBuf  = {{ 0 }};
-    socket.send_to(boost::asio::buffer(sendBuf), endpoint);
+    socket.send_to(boost::asio::buffer(sendBuf), receiver_endpoint);
 
     std::array<char, 128> recvBuf;
     udp::endpoint sender_endpoint;
@@ -22,4 +21,5 @@ int main(int argc, char* argv[]) {
         boost::asio::buffer(recvBuf), sender_endpoint);
 
     std::cout.write(recvBuf.data(), len);
+
 }
