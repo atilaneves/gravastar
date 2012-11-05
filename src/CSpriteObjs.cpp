@@ -37,7 +37,7 @@ void CSpriteObjs::Erase() {
 
 void CSpriteObjs::AddObj(CSpriteObj *obj, bool back) {
   DEBUG("Adding   obj %p of type %s, total will be %d\n",
-	obj, typeid(*obj).name(), sObjs.size() + 1);
+        obj, typeid(*obj).name(), (int)sObjs.size() + 1);
   if(back) sObjs.push_back(obj);
   else     sObjs.push_front(obj);
 }
@@ -45,7 +45,7 @@ void CSpriteObjs::AddObj(CSpriteObj *obj, bool back) {
 
 void CSpriteObjs::DeleteObj(CSpriteObj *obj) {
   DEBUG("Deleting obj %p of type %s, total will be %d\n",
-		    obj, typeid(*obj).name(), sObjs.size() - 1);
+        obj, typeid(*obj).name(), (int)sObjs.size() - 1);
   sObjs.remove(obj);
   if(obj->IsUpdated()) obj->Erase();
   delete obj;
@@ -54,7 +54,7 @@ void CSpriteObjs::DeleteObj(CSpriteObj *obj) {
 
 void CSpriteObjs::RemoveObj(CSpriteObj *obj) {
   DEBUG("Removing obj %p of type %s, total will be %d\n",
-		    obj, typeid(*obj).name(), sObjs.size() - 1);
+        obj, typeid(*obj).name(), (int)sObjs.size() - 1);
   objPlace_t where = find(sObjs.begin(), sObjs.end(), obj);
   if(where != sObjs.end()) sObjs.erase(where);
 }

@@ -19,8 +19,8 @@ CIndLoader::CIndLoader(std::string &fileName, const CCanvas &canvas,
   if(!loaded) {
     mIndsPos  = FindIndsPos(indBmps);
     mBasesPos = FindIndsPos(IndsBmp_t(1, baseBmp)); //make vector out of 1 bmp
-    if(gDebug) printf("inds: %u %u\n", indBmps.size(), mIndsPos.size());
-    if(gDebug) printf("bases: %u\n", mBasesPos.size());
+    if(gDebug) printf("inds: %zu %zu\n", indBmps.size(), mIndsPos.size());
+    if(gDebug) printf("bases: %zu\n", mBasesPos.size());
     assert(indBmps.size() == mIndsPos.size());
     //assert(mBasesPos.size() <= 4);
     SaveCoords();
@@ -75,7 +75,7 @@ void CIndLoader::SaveCoords() {
   FILE *fp = fopen(mFileName.c_str(), "w");
   
   if(fp) {
-    fprintf(fp, "nbBases: %u nbInds: %u\n", mBasesPos.size(), mIndsPos.size());
+    fprintf(fp, "nbBases: %zu nbInds: %zu\n", mBasesPos.size(), mIndsPos.size());
     for(unsigned int i = 0; i < mBasesPos.size(); i++)
       fprintf(fp, "%d %d\n", mBasesPos[i].GetX(), mBasesPos[i].GetY());
     for(unsigned int i = 0; i < mIndsPos.size(); i++)
