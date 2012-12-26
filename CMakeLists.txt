@@ -23,10 +23,10 @@ set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline")
 set(GRAV_FLAGS_RELEASE "-Wall -O1")
 
 set(CMAKE_C_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
-set(CMAKE_CXX_FLAGS_DEBUG "${GRAV_FLAGS_DEBUG} -std=gnu++0x")
+set(CMAKE_CXX_FLAGS_DEBUG "${GRAV_FLAGS_DEBUG} -std=gnu++11")
 
 set(CMAKE_C_FLAGS_RELEASE ${GRAV_FLAGS_RELEASE})
-set(CMAKE_CXX_FLAGS_RELEASE "${GRAV_FLAGS_RELEASE} -std=gnu++0x")
+set(CMAKE_CXX_FLAGS_RELEASE "${GRAV_FLAGS_RELEASE} -std=gnu++11")
 
 message("Release C   flags are ${CMAKE_C_FLAGS_RELEASE}")
 message("Debug   C   flags are ${CMAKE_C_FLAGS_DEBUG}")
