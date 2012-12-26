@@ -9,8 +9,11 @@ find_path(ALLEGRO_INCLUDE_DIR allegro.h
 message("allegro.h found in ${ALLEGRO_INCLUDE_DIR}")
 
 find_library(ALLEGRO_LIBRARY alleg
-             PATHS ${ALLEGRO_INCLUDE_DIR}/../lib ${ALLEGRO_INCLUDE_DIR}/../lib/x86_64
-             NO_DEFAULT_PATH)
+             HINTS
+             "${ALLEGRO_INCLUDE_DIR}/../lib"
+             PATHS
+             "${ALLEGRO_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
+             )
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(ALLEGRO
@@ -23,7 +26,7 @@ else()
     if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
       set(ALLEGRO_LIBRARIES "c:/allegro/bin/alleg42.dll")
     elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-      set(ALLEGRO_LIBRARIES "-lalleg-4.2.2")
+      set(ALLEGRO_LIBRARIES "-lalleg -L/usr/lib/x86_64-linux-gnu")
     endif()
 endif()
 
