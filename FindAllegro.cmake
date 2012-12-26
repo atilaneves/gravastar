@@ -9,9 +9,8 @@ find_path(ALLEGRO_INCLUDE_DIR allegro.h
 message("allegro.h found in ${ALLEGRO_INCLUDE_DIR}")
 
 find_library(ALLEGRO_LIBRARY alleg
-             PATHS ${ALLEGRO_INCLUDE_DIR}/../lib
-	     NO_DEFAULT_PATH)
-
+             PATHS ${ALLEGRO_INCLUDE_DIR}/../lib ${ALLEGRO_INCLUDE_DIR}/../lib/x86_64
+             NO_DEFAULT_PATH)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(ALLEGRO

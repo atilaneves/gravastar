@@ -19,14 +19,14 @@ if(NOT CMAKE_BUILD_TYPE)
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline -std=gnu++0x")
-set(GRAV_FLAGS_RELEASE "-Wall -O1 -std=gnu++0x")
+set(GRAV_FLAGS_DEBUG "-Wall -g -pg -fno-inline")
+set(GRAV_FLAGS_RELEASE "-Wall -O1")
 
 set(CMAKE_C_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
-set(CMAKE_CXX_FLAGS_DEBUG ${GRAV_FLAGS_DEBUG})
+set(CMAKE_CXX_FLAGS_DEBUG "${GRAV_FLAGS_DEBUG} -std=gnu++0x")
 
 set(CMAKE_C_FLAGS_RELEASE ${GRAV_FLAGS_RELEASE})
-set(CMAKE_CXX_FLAGS_RELEASE ${GRAV_FLAGS_RELEASE})
+set(CMAKE_CXX_FLAGS_RELEASE "${GRAV_FLAGS_RELEASE} -std=gnu++0x")
 
 message("Release C   flags are ${CMAKE_C_FLAGS_RELEASE}")
 message("Debug   C   flags are ${CMAKE_C_FLAGS_DEBUG}")
@@ -92,11 +92,14 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  add_executable(gravastar ${SRCS} ${GRAVRC_OBJ})
-  add_executable(client src/testing/client.cpp)
+  set(GRAV_SRCS ${SRCS} ${GRAVRC_OBJ})
 else()
-  add_executable(gravastar ${SRCS})
+  set(GRAV_SRCS ${SRCS})
 endif()
+
+add_executable(gravastar ${GRAV_SRCS})
+add_executable(client src/testing/client.cpp)
+
 target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
 target_link_libraries(gravastar ${Boost_LIBRARIES})
 target_link_libraries(client ${Boost_LIBRARIES})
