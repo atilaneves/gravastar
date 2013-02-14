@@ -1,18 +1,18 @@
 #ifndef TEST_SUITE_HPP
 #define TEST_SUITE_HPP
 
-#include <map>
 #include <vector>
 #include <string>
-#include <chrono>
+#include <future>
 
 #include "TestCase.hpp"
+#include "TestCaseFactory.hpp"
 
 class TestSuite {
 public:
 
 
-    TestSuite();
+    TestSuite(std::launch policy = std::launch::async);
     /**
      * Returns the elapsed time in seconds
      */
@@ -24,6 +24,7 @@ public:
 
 private:
 
+    const std::launch _policy;
     std::vector<std::string> _failures;
     size_t _numTestsRun;
 

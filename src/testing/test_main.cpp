@@ -12,7 +12,8 @@ static options::options_description getOptionsDesc() {
                                       "(each must either be a full testcase path or end with '/'");
     desc.add_options()
         ("help,h", "produce help message")
-        ("show,s", "show avaiable test cases");
+        ("show,s", "show avaiable test cases")
+        ("threaded,t", "run in multiple threads");
     return desc;
 }
 
@@ -32,46 +33,54 @@ static void printPaths() {
 }
 
 static const int CARRY_ON = -1;
-static int handleOptions(int argc, char* argv[]) {
+//returns err_code, policy
+static std::tuple<int, std::launch> handleOptions(int argc, char* argv[]) {
     const auto desc = getOptionsDesc();
+    std::launch policy = std::launch::deferred;
     try {
         const auto vars = getOptVars(argc, argv, desc);
         if(vars.count("help")) {
             std::cout << desc;
-            return 0;
+            return std::make_tuple(0, policy);
         }
         if(vars.count("show")) {
             printPaths();
-            return 0;
+            return std::make_tuple(0, policy);
         }
+
+        policy = vars.count("threaded") ? std::launch::async : std::launch::deferred;
     } catch(options::error&) {
         std::cout << "Error parsing options" << std::endl;
         std::cout << desc;
-        return 1;
+        return std::make_tuple(1, policy);
     }
-    return CARRY_ON;
+
+    return std::make_tuple(CARRY_ON, policy);
 }
 
-static std::vector<std::string> getTestsToRun(int argc, char *argv[]) {
+static std::vector<std::string> getTestsToRun(int argc, char *argv[], int firstTestIndex) {
     std::vector<std::string> testsToRun;
-    for(int i = 1; i < argc; ++i) {
+    for(int i = firstTestIndex; i < argc; ++i) {
         testsToRun.emplace_back(argv[i]);
     }
     return testsToRun;
 }
 
-static double runTests(int argc, char *argv[], TestSuite& testSuite) {
-    return argc > 1 ? testSuite.run(getTestsToRun(argc, argv)) : testSuite.run();
+static double runTests(int argc, char *argv[], TestSuite& testSuite, int firstTestIndex) {
+    return argc > firstTestIndex ? testSuite.run(getTestsToRun(argc, argv, firstTestIndex)) : testSuite.run();
 }
 
 int main(int argc, char* argv[]) {
-    const int rc = handleOptions(argc, argv);
+    const auto optionTuple = handleOptions(argc, argv);
+    const auto rc = std::get<0>(optionTuple);
     if(rc != CARRY_ON) {
         return rc;
     }
 
-    TestSuite testSuite;
-    const auto elapsed = runTests(argc, argv, testSuite);
+    const auto policy = std::get<1>(optionTuple);
+    const int firstTestIndex = policy == std::launch::async ? 2 : 1; //option means args further down
+    TestSuite testSuite(policy);
+    const auto elapsed = runTests(argc, argv, testSuite, firstTestIndex);
 
     if(!testSuite.getNumTestsRun()) {
         std::cout << "Did not run any tests!!!\n";

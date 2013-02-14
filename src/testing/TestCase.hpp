@@ -10,7 +10,7 @@ class TestCase {
 public:
 
     TestCase();
-    virtual ~TestCase() { }
+    virtual ~TestCase();
     bool doTest();
 
 protected:

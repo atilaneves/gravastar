@@ -11,7 +11,7 @@ class TestCaseFactory {
 public:
 
     struct TestCaseWithPath;
-    using TestCases = std::vector<TestCaseWithPath>;
+    using TestCases = std::vector<std::shared_ptr<TestCaseWithPath>>;
 
     static TestCaseFactory& getInstance();
     bool registerTest(const std::string& path, const TestCaseCreator& creator);
@@ -20,10 +20,8 @@ public:
 
     struct TestCaseWithPath {
         const std::string _path;
-        std::unique_ptr<TestCase> _testCase;
+        std::shared_ptr<TestCase> const _testCase;
         TestCaseWithPath(const std::string& p, TestCase* t):_path(p), _testCase(t) { }
-        TestCaseWithPath(TestCaseWithPath&& other):
-            _path(std::move(other._path)), _testCase(std::move(other._testCase)) {}
         const std::string& getPath() const { return _path; }
         bool doTest() { return _testCase->doTest(); }
     };

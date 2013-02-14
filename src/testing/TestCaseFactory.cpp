@@ -50,7 +50,7 @@ auto TestCaseFactory::createTests(const std::string& testPathToRun) const -> Tes
             return TestCases();
         }
 
-        testCases.emplace_back(testPath, createTest(testPath));
+        testCases.emplace_back(std::make_shared<TestCaseWithPath>(testPath, createTest(testPath)));
     }
 
     return testCases;

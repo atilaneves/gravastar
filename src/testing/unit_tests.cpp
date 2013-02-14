@@ -1,6 +1,7 @@
 #include "test_library.hpp"
 #include <string>
 #include <list>
+#include <thread>
 
 SIMPLE_TEST(equals, Numbers,
     TEST(
@@ -68,16 +69,21 @@ SIMPLE_TEST(standalone, Containers,
     )
 )
 
-// namespace {
-//     TestCase* create_BogusTest() {
-//         return new ContainerTestCase;
-//     }  
-//     bool runLoads() {
-//         for(int i = 0; i < 4000; ++i) {
-//             TestCaseFactory::getInstance().registerTest("Bogus" + std::to_string(i), "bogus/" + std::to_string(i),
-//                                                   create_BogusTest);
-//         }
-//         return true;
-//     }
-// bool resultBogus = runLoads();
-// }
+class TakesAWhile: public TestCase {
+    virtual void test() {
+        checkEqual(1, 1);
+        std::this_thread::sleep_for(std::chrono::seconds(1));        
+        checkNotEqual(1, 2);
+    }
+};
+
+namespace {
+    bool runSlowTests() {
+        for(int i = 0; i < 10; ++i) {
+            TestCaseFactory::getInstance().registerTest("while/" + std::to_string(i),
+                                                        testCaseCreator<TakesAWhile>);
+        }
+        return true;
+    }
+    bool resultBogus = runSlowTests();
+}

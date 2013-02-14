@@ -2,6 +2,11 @@
 
 TestCase::TestCase():
     _failed(false) {
+
+}
+
+TestCase::~TestCase() {
+
 }
 
 bool TestCase::doTest() {
