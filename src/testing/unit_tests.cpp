@@ -2,29 +2,24 @@
 #include <string>
 #include <list>
 
-struct NumberTestCase: public TestCase {
-    NumberTestCase(const std::string& path):TestCase(path) { }
-    virtual void test() {
+SIMPLE_TEST(equals, Numbers,
+    TEST(
         checkTrue(true);
         checkEqual(1, 1);
         checkEqual(3.0, 3.0);
         checkNotEqual(2, 3);
         checkNotEqual(2.0, 2.1);
-    }
-};
-REGISTER_TEST(NumberTestCase, "equals/numbers")
+    )
+)
 
 
-struct StringTestCase: public TestCase {
-    StringTestCase(const std::string& path):TestCase(path) { }
-    virtual void test() {
+SIMPLE_TEST(equals, Strings,
+    TEST(
         checkEqual(std::string("bar"), std::string("bar"));
         checkEqual("baz", "baz");
         checkNotEqual("foo", "bar");
-    }
-};
-REGISTER_TEST(StringTestCase, "equals/strings")
-
+    )
+)
 
 struct TestObject {
     const int _int;
@@ -34,33 +29,25 @@ struct TestObject {
     bool operator!=(const TestObject& rhs) const { return !(*this == rhs); }
 };
 
-struct ObjectTestCase: public TestCase {
-    ObjectTestCase(const std::string& path):TestCase(path) { }
-    virtual void test() {
+SIMPLE_TEST(equals, Objects,
+    TEST(
         checkEqual(TestObject(1, "foo"), TestObject(1, "foo"));
         checkNotEqual(TestObject(1, "foo"), TestObject(2, "foo"));
         checkNotEqual(TestObject(1, "foo"), TestObject(1, "bar"));
-    }
-};
-REGISTER_TEST(ObjectTestCase, "equals/objects")
+    )
+)
 
-
-struct NullTestCase: public TestCase {
-    NullTestCase(const std::string& path):TestCase(path) { }
-    virtual void test() {
-        //checkNull(nullptr);
+SIMPLE_TEST(standalone, Null,
+    TEST(
         const TestObject* const nullObj = nullptr;
         checkNull(nullObj);
         const TestObject obj(7, "superman");
         checkNotNull(&obj);
-    }
-};
-REGISTER_TEST(NullTestCase, "null")
+    )
+)
 
-
-struct ContainerTestCase: public TestCase {
-    ContainerTestCase(const std::string& path):TestCase(path) { }
-    virtual void test() {
+SIMPLE_TEST(standalone, Containers,
+    TEST(
         std::vector<int> primes{3, 5, 7, 11, 13};
         checkIn(primes, 3);
         checkNotIn(primes, 2);
@@ -78,9 +65,8 @@ struct ContainerTestCase: public TestCase {
         checkIn(strings, "foo");
         checkNotIn(strings, "baz");
         checkIn(strings, "bar");
-    }
-};
-REGISTER_TEST(ContainerTestCase, "containers")
+    )
+)
 
 // namespace {
 //     TestCase* create_BogusTest() {

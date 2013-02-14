@@ -4,5 +4,6 @@
 #include "TestCase.hpp"
 #include "TestSuite.hpp"
 #include "TestCaseFactory.hpp"
+#include "macros.hpp"
 
 #endif

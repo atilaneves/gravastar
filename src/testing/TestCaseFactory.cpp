@@ -46,12 +46,17 @@ auto TestCaseFactory::createTests(const std::string& testPathToRun) const -> Tes
             
         if(_pathToCreators.find(testPath) == _pathToCreators.end()) {
             std::cout << "Could not create test case " << testPath <<
-                " for test path " << testPath << std::endl;
+                         " for test path " << testPath << std::endl;
             return TestCases();
         }
 
-        testCases.emplace_back(_pathToCreators.at(testPath)());
+        testCases.emplace_back(testPath, createTest(testPath));
     }
 
     return testCases;
+}
+
+
+TestCase* TestCaseFactory::createTest(const std::string& path) const {
+    return _pathToCreators.at(path)();
 }

@@ -32,8 +32,8 @@ double TestSuite::run(const std::vector<std::string>& pathsToRun) {
     for(const auto& pathToRun: pathsToRun) {
         auto testCases = TestCaseFactory::getInstance().createTests(pathToRun);
         for(auto& testCase: testCases) {
-            std::cout << "Running test " << testCase->getPath() << std::endl;
-            if(!testCase->doTest()) addFailure(testCase->getPath());
+            std::cout << "Running test " << testCase.getPath() << std::endl;
+            if(!testCase.doTest()) addFailure(testCase.getPath());
             _numTestsRun++;
         }
     }
