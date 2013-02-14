@@ -25,7 +25,7 @@ static options::variables_map getOptVars(int argc, char* argv[], const options::
 
 static void printPaths() {
     std::cout << "Test cases:\n\n";
-    for(const auto& path: TestSuite::getInstance().getPaths()) {
+    for(const auto& path: TestCaseFactory::getInstance().getPaths()) {
         std::cout << path << std::endl;
     }
     std::cout << std::endl;
@@ -54,12 +54,14 @@ static int handleOptions(int argc, char* argv[]) {
 
 static std::vector<std::string> getTestsToRun(int argc, char *argv[]) {
     std::vector<std::string> testsToRun;
-    if(argc > 1) {
-        for(int i = 1; i < argc; ++i) {
-            testsToRun.emplace_back(argv[i]);
-        }
+    for(int i = 1; i < argc; ++i) {
+        testsToRun.emplace_back(argv[i]);
     }
     return testsToRun;
+}
+
+static double runTests(int argc, char *argv[], TestSuite& testSuite) {
+    return argc > 1 ? testSuite.run(getTestsToRun(argc, argv)) : testSuite.run();
 }
 
 int main(int argc, char* argv[]) {
@@ -68,18 +70,19 @@ int main(int argc, char* argv[]) {
         return rc;
     }
 
-    const auto elapsed = TestSuite::getInstance().runTests(getTestsToRun(argc, argv));
+    TestSuite testSuite;
+    const auto elapsed = runTests(argc, argv, testSuite);
 
-    if(!TestSuite::getInstance().getNumTestsRun()) {
+    if(!testSuite.getNumTestsRun()) {
         std::cout << "Did not run any tests!!!\n";
-        return 2;
+        return 1;
     }
 
     std::cout << "Time taken: " << elapsed << std::endl;
-    std::cout << TestSuite::getInstance().getNumTestsRun() << " test(s) run, " <<
-                 TestSuite::getInstance().getNumFailures() << " failed.\n\n";
+    std::cout << testSuite.getNumTestsRun() << " test(s) run, " <<
+                 testSuite.getNumFailures() << " failed.\n\n";
 
-    if(TestSuite::getInstance().getNumFailures()) {
+    if(testSuite.getNumFailures()) {
         std::cout << "Unit tests failed!\n\n";
         return 1; //oops
     }

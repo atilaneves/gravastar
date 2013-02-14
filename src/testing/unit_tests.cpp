@@ -3,6 +3,7 @@
 #include <list>
 
 struct NumberTestCase: public TestCase {
+    NumberTestCase(const std::string& path):TestCase(path) { }
     virtual void test() {
         checkTrue(true);
         checkEqual(1, 1);
@@ -15,6 +16,7 @@ REGISTER_TEST(NumberTestCase, "equals/numbers")
 
 
 struct StringTestCase: public TestCase {
+    StringTestCase(const std::string& path):TestCase(path) { }
     virtual void test() {
         checkEqual(std::string("bar"), std::string("bar"));
         checkEqual("baz", "baz");
@@ -33,6 +35,7 @@ struct TestObject {
 };
 
 struct ObjectTestCase: public TestCase {
+    ObjectTestCase(const std::string& path):TestCase(path) { }
     virtual void test() {
         checkEqual(TestObject(1, "foo"), TestObject(1, "foo"));
         checkNotEqual(TestObject(1, "foo"), TestObject(2, "foo"));
@@ -43,6 +46,7 @@ REGISTER_TEST(ObjectTestCase, "equals/objects")
 
 
 struct NullTestCase: public TestCase {
+    NullTestCase(const std::string& path):TestCase(path) { }
     virtual void test() {
         //checkNull(nullptr);
         const TestObject* const nullObj = nullptr;
@@ -55,6 +59,7 @@ REGISTER_TEST(NullTestCase, "null")
 
 
 struct ContainerTestCase: public TestCase {
+    ContainerTestCase(const std::string& path):TestCase(path) { }
     virtual void test() {
         std::vector<int> primes{3, 5, 7, 11, 13};
         checkIn(primes, 3);
@@ -77,3 +82,16 @@ struct ContainerTestCase: public TestCase {
 };
 REGISTER_TEST(ContainerTestCase, "containers")
 
+// namespace {
+//     TestCase* create_BogusTest() {
+//         return new ContainerTestCase;
+//     }  
+//     bool runLoads() {
+//         for(int i = 0; i < 4000; ++i) {
+//             TestCaseFactory::getInstance().registerTest("Bogus" + std::to_string(i), "bogus/" + std::to_string(i),
+//                                                   create_BogusTest);
+//         }
+//         return true;
+//     }
+// bool resultBogus = runLoads();
+// }

@@ -9,8 +9,9 @@
 class TestCase {
 public:
 
-    TestCase():_failed(false) { }
+    TestCase(const std::string& path):_failed(false), _path(path) { }
     virtual ~TestCase() { }
+    const std::string& getPath() const { return _path; }
     bool doTest();
 
 protected:
@@ -45,6 +46,7 @@ protected:
 private:
 
     bool _failed;
+    const std::string _path;
 
     bool fail() { _failed = true; return false; }
 
@@ -55,9 +57,9 @@ typedef std::function<TestCase*()> TestCaseCreator;
 #define REGISTER_TEST(test, path) \
 namespace { \
     TestCase* create_##test() { \
-        return new test; \
+        return new test((path));    \
     } \
-    bool result_##test = TestSuite::getInstance().registerTest(#test, (path), create_##test); \
+    bool result_##test = TestCaseFactory::getInstance().registerTest((path), create_##test); \
 }
 
 

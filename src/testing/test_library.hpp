@@ -1,7 +1,8 @@
 #ifndef TEST_LIBRARY_HPP_
-#define TEST_LIBRARY_HPP
+#define TEST_LIBRARY_HPP_
 
 #include "TestCase.hpp"
 #include "TestSuite.hpp"
+#include "TestCaseFactory.hpp"
 
 #endif
