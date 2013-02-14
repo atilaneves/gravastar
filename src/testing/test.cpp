@@ -2,15 +2,32 @@
 #include <string>
 #include <iostream>
 
-struct TestTestCase: public TestCase {
+struct FirstTestCase: public TestCase {
     virtual void test() {
         checkTrue(true);
-        checkEqual(1, 1);
+        checkEqual(1, 0);
         checkEqual(3.0, 3.0);
         checkEqual(std::string("foo"), std::string("foo"));
     }
 };
-REGISTER_TEST(TestTestCase)
+REGISTER_TEST(FirstTestCase)
+
+struct AnotherTestCase: public TestCase {
+    virtual void test() {
+        checkEqual(std::string("foo"), std::string("bar"));
+        checkEqual("baz", "badz");
+    }
+};
+REGISTER_TEST(AnotherTestCase)
+
+struct YetAnotherTestCase: public TestCase {
+    virtual void test() {
+        checkEqual(1, 1);
+    }
+};
+REGISTER_TEST(YetAnotherTestCase)
+
+
 
 
 int main() {
@@ -18,4 +35,7 @@ int main() {
     TestSuite::getInstance().runTests();
     std::cout << TestSuite::getInstance().getNumTests() << " test(s) run, " <<
         TestSuite::getInstance().getNumFailures() << " failed.\n\n";
+    if(!TestSuite::getInstance().getNumFailures()) {
+        std::cout << "\nOK!\n\n";
+    }
 }

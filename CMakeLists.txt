@@ -99,6 +99,7 @@ endif()
 
 add_executable(gravastar ${GRAV_SRCS})
 add_executable(client src/testing/client.cpp)
+add_executable(test src/testing/test.cpp src/testing/test_library.cpp)
 
 target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
 target_link_libraries(gravastar ${Boost_LIBRARIES})
