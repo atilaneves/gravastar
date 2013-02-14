@@ -54,48 +54,51 @@ private:
 
 typedef std::function<TestCase*()> TestCaseCreator;
 
+
 class TestSuite {
 public:
 
     static TestSuite& getInstance();
-    bool registerTest(const std::string& name, const TestCaseCreator& creator);
+    bool registerTest(const std::string& name, const std::string& path, const TestCaseCreator& creator);
     void addFailure(const std::string& name);
-    void runTests();
-    int getNumTests()    const { return _creators.size(); }
+    bool runTests(const std::vector<std::string>& testsToRun = std::vector<std::string>());
+    int getNumTestsRun() const { return _numTestsRun; }
     int getNumFailures() const { return _failures.size(); }
+    const std::vector<std::string> getPaths() const;
 
 private:
 
-    std::map<std::string, TestCaseCreator> _creators;
+    std::map<std::string, TestCaseCreator> _nameToCreators;
+    std::map<std::string, std::string> _pathToNames;
     std::vector<std::string> _failures;
+    size_t _numTestsRun;
 
-    TestSuite() { }
+    TestSuite():_numTestsRun() { }
     TestSuite(const TestSuite&);
     TestSuite& operator=(const TestSuite&);
-
 };
 
 
-#define REGISTER_TEST(test) \
+#define REGISTER_TEST(test, path) \
 namespace { \
     TestCase* create_##test() { \
         return new test; \
     } \
-    bool result_##test = TestSuite::getInstance().registerTest(#test, create_##test); \
+    bool result_##test = TestSuite::getInstance().registerTest(#test, (path), create_##test); \
 }
 
 
 #define checkEqual(value, expected) \
     { \
-        if(!verifyEqual((value), (expected)))                           \
-            std::cout << __FILE__ << ":" << __LINE__ <<                 \
+        if(!verifyEqual((value), (expected))) \
+            std::cout << __FILE__ << ":" << __LINE__ << \
                 " Value " #value " is not the expected " #expected << std::endl; \
     }
 
 #define checkNotEqual(value, expected)    \
     { \
-        if(!verifyNotEqual((value), (expected)))                        \
-            std::cout << __FILE__ << ":" << __LINE__ <<                 \
+        if(!verifyNotEqual((value), (expected))) \
+            std::cout << __FILE__ << ":" << __LINE__ << \
                 " Value " #value " is equal to the expected " #expected << std::endl; \
     }
 
@@ -108,30 +111,30 @@ namespace { \
 
 #define checkNotNull(value) \
     { \
-        if(!verifyNotNull((value)))                     \
+        if(!verifyNotNull((value))) \
             std::cout << __FILE__ << ":" << __LINE__ << \
                       " Value " #value " is null " << std::endl; \
     }
 
 #define checkIn(container, value) \
     { \
-        if(!verifyIn((container), (value)))         \
-            std::cout << __FILE__ << ":" << __LINE__ <<                 \
+        if(!verifyIn((container), (value))) \
+            std::cout << __FILE__ << ":" << __LINE__ << \
                 " Value " #value " not in container " << #container << std::endl; \
     }
 
 #define checkNotIn(container, value) \
     { \
-        if(!verifyNotIn((container), (value)))      \
-            std::cout << __FILE__ << ":" << __LINE__ <<                 \
+        if(!verifyNotIn((container), (value))) \
+            std::cout << __FILE__ << ":" << __LINE__ << \
                 " Value " #value " in container " << #container << std::endl; \
     }
 
 #define checkTrue(value) \
-    {                                           \
-        if(!verifyTrue((value)))                       \
-            std::cout << __FILE__ << ":" << __LINE__ <<                 \
-                " Value " #value " is not true" << std::endl;           \
+    { \
+        if(!verifyTrue((value))) \
+            std::cout << __FILE__ << ":" << __LINE__ << \
+                " Value " #value " is not true" << std::endl; \
     }
 
 

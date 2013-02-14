@@ -6,10 +6,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR})
 
 find_package(Allegro REQUIRED)
 include_directories(${ALLEGRO_INCLUDE_DIR})
-find_package(Boost REQUIRED COMPONENTS system)
+
+find_package(Boost COMPONENTS system program_options REQUIRED)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIR})
-ENDIF()
+endif()
 
 
 #set default build type
@@ -99,17 +100,19 @@ endif()
 
 add_executable(gravastar ${GRAV_SRCS})
 add_executable(client src/testing/client.cpp)
-add_executable(test src/testing/test.cpp src/testing/test_library.cpp)
+add_executable(test src/testing/test_main.cpp src/testing/unit_tests.cpp src/testing/test_library.cpp)
 
 target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
 target_link_libraries(gravastar ${Boost_LIBRARIES})
 target_link_libraries(client ${Boost_LIBRARIES})
+target_link_libraries(test ${Boost_LIBRARIES})
 if(WIN32)
     target_link_libraries(gravastar ws2_32)
     target_link_libraries(client ws2_32)
 else()
     target_link_libraries(gravastar pthread)
     target_link_libraries(client pthread)
+    target_link_libraries(test pthread)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
