@@ -15,9 +15,11 @@ void TestSuite::addFailure(const std::string& name) {
 }
 
 
+using std::chrono::duration_cast;
 template<typename CLOCK, typename START>
-static double getElapsedSeconds(CLOCK clock, START start) {
-    return ((clock.now() - start)).count() / 1000000.0;
+static double getElapsedSeconds(CLOCK clock, const START start) {
+    //cast to ms first to get fractional amount of seconds
+    return duration_cast<std::chrono::milliseconds>(clock.now() - start).count() / 1000.0;
 }
 
 
@@ -46,9 +48,9 @@ double TestSuite::run(const std::vector<std::string>& pathsToRun) {
         }
     }
 
-    for(auto& f: futures) f.wait();
-    std::cout << std::endl;
-               
+    for(auto& f: futures) f.wait(); //make sure all tasks finish
+
+    std::cout << std::endl;               
     for(auto failure: _failures) {
         std::cout << "Test " << failure << " failed." << std::endl;        
     }
