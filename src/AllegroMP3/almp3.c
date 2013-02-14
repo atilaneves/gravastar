@@ -345,15 +345,15 @@ ALMP3_MP3 *almp3_create_mp3(void *data, int data_len) {
     skipbytes = 0;
     while (!found && (skipbytes < max)) {
       int data_left = max - skipbytes;
-      char *p = (char *)data + skipbytes;
+      unsigned char *p = data + skipbytes;
 
       if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p)) == -1) {
         /* probably found, check */
         InitMP3(&test_mpeg);
-        ret = decodeMP3(&test_mpeg, p, data_left, test_outbuf, 8192, &test_size);
+        ret = decodeMP3(&test_mpeg, (char*)p, data_left, test_outbuf, 8192, &test_size);
         if ((ret == MP3_OK) && (test_mpeg.fr.framesize > 0)) {
-          char *p2 = p + test_mpeg.fr.framesize + 4;
-          if (p2 < ((char *)data + max)) {
+          unsigned char *p2 = p + test_mpeg.fr.framesize + 4;
+          if (p2 < (unsigned char*)data + max) {
             /* check the next frame to make sure */
             if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p2)) != 0)
               found = TRUE;
@@ -777,7 +777,7 @@ int almp3_poll_mp3(ALMP3_MP3 *mp3) {
         }
 
         /* check the header */
-        if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(mp3->data_cursor)) == -1) {
+        if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)mp3->data_cursor)) == -1) {
           /* try to decode it */
           almp3_reinit_decoder_mp3(mp3);       
           ret = almp3_decode_frame_mp3(mp3, mp3->data_cursor, audiobuf_p, &size_done, &inread);
@@ -785,7 +785,7 @@ int almp3_poll_mp3(ALMP3_MP3 *mp3) {
             char *p = mp3->data_cursor + (mp3->mpeg).fr.framesize + 4;
             if (p < ((char *)mp3->data + mp3->data_len)) {
               /* check the next header too just to make sure */
-              if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p)) != 0)
+                if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)p)) != 0)
                 got_error = FALSE;
             }
             else {
@@ -1000,7 +1000,7 @@ SAMPLE *almp3_create_sample_from_mp3(ALMP3_MP3 *mp3) {
       
       for (j = 0; (j < max) && got_error; j++) {
         /* check the header */
-        if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(mp3->data_cursor)) == -1) {
+          if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)mp3->data_cursor)) == -1) {
           /* try to decode it */
           almp3_reinit_decoder_mp3(mp3);       
           ret = almp3_decode_frame_mp3(mp3, mp3->data_cursor, data, &size_done, &inread);
@@ -1008,7 +1008,7 @@ SAMPLE *almp3_create_sample_from_mp3(ALMP3_MP3 *mp3) {
             char *p = mp3->data_cursor + (mp3->mpeg).fr.framesize + 4;
             if (p < ((char *)mp3->data + mp3->data_len)) {
               /* check the next header too just to make sure */
-              if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p)) != 0)
+                if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)p)) != 0)
                 got_error = FALSE;
             }
             else {
@@ -1265,7 +1265,7 @@ ALMP3_MP3STREAM *almp3_create_mp3stream(void *first_data_buffer, int data_buffer
       int data_left = max - skipbytes;
       char *p = (char *)first_data_buffer + skipbytes;
 
-      if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p)) == -1) {
+      if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)p)) == -1) {
         /* probably found, check */
         InitMP3(&test_mpeg);
         ret = decodeMP3(&test_mpeg, p, data_left, test_outbuf, 8192, &test_size);
@@ -1273,7 +1273,7 @@ ALMP3_MP3STREAM *almp3_create_mp3stream(void *first_data_buffer, int data_buffer
           char *p2 = p + test_mpeg.fr.framesize + 4;
           if (p2 < ((char *)first_data_buffer + max)) {
             /* check the next frame to make sure */
-            if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p2)) != 0)
+              if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)p2)) != 0)
               found = TRUE;
           }
           else {
@@ -1655,7 +1655,7 @@ int almp3_poll_mp3stream(ALMP3_MP3STREAM *mp3) {
 
         /* check the header */
         p = (char *)temp_databuf + mp3->data_cursor;
-        if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p)) == -1) {
+        if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)p)) == -1) {
           /* try to decode it */
           almp3_reinit_decoder_mp3stream(mp3);
           ret = almp3_decode_frame_mp3stream(mp3, p, temp_buf_left, audiobuf_p, &size_done, &inread);
@@ -1663,7 +1663,7 @@ int almp3_poll_mp3stream(ALMP3_MP3STREAM *mp3) {
             char *p = (char *)temp_databuf + mp3->data_cursor + (mp3->mpeg).fr.framesize + 4;
             if (p < ((char *)temp_databuf + temp_buf_size)) {
               /* check the next header too just to make sure */
-              if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian(p)) != 0)
+              if (almp3_check_frame_validity((unsigned int)almp3_get_big_endian((unsigned char*)p)) != 0)
                 got_error = FALSE;
             }
             else {

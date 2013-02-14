@@ -39,12 +39,12 @@ CFont::~CFont() {
 
 
 void CFont::Print(CCanvas &canvas,int x,int y,int col, int bg,
-		  const std::string &str) const {
+                  const std::string &str) const {
  textprintf_ex((BITMAP*)canvas.GetData(),mFont,x,y,col,bg,str.c_str());
 }
 
 
 void CFont::PrintCentre(CCanvas &canvas,int x,int y,int col, int bg,
-			const std::string &str) const {
+                        const std::string &str) const {
  textprintf_centre_ex((BITMAP*)canvas.GetData(),mFont,x,y,col,bg,str.c_str());
 }

@@ -15,7 +15,7 @@ public:
 
 private:
 
-  std::auto_ptr<CMenuIcon> mIcon;
+  std::unique_ptr<CMenuIcon> mIcon;
 
 };
 
