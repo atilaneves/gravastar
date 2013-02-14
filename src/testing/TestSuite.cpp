@@ -1,21 +1,8 @@
-#include "test_library.hpp"
+#include "TestSuite.hpp"
 #include <memory>
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
-
-bool TestCase::doTest() {
-    setup();
-    test();
-    shutdown();
-    return !_failed;
-}
-
-
-bool TestCase::verifyTrue(bool condition) {
-    _failed = !condition;
-    return condition;
-}
 
 
 TestSuite& TestSuite::getInstance() {

@@ -100,7 +100,10 @@ endif()
 
 add_executable(gravastar ${GRAV_SRCS})
 add_executable(client src/testing/client.cpp)
-add_executable(test src/testing/test_main.cpp src/testing/unit_tests.cpp src/testing/test_library.cpp)
+add_executable(test src/testing/test_main.cpp
+                    src/testing/unit_tests.cpp
+                    src/testing/TestCase.cpp
+                    src/testing/TestSuite.cpp)
 
 target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
 target_link_libraries(gravastar ${Boost_LIBRARIES})
