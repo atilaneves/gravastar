@@ -38,10 +38,17 @@ static bool isToRun(const std::string& testPathToRun, const std::string& testPat
 }
 
 
-bool TestSuite::runTests(const std::vector<std::string>& testsToRun) {
+template<typename CLOCK, typename START>
+static double getElapsedSeconds(CLOCK clock, START start) {
+    return ((clock.now() - start)).count() / 1000.0;
+}
+
+double TestSuite::runTests(const std::vector<std::string>& testsToRun) {
     const std::vector<std::string> actualTestsToRun = testsToRun.empty() ? getPaths() : testsToRun;
 
     std::cout << "Running tests..." << std::endl;
+    std::chrono::high_resolution_clock clock;
+    const auto start = clock.now();
 
     for(const auto& testPathToRun: actualTestsToRun) {
         for(const auto& pathToName: _pathToNames) {
@@ -54,7 +61,7 @@ bool TestSuite::runTests(const std::vector<std::string>& testsToRun) {
             if(_nameToCreators.find(testName) == _nameToCreators.end()) {
                 std::cout << "Could not create test case " << testName <<
                     " for test path " << testPath << std::endl;
-                return false;
+                return getElapsedSeconds(clock, start);
             }
 
             std::unique_ptr<TestCase> testCase { _nameToCreators[testName]() };
@@ -67,7 +74,7 @@ bool TestSuite::runTests(const std::vector<std::string>& testsToRun) {
         std::cout << "Test " << failure << " failed." << std::endl;        
     }
 
-    return true;
+    return getElapsedSeconds(clock, start);
 }
 
 

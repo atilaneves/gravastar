@@ -1,5 +1,5 @@
 #ifndef TESTCASE_HPP_
-#define TESTCASE_HPP
+#define TESTCASE_HPP_
 
 #include <functional>
 #include <algorithm>

@@ -68,15 +68,14 @@ int main(int argc, char* argv[]) {
         return rc;
     }
 
-    if(!TestSuite::getInstance().runTests(getTestsToRun(argc, argv))) {
-        return 2;
-    }
+    const auto elapsed = TestSuite::getInstance().runTests(getTestsToRun(argc, argv));
 
     if(!TestSuite::getInstance().getNumTestsRun()) {
         std::cout << "Did not run any tests!!!\n";
-        return 3;
+        return 2;
     }
 
+    std::cout << "Time taken: " << elapsed << std::endl;
     std::cout << TestSuite::getInstance().getNumTestsRun() << " test(s) run, " <<
                  TestSuite::getInstance().getNumFailures() << " failed.\n\n";
 

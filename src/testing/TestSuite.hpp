@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <chrono>
 
 #include "TestCase.hpp"
 
@@ -13,7 +14,10 @@ public:
     static TestSuite& getInstance();
     bool registerTest(const std::string& name, const std::string& path, const TestCaseCreator& creator);
     void addFailure(const std::string& name);
-    bool runTests(const std::vector<std::string>& testsToRun = std::vector<std::string>());
+    /**
+     * Returns the elapsed time in seconds
+     */
+    double runTests(const std::vector<std::string>& testsToRun = std::vector<std::string>());
     int getNumTestsRun() const { return _numTestsRun; }
     int getNumFailures() const { return _failures.size(); }
     const std::vector<std::string> getPaths() const;
