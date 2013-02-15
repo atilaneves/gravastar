@@ -77,3 +77,11 @@
             std::cout << "    " << __FILE__ << ":" << __LINE__ << \
                 " Value " #value " is not true" << std::endl; \
     }
+
+
+#define checkFalse(value) \
+    { \
+        if(!verifyFalse((value))) \
+            std::cout << "    " << __FILE__ << ":" << __LINE__ << \
+                " Value " #value " is not false" << std::endl; \
+    }

@@ -38,6 +38,7 @@ protected:
     }
 
     bool verifyTrue(bool condition);
+    bool verifyFalse(bool condition);
 
     virtual void test() = 0;
     virtual void setup()    { }

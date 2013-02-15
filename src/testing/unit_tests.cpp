@@ -3,9 +3,21 @@
 #include <list>
 #include <thread>
 
-SIMPLE_TEST(equals, Numbers,
+SIMPLE_TEST(equals, Boolean,
     TEST(
         checkTrue(true);
+        checkFalse(false);
+
+        checkTrue(2 > 1);
+        checkTrue(1 >= 1);
+        checkTrue(2 < 3);
+        checkFalse(2 > 3);
+        checkFalse(3 >= 4);
+    )
+)
+
+SIMPLE_TEST(equals, Numbers,
+    TEST(
         checkEqual(1, 1);
         checkEqual(3.0, 3.0);
         checkNotEqual(2, 3);
