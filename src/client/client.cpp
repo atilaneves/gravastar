@@ -19,7 +19,10 @@ int main() {
     udp::endpoint sender_endpoint;
     size_t len = socket.receive_from(
         boost::asio::buffer(recvBuf), sender_endpoint);
-
+    
+    std::cout << "Received " << len << " bytes:" << std::endl;
     std::cout.write(recvBuf.data(), len);
+    std::cout << std::endl;
+    //std::cout << recv
 
 }

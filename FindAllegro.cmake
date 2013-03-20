@@ -12,6 +12,8 @@ find_library(ALLEGRO_LIBRARY alleg
              HINTS
              "${ALLEGRO_INCLUDE_DIR}/../lib"
              PATHS
+             "/usr/lib/x86_64-linux-gnu"
+             "/usr/lib"
              "${ALLEGRO_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
              )
 

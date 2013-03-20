@@ -1,6 +1,7 @@
 #ifndef _CMELEE_SERVER_H_
 #define _CMELEE_SERVER_H_
 
+#include <thread>
 
 class CUdpServer;
 
@@ -13,6 +14,7 @@ public:
 private:
 
     CUdpServer* mUdpServer;
+    std::thread mThread;
 };
 
 
