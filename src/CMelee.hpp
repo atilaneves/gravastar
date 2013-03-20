@@ -39,14 +39,14 @@ protected:
     int          mWinner;
     CMeleeServer mServer;
 
-    void    CheckGameOver();
+    void     CheckGameOver();
     CPilot*  CreatePilot(const CGravOptions &options, int p);
     void     End(float avgFPS);
     pilots_t GetActivePilots() const;
-    virtual int      GetWinner()  = 0;
-    virtual bool     IsGameOver() = 0;
     void     Update(float dt);
 
+    virtual int  GetWinner()  = 0;
+    virtual bool IsGameOver() = 0;
 };
 
 #endif

@@ -1,9 +1,8 @@
 #ifndef _CMELEE_SERVER_H_
 #define _CMELEE_SERVER_H_
 
+#include "CUdpServer.hpp"
 #include <thread>
-
-class CUdpServer;
 
 class CMeleeServer {
 public:
@@ -13,7 +12,7 @@ public:
 
 private:
 
-    CUdpServer* mUdpServer;
+    CUdpServer mUdpServer;
     std::thread mThread;
 };
 

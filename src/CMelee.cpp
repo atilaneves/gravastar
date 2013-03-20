@@ -74,7 +74,6 @@ void CMelee::Run() {
 }
 
 
-
 void CMelee::Update(float dt) {
     pilots_t pilots = GetActivePilots();
     for(unsigned int p = 0; p < pilots.size(); ++p) pilots[p]->CheckControls();
