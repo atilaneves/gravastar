@@ -4,21 +4,20 @@
 
 using boost::asio::ip::udp;
 
+
 int main() {
     boost::asio::io_service service;
-    const boost::asio::ip::address_v4 addr({{0x7f, 0, 0, 1}}); //local
-    udp::endpoint receiver_endpoint(addr, 12345);
-
     udp::socket socket(service);
     socket.open(udp::v4());
 
-    std::array<char, 1> sendBuf  = {{ 0 }};
-    socket.send_to(boost::asio::buffer(sendBuf), receiver_endpoint);
+    const boost::asio::ip::address_v4 addr({{0x7f, 0, 0, 1}}); //local
+    udp::endpoint receiverEndpoint(addr, 12345);
+    std::array<char, 1> sendBuf = {{ 0 }};
+    socket.send_to(boost::asio::buffer(sendBuf), receiverEndpoint);
 
     std::array<char, 128> recvBuf;
-    udp::endpoint sender_endpoint;
-    size_t len = socket.receive_from(
-        boost::asio::buffer(recvBuf), sender_endpoint);
+    udp::endpoint senderEndpoint;
+    const auto len = socket.receive_from(boost::asio::buffer(recvBuf), senderEndpoint);
 
     std::cout << "Received " << len << " bytes:" << std::endl;
     std::cout.write(recvBuf.data(), len);
