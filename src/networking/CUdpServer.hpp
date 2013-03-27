@@ -1,3 +1,4 @@
+
 #ifndef CUDPSERVER_HPP_
 #define CUDPSERVER_HPP_
 
@@ -8,8 +9,8 @@ class CUdpServer {
 public:
 
     CUdpServer();
-    void run();
-    void stop();
+    void Run();
+    void Stop();
 
 private:
 

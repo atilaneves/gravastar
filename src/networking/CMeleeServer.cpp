@@ -3,11 +3,15 @@
 
 
 CMeleeServer::CMeleeServer():
-    mThread([this]() { mUdpServer.run(); }) {
+    mTcpServer(mTcpIoService),
+    mUdpThread([this]() { mUdpServer.Run(); }),
+    mTcpThread([this]() { mTcpIoService.run(); }) {
 
 }
 
 CMeleeServer::~CMeleeServer() {
-    mUdpServer.stop();
-    mThread.join();
+    mUdpServer.Stop();
+    mUdpThread.join();
+    mTcpIoService.stop();
+    mTcpThread.join();
 }

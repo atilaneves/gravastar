@@ -13,16 +13,16 @@ CUdpServer::CUdpServer():
     Listen();
 }
 
-void CUdpServer::run() {
+void CUdpServer::Run() {
     mService.run();
 }
 
-void CUdpServer::stop() {
+void CUdpServer::Stop() {
     mService.stop();
 }
 
 void CUdpServer::Listen() {
-    std::cout << "Listening\n";
+    std::cout << "UDP server Listening\n";
     mSocket.async_receive_from(
         boost::asio::buffer(mRecvBuffer), mEndpoint,
         boost::bind(&CUdpServer::HandleReceive, this,
@@ -34,7 +34,7 @@ void CUdpServer::HandleReceive(const boost::system::error_code& error,
                                std::size_t numBytes) {
     std::cout << "Received " << numBytes << " bytes\n";
     if(!error || error == boost::asio::error::message_size) {
-        std::shared_ptr<std::string> message(new std::string("Gravastar!"));
+        std::shared_ptr<std::string> message(new std::string("UDP Gravastar!"));
 
         mSocket.async_send_to(boost::asio::buffer(*message), mEndpoint,
                               boost::bind(&CUdpServer::HandleSend, this, message,

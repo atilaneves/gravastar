@@ -2,6 +2,7 @@
 #define _CMELEE_SERVER_H_
 
 #include "CUdpServer.hpp"
+#include "CTcpServer.hpp"
 #include <thread>
 
 class CMeleeServer {
@@ -13,7 +14,10 @@ public:
 private:
 
     CUdpServer mUdpServer;
-    std::thread mThread;
+    boost::asio::io_service mTcpIoService;
+    CTcpServer mTcpServer;
+    std::thread mUdpThread;
+    std::thread mTcpThread;
 };
 
 
