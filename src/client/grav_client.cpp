@@ -1,11 +1,11 @@
-#include <iostream>
-#include <array>
+#include "CUdpServer.hpp"
+#include <thread>
 #include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
+bool gDebug = false;
 
-int main() {
-
+static void connectToTcpServer() {
     boost::asio::io_service service;
     tcp::socket socket(service);
 
@@ -22,10 +22,21 @@ int main() {
         if(error == boost::asio::error::eof) {
             std::cout << "Connection closed by server\n";
             break; // Connection closed cleanly by peer.
-        } else if(error)
+        } else if(error) {
             throw boost::system::system_error(error); // Some other error.
+        }
 
         std::cout.write(buf.data(), len);
         std::cout << std::endl;
     }
+}
+
+int main() {
+    CUdpServer udpServer;
+    std::thread udpThread([&](){ udpServer.Run(); });
+    
+    connectToTcpServer();
+
+    udpServer.Stop();
+    udpThread.join();
 }

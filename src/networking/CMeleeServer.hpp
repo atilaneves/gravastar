@@ -13,10 +13,8 @@ public:
 
 private:
 
-    CUdpServer mUdpServer;
     boost::asio::io_service mTcpIoService;
     CTcpServer mTcpServer;
-    std::thread mUdpThread;
     std::thread mTcpThread;
 };
 

@@ -23,8 +23,8 @@ private:
     std::string mMessage;
 
     CTcpConnection(boost::asio::io_service& ioService);
-    void HandleWrite(const boost::system::error_code& /*error*/,
-                     size_t /*bytes_transferred*/);
+    void HandleWrite(const boost::system::error_code& error,
+                     size_t bytes_transferred);
 };
 
 class CTcpServer {

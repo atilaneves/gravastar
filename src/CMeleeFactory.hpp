@@ -8,19 +8,19 @@
 
 typedef CMelee* (*CreateMeleeCB)(const CGravOptions&);
 typedef CFactory<CMelee, std::string, CreateMeleeCB,
-		 const CGravOptions&> CMeleeFactory;
+                 const CGravOptions&> CMeleeFactory;
 
 #define REG_MELEE(type,cname) static CMelee *CreateMelee(\
  const CGravOptions &o)\
  { return new cname(o); } \
  static const bool regMelee=\
- CMeleeFactory::Instance().Register(type,CreateMelee);
+ CMeleeFactory::Instance().Register(type, CreateMelee);
 
 #define REG_MELEE2(type,cname) static CMelee *CreateMelee2(\
  const CGravOptions &o)\
  { return new cname(o); } \
  static const bool regMelee2=\
- CMeleeFactory::Instance().Register(type,CreateMelee2);
+ CMeleeFactory::Instance().Register(type, CreateMelee2);
 
 
 #endif
