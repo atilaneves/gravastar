@@ -33,6 +33,7 @@ void CUdpServer::Listen() {
 void CUdpServer::HandleReceive(const boost::system::error_code& error,
                                std::size_t numBytes) {
     std::cout << "Received " << numBytes << " bytes\n";
+    std::cout.write(mRecvBuffer.data(), numBytes);
     if(!error || error == boost::asio::error::message_size) {
         std::shared_ptr<std::string> message(new std::string("UDP Gravastar!"));
 

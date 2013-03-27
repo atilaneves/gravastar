@@ -1,7 +1,7 @@
 #ifndef _CMELEE_SERVER_H_
 #define _CMELEE_SERVER_H_
 
-#include "CUdpServer.hpp"
+#include "CUdpClient.hpp"
 #include "CTcpServer.hpp"
 #include <thread>
 
@@ -16,6 +16,7 @@ private:
     boost::asio::io_service mTcpIoService;
     CTcpServer mTcpServer;
     std::thread mTcpThread;
+    CUdpClient mUdpClient;
 };
 
 
