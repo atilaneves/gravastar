@@ -21,10 +21,10 @@ public:
   CSpriteObj(CLevel &level, const CVector2 &pos);
   virtual ~CSpriteObj();
 
-  	  void         CheckCollision(float dt);
-  	  bool         Collided() const;
-  	  bool         Collided(const CSpriteObj& obj) const;
-  	  positions_t  GetCollisions() const;
+          void         CheckCollision(float dt);
+          bool         Collided() const;
+          bool         Collided(const CSpriteObj& obj) const;
+          positions_t  GetCollisions() const;
   virtual void         Hit(CSpriteObj&   obj, CScreenPos pos, float dt) { }
   virtual void         Hit(CShip&       ship, CScreenPos pos, float dt) { }
   virtual void         Hit(CProjectile& proj, CScreenPos pos, float dt) { }
@@ -36,7 +36,7 @@ public:
   virtual const CGravSprite& GetSprite() const = 0;
   int                  GetWidth()  const { return GetSprite().GetWidth(); }
   bool                 InSprite(CScreenPos pos);
-  virtual bool 	       IsActive()        { return true; }
+  virtual bool                 IsActive()        { return true; }
   bool                 IsStopped() { return mStoppedCounter.IsActive(); }
   bool                 IsUpdated() const { return mUpdated; }
           void         SetUpdated(bool u) { mUpdated = u; }

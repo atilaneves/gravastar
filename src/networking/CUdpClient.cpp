@@ -10,6 +10,6 @@ CUdpClient::CUdpClient():
     mSocket.open(udp::v4());
 }
 
-void CUdpClient::sendTo(const std::vector<char>& sendBuffer) {
+void CUdpClient::sendBytes(const std::vector<char>& sendBuffer) {
     mSocket.send_to(boost::asio::buffer(sendBuffer), mReceiverEndpoint);
 }

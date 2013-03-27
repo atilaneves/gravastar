@@ -2,6 +2,7 @@
 #include "CSpriteObj.hpp"
 #include "CShips.hpp"
 #include "CFlicker.hpp"
+#include "CSpritePacker.hpp"
 #include "debug.hpp"
 #include <typeinfo>
 #include <algorithm>
@@ -10,7 +11,6 @@
 
 
 CSpriteObjs::objs_t CSpriteObjs::sObjs;
-
 
 void CSpriteObjs::Update(float dt) {
   
@@ -90,7 +90,7 @@ CSpriteObj* CSpriteObjs::HitObj(CScreenPos pos, bool drawn) { //anybody here?
 
 
 void CSpriteObjs::Stop(const CVector2& pos, const CSpriteObj &ship, 
-		       float maxTime) {
+                       float maxTime) {
   for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o) {
     if(*o == &ship) continue;
     CVector2 direction = (*o)->GetPos() - pos;
@@ -103,8 +103,8 @@ void CSpriteObjs::Stop(const CVector2& pos, const CSpriteObj &ship,
 
 void CSpriteObjs::DrawObj(CSpriteObj* sprObj) {
   // DEBUG("Drawing  obj %p of type %s at (%d, %d)\n",
-  // 	sprObj, typeid(*sprObj).name(),
-  // 	int(sprObj->GetPos().GetX()), int(sprObj->GetPos().GetY()));
+  //    sprObj, typeid(*sprObj).name(),
+  //    int(sprObj->GetPos().GetX()), int(sprObj->GetPos().GetY()));
   sprObj->Draw();
   sprObj->SetUpdated(true);
 }
@@ -113,4 +113,9 @@ void CSpriteObjs::DrawObj(CSpriteObj* sprObj) {
 void CSpriteObjs::EraseObj(CSpriteObj* sprObj) {
   sprObj->Erase();
   sprObj->SetUpdated(false);
+}
+
+auto CSpriteObjs::Pack() -> FrameBytes {
+    static CSpritePacker spritePacker;
+    return spritePacker.Pack(sObjs);
 }

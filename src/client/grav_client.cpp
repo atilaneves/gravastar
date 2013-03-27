@@ -20,6 +20,7 @@ static void connectToTcpServer() {
         const auto len = socket.read_some(boost::asio::buffer(buf), error);
 
         if(error == boost::asio::error::eof) {
+            continue;
             std::cout << "Connection closed by server\n";
             break; // Connection closed cleanly by peer.
         } else if(error) {

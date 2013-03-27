@@ -10,6 +10,7 @@ using boost::asio::ip::udp;
 
 CUdpServer::CUdpServer():
     mSocket(mService, udp::endpoint(udp::v4(), 12345)) {
+    std::cout << "UDP server Listening\n";
     Listen();
 }
 
@@ -22,7 +23,6 @@ void CUdpServer::Stop() {
 }
 
 void CUdpServer::Listen() {
-    std::cout << "UDP server Listening\n";
     mSocket.async_receive_from(
         boost::asio::buffer(mRecvBuffer), mEndpoint,
         boost::bind(&CUdpServer::HandleReceive, this,
@@ -34,6 +34,7 @@ void CUdpServer::HandleReceive(const boost::system::error_code& error,
                                std::size_t numBytes) {
     std::cout << "Received " << numBytes << " bytes\n";
     std::cout.write(mRecvBuffer.data(), numBytes);
+    std::cout << std::endl;
     if(!error || error == boost::asio::error::message_size) {
         std::shared_ptr<std::string> message(new std::string("UDP Gravastar!"));
 

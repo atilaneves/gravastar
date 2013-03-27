@@ -8,7 +8,7 @@ class CUdpClient {
 public:
 
     CUdpClient();
-    void sendTo(const std::vector<char>& sendBuffer);
+    void sendBytes(const std::vector<char>& sendBuffer);
 
 
 private:

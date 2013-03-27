@@ -3,6 +3,7 @@
 
 #include "CUdpClient.hpp"
 #include "CTcpServer.hpp"
+#include <vector>
 #include <thread>
 
 class CMeleeServer {
@@ -10,6 +11,7 @@ public:
 
     CMeleeServer();
     ~CMeleeServer();
+    void sendFrame(const std::vector<char>& frameBytes);
 
 private:
 

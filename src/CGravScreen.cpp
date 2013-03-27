@@ -8,8 +8,8 @@
 
 
 CGravScreen::CGravScreen(const CCanvas &levelCanvas,
-			 const CClientOptions &options,
-			 const CSong& song):
+                         const CClientOptions &options,
+                         const CSong& song):
   mOldWidth(CResolution::GetWidth()), mOldHeight(CResolution::GetHeight()),
   mCanvas(options.GetWidth(), options.GetHeight()),
   mSong(song), mFont(EmpireBuilderDocument9),

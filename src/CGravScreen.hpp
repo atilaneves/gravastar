@@ -22,7 +22,7 @@ class CGravScreen {
 public:
 
   CGravScreen(const CCanvas &levelCanvas, const CClientOptions &options,
-	      const CSong& song);
+              const CSong& song);
   ~CGravScreen();
 
   void     Draw(const pilots_t &pilots);

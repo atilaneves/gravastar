@@ -23,7 +23,6 @@ public:
     }
 
     bool Register(const TIdentifier& id, TCreateCB creator) {
-        std::cout << "Registering " << id << std::endl;
         mKeys.push_back(id);
         return mMap.insert(typename AssocMap::value_type(id, creator)).second;
     }
