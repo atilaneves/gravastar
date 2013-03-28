@@ -36,7 +36,7 @@ public:
   enum { kNbSuperExpSprites = 8, kNbSpecialExpSprites = 10 };
 
   CShipBluePrint(const std::string &name, const CTeam &team,
-		 const CShipYard &shipYard);
+                 const CShipYard &shipYard);
 
   const CGravSprite& GetSprite() const {
     return *(GetSprites())[0];

@@ -13,6 +13,6 @@ CMeleeServer::~CMeleeServer() {
     mTcpThread.join();
 }
 
-void CMeleeServer::sendFrame(const std::vector<char>& frameBytes) {
-    mUdpClient.sendBytes(frameBytes);
+void CMeleeServer::SendFrame(const std::vector<char>& frameBytes) {
+    mUdpClient.SendBytes(frameBytes);
 }

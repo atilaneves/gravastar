@@ -38,7 +38,7 @@ public:
           void     BackTrack(float dt) { mPos -= mVel*dt; mNose.BackTrack();}
           void     BounceOff(float edgeAngle, float dt);
           float    BouncedOff(const CScreenPos& pos, float& edgeAngle) {
-	   return mCollider.BouncedOff(pos, edgeAngle); } 
+           return mCollider.BouncedOff(pos, edgeAngle); } 
   virtual CVector2 CalcAcc();
   virtual bool     CanMoveSuper() const { return false; }
   virtual void     Draw() { if(mHull > 0) CExplosive::Draw(); }
@@ -47,11 +47,11 @@ public:
   virtual int      GetSpriteIndex() const { return mNose.GetNose(); }
          CWeapons& GetWeapons()  { return mWeapons; }
   virtual void     Hit(CSpriteObj& obj, CScreenPos pos, float dt) {
-    obj.Hit(*this, pos, dt); }
+                       obj.Hit(*this, pos, dt); }
   virtual void     Hit(CProjectile& proj, CScreenPos pos, float dt);
   virtual void     Hit(CShip& ship, CScreenPos pos, float dt);
   virtual bool     IsActive()  { return CExplosive::IsActive() || 
-			       mEffects.IsActive(CExplosionPause::GetID()); }
+                               mEffects.IsActive(CExplosionPause::GetID()); }
           bool     IsEffectOn(int i) { return mEffects.IsActive(i); }
           void     LandDamage(float dt) { mCollider.LandDamage(dt); }
   const CShipAura& GetAura() const { return mAura; }
@@ -71,17 +71,17 @@ public:
 
 protected:
 
-  CEngine          	  mEngine;
-  CNose            	  mNose;
-  CShipFriction    	  mFriction;
-  CShipCollider    	  mCollider;
-  CShipAura        	  mAura;
-  CSound           	  mSpawn;
+  CEngine                 mEngine;
+  CNose                   mNose;
+  CShipFriction           mFriction;
+  CShipCollider           mCollider;
+  CShipAura               mAura;
+  CSound                  mSpawn;
   const CSpriteVector&    mInvSprites;
   const CSpriteVector&    mScrambleSprites;
   const CSpriteVector&    mEMPSprites;
-  CShipEffects     	  mEffects;
-  CWeapons         	  mWeapons;
+  CShipEffects            mEffects;
+  CWeapons                mWeapons;
   const CProjBluePrint&   mExtraProjBluePrint;
   const CFollowBluePrint& mExtraFollowBluePrint;
 

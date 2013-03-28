@@ -78,7 +78,7 @@ void CMelee::Update(float dt) {
     pilots_t pilots = GetActivePilots();
     for(unsigned int p = 0; p < pilots.size(); ++p) pilots[p]->CheckControls();
     CSpriteObjs::Update(dt);
-    mServer.sendFrame(CSpriteObjs::Pack());
+    mServer.SendFrame(CSpriteObjs::Pack());
     mPowerups.Generate(dt);
     mGravScreen.Draw(GetActivePilots());
 }

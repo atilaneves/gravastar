@@ -8,19 +8,23 @@
 using boost::asio::ip::udp;
 
 
-CUdpServer::CUdpServer():
+CUdpServer::CUdpServer(const RecvHandler& recvHandler, const SendHandler& sendHandler):
+    mRecvHandler(recvHandler), mSendHandler(sendHandler),
     mSocket(mService, udp::endpoint(udp::v4(), 12345)) {
     std::cout << "UDP server Listening\n";
     Listen();
 }
 
+
 void CUdpServer::Run() {
     mService.run();
 }
 
+
 void CUdpServer::Stop() {
     mService.stop();
 }
+
 
 void CUdpServer::Listen() {
     mSocket.async_receive_from(
@@ -28,27 +32,16 @@ void CUdpServer::Listen() {
         boost::bind(&CUdpServer::HandleReceive, this,
                     boost::asio::placeholders::error,
                     boost::asio::placeholders::bytes_transferred));
-  }
-
-void CUdpServer::HandleReceive(const boost::system::error_code& error,
-                               std::size_t numBytes) {
-    std::cout << "Received " << numBytes << " bytes\n";
-    std::cout.write(mRecvBuffer.data(), numBytes);
-    std::cout << std::endl;
-    if(!error || error == boost::asio::error::message_size) {
-        std::shared_ptr<std::string> message(new std::string("UDP Gravastar!"));
-
-        mSocket.async_send_to(boost::asio::buffer(*message), mEndpoint,
-                              boost::bind(&CUdpServer::HandleSend, this, message,
-                                          boost::asio::placeholders::error,
-                                          boost::asio::placeholders::bytes_transferred));
-        Listen();
-    }
 }
 
 
-void CUdpServer::HandleSend(std::shared_ptr<std::string> message,
-                            const boost::system::error_code& error,
-                            std::size_t bytes_transferred) {
-    std::cout << "Sent " << bytes_transferred << " bytes" << std::endl;
+void CUdpServer::SendBytes(const std::vector<char>& sendBuffer) {
+    mSocket.async_send_to(boost::asio::buffer(sendBuffer), mEndpoint, mSendHandler);
+}
+
+
+void CUdpServer::HandleReceive(const boost::system::error_code& error,
+                               std::size_t numBytes) {
+    mRecvHandler(error, numBytes, mRecvBuffer);
+    Listen();
 }

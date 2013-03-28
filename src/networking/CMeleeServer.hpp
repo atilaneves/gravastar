@@ -11,7 +11,7 @@ public:
 
     CMeleeServer();
     ~CMeleeServer();
-    void sendFrame(const std::vector<char>& frameBytes);
+    void SendFrame(const std::vector<char>& frameBytes);
 
 private:
 

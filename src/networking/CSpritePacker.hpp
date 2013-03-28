@@ -3,16 +3,20 @@
 
 #include "CSpriteObjs.hpp"
 #include <vector>
-
+#include <chrono>
 
 class CSpritePacker {
 
 public:
 
     using FrameBytes = CSpriteObjs::FrameBytes;
-    using Sprites = const CSpriteObjs::objs_t&;
+    using Sprites = CSpriteObjs::objs_t;
 
-    FrameBytes Pack(Sprites sprites);
+    FrameBytes Pack(const Sprites& sprites) const;
+
+private:
+
+    std::chrono::high_resolution_clock mClock;
 };
 
 

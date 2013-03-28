@@ -6,8 +6,8 @@
 
 
 CMoverBluePrint::CMoverBluePrint(int startPos,
-				 const CDataFile &dataFile,
-				 const CTeam &team, int colour) {
+                                 const CDataFile &dataFile,
+                                 const CTeam &team, int colour) {
 
   const int kNbInQuad = CNose::kNbNoses/4; //# of sprites in one quadrant
  
@@ -18,6 +18,6 @@ CMoverBluePrint::CMoverBluePrint(int startPos,
     const float scale = 1;
     
     mSprites.push_back(new CGravSprite(sprite, team, angle, scale,
-				       colour)); //rotate
+                                       colour)); //rotate
   }
 }

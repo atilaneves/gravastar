@@ -12,16 +12,16 @@
 
 
 CShipBluePrint::CShipBluePrint(const std::string &name, const CTeam &team,
-			       const CShipYard &shipYard):
+                               const CShipYard &shipYard):
   mName(name), mDataFile(new CDataFile("Ships/" + name + ".dat")),
   mTeam(team),
   mExplosiveBluePrint(BLUE_000, "ship", *mDataFile, team),
   mExaustBluePrint(EXAUST_000, *mDataFile, team),
   mInvulnerableBluePrint(BLUE_000, *mDataFile, team, team.GetDarkColour()),
   mScrambleBluePrint(1, CDataFile("Weapons/boomerang.dat"),
-		     team, team.GetDarkColour()),
+                     team, team.GetDarkColour()),
   mEMPBluePrint(1, CDataFile("Weapons/emp.dat"),
-		team, team.GetDarkColour()),
+                team, team.GetDarkColour()),
   mSounds(shipYard.GetSounds()),
   mStatSprite(mDataFile->GetData(BLUE_000), team),
   mAuraSprite(mDataFile->GetData(AURA_000), team),
@@ -35,14 +35,14 @@ CShipBluePrint::CShipBluePrint(const std::string &name, const CTeam &team,
 
   CFollowBluePrintFactory& flwFactory = CFollowBluePrintFactory::Instance();
   mFollowSpecBluePrint.reset(flwFactory.CreateObject(getFollowName(name),
-							team));
+                                                        team));
   mExtraFollowBluePrint.reset(flwFactory.CreateObject(getExtraFollowName(name),
-						      team));
+                                                      team));
 
   CWeaponBluePrintFactory& weapFactory = CWeaponBluePrintFactory::Instance();
   mWeaponBluePrint.reset(weapFactory.CreateObject(getWeaponName(name), team));
   mExtraProjBluePrint.reset(weapFactory.CreateObject(getExtraWeaponName(name),
-						     team));
+                                                     team));
 
   CDataFile specData("Explosions/specialExp.dat");
   for(int i = 0; i < CSpecialExplosion::kNbFrames; ++i)
@@ -62,10 +62,10 @@ void CShipBluePrint::SetAttributes(char *data) {
   fmt += "%*s %*s %d %f";  //super rate and duration
   
   sscanf(data, fmt.c_str(),
-	 &mMass, &mMaxHull, &mMaxVel,
-	 &mThrust, &mTurnPower,
-	 &mFastRate, &mSlowRate, &mMaxTemperature, &mCoolingRate,
-	 &mSpecialRate, &mMaxGauge, &mDepletion, &mRecovery,
-	 &mBaseHull, &mBaseSpecial,
-	 &mSuperRate, &mSuperDuration);
+         &mMass, &mMaxHull, &mMaxVel,
+         &mThrust, &mTurnPower,
+         &mFastRate, &mSlowRate, &mMaxTemperature, &mCoolingRate,
+         &mSpecialRate, &mMaxGauge, &mDepletion, &mRecovery,
+         &mBaseHull, &mBaseSpecial,
+         &mSuperRate, &mSuperDuration);
 }
