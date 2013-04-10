@@ -14,13 +14,6 @@ CMenu::CMenu(CMenuIcon *icon):
 }
 
 
-CMenu::~CMenu() {
-    for(unsigned int i = 0; i < mItems.size(); ++i)
-        for(unsigned int j = 0; j < mItems[i].size(); ++j)
-            delete mItems[i][j];
-}
-
-
 int CMenu::GetSubMenuX(int column) const {
     int deltaX = 0;
     int x      = CResolution::GetWidth() / 2;
@@ -37,9 +30,9 @@ int CMenu::GetSubMenuY(int row) const {
 }
 
 
-void CMenu::AddMenu(CMenu *menu, int col) { 
+void CMenu::AddMenu(CMenuHolder&& menu, int col) {
     if((int)mItems.size() <= col) mItems.resize(col + 1); //add column if needed
-    mItems[col].push_back(menu);
+    mItems[col].push_back(std::move(menu));
     CMenuIcon *icon = menu->mIcon.get();
     if (icon->GetWidth()  > mMaxWidth)  mMaxWidth  = icon->GetWidth();
     if (icon->GetHeight() > mMaxHeight) mMaxHeight = icon->GetHeight();
