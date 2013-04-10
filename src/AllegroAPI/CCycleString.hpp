@@ -15,7 +15,7 @@ class CCycleString:public CCycleLeaf {
 public:
 
   CCycleString(const std::string &title, const strings_t& strings,
-	       int max, int min = 1);
+               int max, int min = 1);
 
   virtual std::string GetString() const { 
     return mStrings[mCycle.ToInt() - mCycle.GetMin()]; }

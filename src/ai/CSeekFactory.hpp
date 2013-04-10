@@ -9,7 +9,7 @@
 
 typedef CSeekAndDestroy* (*CreateSeekCB)(CPilotBot&);
 typedef CFactory<CSeekAndDestroy, std::string,
-		 CreateSeekCB, CPilotBot&> CSeekFactory;
+                 CreateSeekCB, CPilotBot&> CSeekFactory;
 
 #define REG_SEEK(sname,cname) static CSeekAndDestroy *CreateSeek(CPilotBot &p)\
  { return new cname(p); } \
@@ -20,7 +20,6 @@ typedef CFactory<CSeekAndDestroy, std::string,
  { return new cname(p); } \
  static const bool regSeek2=\
  CSeekFactory::Instance().Register(sname, CreateSk2);
-
 
 #define REG_SEEK3(sname,cname) static CSeekAndDestroy *CreateSk3(CPilotBot &p)\
  { return new cname(p); } \

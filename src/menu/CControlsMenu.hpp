@@ -16,24 +16,24 @@ class CControlsMenu: public CStringMenu {
 
 public:
 
-  enum { kMaxNbPilots = 4 };
+    enum { kMaxNbPilots = 4 };
 
-  CControlsMenu(const CVersusMenu &versus, const CClientOptions& options);
-  virtual ~CControlsMenu() { }
+    CControlsMenu(const CVersusMenu &versus, const CClientOptions& options);
+    virtual ~CControlsMenu() { }
 
-  virtual  void      Draw(CCanvas &canvas);
-  CPilotInputOptions GetPilotInputOptions(int i);
-           int       GetJoyIndex(int i) const;
+    virtual  void  Draw(CCanvas &canvas);
+             int   GetJoyIndex(int i) const;
+             std::vector<CPilotInputOptions> GetPilotInputOptions(int nbPilots) const;
 
 
 private:
 
-  CMenuCursor mCursor;
-  const CVersusMenu& mVersus;
-  std::vector<CCycleStringEnter*> mControlTypes;
-  std::vector<CRedefineMenu*> mRedefines;
+    CMenuCursor mCursor;
+    const CVersusMenu& mVersus;
+    std::vector<CCycleStringEnter*> mControlTypes;
+    std::vector<CRedefineMenu*> mRedefines;
 
-  virtual int GetSubMenuX(int column) const;
+    virtual int GetSubMenuX(int column) const;
 
 };
 

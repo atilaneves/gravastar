@@ -13,7 +13,7 @@ public:
 
   CGravOptions() { }
   CGravOptions(const CMeleeOptions &meleeOptions,
-	       const CClientOptions &clientOptions):
+               const CClientOptions &clientOptions):
     mMeleeOptions(meleeOptions), mClientOptions(clientOptions) { }
 
   const CClientOptions& GetClientOptions() const { return mClientOptions; }

@@ -21,14 +21,14 @@ public:
 
           void   AdoptInput(CMenuInput *input) { mInput.reset(input); }
   virtual void   Draw(CCanvas &canvas);
-  	  int    GetCol() const { return mCol.ToInt(); }
-  	  int    GetNbCols() const { return mCol.GetMax(); }
-  	  int    GetNbRows() const { return mRow.GetMax(); }
-  	  int    GetRow() const { return mRow.ToInt(); }
+          int    GetCol() const { return mCol.ToInt(); }
+          int    GetNbCols() const { return mCol.GetMax(); }
+          int    GetNbRows() const { return mRow.GetMax(); }
+          int    GetRow() const { return mRow.ToInt(); }
   virtual void   OnSelect() { }
-  	  void   SetCol(int c) { mCol = c; }
-  	  void   SetRow(int r) { mRow = r; }
-  	  void   SetRowsCols(); //sets total number of rows/columns
+          void   SetCol(int c) { mCol = c; }
+          void   SetRow(int r) { mRow = r; }
+          void   SetRowsCols(); //sets total number of rows/columns
   virtual CMenu* Update(CRootMenu &rootMenu); //updates
 
 

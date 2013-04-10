@@ -20,7 +20,7 @@ public:
 
   enum { kMaxNbPilots = 4 };
 
-  CShipMenu(const CGravMenu &gravMenu, const CVersusMenu &versusMenu);
+  CShipMenu(const CVersusMenu &versusMenu);
   virtual ~CShipMenu();
 
           int         GetLevelNb() const { return mLevelMenu.GetLevelNb(); }
@@ -32,7 +32,6 @@ public:
 private:
 
   CSound mSound;
-  const CGravMenu &mGravMenu;
   const CVersusMenu &mVersus;
   std::vector<CShipMenuItem*> mShipItems;
   shipsTypes_t mShipTypes;

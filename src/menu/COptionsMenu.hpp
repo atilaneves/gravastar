@@ -21,23 +21,22 @@ class COptionsMenu: public CStringMenu {
 
 public:
 
-  COptionsMenu(CSprite *cursorSprite, const CVersusMenu& versus,
-	       const CClientOptions& options);
+    COptionsMenu(CSprite *cursorSprite, const CVersusMenu& versus,
+                 const CClientOptions& options);
 
-  CClientOptions GetClientOptions(int nbPilots) const;
-  void           Save() const;
+    CClientOptions GetClientOptions(int nbPilots) const;
+    void           Save() const;
 
 
 private:
 
-  CMenuCursor mCursor;
-  const CVersusMenu& mVersus;
-  CControlsMenu* mControlsMenu;
-  CVideoMenu*    mVideoMenu;
-  CSoundMenu*    mSoundMenu;
+    CMenuCursor mCursor;
+    const CVersusMenu& mVersus;
+    CControlsMenu* mControlsMenu;
+    CVideoMenu*    mVideoMenu;
+    CSoundMenu*    mSoundMenu;
 
-  CPilotInputOptions         GetPilotInputOptions(int i) const;
-  std::vector<CPilotOptions> GetPilotOptions(int nbPilots) const;
+    std::vector<CPilotOptions> GetPilotOptions(int nbPilots) const;
 
 
 };

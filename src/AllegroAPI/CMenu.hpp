@@ -12,6 +12,8 @@ class CCanvas;
 
 class CMenu {
 
+    friend class CMenuDecorator;
+
 public:
 
   CMenu(CMenuIcon *icon);
@@ -40,10 +42,10 @@ protected:
   virtual bool IsActive(CRootMenu &rootMenu);
           bool RunStep(CRootMenu &rootMenu);
 
-  std::auto_ptr<CMenuIcon>          mIcon;
-  int                               mMaxWidth, mMaxHeight;
-  std::vector <CMenuCursor*>        mCursors;
-  std::vector<std::vector<CMenu*> > mItems;
+  std::unique_ptr<CMenuIcon>       mIcon;
+  int                              mMaxWidth, mMaxHeight;
+  std::vector <CMenuCursor*>       mCursors;
+  std::vector<std::vector<CMenu*>> mItems;
 
 
 };

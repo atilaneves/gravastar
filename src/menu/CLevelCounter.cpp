@@ -1,5 +1,6 @@
 #include "CLevelCounter.hpp"
 #include "CDataFile.hpp"
+#include "CLevelHeader.hpp"
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
@@ -26,4 +27,14 @@ int CLevelCounter::FindNbLevels() {
 
 int CLevelCounter::GetRandomLevel() const {
   return rand() % mNbLevels + 1; //1 to nbLevels
+}
+
+strings_t CLevelCounter::GetLevelTitles() const {
+    strings_t titles;
+    for(int i = 0; i <= GetNbLevels(); i++) {
+        CLevelHeader levelHeader(i);
+        titles.push_back(levelHeader.GetTitle());
+    }
+
+    return titles;
 }

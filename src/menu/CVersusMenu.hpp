@@ -13,6 +13,7 @@ class CShipMenu;
 #include "CPilotOptions.hpp"
 #include "CStringMenu.hpp"
 #include "CMenuCursor.hpp"
+#include "CGravOptions.hpp"
 #include <vector>
 
 
@@ -20,37 +21,42 @@ class CVersusMenu: public CStringMenu {
 
 public:
 
-  enum { kMaxNbPilots = 4 };
+    enum { kMaxNbPilots = 4 };
 
-  CVersusMenu(CSprite *cursorSprite, const CGravMenu &gravMenu);
+    CVersusMenu(const CSprite *cursorSprite, const CGravMenu &gravMenu, const std::string& title = "Offline");
 
-  CMeleeOptions      GetMeleeOptions()   const;
-        std::string  GetMeleeType()      const;
-        int          GetNbPilots()       const;
-        int          GetNbShips()        const;
-        int          GetNbShips(int p)   const;
-        std::string  GetPilotName(int p) const;
-  const CTeam&       GetPilotTeam(int p) const;
-        std::string  GetPilotType(int p) const;
-        std::string  GetShipType(int p, int s) const;
-  const shipTypes_t& GetShipTypes(int p) const;
-        float        GetPowerupRate() const;
+    std::vector<CPilotOptions> GetPilotOptions(int nbPilots,
+                                               const std::vector<CPilotInputOptions>& pilotInputOpts) const;
+
+
+    CGravOptions       GetGravOptions()    const;
+    CMeleeOptions      GetMeleeOptions()   const;
+          std::string  GetMeleeType()      const;
+          int          GetNbPilots()       const;
+          int          GetNbShips()        const;
+          int          GetNbShips(int p)   const;
+          std::string  GetPilotName(int p) const;
+    const CTeam&       GetPilotTeam(int p) const;
+          std::string  GetPilotType(int p) const;
+          std::string  GetShipType(int p, int s) const;
+    const shipTypes_t& GetShipTypes(int p) const;
+          float        GetPowerupRate() const;
 
 
 private:
 
-  CMenuCursor mCursor;
-  CCycleString *mMeleeType;
-  CShipMenu *mShipMenu;
-  CCycleLeaf *mNbHumans, *mNbBots, *mLimit, *mPowerupRate;
-  std::vector<CCycleTeam*> mTeams;
+    const CGravMenu& mGravMenu;
+    CMenuCursor mCursor;
+    CCycleString *mMeleeType;
+    CShipMenu *mShipMenu;
+    CCycleLeaf *mNbHumans, *mNbBots, *mLimit, *mPowerupRate;
+    std::vector<CCycleTeam*> mTeams;
 
-          void CreateTeams();
-          void CreateTypes();
-  std::vector<CPilotOptions> GetPilotOptions() const;
-          void KeepInBounds();
-          void SetTypeString();
-  virtual void Update(CRootMenu &rootMenu);
+            void CreateTeams();
+            void CreateTypes();
+            void KeepInBounds();
+            void SetTypeString();
+    virtual void Update(CRootMenu &rootMenu);
 
 };
 

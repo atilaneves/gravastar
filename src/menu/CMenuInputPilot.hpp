@@ -6,14 +6,14 @@
 #include "CPilotInput.hpp"
 #include <memory>
 #include <vector>
-class CGravOptions;
+class CClientOptions;
 class CMenuInputBot;
 
 class CMenuInputPilot: public CMenuInput {
 
 public:
 
-  CMenuInputPilot(int index, const CGravOptions& options);
+  CMenuInputPilot(int index, const CClientOptions& options);
   virtual ~CMenuInputPilot();
 
   void AddBot(CMenuInputBot* bot);

@@ -8,7 +8,7 @@
 #include "CLevelCounter.hpp"
 #include "CSound.hpp"
 #include <vector>
-class CGravMenu;
+class CVersusMenu;
 class CMeleeStart;
 class CLevelMenuSprite;
 class CSprite;
@@ -19,7 +19,7 @@ class CLevelMenu: public CStringMenu {
 
 public:
 
-  CLevelMenu(const CGravMenu &gravMenu);
+  CLevelMenu(const CVersusMenu &versusMenu);
   ~CLevelMenu();
 
   virtual void Draw(CCanvas &canvas);

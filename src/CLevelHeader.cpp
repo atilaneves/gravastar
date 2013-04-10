@@ -15,7 +15,7 @@ CLevelHeader::CLevelHeader(unsigned int levelNb):
  char *attribPtr = (char *)datafile.GetData(kATTRIBUTES);
  char title[200];
  sscanf(attribPtr,"%*s %*s %*s %*s %f %f %f %d %s",
-	&mGravity, &mAirFriction, &mLandFriction, &mNbInds, title);
+        &mGravity, &mAirFriction, &mLandFriction, &mNbInds, title);
  mTitle = CUnderscoreRemover::Remove(title);
 }
 
