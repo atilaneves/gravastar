@@ -15,11 +15,11 @@ public:
   CMenuIconShip(const CDataFile *dataFile, int index);
   virtual ~CMenuIconShip() { }
 
-  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight);
+  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight) const override;
 
 private:
 
-  std::auto_ptr<CSprite> mSpritePtr;
+  std::unique_ptr<CSprite> mSpritePtr;
 
 };
 

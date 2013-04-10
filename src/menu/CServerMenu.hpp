@@ -10,7 +10,7 @@ class CGravMenu;
 class CServerMenu: public CCursorMenu<CStringMenu> {
 public:
 
-    CServerMenu(const CSprite *cursorSprite, const CGravMenu& gravMenu);
+    CServerMenu(const CSprite *cursorSprite, CGravMenu& gravMenu);
 
 private:
 

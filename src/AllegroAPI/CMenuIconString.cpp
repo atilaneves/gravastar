@@ -10,7 +10,7 @@ CMenuIconString::CMenuIconString(const std::string &title, const CFont &font):
 }
 
 
-void CMenuIconString::Draw(CCanvas &canvas, int x, int y, bool highlight) {
+void CMenuIconString::Draw(CCanvas &canvas, int x, int y, bool highlight) const {
   mFont.Print(canvas, x, y, GetColour(highlight), -1, mTitle.c_str());
 }
 

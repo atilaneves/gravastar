@@ -10,7 +10,7 @@ CMenuIconSprite::CMenuIconSprite(CSprite &sprite):
 }
 
 
-void CMenuIconSprite::Draw(CCanvas &canvas, int x, int y, bool highlight) {
+void CMenuIconSprite::Draw(CCanvas &canvas, int x, int y, bool highlight) const {
   x += 20  - mSprite.GetWidth()/2;
   y += mSprite.GetHeight()/2;
   mSprite.Draw(canvas,x,y);

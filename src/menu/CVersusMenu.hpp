@@ -23,7 +23,7 @@ public:
 
     enum { kMaxNbPilots = 4 };
 
-    CVersusMenu(const CSprite *cursorSprite, const CGravMenu &gravMenu, const std::string& title = "Offline");
+    CVersusMenu(const CSprite *cursorSprite, const CGravMenu &gravMenu);
 
     std::vector<CPilotOptions> GetPilotOptions(int nbPilots,
                                                const std::vector<CPilotInputOptions>& pilotInputOpts) const;

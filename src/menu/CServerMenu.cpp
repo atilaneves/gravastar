@@ -1,8 +1,9 @@
 #include "CServerMenu.hpp"
+#include "CGravMenu.hpp"
 #include "CVersusMenu.hpp"
 
-CServerMenu::CServerMenu(const CSprite *cursorSprite, const CGravMenu& gravMenu):
+CServerMenu::CServerMenu(const CSprite *cursorSprite, CGravMenu& gravMenu):
     CCursorMenu<CStringMenu>(cursorSprite, "Server") {
 
-    AddMenu(new CVersusMenu(cursorSprite, gravMenu, "Start"));
+    AddMenu(gravMenu.GetVersusMenu());
 }

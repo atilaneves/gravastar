@@ -15,6 +15,6 @@ CMenuIconShip::CMenuIconShip(const CDataFile *dataFile, int index):
 }
 
 
-void CMenuIconShip::Draw(CCanvas &canvas, int x, int y, bool highlight) {
+void CMenuIconShip::Draw(CCanvas &canvas, int x, int y, bool highlight) const {
   mSprite.Draw(canvas, x - GetWidth() / 2, y - GetHeight() / 2);
 }

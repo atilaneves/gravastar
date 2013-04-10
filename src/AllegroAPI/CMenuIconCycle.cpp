@@ -7,20 +7,20 @@
 
 
 CMenuIconCycle::CMenuIconCycle(const std::string &title,
-			       const CCycleLeaf &cycleMenu):
-  mFont(CStringMenu::GetFont()), mTitle(title, mFont), mCycleMenu(cycleMenu) {
+                               const CCycleLeaf &cycleMenu):
+    mFont(CStringMenu::GetFont()), mTitle(title, mFont), mCycleMenu(cycleMenu) {
   
 }
 
 
-void CMenuIconCycle::Draw(CCanvas &canvas, int x, int y, bool highlight) {
-  mTitle.Draw(canvas, x, y, highlight);
-  mFont.Print(canvas, x + mTitle.GetWidth() + 10, y,
-	      CMenuIconString::GetColour(highlight), -1,
-	      mCycleMenu.GetString());
+void CMenuIconCycle::Draw(CCanvas &canvas, int x, int y, bool highlight) const {
+    mTitle.Draw(canvas, x, y, highlight);
+    mFont.Print(canvas, x + mTitle.GetWidth() + 10, y,
+                CMenuIconString::GetColour(highlight), -1,
+                mCycleMenu.GetString());
 }
 
 
 int CMenuIconCycle::GetWidth() const {
-  return mTitle.GetWidth() + mFont.GetLength(mCycleMenu.GetString().c_str());
+    return mTitle.GetWidth() + mFont.GetLength(mCycleMenu.GetString().c_str());
 }

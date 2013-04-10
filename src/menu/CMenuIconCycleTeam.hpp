@@ -18,7 +18,7 @@ private:
 
   const CCycleTeam &mCycleTeam;
 
-  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight = false);
+  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight = false) const override;
   
 };
 

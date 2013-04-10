@@ -6,7 +6,7 @@
 
 
 CMenuIconCycleTeam::CMenuIconCycleTeam(const std::string &title,
-				       const CCycleTeam &cycleMenu):
+                                       const CCycleTeam &cycleMenu):
   CMenuIconCycle(title, cycleMenu),
   mCycleTeam(cycleMenu) {
 
@@ -14,11 +14,11 @@ CMenuIconCycleTeam::CMenuIconCycleTeam(const std::string &title,
 }
 
 
-void CMenuIconCycleTeam::Draw(CCanvas &canvas, int x, int y, bool highlight) {
+void CMenuIconCycleTeam::Draw(CCanvas &canvas, int x, int y, bool highlight) const {
   mTitle.Draw(canvas, x, y, highlight);
   mFont.Print(canvas, x + mTitle.GetWidth() + 10, y,
-	      mCycleTeam.GetTeam().GetDarkColour(), -1,
-	      mCycleTeam.GetString());
+              mCycleTeam.GetTeam().GetDarkColour(), -1,
+              mCycleTeam.GetString());
 }
 
 

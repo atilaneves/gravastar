@@ -9,9 +9,8 @@
 #include "CGravMenu.hpp"
 
 CVersusMenu::CVersusMenu(const CSprite *cursorSprite,
-                         const CGravMenu &gravMenu,
-                         const std::string& title):
-    CStringMenu(title),
+                         const CGravMenu &gravMenu):
+    CStringMenu("Versus"),
     mGravMenu(gravMenu),
     mCursor(*this, cursorSprite) {
 

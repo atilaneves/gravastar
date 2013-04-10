@@ -21,7 +21,7 @@ public:
     CGravMenu(const CGravOptions &options);
 
     CClientOptions GetClientOptions(int nbPilots) const;
-
+    CVersusMenu& GetVersusMenu() { return *mVersusMenu; }
 
 private:
 

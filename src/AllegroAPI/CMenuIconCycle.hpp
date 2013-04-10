@@ -30,7 +30,7 @@ protected:
   CMenuIconString mTitle;
   const CCycleLeaf& mCycleMenu;
 
-  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight=false);
+  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight=false) const override;
   
 };
 

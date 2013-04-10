@@ -15,17 +15,15 @@ public:
   CMenuIconString(const std::string &title, const CFont &font);
   virtual ~CMenuIconString() { }
   
-  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight=false);
-  virtual int  GetHeight() const;
+  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight=false) const override;
+  virtual int  GetHeight() const override;
   static  int  GetColour(bool h) { return  h ? GetMenuHi() : GetMenuLo(); }
   static  int  GetMenuHi() { return CColour::GetColour(255, 255, 255); }
   static  int  GetMenuLo() { return CColour::GetColour(140, 140, 140); }
   const std::string& GetTitle() const { return mTitle; }
-  virtual int  GetWidth()  const;
+  virtual int  GetWidth() const override;
           void SetTitle(const std::string& t) { mTitle = t; }
 
-  
-  
 private:
 
   std::string  mTitle;

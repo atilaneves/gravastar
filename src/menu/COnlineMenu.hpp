@@ -9,7 +9,7 @@ class CGravMenu;
 class COnlineMenu: public CCursorMenu<CStringMenu> {
 public:
 
-    COnlineMenu(const CSprite *cursorSprite, const CGravMenu& gravMenu);
+    COnlineMenu(const CSprite *cursorSprite, CGravMenu& gravMenu);
 };
 
 #endif
