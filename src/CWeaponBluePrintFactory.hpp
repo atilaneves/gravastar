@@ -8,8 +8,8 @@ class CTeam;
 
 
 typedef CProjBluePrint* (*CreateWeaponBluePrintCB)(const CTeam&);
-typedef CFactory<CProjBluePrint, std::string, CreateWeaponBluePrintCB,
-		 const CTeam&> CWeaponBluePrintFactory;
+typedef CFactory<CProjBluePrint, std::string,
+                 const CTeam&> CWeaponBluePrintFactory;
 
 std::string getWeaponName(const std::string& name);
 std::string getExtraWeaponName(const std::string& name);

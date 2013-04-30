@@ -9,7 +9,7 @@
 
 typedef CSeekAndDestroy* (*CreateSeekCB)(CPilotBot&);
 typedef CFactory<CSeekAndDestroy, std::string,
-                 CreateSeekCB, CPilotBot&> CSeekFactory;
+                 CPilotBot&> CSeekFactory;
 
 #define REG_SEEK(sname,cname) static CSeekAndDestroy *CreateSeek(CPilotBot &p)\
  { return new cname(p); } \

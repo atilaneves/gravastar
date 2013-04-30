@@ -13,12 +13,12 @@ class CSpriteVector;
 
 
 typedef CFollower* (*CreateFollowCB)(const CSpriteVector&, CLevel&,
-				     CMoverObj&, CSound*,  const CVector2&);
+                                     CMoverObj&, CSound*,  const CVector2&);
 
 
-typedef CFactory<CFollower, std::string, CreateFollowCB,
-		 const CSpriteVector&, CLevel&, CMoverObj&, CSound*,
-		 const CVector2&> CFollowFactory;
+typedef CFactory<CFollower, std::string,
+                 const CSpriteVector&, CLevel&, CMoverObj&, CSound*,
+                 const CVector2&> CFollowFactory;
 
 
 #define REG_FOLLOW(pname, cname) static CFollower* CreateFollow(\

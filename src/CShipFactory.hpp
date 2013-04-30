@@ -11,8 +11,8 @@
 typedef CShip* (*CreateShipCB)(const CShipBluePrint&, CPilot&, CLevel&);
 
 
-typedef CFactory<CShip, std::string, CreateShipCB,
-		 const CShipBluePrint&, CPilot&, CLevel&> CShipFactory;
+typedef CFactory<CShip, std::string,
+                 const CShipBluePrint&, CPilot&, CLevel&> CShipFactory;
 
 #define REG_SHIP(sname, cname) static CShip* CreateShip(\
  const CShipBluePrint &bp, CPilot &pl, CLevel &lv) \

@@ -7,7 +7,7 @@
 #include <string>
 
 typedef CMelee* (*CreateMeleeCB)(const CGravOptions&);
-typedef CFactory<CMelee, std::string, CreateMeleeCB,
+typedef CFactory<CMelee, std::string,
                  const CGravOptions&> CMeleeFactory;
 
 #define REG_MELEE(type,cname) static CMelee *CreateMelee(\

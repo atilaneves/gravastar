@@ -5,19 +5,19 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <functional>
 
-template <class TAbstract, typename TIdentifier, typename TCreateCB,
-          typename TParam1=int, typename TParam2=int, typename TParam3=int,
-          typename TParam4=int, typename TParam5=int> 
+template <class TAbstract, typename TIdentifier, typename... Args>
 class CFactory {
 
 public:
 
-    typedef std::map<TIdentifier, TCreateCB> AssocMap;
+    using TCreateCB = std::function<TAbstract*(Args ...args)>;
+    using AssocMap = std::map<TIdentifier, TCreateCB>;
 
     const std::vector<TIdentifier>& GetKeys() const { return mKeys; }
 
-    static CFactory& Instance() { 
+    static CFactory& Instance() {
         static CFactory factory;
         return factory;
     }
@@ -31,49 +31,15 @@ public:
         return mMap.erase(id) == 1;
     }
 
-    TAbstract* CreateObject(const TIdentifier& id) {
+    TAbstract* CreateObject(const TIdentifier& id, Args ...args) {
         typename AssocMap::const_iterator i = mMap.find(id);
-        return i != mMap.end() ? (i->second)() : 0;
+        return i != mMap.end() ? (i->second)(args...) : nullptr;
     }
-
-    TAbstract* CreateObject(const TIdentifier& id, TParam1 param1) {
-        typename AssocMap::const_iterator i = mMap.find(id);
-        return i != mMap.end() ? (i->second)(param1) : 0;
-    }
-
-    TAbstract* CreateObject(const TIdentifier& id,
-                            TParam1 param1, TParam2 param2) {
-        typename AssocMap::const_iterator i = mMap.find(id);
-        return i != mMap.end() ? (i->second)(param1, param2) : 0;
-    }
-
-    TAbstract* CreateObject(const TIdentifier& id,
-                            TParam1 param1, TParam2 param2, TParam3 param3) {
-        typename AssocMap::const_iterator i = mMap.find(id);
-        return i != mMap.end() ? (i->second)(param1, param2, param3) : 0;
-    }
-
-    TAbstract* CreateObject(const TIdentifier& id,
-                            TParam1 param1, TParam2 param2,
-                            TParam3 param3, TParam4 param4) {
-        typename AssocMap::const_iterator i = mMap.find(id);
-        return i != mMap.end() ? (i->second)(param1, param2, param3, param4) : 0;
-    }
-
-    TAbstract* CreateObject(const TIdentifier& id,
-                            TParam1 param1, TParam2 param2,
-                            TParam3 param3, TParam4 param4, TParam5 param5) {
-        typename AssocMap::const_iterator i = mMap.find(id);
-        return i != mMap.end() ? (i->second)(param1, param2, param3, param4,
-                                             param5) : 0;
-    }
-
 
 protected:
 
     CFactory()  {} //protected ctor
     ~CFactory() {} //protected dtor
-
 
 private:
  
@@ -81,8 +47,6 @@ private:
     std::vector<TIdentifier> mKeys;
 
     CFactory(const CFactory&); //nobody can call this
-
-
 };
 
 

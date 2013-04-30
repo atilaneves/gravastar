@@ -8,8 +8,7 @@ class CTeam;
 
 
 typedef CShipEffect* (*createEffect_t)(const CTeam&, CShip&, CLevel&);
-typedef CIndexFactory<CShipEffect,createEffect_t,const CTeam&,CShip&,
-		      CLevel&> CEffectFactory;
+typedef CIndexFactory<CShipEffect, const CTeam&, CShip&, CLevel&> CEffectFactory;
 
 #define REG_EFFECT(cname) static CShipEffect *CreateEffect(const CTeam &t,\
                                                            CShip& s,\

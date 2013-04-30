@@ -11,8 +11,8 @@ class CLevel;
 
 
 typedef CSpecial* (*CreateSpecialCB)(const CShipBluePrint&, CShip&, CLevel&);
-typedef CFactory<CSpecial, std::string, CreateSpecialCB,
-		 const CShipBluePrint&, CShip&, CLevel&> CSpecialFactory;
+typedef CFactory<CSpecial, std::string,
+                 const CShipBluePrint&, CShip&, CLevel&> CSpecialFactory;
 
 #define REG_SPECIAL(sname,cname) static CSpecial *CreateSpecial(\
  const CShipBluePrint &bp, CShip& sh, CLevel &lv)\

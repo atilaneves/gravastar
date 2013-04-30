@@ -8,8 +8,8 @@ class CTeam;
 
 
 typedef CProjBluePrint* (*CreateProjBluePrintCB)(const CTeam&);
-typedef CFactory<CProjBluePrint, std::string, CreateProjBluePrintCB,
-		 const CTeam&> CProjBluePrintFactory;
+typedef CFactory<CProjBluePrint, std::string,
+                 const CTeam&> CProjBluePrintFactory;
 
 #define REG_PROJ_BLUEPRINT(shipName, projName) \
 static CProjBluePrint* CreateProjBluePrint(const CTeam& team)\

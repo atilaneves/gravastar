@@ -5,56 +5,46 @@
 #include "CFactory.hpp"
 
 
-template<typename TAbstract,typename TCreateCB,
-	 typename TParam1=int,typename TParam2=int,
-	 typename TParam3=int,typename TParam4=int>
-class CIndexFactory:public CFactory<TAbstract,int,TCreateCB,TParam1,TParam2,
-				    TParam3, TParam4> {
+template<typename TAbstract, typename... Args>
+class CIndexFactory:public CFactory<TAbstract, int, Args...> {
 
 public:
- 
-        int            GetNbClasses() const { return mNbClasses; }
- static CIndexFactory& Instance();
-        int            Register(TCreateCB creator);
+    using TCreateCB = typename CFactory<TAbstract, int, Args...>::TCreateCB;
+    int                   GetNbClasses() const { return mNbClasses; }
+    static CIndexFactory& Instance();
+    int                   Register(TCreateCB creator);
 
 
 private:
 
- int mNbClasses; 
+    int mNbClasses; 
 
- CIndexFactory(); //private ctor
- CIndexFactory(const CIndexFactory&); //nobody can call this
- ~CIndexFactory() {} //private dtor
+    CIndexFactory(); //private ctor
+    CIndexFactory(const CIndexFactory&); //nobody can call this
+    ~CIndexFactory() {} //private dtor
 
 };
 
 
-template<typename TAbstract,typename TCreateCB,
-	 typename TParam1,typename TParam2,typename TParam3,typename TParam4>
-CIndexFactory<TAbstract,TCreateCB,TParam1,
-	      TParam2,TParam3,TParam4>::CIndexFactory():
-   CFactory<TAbstract,int,TCreateCB,TParam1,TParam2,TParam3,TParam4>(),
-   mNbClasses(0) {
+template<typename TAbstract, typename...Args>
+CIndexFactory<TAbstract, Args...>::CIndexFactory():
+                  CFactory<TAbstract, int, Args...>(),
+                  mNbClasses(0) {
 }
 
 
-template<typename TAbstract,typename TCreateCB,
-	 typename TParam1,typename TParam2,typename TParam3,typename TParam4>
-CIndexFactory<TAbstract,TCreateCB,TParam1,TParam2,TParam3,TParam4> &
- CIndexFactory<TAbstract,TCreateCB,TParam1,TParam2,TParam3,TParam4>::Instance() { 
- static CIndexFactory<TAbstract,TCreateCB,TParam1,TParam2,TParam3,TParam4> factory;
- return factory;
+template<typename TAbstract, typename...Args>
+CIndexFactory<TAbstract, Args...>&
+CIndexFactory<TAbstract, Args...>::Instance() { 
+    static CIndexFactory<TAbstract, Args...> factory;
+    return factory;
 }
 
 
-template<typename TAbstract,typename TCreateCB,
-	 typename TParam1,typename TParam2,typename  TParam3,typename TParam4>
-int CIndexFactory<TAbstract,TCreateCB,TParam1,TParam2,TParam3,TParam4>::Register(
-						 TCreateCB creator) {
- CFactory<TAbstract,int,TCreateCB,TParam1,TParam2,
-   TParam3,TParam4>::Register(mNbClasses,
-			      creator);
- return mNbClasses++;
+template<typename TAbstract, typename...Args>
+int CIndexFactory<TAbstract, Args...>::Register(TCreateCB creator) {
+    CFactory<TAbstract, int, Args...>::Register(mNbClasses, creator);
+    return mNbClasses++;
 }
 
 #endif

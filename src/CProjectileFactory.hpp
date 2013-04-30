@@ -11,12 +11,12 @@ class CShip;
 
 
 typedef CProjectile* (*CreateProjCB)(const CProjBluePrint&, 
-				     CShip&, const CVector2&,
-				     const CVector2&, bool);
+                                     CShip&, const CVector2&,
+                                     const CVector2&, bool);
 
-typedef CFactory<CProjectile, std::string, CreateProjCB,
-		 const CProjBluePrint&, CShip&,
-		 const CVector2&, const CVector2&, bool> CProjectileFactory;
+typedef CFactory<CProjectile, std::string,
+                 const CProjBluePrint&, CShip&,
+                 const CVector2&, const CVector2&, bool> CProjectileFactory;
 
 
 #define REG_PROJECTILE(pname, cname) static CProjectile* CreateProjectile(\
