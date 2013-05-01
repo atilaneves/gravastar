@@ -16,11 +16,14 @@
 
 
 CMelee::CMelee(const CGravOptions &options):
-    mGravMedia(options),
+    mGravMedia(options.GetMeleeOptions(),
+               options.GetClientOptions().GetAllPilotOptions()),
     mGravScreen(mGravMedia.GetLevel().GetCanvas(), options.GetClientOptions(),
                 mSong),
-    mPowerups(mGravMedia.GetLevel(),options.GetMeleeOptions().GetPowerupRate()),
-    mMeleeScore(mGravScreen.GetCanvas(), options.GetMeleeOptions().GetType(),
+    mPowerups(mGravMedia.GetLevel(),
+              options.GetMeleeOptions().GetPowerupRate()),
+    mMeleeScore(mGravScreen.GetCanvas(),
+                options.GetMeleeOptions().GetType(),
                 mSong),
     mWinner(-1) {
 
@@ -28,17 +31,16 @@ CMelee::CMelee(const CGravOptions &options):
     CActionPicker::SetPowerups(&mPowerups);
     mSong.PlayLoop();
 
-    for(unsigned int p = 0; p < options.GetClientOptions().GetNbPilots(); p++)
-        mPilots.push_back(CreatePilot(options, p));
+    for(const auto& pilotOptions: options.GetClientOptions().GetAllPilotOptions())
+        mPilots.push_back(CreatePilot(pilotOptions));
 }
 
 
-CPilot* CMelee::CreatePilot(const CGravOptions &options, int p) {
-    const CPilotOptions &poptions=options.GetClientOptions().GetPilotOptions(p);
+CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions) {
     const CShipYard &shipYard    = mGravMedia.GetShipYard();
-    const std::string& type      = poptions.GetType();
-    return CPilotFactory::Instance().CreateObject(type, poptions, shipYard,
-                                                  mMeleeScore);
+    const std::string& type      = pilotOptions.GetType();
+    return CPilotFactory::Instance().CreateObject(type, pilotOptions,
+                                                  shipYard, mMeleeScore);
 }
 
 

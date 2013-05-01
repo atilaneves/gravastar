@@ -24,7 +24,8 @@ public:
   const CPilotInputOptions& GetInputOptions() const { return mInputOptions; }
   const std::string& GetName()                const { return mName;         }
   const unsigned int GetNbShips()             const { return mShips.size(); }
-  const std::string& GetShipName(unsigned int s) const { return mShips[s]; }
+  const std::string& GetShipName(unsigned s)  const { return mShips[s]; }
+  const shipTypes_t& GetShipNames()           const { return mShips; }
   const CTeam&       GetTeam()                const { return *mTeam;        }
   const std::string& GetType()                const { return mType;         }
         void         SetBot()                       { mType = "Bot"; }

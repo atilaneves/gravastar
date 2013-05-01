@@ -1,9 +1,10 @@
 #include "CGravMedia.hpp"
-#include "CGravOptions.hpp"
+#include "CMeleeOptions.hpp"
 
 
-CGravMedia::CGravMedia(const CGravOptions &options):
-  mLevel(options.GetMeleeOptions().GetLevelNb()),
-  mShipYard(mLevel, options) {
+CGravMedia::CGravMedia(const CMeleeOptions &meleeOptions,
+                       const CClientOptions::AllPilotOptions& allPilotOptions):
+  mLevel(meleeOptions.GetLevelNb()),
+  mShipYard(mLevel, allPilotOptions) {
 
 }

@@ -32,7 +32,7 @@ private:
 
   enum { kNbColours = 14 };
 
-  const std::string      mName;
+  const std::string mName;
   const float mStart, mEnd;
   std::vector<int> mColours;
 

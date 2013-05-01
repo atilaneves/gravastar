@@ -3,6 +3,7 @@
 
 
 class CGravOptions;
+class CPilotOptions;
 class CPilot;
 #include "CGravMedia.hpp"
 #include "CGravScreen.hpp"
@@ -40,7 +41,7 @@ protected:
     CMeleeServer mServer;
 
     void     CheckGameOver();
-    CPilot*  CreatePilot(const CGravOptions &options, int p);
+    CPilot*  CreatePilot(const CPilotOptions&);
     void     End(float avgFPS);
     pilots_t GetActivePilots() const;
     void     Update(float dt);

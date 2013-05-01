@@ -1,25 +1,19 @@
 #include "CShipYard.hpp"
 #include "CTeam.hpp"
-#include "CGravOptions.hpp"
 #include "CShip.hpp"
 #include "CShipFactory.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 
 
-CShipYard::CShipYard(CLevel &level, const CGravOptions &options):
+CShipYard::CShipYard(CLevel &level,
+                     const CClientOptions::AllPilotOptions& allPilotOptions):
     mLevel(level) {
     //builds blueprints for all ships/teams for all pilots
 
-    const auto &clientOptions = options.GetClientOptions();
-    for(unsigned int p = 0; p < clientOptions.GetNbPilots(); ++p) {
-    
-        const auto &pilotOptions = clientOptions.GetPilotOptions(p);
-        for(unsigned int s = 0; s < pilotOptions.GetNbShips(); ++s) {
-      
-            const auto& shipName = pilotOptions.GetShipName(s);
-            const auto& team     = pilotOptions.GetTeam();
-      
+    for(const auto& pilotOptions: allPilotOptions) {
+        const auto& team = pilotOptions.GetTeam();
+        for(const auto& shipName: pilotOptions.GetShipNames()) {
             if(!HasBluePrint(shipName, team)) InsertBluePrint(shipName, team);
         }
     }

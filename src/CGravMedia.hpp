@@ -2,16 +2,18 @@
 #define CGRAVMEDIA_H
 
 
-class CGravOptions;
+class CMeleeOptions;
 #include "CLevel.hpp"
 #include "CShipYard.hpp"
+#include "CClientOptions.hpp"
 
 
 class CGravMedia {
 
 public:
 
-  CGravMedia(const CGravOptions &options);
+    CGravMedia(const CMeleeOptions &meleeOptions,
+               const CClientOptions::AllPilotOptions& allPilotOptions);
 
         CLevel&    GetLevel()          { return mLevel;    }
   const CShipYard& GetShipYard() const { return mShipYard; }

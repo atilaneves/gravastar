@@ -11,10 +11,9 @@
 #include "CShipBluePrint.hpp"
 #include "CSound.hpp"
 #include "CShipSounds.hpp"
-
+#include "CClientOptions.hpp"
 
 class CTeam;
-class CGravOptions;
 class CShip;
 class CPilot;
 class CLevel;
@@ -24,35 +23,37 @@ class CShipYard {
 
 public:
 
-  enum { kNbTeams = 4 };
+    enum { kNbTeams = 4 };
+    using AllPilotOptions = std::vector<CPilotOptions>;
 
-  CShipYard(CLevel &level, const CGravOptions &options);
-  ~CShipYard();
+    CShipYard(CLevel &level,
+              const CClientOptions::AllPilotOptions& allPilotOptions);
+    ~CShipYard();
 
-  CShip* CreateShip(const std::string &shipName, const CTeam &team,
-		    CPilot &pilot) const;
+    CShip* CreateShip(const std::string &shipName, const CTeam &team,
+                      CPilot &pilot) const;
 
-  const CShipBluePrint& GetBluePrint(const std::string &shipName,
-				     const CTeam &team) const;
-  const CShipSounds& GetSounds() const { return mSounds; }
+    const CShipBluePrint& GetBluePrint(const std::string &shipName,
+                                       const CTeam &team) const;
+    const CShipSounds& GetSounds() const { return mSounds; }
 
 
 private:
 
-  typedef std::map<std::string, CShipBluePrint*> BluePrintMap_t;
-  typedef BluePrintMap_t::const_iterator ConstBluePrintIterator_t;
-  typedef BluePrintMap_t::iterator BluePrintIterator_t;
+    typedef std::map<std::string, CShipBluePrint*> BluePrintMap_t;
+    typedef BluePrintMap_t::const_iterator ConstBluePrintIterator_t;
+    typedef BluePrintMap_t::iterator BluePrintIterator_t;
 
-  BluePrintMap_t mMap;
-  CLevel&        mLevel;
-  CShipSounds    mSounds;
+    BluePrintMap_t mMap;
+    CLevel&        mLevel;
+    CShipSounds    mSounds;
 
-  const std::string GetID(const std::string &shipName,
-			  const CTeam &team) const;
-  bool              HasBluePrint(const std::string &shipName,
-				 const CTeam &team) const;
-  void              InsertBluePrint(const std::string &shipName,
-				    const CTeam &team);
+    const std::string GetID(const std::string &shipName,
+                            const CTeam &team) const;
+    bool              HasBluePrint(const std::string &shipName,
+                                   const CTeam &team) const;
+    void              InsertBluePrint(const std::string &shipName,
+                                      const CTeam &team);
 
 };
 
