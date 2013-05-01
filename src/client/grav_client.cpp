@@ -1,4 +1,4 @@
-#include "CUdpServer.hpp"
+#include "CUdpServerCallbacks.hpp"
 #include <thread>
 #include <boost/asio.hpp>
 #include <stdint.h>
@@ -64,7 +64,7 @@ static void connectToTcpServer() {
 }
 
 int main() {
-    CUdpServer udpServer(recvHandler, sendHandler);
+    CUdpServerCallbacks udpServer(recvHandler, sendHandler);
     std::thread udpThread([&](){ udpServer.Run(); });
     
     connectToTcpServer();
