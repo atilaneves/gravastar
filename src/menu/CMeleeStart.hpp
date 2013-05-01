@@ -13,7 +13,7 @@ class CMeleeStart: public CCycleString {
 public:
 
   CMeleeStart(const CVersusMenu &versusMenu, const strings_t& levelNames);
-  virtual void Run(CRootMenu &rootMenu);
+  virtual void Run(CRootMenu &rootMenu) override;
 
   int GetNbLevels() const { return mCycle.GetMax(); }
 

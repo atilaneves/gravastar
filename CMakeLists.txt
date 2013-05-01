@@ -101,22 +101,17 @@ else()
 endif()
 
 add_executable(gravastar src/server/grav_server.cpp ${GRAV_SRCS})
-add_executable(client src/client/grav_client.cpp ${GRAV_SRCS})
 
 file(GLOB TEST_SRCS src/testing/*.cpp)
 add_executable(test ${TEST_SRCS})
 
 target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
 target_link_libraries(gravastar ${Boost_LIBRARIES})
-target_link_libraries(client ${ALLEGRO_LIBRARIES})
-target_link_libraries(client ${Boost_LIBRARIES})
 target_link_libraries(test ${Boost_LIBRARIES})
 if(WIN32)
     target_link_libraries(gravastar ws2_32)
-    target_link_libraries(client ws2_32)
 else()
     target_link_libraries(gravastar pthread)
-    target_link_libraries(client pthread)
     target_link_libraries(test pthread)
 endif()
 

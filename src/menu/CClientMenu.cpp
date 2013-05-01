@@ -1,9 +1,17 @@
+#include "CClientMenu.hpp"
+#include "MeleeStarter.hpp"
+#include "CGravOptions.hpp"
 #include "CGravUpdateServer.hpp"
 #include <thread>
 #include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
-bool gDebug = false;
+
+
+CClientMenu::CClientMenu(const CSprite *cursorSprite):
+    CCursorMenu<CStringMenu>(cursorSprite, "Client") {
+
+}
 
 static void connectToTcpServer() {
     boost::asio::io_service service;
@@ -32,11 +40,12 @@ static void connectToTcpServer() {
     }
 }
 
-int main() {
+void CClientMenu::Run(CRootMenu &rootMenu) {
     CGravUpdateServer udpServer;
     std::thread udpThread{[&](){ udpServer.Run(); }};
-    
+
     connectToTcpServer();
+    startMeleeFromMenu(rootMenu, CGravOptions{});
 
     udpServer.Stop();
     udpThread.join();
