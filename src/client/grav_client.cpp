@@ -23,7 +23,7 @@ static void recvHandler(boost::system::error_code error, size_t bytes,
     const uint32_t milliseconds = (array[0] << 24) + (array[1] << 16) + (array[2] << 8) + array[3];
     std::cout << "Milliseconds: " << milliseconds << std::endl; 
 
-    const unsigned short numSprites = (array[4] << 8) + array[5];
+    const uint16_t numSprites = (array[4] << 8) + array[5];
     std::cout << "numSprites: " << numSprites << std::endl;
 
     for(std::size_t i = 6; i < bytes; i += 6) {

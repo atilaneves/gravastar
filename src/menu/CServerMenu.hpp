@@ -11,10 +11,6 @@ class CServerMenu: public CCursorMenu<CStringMenu> {
 public:
 
     CServerMenu(const CSprite *cursorSprite, CGravMenu& gravMenu);
-
-private:
-
-
 };
 
 #endif

@@ -17,9 +17,9 @@ class CPilotOptions {
 public:
 
   CPilotOptions(const std::string &name, const std::string& type,
-		const CTeam &team,
-		const shipTypes_t &ships,
-		const CPilotInputOptions &inputOptions);
+                const CTeam &team,
+                const shipTypes_t &ships,
+                const CPilotInputOptions &inputOptions);
 
   const CPilotInputOptions& GetInputOptions() const { return mInputOptions; }
   const std::string& GetName()                const { return mName;         }

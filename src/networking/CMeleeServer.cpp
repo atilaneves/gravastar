@@ -3,7 +3,7 @@
 
 
 CMeleeServer::CMeleeServer():
-    mTcpServer(mTcpIoService),
+    mTcpServer(mTcpIoService, *this),
     mTcpThread([this]() { mTcpIoService.run(); }) {
 
 }
@@ -14,5 +14,11 @@ CMeleeServer::~CMeleeServer() {
 }
 
 void CMeleeServer::SendFrame(const std::vector<char>& frameBytes) {
-    mUdpClient.SendBytes(frameBytes);
+    for(auto& connection: mConnections) {
+        connection->SendBytes(frameBytes);
+    }
+}
+
+void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
+    mConnections.emplace_back(new CGravConnection{tcpConnection});
 }
