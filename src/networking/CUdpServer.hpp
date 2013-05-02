@@ -7,14 +7,14 @@
 class CUdpServer {
 public:
 
-    using Array = std::array<char, 1024*1024>;
+    using Array = std::array<unsigned char, 1024*1024>;
 
     CUdpServer();
     virtual ~CUdpServer() { }
 
     void Run();
     void Stop();
-    void SendBytes(const std::vector<char>& sendBuffer);
+    void SendBytes(const std::vector<unsigned char>& sendBuffer);
 
 private:
 

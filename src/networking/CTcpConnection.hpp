@@ -15,11 +15,13 @@ public:
 
     static Pointer Create(boost::asio::io_service& io_service);
     tcp::socket& Socket();
-    void Start();
+    void Start(const std::string& msg);
+    void SendBytes(const std::vector<unsigned char>& bytes);
+    void SendBytes(const std::string& bytes);
 
 private:
     tcp::socket mSocket;
-    std::string mMessage;
+    std::vector<unsigned char> mMessage;
 
     CTcpConnection(boost::asio::io_service& ioService);
     void HandleWrite(const boost::system::error_code& error,

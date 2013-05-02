@@ -11,6 +11,6 @@ CUdpClient::CUdpClient():
 }
 
 
-void CUdpClient::SendBytes(const std::vector<char>& sendBuffer) {
+void CUdpClient::SendBytes(const std::vector<unsigned char>& sendBuffer) {
     mSocket.send_to(boost::asio::buffer(sendBuffer), mReceiverEndpoint);
 }

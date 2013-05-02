@@ -12,21 +12,24 @@ class CSprite: public CDrawable {
 
 public:
 
-  CSprite(void *data);
-  CSprite(void *data, float angle, float scale = 1);
-  virtual ~CSprite();
+    CSprite(void *data);
+    CSprite(void *data, float angle, float scale = 1);
+    virtual ~CSprite();
 
-  static  BITMAP* CreateBitmap(void *data, float angle, float scale);
-  virtual void    Draw (CCanvas &canvas, int x, int y) const;
-          int     GetHeight() const { return mData->h; }
-          int     GetWidth()  const { return mData->w; }
+    static  BITMAP* CreateBitmap(void *data, float angle, float scale);
+    virtual void    Draw (CCanvas &canvas, int x, int y) const;
+            int     GetHeight() const { return mData->h; }
+            int     GetWidth()  const { return mData->w; }
+            size_t  GetHash() const { return mHash; }
 
 
 private:
 
-  SpriteImp_t *mData; //the actual sprite data
+    SpriteImp_t *mData; //the actual sprite data
+    size_t mHash;
 
-  static BITMAP* MakeTransparent(BITMAP *sprite);
+    static BITMAP* MakeTransparent(BITMAP *sprite);
+    size_t CalcHash();
 
 };
 

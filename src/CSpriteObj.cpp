@@ -2,7 +2,7 @@
 #include "CSpriteObjs.hpp"
 #include "CGravSprite.hpp"
 #include "CLevel.hpp"
-
+#include <iostream> //DELETE
 
 CSpriteObj::CSpriteObj(CLevel &level, const CVector2 &pos):
     mLevel(level), mPos(pos), mUpdated(false) {
@@ -17,6 +17,8 @@ CSpriteObj::~CSpriteObj() {
 
 
 void CSpriteObj::Draw() {
+    std::cout << "Drew " << GetSprite().GetHash() << " on x: " <<
+        GetTopLeftX() << ", y: " << GetTopLeftY() << std::endl; //DELETE
     GetSprite().Draw(mLevel.GetCanvas(), GetTopLeftX(), GetTopLeftY());
 }
 

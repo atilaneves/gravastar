@@ -30,6 +30,7 @@ public:
 
 
     CGravOptions       GetGravOptions()    const;
+    CClientOptions     GetClientOptions()  const;
     CMeleeOptions      GetMeleeOptions()   const;
           std::string  GetMeleeType()      const;
           int          GetNbPilots()       const;

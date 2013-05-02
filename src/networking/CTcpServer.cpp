@@ -29,7 +29,7 @@ void CTcpServer::HandleAccept(CTcpConnection::Pointer newConnection,
                               const boost::system::error_code& error) {
     if(!error) {
         std::cout << "Starting new TCP connection" << std::endl;
-        newConnection->Start();
+        newConnection->Start("Gravastar Server ACK");
         mTcpObserver.Handle(newConnection);
         StartAccept();
     }

@@ -22,7 +22,8 @@ public:
                 float angle = 0, float scale = 1, int colour = -1);
     virtual ~CGravSprite();
 
-    static CGravSprite* GetSprite(size_t index) { return sSprites[index]; }
+    static CGravSprite* GetSprite(size_t hash) { return sSprites[hash]; }
+    static bool EnableHashing(bool e) { sHashing = e; return e;}
 
     positions_t      Collided(const CCanvas &canvas, const CVector2 &pos) const;
     bool             Collided(const CCanvas& canvas, const CGravSprite& sprite,
@@ -41,8 +42,9 @@ private:
     std::unique_ptr<CSprite> mErase;  //what you erase with
     CSpriteCollision mCollision;
     size_t mSpriteIndex;
+    static bool sHashing;
     static size_t sSpriteIndex;
-    static std::unordered_map<size_t, CGravSprite*> sSprites;
+    static std::unordered_map<size_t, CGravSprite*> sSprites;    
 
     void Transform(BITMAP *bmp, const CTeam &team, int colour, 
                    CSpriteCanvas &draw, CSpriteCanvas &erase);

@@ -14,7 +14,7 @@ public:
     typedef std::list<CSpriteObj*> objs_t;
     typedef objs_t::iterator objPlace_t;
     typedef objs_t::reverse_iterator robjPlace_t;
-    using FrameBytes = std::vector<char>;
+    using FrameBytes = std::vector<unsigned char>;
 
     static void        AddObj(CSpriteObj *sprObj, bool back = true);
     static void        DeleteAll();

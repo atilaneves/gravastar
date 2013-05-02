@@ -27,5 +27,4 @@ void startMeleeFromMenu(CRootMenu &rootMenu,
     melee->Run();
     delete melee;
     rootMenu.PlaySong();
-
 }

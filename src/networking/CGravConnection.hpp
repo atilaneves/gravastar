@@ -12,7 +12,9 @@ public:
 
     CGravConnection(const CTcpConnection::Pointer& tcpConnection);
 
-    void SendBytes(const std::vector<char>& frameBytes);
+    void SendUdpBytes(const std::vector<unsigned char>& bytes);
+    void SendTcpBytes(const std::vector<unsigned char>& bytes);
+    void SendTcpBytes(const std::string& bytes);
 
 private:
 

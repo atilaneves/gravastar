@@ -31,10 +31,10 @@ protected:
 
     pilots_t mPilots;
 
+    CRandomSong  mSong;
     CGravMedia   mGravMedia;
     CGravScreen  mGravScreen;
     CPowerups    mPowerups;
-    CRandomSong  mSong;
     CMeleeScore  mMeleeScore;
     CTimeCounter mEndCounter;
     int          mWinner;

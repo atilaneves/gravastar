@@ -15,6 +15,8 @@ public:
     CClientOptions();
     CClientOptions(const AllPilotOptions& options, bool ww, int w, int h,
                    int soundVol, int musicVol, bool smart);
+    CClientOptions(const AllPilotOptions& allPilotOptions,
+                   const CClientOptions& other);
 
                     int    GetHeight() const { return mScreenHeight;  }
                     int    GetMusicVolume() const { return mMusicVolume; }

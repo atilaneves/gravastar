@@ -2,6 +2,7 @@
 #define _CMELEE_SERVER_H_
 
 
+class CGravOptions;
 #include "CTcpServer.hpp"
 #include "CGravConnection.hpp"
 #include <thread>
@@ -13,7 +14,8 @@ public:
 
     CMeleeServer();
     ~CMeleeServer();
-    void SendFrame(const std::vector<char>& frameBytes);
+    void SendFrame(const std::vector<unsigned char>& frameBytes);
+    void SendOptions(const CGravOptions& gravOptions);
     virtual void Handle(const CTcpConnection::Pointer& tcpConnection) override;
 
 private:

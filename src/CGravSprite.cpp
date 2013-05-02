@@ -1,14 +1,17 @@
 #include "CGravSprite.hpp"
 #include "CSpriteCanvas.hpp"
 #include "CColour.hpp"
+#include <iostream> //DELETE
 
+bool CGravSprite::sHashing = false;
 size_t CGravSprite::sSpriteIndex;
 std::unordered_map<size_t, CGravSprite*> CGravSprite::sSprites;
 
 
 CGravSprite::CGravSprite(void *data, const CTeam &team,
                          float angle, float scale, int colour):
-    mCollision((BITMAP*)data) {
+    mCollision((BITMAP*)data),
+    mSpriteIndex(0) {
 
     auto bmp = CSprite::CreateBitmap(data, angle, scale);
     CSpriteCanvas draw(bmp);
@@ -19,13 +22,19 @@ CGravSprite::CGravSprite(void *data, const CTeam &team,
     mSprite.reset(new CSprite(draw.GetData()));
     mErase.reset(new CSprite(erase.GetData()));
     
-    mSpriteIndex = sSpriteIndex++;
-    sSprites[mSpriteIndex] = this;
+    if(sHashing) {
+        mSpriteIndex = sSpriteIndex++;
+        sSprites[mSpriteIndex] = this;
+        std::cout << "sSpriteIndex = " << sSpriteIndex << std::endl; //DELETE
+    }
+    //mSpriteIndex = mSprite->GetHash();
 }
 
 
 CGravSprite::~CGravSprite() {
-    sSprites.erase(mSpriteIndex);
+    if(sHashing) {
+        sSprites.erase(mSpriteIndex);
+    }
 }
 
 void CGravSprite::Transform(BITMAP *bmp, const CTeam &team, int colour,

@@ -23,10 +23,8 @@ private:
   bool mPlayedSounds[kMaxNbTeams];
   std::map<std::string, CSound*> mSounds;
 
-  virtual int  GetWinner();
-  virtual bool IsGameOver();
-
-
+  virtual int  GetWinner() override;
+  virtual bool IsGameOver() override;
 };
 
 #endif

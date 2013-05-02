@@ -74,6 +74,10 @@ int CSplitScreen::GetRealGrabPos(int pos, int subLength, int levelLength) {
 
 
 CScreenPos CSplitScreen::GetCentre(const pilots_t& pilots) {
+    if(pilots.empty())
+        return { mLevelCanvas->GetWidth()  / 2,
+                 mLevelCanvas->GetHeight() / 2 };
+
     if(pilots.size() == 1)
         return { (int)pilots[0]->GetShip().GetPos().GetX(),
                  (int)pilots[0]->GetShip().GetPos().GetY() };

@@ -129,8 +129,11 @@ const shipTypes_t& CVersusMenu::GetShipTypes(int p) const {
 }
 
 CGravOptions CVersusMenu::GetGravOptions() const {
-    return CGravOptions(GetMeleeOptions(),
-                        mGravMenu.GetClientOptions(GetNbPilots()));
+    return CGravOptions(GetMeleeOptions(), GetClientOptions());
+}
+
+CClientOptions CVersusMenu::GetClientOptions() const {
+    return mGravMenu.GetClientOptions(GetNbPilots());
 }
 
 std::vector<CPilotOptions> CVersusMenu::GetPilotOptions(int nbPilots,

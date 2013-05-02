@@ -25,6 +25,8 @@ public:
           bool         Collided() const;
           bool         Collided(const CSpriteObj& obj) const;
           positions_t  GetCollisions() const;
+          int          GetTopLeftX() const { return (int)mPos.GetX() - GetWidth()/2;  }
+          int          GetTopLeftY() const { return (int)mPos.GetY() - GetHeight()/2; }
   virtual void         Hit(CSpriteObj&   obj, CScreenPos pos, float dt) { }
   virtual void         Hit(CShip&       ship, CScreenPos pos, float dt) { }
   virtual void         Hit(CProjectile& proj, CScreenPos pos, float dt) { }
@@ -51,10 +53,6 @@ protected:
   CVector2 mPos;
   bool mUpdated;
   CTimeCounter mStoppedCounter;
-
-  int GetTopLeftX() const { return (int)mPos.GetX() - GetWidth()/2;  }
-  int GetTopLeftY() const { return (int)mPos.GetY() - GetHeight()/2; }
-
 };
 
 

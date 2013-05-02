@@ -33,7 +33,7 @@ void CUdpServer::Listen() {
 }
 
 
-void CUdpServer::SendBytes(const std::vector<char>& sendBuffer) {
+void CUdpServer::SendBytes(const std::vector<unsigned char>& sendBuffer) {
     mSocket.async_send_to(boost::asio::buffer(sendBuffer), mEndpoint,
                           boost::bind(&CUdpServer::HandleSend, this,
                                       boost::asio::placeholders::error,

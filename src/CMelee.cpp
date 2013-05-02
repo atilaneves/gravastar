@@ -37,8 +37,8 @@ CMelee::CMelee(const CGravOptions &options):
 
 
 CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions) {
-    const CShipYard &shipYard    = mGravMedia.GetShipYard();
-    const std::string& type      = pilotOptions.GetType();
+    const auto& shipYard = mGravMedia.GetShipYard();
+    const auto& type     = pilotOptions.GetType();
     return CPilotFactory::Instance().CreateObject(type, pilotOptions,
                                                   shipYard, mMeleeScore);
 }

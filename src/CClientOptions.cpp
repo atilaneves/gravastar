@@ -10,7 +10,15 @@ CClientOptions::CClientOptions(const AllPilotOptions& options,
     mSoundVolume(soundVol), mMusicVolume(musicVol),
     mSmartSplit(smart) { 
 
-    }
+}
+
+CClientOptions::CClientOptions(const AllPilotOptions& allPilotOptions,
+                               const CClientOptions& other):
+    CClientOptions(allPilotOptions, other.mWindowed,
+                   other.mScreenWidth, other.mScreenHeight,
+                   other.mSoundVolume, other.mMusicVolume,
+                   other.mSmartSplit) {
+}
 
 
 CClientOptions::CClientOptions() {
