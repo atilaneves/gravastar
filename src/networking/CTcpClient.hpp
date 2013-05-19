@@ -4,6 +4,7 @@
 #include <string>
 #include <functional>
 #include <vector>
+#include <mutex>
 #include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
@@ -20,9 +21,12 @@ public:
     void BlockingConnect(double seconds=0);
     bool Connect();
     bool ReadForever(const MsgHandler& msgHandler);
+    void Stop() { std::lock_guard<std::mutex> lock{mStopMutex}; mStop = true; }
 
 private:
 
+    mutable std::mutex mStopMutex;
+    bool mStop;
     boost::asio::io_service mIoService;
     tcp::socket mSocket;
     const address_v4 mServerAddress;

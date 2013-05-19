@@ -1,5 +1,4 @@
 #include "CTcpServer.hpp"
-#include <iostream>
 #include <algorithm>
 #include <boost/bind.hpp>
 
@@ -12,13 +11,12 @@ CTcpServer::CTcpServer(boost::asio::io_service& ioService,
     : mTcpObserver(tcpObserver),
       mAcceptor(ioService, tcp::endpoint(tcp::v4(), 12346)) {
 
-    std::cout << "CTcpServer starting\n";
     StartAccept();
 }
 
 void CTcpServer::StartAccept() {
     CTcpConnection::Pointer newConnection =
-        CTcpConnection::Create(mAcceptor.get_io_service());    
+        CTcpConnection::Create(mAcceptor.get_io_service());
 
     mAcceptor.async_accept(newConnection->Socket(),
                            boost::bind(&CTcpServer::HandleAccept, this, newConnection,
@@ -28,8 +26,6 @@ void CTcpServer::StartAccept() {
 void CTcpServer::HandleAccept(CTcpConnection::Pointer newConnection,
                               const boost::system::error_code& error) {
     if(!error) {
-        std::cout << "Starting new TCP connection" << std::endl;
-        newConnection->Start("Gravastar Server ACK");
         mTcpObserver.Handle(newConnection);
         StartAccept();
     }

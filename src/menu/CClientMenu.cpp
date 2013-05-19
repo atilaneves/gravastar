@@ -10,6 +10,7 @@
 #include "CTcpClient.hpp"
 #include "fontsdat.h"
 #include <thread>
+#include <algorithm>
 #include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
@@ -23,28 +24,51 @@ CClientMenu::CClientMenu(const CSprite *cursorSprite, CGravMenu& gravMenu):
 
 }
 
-void CClientMenu::Run(CRootMenu &rootMenu) {
-    CGravUpdateServer updateServer;
-    std::thread updateThread{[&](){ updateServer.Run(); }};
+static std::vector<std::string> msgBufToVec(const CTcpClient::MsgBuf& buf, size_t len) {
+    std::string bufStr{buf.cbegin(), buf.cbegin() + len};
+    std::istringstream stream{bufStr};
+    std::vector<std::string> tokens;
+    std::copy(std::istream_iterator<std::string>(stream),
+              std::istream_iterator<std::string>(),
+              std::back_inserter<std::vector<std::string>>(tokens));
+    return tokens;
+}
 
-    PrintCentre("Waiting for server...");
+static std::string nextOption(std::vector<std::string>& strings) {
+    auto str = strings.back();
+    strings.pop_back();
+    return str;
+}
+
+void CClientMenu::Run(CRootMenu &rootMenu) {
+    PrintCentre("Connecing to server...");
     CTcpClient tcpClient("127.0.0.1", 12346);
     tcpClient.BlockingConnect();
 
-    std::thread readThread{[&] {
-        tcpClient.ReadForever([](const CTcpClient::MsgBuf& buf, size_t len) {
-            std::cout << "readThread lambda, len is "  << len << std::endl;
-            std::cout.write(reinterpret_cast<const char*>(buf.data()), len);
-            std::cout << std::endl;
+    PrintCentre("Waiting for server...");
+    for(;;) {
+        tcpClient.ReadForever([&](const CTcpClient::MsgBuf& buf, size_t len) {
+            auto tokens = msgBufToVec(buf, len);
+            std::reverse(std::begin(tokens), std::end(tokens));
+            const auto command = nextOption(tokens);
+            if(command == "Start") StartMeleeClient(rootMenu, tokens);
         });
-    }};
+    }
 
+    tcpClient.Stop();
+}
+
+
+void CClientMenu::StartMeleeClient(CRootMenu &rootMenu, std::vector<std::string>& options) const {
     rootMenu.StopSong();
     CSound sound("meleeStart");
     sound.PlayCentre();
 
+    CGravUpdateServer updateServer;
+    std::thread updateThread{[&](){ updateServer.Run(); }};
+
     PrintCentre("Loading...");
-    auto* melee = new CMeleeClient(GetGravOptions(), updateServer);
+    auto* melee = new CMeleeClient(GetGravOptions(options), updateServer);
     assert(melee);
     melee->Run();
     delete melee;
@@ -54,7 +78,8 @@ void CClientMenu::Run(CRootMenu &rootMenu) {
     updateThread.join();
 }
 
-void CClientMenu::PrintCentre(const std::string& str) {
+
+void CClientMenu::PrintCentre(const std::string& str) const {
     CCanvas screenCanvas(screen);
     screenCanvas.Clear();
     mFont.PrintCentre(screenCanvas, screenCanvas.GetWidth()/2,
@@ -62,17 +87,30 @@ void CClientMenu::PrintCentre(const std::string& str) {
                       str);
 }
 
-CGravOptions CClientMenu::GetGravOptions() const {
-    const auto meleeType = "Survival"; //TODO: MeleeClient
-    const auto levelNb = 1;
+CGravOptions CClientMenu::GetGravOptions(std::vector<std::string>& options) const {
+    const auto levelNb  = std::stoi(nextOption(options));
+    const auto nbPilots = std::stoi(nextOption(options));
+    const auto nbShips  = std::stoi(nextOption(options));
+
+    std::vector<CPilotOptions> allPilotOpts;
+    for(int i = 0; i < nbPilots; ++i) {
+        const auto name = nextOption(options);
+        const auto type = nextOption(options);
+        const auto& team = CTeam::FindByName(nextOption(options));
+        std::vector<std::string> ships;
+        for(int j = 0; j < nbShips; ++j) {
+            ships.push_back(nextOption(options));
+        }
+
+        const CPilotInputOptions pilotInputOpts{"", 0, 0, 0, 0, 0, 0, 0, 0};
+        allPilotOpts.emplace_back(name, type, team, ships, pilotInputOpts);
+    }
+
+    const auto meleeType = "Client";
     const auto powerupRate = 0.0f;
     const CMeleeOptions meleeOptions{meleeType, levelNb, powerupRate};
-    //const CClientOptions clientOptions = mVersusMenu.GetClientOptions();
-    const CPilotInputOptions pilotInputOpts{"", 0, 0, 0, 0, 0, 0, 0, 0};
-    const std::vector<std::string> ships{5, "Delta"};
-    const CPilotOptions pilotOpts1{"P1", "Human", CTeam::sBlue, ships, pilotInputOpts};
-    const CPilotOptions pilotOpts2{"P2", "Human", CTeam::sRed,  ships, pilotInputOpts};
-    const CClientOptions clientOptions{{pilotOpts1, pilotOpts2},
+
+    const CClientOptions clientOptions{allPilotOpts,
                                        mVersusMenu.GetClientOptions()};
     return {meleeOptions, clientOptions};
 }

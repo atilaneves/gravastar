@@ -20,10 +20,8 @@ void CTcpClient::BlockingConnect(double seconds) {
     }
 }
 
-
 bool CTcpClient::ReadForever(const MsgHandler& msgHandler) {
-    std::cout << "ReadForever" << std::endl;
-    for (;;) {
+    for(;;) {
         std::array<unsigned char, 1024> buf;
         boost::system::error_code error;
 
@@ -31,16 +29,19 @@ bool CTcpClient::ReadForever(const MsgHandler& msgHandler) {
         std::cout << "Read " << len << " bytes" << std::endl;
 
         if(error == boost::asio::error::eof) {
-            std::cout << "Connection closed by server. Received:" << std::endl;
+            std::cout << "Connection closed by server." << std::endl;
             return true; // Connection closed cleanly by peer.
         } else if(error) {
             std::cerr << "Error reading bytes from server" << std::endl;
-            //throw boost::system::system_error(error); // Some other error.
-            return false;
+            throw boost::system::system_error(error); // Some other error.
         }
 
-        std::cout << "Calling Msg HAndler" << std::endl;
+        std::cout << "Calling Msg Handler" << std::endl;
         msgHandler(buf, len);
+        std::lock_guard<std::mutex> lock{mStopMutex};
+        if(mStop) {
+            break;
+        }
     }
 
     return true;

@@ -30,7 +30,7 @@ void CMeleeClient::Run() {
             uint16_t hash, x, y;
             std::tie(hash, x, y) = spriteParams;
             const auto sprite = CGravSprite::GetSprite(hash);
-            //assert(sprite);
+            assert(sprite);
             sprite->Draw(mGravMedia.GetLevel().GetCanvas(), x, y);
         }
         oldSprites = newSprites;

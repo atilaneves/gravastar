@@ -8,6 +8,7 @@ class CVersusMenu;
 #include "CStringMenu.hpp"
 #include "CFont.hpp"
 #include "CGravOptions.hpp"
+#include "CTcpClient.hpp"
 
 
 class CClientMenu: public CCursorMenu<CStringMenu> {
@@ -15,14 +16,15 @@ public:
 
     CClientMenu(const CSprite *cursorSprite, CGravMenu& gravMenu);
     virtual void Run(CRootMenu &rootMenu) override;
-    void PrintCentre(const std::string& str);
 
 private:
 
     CVersusMenu& mVersusMenu;
     CFont mFont;
 
-    CGravOptions GetGravOptions() const;
+    CGravOptions GetGravOptions(std::vector<std::string>& options) const;
+    void StartMeleeClient(CRootMenu &rootMenu, std::vector<std::string>& options) const;
+    void PrintCentre(const std::string& str) const;
 };
 
 #endif
