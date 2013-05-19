@@ -17,8 +17,6 @@ CSpriteObj::~CSpriteObj() {
 
 
 CLevelSprite CSpriteObj::Draw()  {
-    std::cout << "Drew " << GetSprite().GetHash() << " on x: " <<
-        GetTopLeftX() << ", y: " << GetTopLeftY() << std::endl; //DELETE
     GetSprite().Draw(mLevel.GetCanvas(), GetTopLeftX(), GetTopLeftY());
     return { GetSprite().GetHash(), GetTopLeftX(), GetTopLeftY() };
 }

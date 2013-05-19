@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <chrono>
 #include <stdint.h>
-#include <iostream> //DELETE
+
 
 using std::chrono::duration_cast;
 
@@ -34,19 +34,10 @@ auto CSpritePacker::Pack(const Sprites& sprites) const -> FrameBytes {
 
     for(const auto& sprite: sprites) {
         assert(sprite.GetHash() <= std::numeric_limits<uint16_t>::max());
-        std::cout << "Packing " << sprite.GetHash() << ", x: " <<
-            sprite.GetX() << ", y: " << sprite.GetY() << std::endl; //DELETE
         writeUInt16(data, sprite.GetHash());
         writeUInt16(data, sprite.GetX());
         writeUInt16(data, sprite.GetY());
     }
-
-    //DELETE
-    std::cout << "0x";
-    for(const auto& byte: data) {
-        printf("%02x", (unsigned)byte);
-    }
-    std::cout << std::endl;
 
     return data;
 }

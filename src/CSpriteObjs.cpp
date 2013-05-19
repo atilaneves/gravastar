@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <vector>
 #include "CShip.hpp"
-#include <iostream> //DELETE
 
 
 CSpriteObjs::objs_t CSpriteObjs::sObjs;
@@ -23,7 +22,6 @@ void CSpriteObjs::Update(float dt) {
         (*o)->Update(dt);
         if((*o)->IsActive()) DrawObj(*o);
     }
-    std::cout << std::endl; //DELETE
 
     std::vector<CSpriteObj*> toDelete; //inactive sprite objs
 
