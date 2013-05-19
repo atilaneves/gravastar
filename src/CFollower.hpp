@@ -11,25 +11,25 @@ class CFollower: public CMoverObj {
 
 public:
 
-  CFollower(const CSpriteVector &sprites, CLevel &level, CMoverObj &mover,
-            CSound *sound = 0, const CVector2& offset = CVector2(0, 0));
-  virtual ~CFollower();
+    CFollower(const CSpriteVector &sprites, CLevel &level, CMoverObj &mover,
+              CSound *sound = nullptr, const CVector2& offset = CVector2(0, 0));
+    virtual ~CFollower();
 
-  virtual CVector2 CalcAcc() { return CVector2(0, 0); }
-  virtual void     Die() { mActive = false; }
-  virtual int      GetSpriteIndex() const { return mSpriteIndex; }
-  virtual bool     IsActive()  { return mActive && mFollowed.IsAlive(); }
-  virtual void     Move(float dt);
-  virtual void     OutOfBounds(float dt) { }
+    virtual CVector2 CalcAcc() override { return CVector2(0, 0); }
+    virtual void     Die() override { mActive = false; }
+    virtual int      GetSpriteIndex() const override { return mSpriteIndex; }
+    virtual bool     IsActive() override { return mActive && mFollowed.IsAlive(); }
+    virtual void     Move(float dt) override;
+    virtual void     OutOfBounds(float dt) override { }
 
 
 protected:
 
-  bool                    mActive;
-  int                     mSpriteIndex;
-  CMoverObj&              mFollowed;
-  std::unique_ptr<CSound> mSound;
-  CVector2                mOffset;
+    bool                    mActive;
+    int                     mSpriteIndex;
+    CMoverObj&              mFollowed;
+    std::unique_ptr<CSound> mSound;
+    CVector2                mOffset;
 
 };
 
