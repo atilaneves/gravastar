@@ -22,36 +22,36 @@ class CMeleeScore {
 
 public:
 
- enum { kNbColours=4 };
+    enum { kNbColours=4 };
 
- CMeleeScore(CCanvas &canvas, const std::string& meleeType,
-	     CSong& song);
- ~CMeleeScore();
+    CMeleeScore(CCanvas &canvas, const std::string& meleeType,
+                CSong& song);
+    ~CMeleeScore();
 
- void Draw(int winner, const std::string& title,
-	   const CPilotInput &input);
-  const std::string& GetMeleeType() const { return mMeleeType; }
- void PlaySound(const CTeam& team);
+    void Draw(int winner, const std::string& title,
+              const CPilotInput &input);
+    const std::string& GetMeleeType() const { return mMeleeType; }
+    void PlaySound(const CTeam& team);
 
 
 private:
 
-  CCanvas &mCanvas;
-  CSong &mSong;
-  std::string mMeleeType;
-  CFont mFont;
-  std::map<std::string, CSound*> mSounds;
-  
-  void DrawGeometry(int x, int y, int col) const;
-  void End(const CPilotInput &input) const;
-  std::vector<CPilotScore> GetScores() const;
+    CCanvas &mCanvas;
+    CSong &mSong;
+    std::string mMeleeType;
+    CFont mFont;
+    std::map<std::string, CSound*> mSounds;
 
-  struct SGreaterScore {
-    bool operator()(const CPilotScore &ps1,
-		    const CPilotScore &ps2) const {
-      return ps1.Greater(ps2);
-    }
-  };
+    void DrawGeometry(int x, int y, int col) const;
+    void End(const CPilotInput &input) const;
+    std::vector<CPilotScore> GetScores() const;
+
+    struct SGreaterScore {
+        bool operator()(const CPilotScore &ps1,
+                        const CPilotScore &ps2) const {
+            return ps1.Greater(ps2);
+        }
+    };
 };
 
 

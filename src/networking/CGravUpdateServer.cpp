@@ -19,8 +19,8 @@ void CGravUpdateServer::AfterReceive(const boost::system::error_code& error,
 
     //std::cout << "CGravUpdateServer received " << numBytes << " bytes" << std::endl;
 
-    const uint32_t milliseconds = (bytes[0] << 24) + (bytes[1] << 16) + (bytes[2] << 8) + bytes[3];
-    //std::cout << "Milliseconds: " << milliseconds << std::endl; 
+    //const uint32_t milliseconds = (bytes[0] << 24) + (bytes[1] << 16) + (bytes[2] << 8) + bytes[3];
+    //std::cout << "Milliseconds: " << milliseconds << std::endl;
 
     const uint16_t numSprites = (bytes[4] << 8) + bytes[5];
     std::cout << "numSprites: " << numSprites << std::endl;
@@ -49,5 +49,3 @@ void CGravUpdateServer::AfterSend(const boost::system::error_code& error,
                                   std::size_t numBytes) {
     std::cout << "CGravUpdateSercer sent " << numBytes << " bytes" << std::endl;
 }
-
-

@@ -12,6 +12,7 @@
 #include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
+using boost::asio::ip::address_v4;
 
 
 CClientMenu::CClientMenu(const CSprite *cursorSprite, CGravMenu& gravMenu):
@@ -25,7 +26,7 @@ static bool connectToTcpServer() {
     boost::asio::io_service service;
     tcp::socket socket(service);
 
-    const boost::asio::ip::address_v4 addr({{0x7f, 0, 0, 1}}); //local
+    const address_v4 addr = address_v4::from_string("127.0.0.1");
     tcp::endpoint receiverEndpoint(addr, 12346);
     socket.connect(receiverEndpoint);
 

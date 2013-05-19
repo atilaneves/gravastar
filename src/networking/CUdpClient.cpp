@@ -3,7 +3,7 @@
 using boost::asio::ip::udp;
 
 CUdpClient::CUdpClient():
-    mAddress({{0x7f, 0, 0, 1}}) /*local*/,
+    mAddress{{{0x7f, 0, 0, 1}}} /*local*/,
     mReceiverEndpoint(mAddress, 12345), /*port*/
     mSocket(mService) {
 

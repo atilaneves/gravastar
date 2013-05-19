@@ -57,4 +57,5 @@ size_t CSprite::CalcHash() {
     for(size_t i = 0; i < sizeof(SpriteImp_t); ++i) {
         hash += ptr[i];
     }
+    return hash;
 }
