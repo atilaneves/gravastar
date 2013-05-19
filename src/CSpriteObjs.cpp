@@ -12,21 +12,24 @@
 
 
 CSpriteObjs::objs_t CSpriteObjs::sObjs;
+CSpriteObjs::SpritePositions CSpriteObjs::sSpritePositions;
 
 void CSpriteObjs::Update(float dt) {
-  
+
+    sSpritePositions.clear();
+
     for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o) {
         //DEBUG("Update  obj %p of type %s\n", *o, typeid(**o).name());
         (*o)->Update(dt);
         if((*o)->IsActive()) DrawObj(*o);
     }
     std::cout << std::endl; //DELETE
-  
+
     std::vector<CSpriteObj*> toDelete; //inactive sprite objs
-  
-    for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o) 
+
+    for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o)
         if(!(*o)->IsActive()) toDelete.push_back(*o); //find all at same time
-      
+
     for(unsigned int i = 0; i < toDelete.size(); i++)
         DeleteObj(toDelete[i]); //safe to delete all of them now
 }
@@ -91,21 +94,22 @@ CSpriteObj* CSpriteObjs::HitObj(CScreenPos pos, bool drawn) { //anybody here?
 }
 
 
-void CSpriteObjs::Stop(const CVector2& pos, const CSpriteObj &ship, 
+void CSpriteObjs::Stop(const CVector2& pos, const CSpriteObj &ship,
                        float maxTime) {
     for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o) {
         if(*o == &ship) continue;
         CVector2 direction = (*o)->GetPos() - pos;
         float scale = CShips::GetDistanceScaling(direction);
         float deltaT = maxTime * scale;
-        (*o)->Stop(deltaT);   
+        (*o)->Stop(deltaT);
     }
 }
 
 
 void CSpriteObjs::DrawObj(CSpriteObj* sprObj) {
-    sprObj->Draw();
-    sprObj->SetUpdated(true);    
+    const auto spritePos = sprObj->Draw();
+    if(spritePos.WasDrawn()) sSpritePositions.push_back(spritePos);
+    sprObj->SetUpdated(true);
 }
 
 
@@ -116,5 +120,5 @@ void CSpriteObjs::EraseObj(CSpriteObj* sprObj) {
 
 auto CSpriteObjs::Pack() -> FrameBytes {
     static CSpritePacker spritePacker;
-    return spritePacker.Pack(sObjs);
+    return spritePacker.Pack(sSpritePositions);
 }

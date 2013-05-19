@@ -15,6 +15,7 @@ public:
     typedef objs_t::iterator objPlace_t;
     typedef objs_t::reverse_iterator robjPlace_t;
     using FrameBytes = std::vector<unsigned char>;
+    using SpritePositions = std::vector<CLevelSprite>;
 
     static void        AddObj(CSpriteObj *sprObj, bool back = true);
     static void        DeleteAll();
@@ -27,11 +28,12 @@ public:
     static void        Stop(const CVector2& pos, const CSpriteObj &ship,
                             float maxTime);
     static void        Update(float dt);
-  
+
 
 private:
 
     static objs_t sObjs;
+    static SpritePositions sSpritePositions;
 
     static void DrawObj(CSpriteObj* sprObj);
     static void EraseObj(CSpriteObj* sprObj);

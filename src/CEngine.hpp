@@ -27,11 +27,11 @@ public:
 
 private:
 
-  bool        	       mOn;          
-  const float 	       mThrust, mMaxVel;
+  bool                 mOn;
+  const float          mThrust, mMaxVel;
   CFlicker*            mExaust;
-  CLevel& 	       mLevel;
-  CShip&  	       mShip;            
+  CLevel&              mLevel;
+  CShip&               mShip;
   const CSpriteVector& mExaustSprites;
   CSound               mSound;
 

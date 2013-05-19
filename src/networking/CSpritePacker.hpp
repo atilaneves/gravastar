@@ -10,7 +10,7 @@ class CSpritePacker {
 public:
 
     using FrameBytes = CSpriteObjs::FrameBytes;
-    using Sprites = CSpriteObjs::objs_t;
+    using Sprites = CSpriteObjs::SpritePositions;
 
     FrameBytes Pack(const Sprites& sprites) const;
 

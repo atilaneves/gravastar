@@ -16,10 +16,11 @@ CSpriteObj::~CSpriteObj() {
 }
 
 
-void CSpriteObj::Draw() {
+CLevelSprite CSpriteObj::Draw()  {
     std::cout << "Drew " << GetSprite().GetHash() << " on x: " <<
         GetTopLeftX() << ", y: " << GetTopLeftY() << std::endl; //DELETE
     GetSprite().Draw(mLevel.GetCanvas(), GetTopLeftX(), GetTopLeftY());
+    return { GetSprite().GetHash(), GetTopLeftX(), GetTopLeftY() };
 }
 
 
@@ -30,7 +31,7 @@ void CSpriteObj::Erase() {
 
 bool CSpriteObj::InSprite(CScreenPos pos) { //is it in here?
 
-    return pos.GetX() >= GetTopLeftX() && pos.GetX() < GetTopLeftX() + GetWidth() && 
+    return pos.GetX() >= GetTopLeftX() && pos.GetX() < GetTopLeftX() + GetWidth() &&
            pos.GetY() >= GetTopLeftY() && pos.GetY() < GetTopLeftY() + GetHeight() &&
            GetSprite().InSprite(pos.GetX() - GetTopLeftX(),
                                 pos.GetY() - GetTopLeftY()); //bounding box
@@ -54,7 +55,7 @@ positions_t CSpriteObj::GetCollisions() const {
 }
 
 
-bool CSpriteObj::Collided() const { 
+bool CSpriteObj::Collided() const {
     return GetCollisions().size() > 0;
 }
 

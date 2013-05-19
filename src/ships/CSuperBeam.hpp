@@ -11,13 +11,13 @@ class CSuperBeam: public CWeaponFollow {
  public:
 
   CSuperBeam(const CSpriteVector &sprites, CLevel &level, CShip &ship,
-	     CPulseLaser *pulseLaser = 0);
+             CPulseLaser *pulseLaser = 0);
 
-  virtual void Draw();
-  virtual void Erase();
+  virtual CLevelSprite Draw() override;
+  virtual void Erase() override;
           int  GetNose() const;
-  virtual bool IsActive();
-  virtual void Move(float dt);
+  virtual bool IsActive() override;
+  virtual void Move(float dt) override;
 
 
  private:

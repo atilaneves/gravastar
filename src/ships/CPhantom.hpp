@@ -14,7 +14,7 @@ public:
 
   virtual void ApplyInput(const CPilotInput &controls);
           bool CanPhase();
-  virtual void Draw();
+  virtual CLevelSprite Draw() override;
   virtual bool IsAlive() { return CShip::IsAlive() && !mPhased; }
   virtual void Update(float dt);
   virtual void UseSpecial(float dt);

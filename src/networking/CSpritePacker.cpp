@@ -33,12 +33,12 @@ auto CSpritePacker::Pack(const Sprites& sprites) const -> FrameBytes {
     writeUInt16(data, sprites.size());
 
     for(const auto& sprite: sprites) {
-        assert(sprite->GetSprite().GetHash() <= std::numeric_limits<uint16_t>::max());
-        std::cout << "Packing " << sprite->GetSprite().GetHash() << ", x: " <<
-            sprite->GetTopLeftX() << ", y: " << sprite->GetTopLeftY() << std::endl; //DELETE
-        writeUInt16(data, sprite->GetSprite().GetHash());
-        writeUInt16(data, sprite->GetTopLeftX());
-        writeUInt16(data, sprite->GetTopLeftY());
+        assert(sprite.GetHash() <= std::numeric_limits<uint16_t>::max());
+        std::cout << "Packing " << sprite.GetHash() << ", x: " <<
+            sprite.GetX() << ", y: " << sprite.GetY() << std::endl; //DELETE
+        writeUInt16(data, sprite.GetHash());
+        writeUInt16(data, sprite.GetX());
+        writeUInt16(data, sprite.GetY());
     }
 
     //DELETE

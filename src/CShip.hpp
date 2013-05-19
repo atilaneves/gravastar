@@ -38,10 +38,10 @@ public:
           void     BackTrack(float dt) { mPos -= mVel*dt; mNose.BackTrack();}
           void     BounceOff(float edgeAngle, float dt);
           float    BouncedOff(const CScreenPos& pos, float& edgeAngle) {
-           return mCollider.BouncedOff(pos, edgeAngle); } 
+           return mCollider.BouncedOff(pos, edgeAngle); }
   virtual CVector2 CalcAcc();
   virtual bool     CanMoveSuper() const { return false; }
-  virtual void     Draw() { if(mHull > 0) CExplosive::Draw(); }
+    virtual CLevelSprite Draw() override { return mHull > 0 ? CExplosive::Draw() : CLevelSprite{}; }
           int      GetNose() const { return mNose.GetNose(); }
           CPilot&  GetPilot() const { return mPilot; }
   virtual int      GetSpriteIndex() const { return mNose.GetNose(); }
@@ -50,7 +50,7 @@ public:
                        obj.Hit(*this, pos, dt); }
   virtual void     Hit(CProjectile& proj, CScreenPos pos, float dt);
   virtual void     Hit(CShip& ship, CScreenPos pos, float dt);
-  virtual bool     IsActive()  { return CExplosive::IsActive() || 
+  virtual bool     IsActive()  { return CExplosive::IsActive() ||
                                mEffects.IsActive(CExplosionPause::GetID()); }
           bool     IsEffectOn(int i) { return mEffects.IsActive(i); }
           void     LandDamage(float dt) { mCollider.LandDamage(dt); }
