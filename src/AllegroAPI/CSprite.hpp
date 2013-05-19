@@ -5,9 +5,6 @@
 #include <allegro.h>
 
 
-typedef RLE_SPRITE SpriteImp_t; //data structure used to represent sprite
-
-
 class CSprite: public CDrawable {
 
 public:
@@ -20,17 +17,13 @@ public:
     virtual void    Draw (CCanvas &canvas, int x, int y) const;
             int     GetHeight() const { return mData->h; }
             int     GetWidth()  const { return mData->w; }
-            size_t  GetHash() const { return mHash; }
-
 
 private:
 
+    typedef RLE_SPRITE SpriteImp_t; //data structure used to represent sprite
     SpriteImp_t *mData; //the actual sprite data
-    size_t mHash;
 
-    static BITMAP* MakeTransparent(BITMAP *sprite);
-    size_t CalcHash();
-
+    static BITMAP* MakeTransparent(BITMAP* sprite);
 };
 
 #endif

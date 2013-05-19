@@ -18,16 +18,15 @@ CGravSprite::CGravSprite(void *data, const CTeam &team,
     CSpriteCanvas erase(bmp);
 
     Transform(bmp, team, colour, draw, erase);
-  
+
     mSprite.reset(new CSprite(draw.GetData()));
     mErase.reset(new CSprite(erase.GetData()));
-    
+
     if(sHashing) {
         mSpriteIndex = sSpriteIndex++;
         sSprites[mSpriteIndex] = this;
         std::cout << "sSpriteIndex = " << sSpriteIndex << std::endl; //DELETE
     }
-    //mSpriteIndex = mSprite->GetHash();
 }
 
 
@@ -42,9 +41,9 @@ void CGravSprite::Transform(BITMAP *bmp, const CTeam &team, int colour,
 
     for(int x = 0; x < bmp->w; ++x) {     //loop through the bitmap
         for(int y = 0; y < bmp->h; ++y) {
-      
+
             int col = getpixel(bmp, x, y);
-      
+
             if(col != draw.GetMask()) { //non-transparent pixel: gotta draw
                 col = colour < 0 ? team.TransformColour(col) : colour;
                 draw.PutPixel(x, y, col); //draw (blue -> team)
