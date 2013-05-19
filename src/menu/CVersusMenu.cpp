@@ -34,7 +34,7 @@ void CVersusMenu::CreateTeams() {
 
     for(unsigned int i = 0; i < kMaxNbPilots; i++) {
         char playerName[100];
-        sprintf(playerName, "Player %d", i + 1);
+        sprintf(playerName, "Player%d", i + 1);
         AddMenu(mTeams[i] = new CCycleTeam(playerName));
         mTeams[i]->SetCycle(i);
     }
@@ -73,8 +73,8 @@ void CVersusMenu::SetTypeString() {
 }
 
 
-int CVersusMenu::GetNbPilots() const { 
-    return mNbHumans->GetCycle() + mNbBots->GetCycle(); 
+int CVersusMenu::GetNbPilots() const {
+    return mNbHumans->GetCycle() + mNbBots->GetCycle();
 }
 
 

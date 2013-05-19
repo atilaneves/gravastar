@@ -26,7 +26,7 @@ CMelee::CMelee(const CGravOptions &options):
                 options.GetMeleeOptions().GetType(),
                 mSong),
     mWinner(-1),
-    mServer() {
+    mServer(options) {
 
     CKeyboard::Clear();
     CActionPicker::SetPowerups(&mPowerups);

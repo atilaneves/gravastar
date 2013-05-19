@@ -12,14 +12,14 @@ class CGravOptions;
 class CMeleeServer: public CTcpConnectionObserver {
 public:
 
-    CMeleeServer();
+    CMeleeServer(const CGravOptions& options);
     ~CMeleeServer();
     void SendFrame(const std::vector<unsigned char>& frameBytes);
-    void SendOptions(const CGravOptions& gravOptions);
     virtual void Handle(const CTcpConnection::Pointer& tcpConnection) override;
 
 private:
 
+    const CGravOptions& mGravOptions;
     boost::asio::io_service mTcpIoService;
     CTcpServer mTcpServer;
     std::thread mTcpThread;

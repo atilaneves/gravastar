@@ -2,9 +2,11 @@
 #include "CUdpServer.hpp"
 #include "CGravOptions.hpp"
 #include <iostream>
+#include <string>
 
 
-CMeleeServer::CMeleeServer():
+CMeleeServer::CMeleeServer(const CGravOptions& options):
+    mGravOptions(options),
     mTcpServer(mTcpIoService, *this),
     mTcpThread([this]() { mTcpIoService.run(); }) {
 
@@ -24,10 +26,21 @@ void CMeleeServer::SendFrame(const std::vector<unsigned char>& frameBytes) {
 
 void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
     std::cout << "CMeleeServer starting a new TCP connection" << std::endl;
-    tcpConnection->Start("Start 1 2 5 P1 Human Blue Delta Delta Delta Delta Delta P2 Bot Red Delta Delta Delta Delta Delta");
+    std::stringstream clientArgs;
+    clientArgs << "Start ";
+    clientArgs << mGravOptions.GetMeleeOptions().GetLevelNb() << " ";
+    clientArgs << mGravOptions.GetClientOptions().GetNbPilots() << " ";
+    const auto& allPilotOpts = mGravOptions.GetClientOptions().GetAllPilotOptions();
+    clientArgs << allPilotOpts[0].GetNbShips() << " ";
+    for(const auto& pilotOpts: allPilotOpts) {
+        clientArgs << pilotOpts.GetName() << " ";
+        clientArgs << pilotOpts.GetType() << " ";
+        clientArgs << pilotOpts.GetTeam().GetName() << " ";
+        const auto ships = pilotOpts.GetShipNames();
+        for(const auto& ship: ships) {
+            clientArgs << ship << " ";
+        }
+    }
+    tcpConnection->Start(clientArgs.str());
     mConnections.emplace_back(new CGravConnection{tcpConnection});
-}
-
-void CMeleeServer::SendOptions(const CGravOptions& gravOptions) {
-    std::vector<char> bytes;
 }
