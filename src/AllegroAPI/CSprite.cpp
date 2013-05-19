@@ -24,13 +24,13 @@ CSprite::~CSprite() {
 
 BITMAP* CSprite::CreateBitmap(void *data, float angle, float scale) {
     auto sprite = static_cast<BITMAP*>(data);
-    if(angle == 0 && scale == 1) return(MakeTransparent(sprite));
+    if(angle == 0 && scale == 1) return MakeTransparent(sprite);
     int fixangle = itofix( 256 - (int) ((angle/M_PI)*128) ); //convert
     int fixscale = ftofix(scale);
     auto rotated = create_bitmap(sprite->w, sprite->h);
     clear_to_color(rotated, bitmap_mask_color(sprite)); //clean to draw on
     rotate_scaled_sprite(rotated, sprite, 0, 0, fixangle, fixscale); //rotates spr
-    return(MakeTransparent(rotated));
+    return MakeTransparent(rotated);
 }
 
 
@@ -42,7 +42,7 @@ BITMAP* CSprite::MakeTransparent(BITMAP* sprite) { //black to transparent
         }
     }
 
-    return(sprite);
+    return sprite;
 }
 
 
