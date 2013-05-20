@@ -16,6 +16,7 @@
 
 
 CMelee::CMelee(const CGravOptions &options):
+    mServer(options),
     mGravMedia(options.GetMeleeOptions(),
                options.GetClientOptions().GetAllPilotOptions()),
     mGravScreen(mGravMedia.GetLevel().GetCanvas(), options.GetClientOptions(),
@@ -25,8 +26,7 @@ CMelee::CMelee(const CGravOptions &options):
     mMeleeScore(mGravScreen.GetCanvas(),
                 options.GetMeleeOptions().GetType(),
                 mSong),
-    mWinner(-1),
-    mServer(options) {
+    mWinner(-1) {
 
     CKeyboard::Clear();
     CActionPicker::SetPowerups(&mPowerups);

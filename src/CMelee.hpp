@@ -31,6 +31,7 @@ protected:
 
     pilots_t mPilots;
 
+    CMeleeServer mServer;
     CRandomSong  mSong;
     CGravMedia   mGravMedia;
     CGravScreen  mGravScreen;
@@ -38,7 +39,6 @@ protected:
     CMeleeScore  mMeleeScore;
     CTimeCounter mEndCounter;
     int          mWinner;
-    CMeleeServer mServer;
 
     void     CheckGameOver();
     CPilot*  CreatePilot(const CPilotOptions&);
