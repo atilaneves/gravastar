@@ -16,20 +16,20 @@ class CRadar {
 
 public:
 
-  enum { kRadius = 25 };
+    enum { kRadius = 25 };
 
-  CRadar();
+    CRadar();
 
-  void Draw(CBitmap &bmp, int x, int y, const pilots_t &pilots,
-	    const pilots_t& humans,
-	    const CScreenPos &centrePos);
+    void Draw(CBitmap &bmp, int x, int y, const pilots_t &pilots,
+              const pilots_t& humans,
+              const CScreenPos &centrePos);
 
 
 private:
 
-  CCanvas mCanvas;
+    CCanvas mCanvas;
 
-  CVector2 CalcRadiusAngle(const CPilot &pilot, const CVector2& centre);
+    CVector2 CalcRadiusAngle(const CPilot &pilot, const CVector2& centre);
 
 };
 

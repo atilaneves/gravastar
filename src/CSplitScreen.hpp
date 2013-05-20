@@ -17,27 +17,27 @@ class CSplitScreen: public CSubDisplay {
 
 public:
 
-  enum { kSplitBorder=20 };
+    enum { kSplitBorder=20 };
 
-  CSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas,
-	       int width, int height,
-	       int drawX, int drawY);
-  CSplitScreen(const CSplitScreen &split);
+    CSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas,
+                 int width, int height,
+                 int drawX, int drawY);
+    CSplitScreen(const CSplitScreen &split);
 
-  void       DrawRadar(const pilots_t& pilots, const pilots_t& humans);
-  CScreenPos GetCentre(const pilots_t& pilots);
-  pilots_t   GetHumans(const pilots_t& pilots);
-  void       Grab(const pilots_t& pilots);
+    void       DrawRadar(const pilots_t& pilots, const pilots_t& humans);
+    CScreenPos GetCentre(const pilots_t& pilots);
+    pilots_t   GetHumans(const pilots_t& pilots);
+    void       Grab(const pilots_t& pilots);
 
 
 private:
 
-  CSubCanvas     mSubCanvas;
-  const CCanvas* mLevelCanvas;
-  CRadar         mRadar;
+    CSubCanvas     mSubCanvas;
+    const CCanvas* mLevelCanvas;
+    CRadar         mRadar;
 
-  CScreenPos GetGrabPos(const pilots_t& pilots);
-  int        GetRealGrabPos(int pos, int subLength, int levelLength);
+    CScreenPos GetGrabPos(const pilots_t& pilots);
+    int        GetRealGrabPos(int pos, int subLength, int levelLength);
 
 };
 

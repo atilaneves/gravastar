@@ -38,8 +38,8 @@ private:
 
     CCanvas &mCanvas;
     CSong &mSong;
-    std::string mMeleeType;
-    CFont mFont;
+    const std::string mMeleeType;
+    const CFont mFont;
     std::map<std::string, CSound*> mSounds;
 
     void DrawGeometry(int x, int y, int col) const;

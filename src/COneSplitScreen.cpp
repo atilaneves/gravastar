@@ -3,19 +3,19 @@
 
 
 COneSplitScreen::COneSplitScreen(const CCanvas &levelCanvas,
-				 CCanvas &drawCanvas) {
+                                 CCanvas &drawCanvas) {
 
-  push_back(CSplitScreen(levelCanvas, drawCanvas,
-			 drawCanvas.GetWidth(), drawCanvas.GetHeight(),
-			 0,0));
+    push_back(CSplitScreen(levelCanvas, drawCanvas,
+                           drawCanvas.GetWidth(), drawCanvas.GetHeight(),
+                           0,0));
 }
 
 
 void COneSplitScreen::Grab(const pilots_t& pilots) {
-  mSplitScreens[0].Grab(pilots);
+    mSplitScreens[0].Grab(pilots);
 }
 
 
 void COneSplitScreen::DrawRadar(const pilots_t& pilots) {
-  mSplitScreens[0].DrawRadar(pilots, GetHumans(pilots));
+    mSplitScreens[0].DrawRadar(pilots, GetHumans(pilots));
 }

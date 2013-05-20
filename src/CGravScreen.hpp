@@ -42,7 +42,7 @@ private:
   CTimeCounter mTimeCounter;
 
   void PrintSongTitle();
-  CSplitScreens& GetSplitScreens(const CScreenPos& pos, const pilots_t& pilots);
+  CSplitScreens& GetSplitScreens(const CScreenPos& centre, int nbHumans);
 
 };
 

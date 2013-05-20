@@ -28,7 +28,7 @@ CMeleeScore::CMeleeScore(CCanvas &canvas, const std::string& meleeType,
     mSounds["Green"]  = new CSound("victory2");
     mSounds["Yellow"] = new CSound("victory3");
     mSounds["White"]  = new CSound("draw");
-    }
+}
 
 
 CMeleeScore::~CMeleeScore() {

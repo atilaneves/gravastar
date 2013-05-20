@@ -15,7 +15,7 @@ class CPilotBot: public CPilot {
 public:
 
   CPilotBot(const CPilotOptions &options, const CShipYard &shipYard,
-	    CMeleeScore& meleeScore);
+            CMeleeScore& meleeScore);
   virtual ~CPilotBot() { }
 
           float GetMinAngle()    const { return mMinAngle; }

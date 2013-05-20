@@ -10,7 +10,7 @@ class CPilotHuman: public CPilot {
 public:
 
   CPilotHuman(const CPilotOptions &options, const CShipYard &shipYard,
-	      CMeleeScore& meleeScore);
+              CMeleeScore& meleeScore);
   virtual ~CPilotHuman() { }
 
   virtual bool HasSplitScreen() const { return true; }

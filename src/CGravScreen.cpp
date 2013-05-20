@@ -33,7 +33,7 @@ void CGravScreen::Draw(const pilots_t &pilots) {
     mCanvas.Clear();
     pilots_t humans = mOneSplitScreen.GetHumans(pilots);
     CScreenPos pos  = mOneSplitScreen.GetCentre(humans);
-    CSplitScreens& screens = GetSplitScreens(pos, humans);
+    CSplitScreens& screens = GetSplitScreens(pos, humans.size());
 
     screens.Grab(humans);
     screens.DrawRadar(pilots);
@@ -41,10 +41,10 @@ void CGravScreen::Draw(const pilots_t &pilots) {
     mCanvas.Flip();
 }
 
-CSplitScreens& CGravScreen::GetSplitScreens(const CScreenPos& pos, const pilots_t& humans) {
-    if(pos.GetX() >= 0 && mSmartSplit) return mOneSplitScreen;
-    else if(humans.size() == 2)        return mTwoSplitScreens;
-    else                               return mFourSplitScreens;
+CSplitScreens& CGravScreen::GetSplitScreens(const CScreenPos& centre, int nbHumans) {
+    if(centre.GetX() >= 0 && mSmartSplit) return mOneSplitScreen;
+    else if(nbHumans == 2)                return mTwoSplitScreens;
+    else                                  return mFourSplitScreens;
 }
 
 
