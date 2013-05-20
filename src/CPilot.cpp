@@ -72,7 +72,7 @@ const std::string& CPilot::GetName() const {
 }
 
 
-bool CPilot::IsAlive() const { 
+bool CPilot::IsAlive() const {
   return mNbShips > 0 && mShip;
 }
 
@@ -81,4 +81,11 @@ const CShipStatSprite& CPilot::GetShipStatSprite(int index) const {
   const std::string& name = GetShipName();
   const CTeam& team = mOptions.GetTeam();
   return *mShipYard.GetBluePrint(name, team).GetStatSprite();
+}
+
+
+SDisplayPilot CPilot::MakeDisplayPilot() {
+    return SDisplayPilot{VectorToScreenPos(GetShip().GetPos()), GetShip().GetVel(),
+            mOptions.GetTeam(), mStats,
+            GetShip().IsAlive(), HasSplitScreen()};
 }

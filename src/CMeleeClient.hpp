@@ -13,6 +13,8 @@ class CMeleeClient { //TODO: public CMelee
 
 public:
 
+    using pilots_t = CGravScreen::pilots_t;
+
     CMeleeClient(const CGravOptions &options,
                  const CGravUpdateServer& updateServer);
 

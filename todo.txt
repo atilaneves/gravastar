@@ -6,3 +6,4 @@
 . UDP packets down to internet MTU
 . Ignore old packets
 . Coalesce packets?
+. Bug where client fails to load same sprites if server already done a game

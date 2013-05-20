@@ -12,12 +12,11 @@ CRadar::CRadar():
 
 }
 
-
 void CRadar::Draw(CBitmap &bmp, int x, int y, const pilots_t &pilots,
                   const pilots_t& humans, const CScreenPos &centrePos) {
 
     mCanvas.Clear(makecol(255, 0, 255));
-    const CTeam &team = humans.size()== 1 ? humans[0]->GetTeam() : CTeam::sWhite;
+    const CTeam &team = humans.size()== 1 ? humans[0].team : CTeam::sWhite;
     int col = team.GetMainColour();
 
     int width  = mCanvas.GetWidth();
@@ -33,9 +32,9 @@ void CRadar::Draw(CBitmap &bmp, int x, int y, const pilots_t &pilots,
     CVector2 centre(centrePos.GetX(), centrePos.GetY());
 
     for(unsigned int p = 0; p < pilots.size(); p++) {
-        if(!pilots[p]->GetShip().IsAlive()) continue;
-        col = pilots[p]->GetTeam().GetMainColour();
-        CVector2 where = CalcRadiusAngle(*pilots[p], centre);
+        if(!pilots[p].isAlive) continue;
+        col = pilots[p].team.GetMainColour();
+        CVector2 where = CalcRadiusAngle(pilots[p], centre);
         where += CVector2(width/2 - blipWidth/2, height/2 - blipWidth/2);
         CScreenPos corner1(int(where.GetX()), int(where.GetY()));
         CScreenPos corner2 = corner1 + CScreenPos(blipWidth-1, blipWidth-1);
@@ -46,9 +45,8 @@ void CRadar::Draw(CBitmap &bmp, int x, int y, const pilots_t &pilots,
 }
 
 
-CVector2 CRadar::CalcRadiusAngle(const CPilot &pilot, const CVector2& centre) {
-
-    CVector2 dPos = pilot.GetShip().GetPos() - centre;
+CVector2 CRadar::CalcRadiusAngle(const SDisplayPilot &pilot, const CVector2& centre) const {
+    CVector2 dPos = ScreenPosToVector(pilot.position) - centre;
     const float kMaxDistance = 600; //maximum scanner range
     if(dPos.Radius() > kMaxDistance) dPos *= kMaxDistance/dPos.Radius();
     const int kMaxRadius = mCanvas.GetWidth()/2 - 3;

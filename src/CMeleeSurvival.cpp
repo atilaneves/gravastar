@@ -20,21 +20,21 @@ bool CMeleeSurvival::IsGameOver() {
   std::string tNames[kMaxNbTeams] = {"Blue", "Red", "Green", "Yellow"};
   std::map<std::string, int> teams;
   for(int t = 0; t < kMaxNbTeams; t++) teams[tNames[t]] = 0;
-  pilots_t pilots = GetActivePilots();
+  auto pilots = GetActivePilots();
   for(unsigned int p = 0; p < pilots.size(); p++) {
     std::string name = pilots[p]->GetTeam().GetName();
     teams[name] = teams[name] + 1;
   }
   int nbTeams = 0;
   for(int t = 0; t < kMaxNbTeams; t++) if(teams[tNames[t]]) nbTeams++;
-  
+
   return nbTeams == 1; //only one team left, game over
 }
 
 
 int CMeleeSurvival::GetWinner() {
   int winner = -1; //nobody
-  pilots_t pilots = GetActivePilots();
+  const auto pilots = GetActivePilots();
   if(pilots.size() > 0) winner = pilots[0]->GetIndex();
   return winner;
 }

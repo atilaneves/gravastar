@@ -21,28 +21,30 @@ class CGravScreen {
 
 public:
 
-  CGravScreen(const CCanvas &levelCanvas, const CClientOptions &options,
-              const CSong& song);
-  ~CGravScreen();
+    using pilots_t = CSplitScreens::pilots_t;
 
-  void     Draw(const pilots_t &pilots);
-  CCanvas& GetCanvas() { return mCanvas; }
+    CGravScreen(const CCanvas &levelCanvas, const CClientOptions &options,
+                const CSong& song);
+    ~CGravScreen();
+
+    void     Draw(const pilots_t& pilots);
+    CCanvas& GetCanvas() { return mCanvas; }
 
 
 private:
 
-  int mOldWidth, mOldHeight;
-  CCanvas mCanvas;
-  const CSong& mSong;
-  CFont mFont;
-  bool mSmartSplit;
-  COneSplitScreen   mOneSplitScreen;
-  CTwoSplitScreens  mTwoSplitScreens;
-  CFourSplitScreens mFourSplitScreens;
-  CTimeCounter mTimeCounter;
+    int mOldWidth, mOldHeight;
+    CCanvas mCanvas;
+    const CSong& mSong;
+    CFont mFont;
+    bool mSmartSplit;
+    COneSplitScreen   mOneSplitScreen;
+    CTwoSplitScreens  mTwoSplitScreens;
+    CFourSplitScreens mFourSplitScreens;
+    CTimeCounter mTimeCounter;
 
-  void PrintSongTitle();
-  CSplitScreens& GetSplitScreens(const CScreenPos& centre, int nbHumans);
+    void PrintSongTitle();
+    CSplitScreens& GetSplitScreens(const CScreenPos& centre, int nbHumans);
 
 };
 

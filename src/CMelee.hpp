@@ -20,6 +20,8 @@ class CMelee {
 public:
 
     enum { kMaxNbPilots = 4 };
+    using pilots_t = CGravScreen::pilots_t;
+    using Pilots = std::vector<CPilot*>;
 
     CMelee(const CGravOptions &options);
     virtual ~CMelee();
@@ -29,7 +31,7 @@ public:
 
 protected:
 
-    pilots_t mPilots;
+    Pilots mPilots;
 
     CMeleeServer mServer;
     CRandomSong  mSong;
@@ -43,7 +45,7 @@ protected:
     void     CheckGameOver();
     CPilot*  CreatePilot(const CPilotOptions&);
     void     End(float avgFPS);
-    pilots_t GetActivePilots() const;
+    Pilots GetActivePilots() const;
     void     Update(float dt);
 
     virtual int  GetWinner()  = 0;

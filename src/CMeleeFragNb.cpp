@@ -28,8 +28,8 @@ CMeleeFragNb::~CMeleeFragNb() {
 
 
 bool CMeleeFragNb::IsGameOver() {
- 
-  pilots_t pilots = GetActivePilots();
+
+  auto pilots = GetActivePilots();
   if(pilots.empty()) return -1;
   int fragLimit = pilots[0]->GetNbShips();
   int winTeam = -1;
@@ -53,11 +53,11 @@ bool CMeleeFragNb::IsGameOver() {
     }
   }
   //return 1st player we find from the winning team
-  if(winTeam != -1) 
+  if(winTeam != -1)
     for(unsigned int p = 0;  p < pilots.size(); p++)
       if(pilots[p]->GetTeam().GetName() == tNames[winTeam] && mWinner == -1)
 	mWinner = p;
-  
+
   return mWinner != -1;
 }
 

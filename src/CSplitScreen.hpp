@@ -9,6 +9,7 @@
 #include "CScreenPos.hpp"
 #include "CVector2.hpp"
 #include "CRadar.hpp"
+#include "SDisplayPilot.hpp"
 #include <vector>
 class CPilot;
 
@@ -18,6 +19,7 @@ class CSplitScreen: public CSubDisplay {
 public:
 
     enum { kSplitBorder=20 };
+    using pilots_t = CRadar::pilots_t;
 
     CSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas,
                  int width, int height,

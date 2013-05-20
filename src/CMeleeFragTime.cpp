@@ -34,8 +34,8 @@ bool CMeleeFragTime::IsGameOver() {
 
 
 int CMeleeFragTime::GetWinner() {
- 
-  pilots_t pilots = GetActivePilots();
+
+  auto pilots = GetActivePilots();
   if(pilots.empty()) return -1;
   int winTeam = -1;
   std::string tNames[] = {"Blue", "Red", "Green", "Yellow"};
@@ -60,11 +60,11 @@ int CMeleeFragTime::GetWinner() {
     if(teams[tNames[t]] == max) return -1; //2 teams are tied
 
   //return 1st player we find from the winning team
-  if(winTeam != -1) 
+  if(winTeam != -1)
     for(unsigned int p = 0;  p < pilots.size(); p++)
       if(pilots[p]->GetTeam().GetName() == tNames[winTeam]) {
 	return p;
       }
-  
+
   return  -1;
 }

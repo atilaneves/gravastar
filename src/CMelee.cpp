@@ -77,13 +77,22 @@ void CMelee::Run() {
 }
 
 
+static CMelee::pilots_t getDisplayPilots(const CMelee::Pilots& pilots) {
+    CMelee::pilots_t displayPilots;
+    for(const auto& pilot: pilots) {
+        displayPilots.push_back(pilot->MakeDisplayPilot());
+    }
+    return displayPilots;
+}
+
 void CMelee::Update(float dt) {
-    pilots_t pilots = GetActivePilots();
+    auto pilots = GetActivePilots();
     for(unsigned int p = 0; p < pilots.size(); ++p) pilots[p]->CheckControls();
     CSpriteObjs::Update(dt);
     mServer.SendFrame(CSpriteObjs::Pack());
     mPowerups.Generate(dt);
-    mGravScreen.Draw(GetActivePilots());
+
+    mGravScreen.Draw(getDisplayPilots(GetActivePilots()));
 }
 
 
@@ -100,8 +109,8 @@ void CMelee::End(float avgFPS) {
 }
 
 
-pilots_t CMelee::GetActivePilots() const {
-    pilots_t pilots;
+auto CMelee::GetActivePilots() const -> Pilots {
+    Pilots pilots;
     if(mWinner >= 0 && mPilots[mWinner]->IsAlive()) //winner gets display
         pilots.push_back(mPilots[mWinner]);
     else
