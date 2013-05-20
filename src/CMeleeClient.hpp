@@ -7,6 +7,7 @@ class CGravOptions;
 #include "CGravMedia.hpp" //delete
 #include "CGravScreen.hpp" //delete
 #include "CRandomSong.hpp" //delete
+#include <mutex>
 
 class CMeleeClient { //TODO: public CMelee
 
@@ -16,14 +17,17 @@ public:
                  const CGravUpdateServer& updateServer);
 
     void Run();
+    void Stop();
 
 private:
 
     const CGravUpdateServer& mUpdateServer;
+    bool mIsGameOver;
+    std::mutex mGameOverMutex;
 
     //TODO: override
     //virtual int  GetWinner() override;
-    //virtual bool IsGameOver() override;
+    //virtual bool IsGameOver() override { return mIsGameOver; }
 
     //TODO: delete
     CRandomSong  mSong;

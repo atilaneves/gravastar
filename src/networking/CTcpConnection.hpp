@@ -15,7 +15,6 @@ public:
 
     static Pointer Create(boost::asio::io_service& io_service);
     tcp::socket& Socket();
-    void Start(const std::string& msg);
     void SendBytes(const std::vector<unsigned char>& bytes);
     void SendBytes(const std::string& bytes);
 

@@ -45,13 +45,6 @@ private:
     void DrawGeometry(int x, int y, int col) const;
     void End(const CPilotInput &input) const;
     std::vector<CPilotScore> GetScores() const;
-
-    struct SGreaterScore {
-        bool operator()(const CPilotScore &ps1,
-                        const CPilotScore &ps2) const {
-            return ps1.Greater(ps2);
-        }
-    };
 };
 
 

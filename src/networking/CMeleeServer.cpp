@@ -41,6 +41,13 @@ void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
             clientArgs << ship << " ";
         }
     }
-    tcpConnection->Start(clientArgs.str());
+    tcpConnection->SendBytes(clientArgs.str());
     mConnections.emplace_back(new CGravConnection{tcpConnection});
+}
+
+void CMeleeServer::End() {
+    for(auto& connection: mConnections) {
+        std::stringstream clientArgs{"Stop "};
+        connection->SendTcpBytes(clientArgs.str());
+    }
 }

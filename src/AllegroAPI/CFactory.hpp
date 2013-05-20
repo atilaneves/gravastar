@@ -31,7 +31,7 @@ public:
         return mMap.erase(id) == 1;
     }
 
-    TAbstract* CreateObject(const TIdentifier& id, Args ...args) {
+    TAbstract* CreateObject(const TIdentifier& id, Args ...args) const {
         typename AssocMap::const_iterator i = mMap.find(id);
         return i != mMap.end() ? (i->second)(args...) : nullptr;
     }
@@ -42,7 +42,7 @@ protected:
     ~CFactory() {} //protected dtor
 
 private:
- 
+
     AssocMap mMap;
     std::vector<TIdentifier> mKeys;
 

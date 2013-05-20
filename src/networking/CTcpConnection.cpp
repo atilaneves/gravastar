@@ -15,10 +15,6 @@ tcp::socket& CTcpConnection::Socket() {
 }
 
 
-void CTcpConnection::Start(const std::string& startMsg) {
-    SendBytes(startMsg);
-}
-
 void CTcpConnection::SendBytes(const std::string& bytes) {
     std::vector<unsigned char> vec;
     vec.insert(std::begin(vec), std::begin(bytes), std::end(bytes));

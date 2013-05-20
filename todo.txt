@@ -1,0 +1,8 @@
+. IP addr and port on command-line
+. Disable pause on network game or propagate it
+. Radar / split screens on client
+. Input on client
+. End score on client when melee ends
+. UDP packets down to internet MTU
+. Ignore old packets
+. Coalesce packets?

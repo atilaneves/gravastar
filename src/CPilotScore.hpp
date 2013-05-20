@@ -14,7 +14,7 @@ public:
 
  void Draw(const CFont &font, CCanvas &canvas,int x,int y) const;
  int  GetScore() const;
- bool Greater(const CPilotScore &pilotScore) const;
+ bool operator>(const CPilotScore &pilotScore) const;
 
 
 private:

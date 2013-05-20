@@ -26,7 +26,6 @@ bool CTcpClient::ReadForever(const MsgHandler& msgHandler) {
         boost::system::error_code error;
 
         const auto len = mSocket.read_some(boost::asio::buffer(buf), error);
-        std::cout << "Read " << len << " bytes" << std::endl;
 
         if(error == boost::asio::error::eof) {
             std::cout << "Connection closed by server." << std::endl;
@@ -36,7 +35,6 @@ bool CTcpClient::ReadForever(const MsgHandler& msgHandler) {
             throw boost::system::system_error(error); // Some other error.
         }
 
-        std::cout << "Calling Msg Handler" << std::endl;
         msgHandler(buf, len);
         std::lock_guard<std::mutex> lock{mStopMutex};
         if(mStop) {

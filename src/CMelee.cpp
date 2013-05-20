@@ -88,15 +88,15 @@ void CMelee::Update(float dt) {
 
 
 void CMelee::End(float avgFPS) {
+    mServer.End();
     CKeyboard::Clear();
     printf("avg FPS: %.1f\n", avgFPS);
-    CPilotInputBot input;
     if(mWinner >= 0) {
         CStats::AddWin(mWinner);
         mMeleeScore.Draw(mWinner, "WINNER!",
                          CPilots::GetPilot(mWinner).GetInput());
     }
-    else mMeleeScore.Draw(mWinner, "DRAW", input);
+    else mMeleeScore.Draw(mWinner, "DRAW", CPilotInputBot{});
 }
 
 

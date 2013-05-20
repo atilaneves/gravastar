@@ -3,6 +3,7 @@
 
 CMeleeClient::CMeleeClient(const CGravOptions& options, const CGravUpdateServer& updateServer):
     mUpdateServer(updateServer),
+    mIsGameOver(),
     mGravMedia(options.GetMeleeOptions(),
                options.GetClientOptions().GetAllPilotOptions()),
     mGravScreen(mGravMedia.GetLevel().GetCanvas(), options.GetClientOptions(),
@@ -18,7 +19,7 @@ CMeleeClient::CMeleeClient(const CGravOptions& options, const CGravUpdateServer&
 
 void CMeleeClient::Run() {
     CGravUpdateServer::Sprites oldSprites, newSprites;
-    while(true) {
+    for(;;) {
         for(const auto& spriteParams: oldSprites) {
             uint16_t hash, x, y;
             std::tie(hash, x, y) = spriteParams;
@@ -35,5 +36,12 @@ void CMeleeClient::Run() {
         }
         oldSprites = newSprites;
         mGravScreen.Draw(pilots_t{});
+        std::lock_guard<std::mutex> lock{mGameOverMutex};
+        if(mIsGameOver) break;
     }
+}
+
+void CMeleeClient::Stop() {
+    std::lock_guard<std::mutex> lock{mGameOverMutex};
+    mIsGameOver = true;
 }

@@ -16,15 +16,15 @@ public:
 
     CClientMenu(const CSprite *cursorSprite, CGravMenu& gravMenu);
     virtual void Run(CRootMenu &rootMenu) override;
+    void PrintCentre(const std::string& str) const;
 
 private:
 
     CVersusMenu& mVersusMenu;
     CFont mFont;
-
-    CGravOptions GetGravOptions(std::vector<std::string>& options) const;
-    void StartMeleeClient(CRootMenu &rootMenu, std::vector<std::string>& options) const;
-    void PrintCentre(const std::string& str) const;
 };
+
+
+std::string nextOption(std::vector<std::string>& strings);
 
 #endif
