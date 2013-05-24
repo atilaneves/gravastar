@@ -20,20 +20,20 @@ CClientMenu::CClientMenu(const CSprite *cursorSprite, CGravMenu& gravMenu):
 
 }
 
-static std::vector<std::string> msgBufToVec(const CTcpClient::MsgBuf& buf, size_t len) {
+static std::deque<std::string> msgBufToVec(const CTcpClient::MsgBuf& buf, size_t len) {
     std::string bufStr{buf.cbegin(), buf.cbegin() + len};
     std::cout << "Read " << len << " bytes: " << bufStr << std::endl;
     std::istringstream stream{bufStr};
-    std::vector<std::string> tokens;
+    std::deque<std::string> tokens;
     std::copy(std::istream_iterator<std::string>(stream),
               std::istream_iterator<std::string>(),
-              std::back_inserter<std::vector<std::string>>(tokens));
+              std::back_inserter<std::deque<std::string>>(tokens));
     return tokens;
 }
 
-std::string nextOption(std::vector<std::string>& strings) {
-    auto str = strings.back();
-    strings.pop_back();
+std::string nextOption(std::deque<std::string>& strings) {
+    auto str = strings.front();
+    strings.pop_front();
     return str;
 }
 
@@ -50,7 +50,6 @@ void CClientMenu::Run(CRootMenu &rootMenu) {
     while(meleeRunning) {
         tcpClient.ReadForever([&](const CTcpClient::MsgBuf& buf, size_t len) {
             auto tokens = msgBufToVec(buf, len);
-            std::reverse(std::begin(tokens), std::end(tokens));
             const auto command = nextOption(tokens);
 
             if(command == "Start") {

@@ -9,6 +9,7 @@ class CVersusMenu;
 #include "CFont.hpp"
 #include "CGravOptions.hpp"
 #include "CTcpClient.hpp"
+#include <deque>
 
 
 class CClientMenu: public CCursorMenu<CStringMenu> {
@@ -25,6 +26,6 @@ private:
 };
 
 
-std::string nextOption(std::vector<std::string>& strings);
+std::string nextOption(std::deque<std::string>& strings);
 
 #endif

@@ -13,7 +13,7 @@ CMeleeClientStarter::CMeleeClientStarter(CRootMenu& rootMenu,
 }
 
 
-void CMeleeClientStarter::Start(const std::vector<std::string>& options,
+void CMeleeClientStarter::Start(const std::deque<std::string>& options,
                                 const CClientOptions& vsClientOptions) {
     mRootMenu.StopSong();
     CSound sound("meleeStart");
@@ -37,9 +37,8 @@ void CMeleeClientStarter::Stop() {
     mMelee->Stop();
 }
 
-CGravOptions CMeleeClientStarter::GetGravOptions(const std::vector<std::string>& opts,
+CGravOptions CMeleeClientStarter::GetGravOptions(std::deque<std::string> options,
                                                  const CClientOptions& vsClientOptions) const {
-    std::vector<std::string> options = opts;
     const auto levelNb  = std::stoi(nextOption(options));
     const auto nbPilots = std::stoi(nextOption(options));
     const auto nbShips  = std::stoi(nextOption(options));
