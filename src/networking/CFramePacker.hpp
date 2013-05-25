@@ -1,18 +1,19 @@
-#ifndef CSPRITE_PACKER_HPP_
-#define CSPRITE_PACKER_HPP_
+#ifndef CFRAME_PACKER_HPP_
+#define CFRAME_PACKER_HPP_
 
 #include "CSpriteObjs.hpp"
 #include <vector>
 #include <chrono>
 
-class CSpritePacker {
+class CFramePacker {
 
 public:
 
     using FrameBytes = CSpriteObjs::FrameBytes;
     using Sprites = CSpriteObjs::SpritePositions;
+    using Pilots = CSpriteObjs::Pilots;
 
-    FrameBytes Pack(const Sprites& sprites) const;
+    FrameBytes Pack(const Pilots& pilots, const Sprites& sprites) const;
 
 private:
 

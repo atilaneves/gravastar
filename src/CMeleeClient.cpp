@@ -35,7 +35,7 @@ void CMeleeClient::Run() {
             sprite->Draw(mGravMedia.GetLevel().GetCanvas(), x, y);
         }
         oldSprites = newSprites;
-        mGravScreen.Draw(pilots_t{});
+        mGravScreen.Draw(mUpdateServer.GetPilots());
         std::lock_guard<std::mutex> lock{mGameOverMutex};
         if(mIsGameOver) break;
     }

@@ -45,8 +45,8 @@ void CSplitScreen::Grab(const pilots_t& pilots) {
     const CTeam &team = pilots.size() == 1 ? pilots[0].team : CTeam::sWhite;
     CRect rect(mSubCanvas, flipX, flipY, flipX + width - 1,
                flipY + height - 1, team.GetMainColour());
-    for(unsigned int p = 0; p < pilots.size(); p++)
-        pilots[p].stats.Draw(mSubCanvas, 2, 2 + p*25);
+    //for(unsigned int p = 0; p < pilots.size(); p++) //TODO: re-enable
+    //  pilots[p].stats.Draw(mSubCanvas, 2, 2 + p*25);
 }
 
 

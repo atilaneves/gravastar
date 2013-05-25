@@ -5,6 +5,7 @@
 #include "CSpriteObj.hpp"
 #include "CScreenPos.hpp"
 #include "CVector2.hpp"
+#include "CRadar.hpp"
 #include <list>
 #include <vector>
 
@@ -14,6 +15,7 @@ public:
     typedef std::list<CSpriteObj*> objs_t;
     typedef objs_t::iterator objPlace_t;
     typedef objs_t::reverse_iterator robjPlace_t;
+    using Pilots = CRadar::pilots_t;
     using FrameBytes = std::vector<unsigned char>;
     using SpritePositions = std::vector<CLevelSprite>;
 
@@ -23,7 +25,7 @@ public:
     static bool        HasFlicker(CSpriteObj *flicker);
     static void        RemoveObj(CSpriteObj *sprObj);
     static void        Erase();
-    static FrameBytes  Pack();
+    static FrameBytes  Pack(const Pilots& pilots);
     static CSpriteObj* HitObj(CScreenPos pos, bool drawn = true); //anyone here?
     static void        Stop(const CVector2& pos, const CSpriteObj &ship,
                             float maxTime);

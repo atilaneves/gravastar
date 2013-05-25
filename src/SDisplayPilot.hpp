@@ -7,6 +7,7 @@ class CPilotStats;
 #include "CVector2.hpp"
 
 struct SDisplayPilot {
+    //SDisplayPilot(CScreenPos p, CVector2 v, const CTeam& t
     const CScreenPos position;
     const CVector2 velocity;
     const CTeam& team;

@@ -21,7 +21,7 @@ class CGravScreen {
 
 public:
 
-    using pilots_t = CSplitScreens::pilots_t;
+    using pilots_t = CRadar::pilots_t;
 
     CGravScreen(const CCanvas &levelCanvas, const CClientOptions &options,
                 const CSong& song);

@@ -2,7 +2,7 @@
 #include "CSpriteObj.hpp"
 #include "CShips.hpp"
 #include "CFlicker.hpp"
-#include "CSpritePacker.hpp"
+#include "CFramePacker.hpp"
 #include "debug.hpp"
 #include <typeinfo>
 #include <algorithm>
@@ -116,7 +116,7 @@ void CSpriteObjs::EraseObj(CSpriteObj* sprObj) {
     sprObj->SetUpdated(false);
 }
 
-auto CSpriteObjs::Pack() -> FrameBytes {
-    static CSpritePacker spritePacker;
-    return spritePacker.Pack(sSpritePositions);
+auto CSpriteObjs::Pack(const Pilots& pilots) -> FrameBytes {
+    static CFramePacker framePacker;
+    return framePacker.Pack(pilots, sSpritePositions);
 }

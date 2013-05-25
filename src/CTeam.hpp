@@ -20,7 +20,9 @@ public:
   bool operator!=(const CTeam& team) const { return mName != team.mName; }
 
   static const CTeam& FindByName(const std::string& name);
+  static const CTeam& FromHash(uint8_t hash);
          int          GetDarkColour() const { return mColours[0]; }
+         uint8_t      GetHash() const;
          int          GetMainColour() const { return mColours[6]; }
          int          GetSecondaryColour() const { return mColours[4]; }
   const  std::string& GetName() const { return mName; }
