@@ -6,6 +6,7 @@
 #include "CScreenPos.hpp"
 #include "CVector2.hpp"
 #include "CRadar.hpp"
+#include "Cereal.hpp"
 #include <list>
 #include <vector>
 
@@ -16,7 +17,7 @@ public:
     typedef objs_t::iterator objPlace_t;
     typedef objs_t::reverse_iterator robjPlace_t;
     using Pilots = CRadar::pilots_t;
-    using FrameBytes = std::vector<unsigned char>;
+    using FrameBytes = Cereal::Bytes;
     using SpritePositions = std::vector<CLevelSprite>;
 
     static void        AddObj(CSpriteObj *sprObj, bool back = true);

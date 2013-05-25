@@ -47,9 +47,10 @@ file(GLOB SRCS_MENU src/menu/*.cpp)
 file(GLOB SRCS_POWERUPS src/powerups/*.cpp)
 file(GLOB SRCS_SHIPS src/ships/*.cpp)
 file(GLOB SRCS_NETWORKING src/networking/*.cpp)
+file(GLOB SRCS_CEREAL src/cereal/*.cpp)
 
 set(SRCS ${SRCS_NETWORKING} ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
-         ${SRCS_POWERUPS} ${SRCS_SHIPS} 
+         ${SRCS_POWERUPS} ${SRCS_SHIPS} ${SRCS_CEREAL}
          ${CMAKE_SOURCE_DIR}/src/grav.rc)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -69,6 +70,7 @@ include_directories(src/menu)
 include_directories(src/powerups)
 include_directories(src/ships)
 include_directories(src/networking)
+include_directories(src/cereal)
 
 add_definitions("-DDEV_DATAFILE_DIR=\"${CMAKE_SOURCE_DIR}\"")
 add_definitions("-D_WIN32_WINNT=0x0700") #boost asio
@@ -102,17 +104,11 @@ endif()
 
 add_executable(gravastar src/server/grav_server.cpp ${GRAV_SRCS})
 
-file(GLOB TEST_SRCS src/testing/*.cpp)
-add_executable(test ${TEST_SRCS})
-
-target_link_libraries(gravastar ${ALLEGRO_LIBRARIES})
-target_link_libraries(gravastar ${Boost_LIBRARIES})
-target_link_libraries(test ${Boost_LIBRARIES})
+target_link_libraries(gravastar ${ALLEGRO_LIBRARIES} ${Boost_LIBRARIES})
 if(WIN32)
     target_link_libraries(gravastar ws2_32)
 else()
     target_link_libraries(gravastar pthread)
-    target_link_libraries(test pthread)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
