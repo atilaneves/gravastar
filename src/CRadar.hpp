@@ -5,7 +5,7 @@
 #include "CCanvas.hpp"
 #include "CVector2.hpp"
 #include "CScreenPos.hpp"
-#include "SDisplayPilot.hpp"
+#include "CDisplayPilot.hpp"
 #include <vector>
 class CPilot;
 
@@ -15,7 +15,7 @@ class CRadar {
 public:
 
     enum { kRadius = 25 };
-    using pilots_t = std::vector<SDisplayPilot>;
+    using pilots_t = std::vector<CDisplayPilot>;
 
     CRadar();
 
@@ -28,7 +28,7 @@ private:
 
     CCanvas mCanvas;
 
-    CVector2 CalcRadiusAngle(const SDisplayPilot &pilot, const CVector2& centre) const;
+    CVector2 CalcRadiusAngle(const CDisplayPilot &pilot, const CVector2& centre) const;
 };
 
 

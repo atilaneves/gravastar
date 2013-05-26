@@ -2,16 +2,21 @@
 #include "CSpriteObj.hpp"
 #include "CShips.hpp"
 #include "CFlicker.hpp"
-#include "CFramePacker.hpp"
+#include "SClientFrame.hpp"
+#include "Cerealiser.hpp"
 #include "debug.hpp"
 #include <typeinfo>
 #include <algorithm>
 #include <vector>
-#include "CShip.hpp"
+#include <limits>
+#include <assert.h>
+#include <chrono>
+#include <stdint.h>
 
 
 CSpriteObjs::objs_t CSpriteObjs::sObjs;
 CSpriteObjs::SpritePositions CSpriteObjs::sSpritePositions;
+CChrono CSpriteObjs::sChrono;
 
 void CSpriteObjs::Update(float dt) {
 
@@ -117,6 +122,11 @@ void CSpriteObjs::EraseObj(CSpriteObj* sprObj) {
 }
 
 auto CSpriteObjs::Pack(const Pilots& pilots) -> FrameBytes {
-    static CFramePacker framePacker;
-    return framePacker.Pack(pilots, sSpritePositions);
+    assert(sSpritePositions.size() <= std::numeric_limits<uint16_t>::max());
+    const uint32_t milliseconds = sChrono.SinceStartMs();
+    assert(milliseconds <= std::numeric_limits<decltype(milliseconds)>::max());
+
+    Cerealiser cereal;
+    cereal << SClientFrame{milliseconds, pilots, sSpritePositions};
+    return cereal.getBytes();
 }

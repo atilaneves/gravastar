@@ -84,8 +84,8 @@ const CShipStatSprite& CPilot::GetShipStatSprite(int index) const {
 }
 
 
-SDisplayPilot CPilot::MakeDisplayPilot() {
-    return SDisplayPilot{VectorToScreenPos(GetShip().GetPos()), GetShip().GetVel(),
+CDisplayPilot CPilot::MakeDisplayPilot() {
+    return { GetShip().GetPos(), GetShip().GetVel(),
             mOptions.GetTeam(), mStats,
             GetShip().IsAlive(), HasSplitScreen()};
 }

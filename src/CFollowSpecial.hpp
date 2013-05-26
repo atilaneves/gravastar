@@ -14,31 +14,30 @@ class CFollowSpecial: public CSpecial {
 
 public:
 
-  CFollowSpecial(const CShipBluePrint &shipBluePrint,
-		 CShip &ship, CLevel &level);
+    CFollowSpecial(const CShipBluePrint &shipBluePrint,
+                   CShip &ship, CLevel &level);
 
-  virtual const CGravSprite& GetSprite() const;
+    virtual const CGravSprite& GetSprite() const;
 
-  virtual void DrawStats(CCanvas &canvas) const;
-  virtual bool IsActive() const;
-  virtual void PlaySound();
-  virtual CMoverObj* UseAt(const CVector2& pos, const CVector2& vel,
-			   const std::string& name, bool shadow);
+    virtual void DrawStats(CCanvas &canvas) const;
+    virtual bool IsActive() const;
+    virtual void PlaySound();
+    virtual CMoverObj* UseAt(const CVector2& pos, const CVector2& vel,
+                             const std::string& name, bool shadow);
 
 
 private:
 
-  const CFollowBluePrint& mBluePrint;
-  const CSpriteVector&    mSprites;
-  CLevel&                 mLevel;
-  const CShipStatSprite&  mStatSprite;
-  CSound                  mSound;
-  CFollower              *mFollower;
+    const CFollowBluePrint& mBluePrint;
+    const CSpriteVector&    mSprites;
+    CLevel&                 mLevel;
+    const CShipStatSprite&  mStatSprite;
+    CSound                  mSound;
+    CFollower              *mFollower;
 
-  virtual       float            GetDepletionScale(float dt) const;
-  virtual const CShipStatSprite& GetStatSprite()     const {
-    return mStatSprite; }
-  virtual 	void  	   	 NotUsing();
+    virtual       float            GetDepletionScale(float dt) const;
+    virtual const CShipStatSprite& GetStatSprite() const { return mStatSprite; }
+    virtual       void             NotUsing();
 
 
 };

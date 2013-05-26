@@ -2,7 +2,7 @@
 #define CPILOT_H
 
 
-#include "SDisplayPilot.hpp"
+#include "CDisplayPilot.hpp"
 #include "CPilotOptions.hpp"
 #include "CShip.hpp"
 #include "CPilotInput.hpp"
@@ -44,7 +44,7 @@ public:
           bool IsAlive() const;
   virtual void NextShip();
   static  void ResetIndex() { sIndex = 0; }
- SDisplayPilot MakeDisplayPilot();
+ CDisplayPilot MakeDisplayPilot();
 
 
 private:

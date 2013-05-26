@@ -11,7 +11,7 @@
 
 
 CSuper::CSuper(const CShipBluePrint &bluePrint, CLevel &level, CShip &ship):
-  mLevel(level), mShip(ship), mExpSprites(bluePrint.mSuperExpSprites), 
+  mLevel(level), mShip(ship), mExpSprites(bluePrint.mSuperExpSprites),
   mSound(bluePrint.mSounds.mSuperSound),
   mExpSound(bluePrint.mSounds.mSuperExpSound),
   mRate(bluePrint.mSuperRate), mDuration(bluePrint.mSuperDuration),
@@ -30,7 +30,6 @@ void CSuper::ApplyInput(const CPilotInput& input) {
 
 
 void CSuper::Update(float dt) {
-  //AddGauge(100);
   if(mExpCounter.JustFinished()) mSuperCounter.Start(mDuration);
   if(mSuperCounter.IsActive() &&
      CSuperTimer::Instance().IsReady(mShip.GetPilot().GetIndex(), mRate))
@@ -50,6 +49,6 @@ void CSuper::AddGauge(float amount) {
 
 void CSuper::DrawStats(CCanvas& canvas) const {
   if(!CanUse()) return;
-  int x = 67, y = 10;
+  constexpr int x = 67, y = 10;
   mSprite.Draw(canvas, x, y);
 }

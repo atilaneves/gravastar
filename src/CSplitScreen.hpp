@@ -9,7 +9,6 @@
 #include "CScreenPos.hpp"
 #include "CVector2.hpp"
 #include "CRadar.hpp"
-#include "SDisplayPilot.hpp"
 #include <vector>
 class CPilot;
 

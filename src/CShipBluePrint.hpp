@@ -54,14 +54,14 @@ public:
 
 private:
 
-  std::string mName;
-  CDataFile *mDataFile;
+  const std::string mName;
+  const CDataFile *mDataFile;
   const CTeam& mTeam;
-  CExplosiveBluePrint   mExplosiveBluePrint;
-  CMoverBluePrint       mExaustBluePrint;
-  CMoverBluePrint       mInvulnerableBluePrint;
-  CMoverBluePrint       mScrambleBluePrint;
-  CMoverBluePrint       mEMPBluePrint;
+  const CExplosiveBluePrint   mExplosiveBluePrint;
+  const CMoverBluePrint       mExaustBluePrint;
+  const CMoverBluePrint       mInvulnerableBluePrint;
+  const CMoverBluePrint       mScrambleBluePrint;
+  const CMoverBluePrint       mEMPBluePrint;
   std::unique_ptr<CProjBluePrint>  mWeaponBluePrint;
   std::unique_ptr<CProjBluePrint>  mExtraProjBluePrint;
   std::unique_ptr<CProjBluePrint>  mProjSpecBluePrint;
@@ -75,10 +75,10 @@ private:
   float mBaseHull, mBaseSpecial;
   int mSuperRate;
   float mSuperDuration;
-  CShipSounds mSounds;
-  CShipStatSprite mStatSprite;
-  CGravSprite     mAuraSprite;
-  CGravSprite     mSuperSprite;
+  const CShipSounds mSounds;
+  const CShipStatSprite mStatSprite;
+  const CGravSprite     mAuraSprite;
+  const CGravSprite     mSuperSprite;
   CSpriteVector   mSpecialExpSprites;
   CSpriteVector   mSuperExpSprites;
 

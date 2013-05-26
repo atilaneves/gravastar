@@ -9,7 +9,7 @@
 
 void CLivesStats::Draw() {
 
-    const int x = 0, y = 1, dx = 10;
+    constexpr int x = 0, y = 1, dx = 10;
     mStatSprite->Draw(mCanvas, x, y);
     CFont font;
     font.Print(mCanvas, x + dx, y, mPilot.GetTeam().GetMainColour(), -1, "x");

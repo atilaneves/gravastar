@@ -42,11 +42,11 @@ void CSplitScreen::Grab(const pilots_t& pilots) {
     mLevelCanvas->Blit(mSubCanvas, pos.GetX(), pos.GetY(), flipX, flipY,
                        width, height);
 
-    const CTeam &team = pilots.size() == 1 ? pilots[0].team : CTeam::sWhite;
+    const CTeam &team = pilots.size() == 1 ? pilots[0].GetTeam() : CTeam::sWhite;
     CRect rect(mSubCanvas, flipX, flipY, flipX + width - 1,
                flipY + height - 1, team.GetMainColour());
     //for(unsigned int p = 0; p < pilots.size(); p++) //TODO: re-enable
-    //  pilots[p].stats.Draw(mSubCanvas, 2, 2 + p*25);
+    //  pilots[p].GetStats().Draw(mSubCanvas, 2, 2 + p*25);
 }
 
 
@@ -55,7 +55,7 @@ CScreenPos CSplitScreen::GetGrabPos(const pilots_t &pilots) {
     const float velFactor = 0.25; //screen modifier for speed
 
     if(pilots.size() == 1)
-        pos += CScreenPos(pilots[0].velocity * velFactor);
+        pos += CScreenPos(pilots[0].GetVelocity() * velFactor);
 
     int x = GetRealGrabPos(pos.GetX(),
                            mSubCanvas.GetWidth(), mLevelCanvas->GetWidth());
@@ -79,15 +79,15 @@ CScreenPos CSplitScreen::GetCentre(const pilots_t& pilots) {
                  mLevelCanvas->GetHeight() / 2 };
 
     if(pilots.size() == 1)
-        return { (int)pilots[0].position.GetX(),
-                (int)pilots[0].position.GetY() };
+        return { (int)pilots[0].GetPosition().GetX(),
+                (int)pilots[0].GetPosition().GetY() };
 
     const auto humans = GetHumans(pilots);
     std::vector<int> sx, sy;
     std::transform(std::begin(humans), std::end(humans), std::begin(sx),
-                   [](const SDisplayPilot& p) { return p.position.GetX(); });
+                   [](const CDisplayPilot& p) { return p.GetPosition().GetX(); });
     std::transform(std::begin(humans), std::end(humans), std::begin(sy),
-                   [](const SDisplayPilot& p) { return p.position.GetY(); });
+                   [](const CDisplayPilot& p) { return p.GetPosition().GetY(); });
 
     const int minX = *std::min_element(std::begin(sx), std::end(sx));
     const int maxX = *std::max_element(std::begin(sx), std::end(sx));
@@ -105,6 +105,6 @@ CScreenPos CSplitScreen::GetCentre(const pilots_t& pilots) {
 auto CSplitScreen::GetHumans(const pilots_t& pilots) -> pilots_t{
     pilots_t humans;
     for(unsigned int i = 0; i < pilots.size(); i++)
-        if(pilots[i].hasSplitScreen) humans.push_back(pilots[i]);
+        if(pilots[i].HasSplitScreen()) humans.push_back(pilots[i]);
     return humans.empty() ? pilots : humans;
 }

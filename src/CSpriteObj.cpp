@@ -18,7 +18,9 @@ CSpriteObj::~CSpriteObj() {
 
 CLevelSprite CSpriteObj::Draw()  {
     GetSprite().Draw(mLevel.GetCanvas(), GetTopLeftX(), GetTopLeftY());
-    return { GetSprite().GetHash(), GetTopLeftX(), GetTopLeftY() };
+    return {static_cast<uint16_t>(GetSprite().GetHash()),
+            static_cast<uint16_t>(GetTopLeftX()),
+            static_cast<uint16_t>(GetTopLeftY()) };
 }
 
 

@@ -6,6 +6,7 @@
 #include "CScreenPos.hpp"
 #include "CVector2.hpp"
 #include "CRadar.hpp"
+#include "CChrono.hpp"
 #include "Cereal.hpp"
 #include <list>
 #include <vector>
@@ -37,12 +38,11 @@ private:
 
     static objs_t sObjs;
     static SpritePositions sSpritePositions;
+    static CChrono sChrono;
 
     static void DrawObj(CSpriteObj* sprObj);
     static void EraseObj(CSpriteObj* sprObj);
     static void DeleteObj(CSpriteObj *sprObj);
-
-
 };
 
 

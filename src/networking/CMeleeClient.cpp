@@ -20,19 +20,18 @@ CMeleeClient::CMeleeClient(const CGravOptions& options, const CGravUpdateServer&
 void CMeleeClient::Run() {
     CGravUpdateServer::Sprites oldSprites, newSprites;
     for(;;) {
-        for(const auto& spriteParams: oldSprites) {
-            uint16_t hash, x, y;
-            std::tie(hash, x, y) = spriteParams;
-            const auto sprite = CGravSprite::GetSprite(hash);
-            sprite->Erase(mGravMedia.GetLevel().GetCanvas(), x, y);
+        for(const auto& levelSprite: oldSprites) {
+            const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());
+            assert(sprite);
+            sprite->Erase(mGravMedia.GetLevel().GetCanvas(),
+                          levelSprite.GetX(), levelSprite.GetY());
         }
         newSprites = mUpdateServer.GetSprites();
-        for(const auto& spriteParams: newSprites) {
-            uint16_t hash, x, y;
-            std::tie(hash, x, y) = spriteParams;
-            const auto sprite = CGravSprite::GetSprite(hash);
+        for(const auto& levelSprite: newSprites) {
+            const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());
             assert(sprite);
-            sprite->Draw(mGravMedia.GetLevel().GetCanvas(), x, y);
+            sprite->Draw(mGravMedia.GetLevel().GetCanvas(),
+                          levelSprite.GetX(), levelSprite.GetY());
         }
         oldSprites = newSprites;
         mGravScreen.Draw(mUpdateServer.GetPilots());
