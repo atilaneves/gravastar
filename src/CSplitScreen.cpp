@@ -84,10 +84,10 @@ CScreenPos CSplitScreen::GetCentre(const pilots_t& pilots) {
 
     const auto humans = GetHumans(pilots);
     std::vector<int> sx, sy;
-    std::transform(std::begin(humans), std::end(humans), std::begin(sx),
-                   [](const CDisplayPilot& p) { return p.GetPosition().GetX(); });
-    std::transform(std::begin(humans), std::end(humans), std::begin(sy),
-                   [](const CDisplayPilot& p) { return p.GetPosition().GetY(); });
+    for(const auto& p: humans) {
+        sx.push_back(p.GetPosition().GetX());
+        sy.push_back(p.GetPosition().GetY());
+    }
 
     const int minX = *std::min_element(std::begin(sx), std::end(sx));
     const int maxX = *std::max_element(std::begin(sx), std::end(sx));
