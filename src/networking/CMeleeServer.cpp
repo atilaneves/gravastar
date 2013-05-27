@@ -7,7 +7,17 @@
 
 using namespace std;
 
+static vector<string> getPilotTypes(const CGravOptions& options) {
+    vector<string> types;
+    const auto& allPilotOptions = options.GetClientOptions().GetAllPilotOptions();
+    for(const auto& pilotOptions: allPilotOptions) {
+        types.push_back(pilotOptions.GetType());
+    }
+    return types;
+}
+
 CMeleeServer::CMeleeServer(const CGravOptions& options):
+    mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
     mTcpServer(mTcpIoService, *this),
     mTcpThread([this]() { mTcpIoService.run(); }) {
@@ -19,6 +29,15 @@ CMeleeServer::~CMeleeServer() {
     mTcpIoService.stop();
     mTcpThread.join();
 }
+
+std::string CMeleeServer::GetPilotType(const std::string& type,
+                                       unsigned pilotIndex) const {
+    if(pilotIndex == 0 || type == "Bot") {
+        return type;
+    }
+    return "Client";
+}
+
 
 void CMeleeServer::SendFrame(const vector<unsigned char>& frameBytes) {
     for(auto& connection: mConnections) {
@@ -42,7 +61,7 @@ void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
 
 static string getRealPilotType(const string& type,
                                unsigned pilotIndex, unsigned connectionIndex) {
-    return pilotIndex == connectionIndex ? "Human" : "Bot";
+    return pilotIndex == connectionIndex ? "Human" : "Server";
 }
 
 template<typename T>
@@ -57,13 +76,16 @@ void CMeleeServer::SendClientArgs() {
 
     if(gravConnection->GetIndex() >=
        mGravOptions.GetClientOptions().GetNbPilots()) {
-        cerr << "Pilot index out of range: " << gravConnection->GetIndex() << endl;
+        cerr << "Connection index (" << gravConnection->GetIndex() <<
+            ") larger than #pilots (" << mGravOptions.GetClientOptions().GetNbPilots()
+             << ")" << endl;
         assert(false);
     }
 
     stringstream clientArgs;
     writeValue(clientArgs, "Start");
-    writeValue(clientArgs, gravConnection->GetIndex());
+    const auto clientIndex = GetPilotIndex(gravConnection->GetIndex());
+    writeValue(clientArgs, clientIndex);
     writeValue(clientArgs, mGravOptions.GetMeleeOptions().GetLevelNb());
     writeValue(clientArgs, mGravOptions.GetClientOptions().GetNbPilots());
     const auto& allPilotOpts = mGravOptions.GetClientOptions().GetAllPilotOptions();
@@ -71,8 +93,7 @@ void CMeleeServer::SendClientArgs() {
     int i = 0;
     for(const auto& pilotOpts: allPilotOpts) {
         writeValue(clientArgs, pilotOpts.GetName());
-        const auto type = getRealPilotType(pilotOpts.GetType(), i,
-                                           gravConnection->GetIndex());
+        const auto type = getRealPilotType(pilotOpts.GetType(), i, clientIndex);
         writeValue(clientArgs, type);
         writeValue(clientArgs, pilotOpts.GetTeam().GetName());
         const auto ships = pilotOpts.GetShipNames();
@@ -83,6 +104,16 @@ void CMeleeServer::SendClientArgs() {
     }
     cout << "Server -> Client: " << clientArgs.str() << endl;
     gravConnection->SendTcpBytes(clientArgs.str());
+}
+
+unsigned CMeleeServer::GetPilotIndex(unsigned connectionIndex) const {
+    unsigned numHumans = 0;
+    for(unsigned i = 0; i < mPilotTypes.size(); ++i) {
+        if(numHumans == connectionIndex) return i;
+        if(mPilotTypes[i] == "Human") ++numHumans;
+    }
+    assert(false);
+    return 0;
 }
 
 void CMeleeServer::End() {

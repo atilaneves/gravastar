@@ -17,9 +17,11 @@ public:
     void SendFrame(const std::vector<unsigned char>& frameBytes);
     virtual void Handle(const CTcpConnection::Pointer& tcpConnection) override;
     void End();
+    std::string GetPilotType(const std::string& type, unsigned pilotIndex) const;
 
 private:
 
+    std::vector<std::string> mPilotTypes;
     const CGravOptions& mGravOptions;
     boost::asio::io_service mTcpIoService;
     CTcpServer mTcpServer;
@@ -27,6 +29,7 @@ private:
     std::vector<std::unique_ptr<CGravConnection>> mConnections;
 
     void SendClientArgs();
+    unsigned GetPilotIndex(unsigned connectionIndex) const;
 };
 
 

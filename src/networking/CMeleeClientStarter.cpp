@@ -23,7 +23,6 @@ void CMeleeClientStarter::Start(std::deque<std::string> options,
     sound.PlayCentre();
 
     const unsigned pilotIndex = std::stoi(nextOption(options));
-    cout << "pilotIndex is " << pilotIndex;
     CGravUpdateServer updateServer{mServerUdpPort, pilotIndex};
     std::thread updateThread{[&](){ updateServer.Run(); }};
 
@@ -47,7 +46,6 @@ CGravOptions CMeleeClientStarter::GetGravOptions(std::deque<std::string>& option
     const auto levelNb    = std::stoi(nextOption(options));
     const auto nbPilots   = std::stoi(nextOption(options));
     const auto nbShips    = std::stoi(nextOption(options));
-    cout << "level " << levelNb << " pilots: " << nbPilots << " ships: " << nbShips << endl;
 
     std::vector<CPilotOptions> allPilotOpts;
     for(int i = 0; i < nbPilots; ++i) {

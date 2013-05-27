@@ -9,7 +9,7 @@ REG_PILOT("Human", CPilotHuman)
 CPilotHuman::CPilotHuman(const CPilotOptions &options,
                          const CShipYard &shipYard,
                          CMeleeScore& meleeScore):
-    CPilot(options, shipYard, meleeScore),
+    CPilot(true /*splitscreen*/, options, shipYard, meleeScore),
     mReleasedStart(true) {
 
 

@@ -14,28 +14,27 @@ class CPilotBot: public CPilot {
 
 public:
 
-  CPilotBot(const CPilotOptions &options, const CShipYard &shipYard,
-            CMeleeScore& meleeScore);
-  virtual ~CPilotBot() { }
+    CPilotBot(const CPilotOptions &options, const CShipYard &shipYard,
+              CMeleeScore& meleeScore);
+    virtual ~CPilotBot() { }
 
-          float GetMinAngle()    const { return mMinAngle; }
-  virtual bool  HasSplitScreen() const { return false; }
-          bool  IsClearLine(const CVector2 &pos);
-  virtual void  NextShip();
+    float GetMinAngle()    const { return mMinAngle; }
+    bool  IsClearLine(const CVector2 &pos);
+    virtual void  NextShip() override;
 
 
 private:
 
-  CTimeCounter mThrust, mNoThrust;
-  float mMinAngle;
-  std::auto_ptr<CActionPicker> mActionPicker;
+    CTimeCounter mThrust, mNoThrust;
+    float mMinAngle;
+    std::unique_ptr<CActionPicker> mActionPicker;
 
-  virtual void CheckControls();
+    virtual void CheckControls() override;
 
-  void PreventStasis(CPilotInputBot& input);
-  void Turn(const CBotAction& action, CPilotInputBot& input);
-  void Thrust(const CBotAction& action, CPilotInputBot& input);
-  void Shoot(CBotAction& action, CPilotInputBot& input);
+    void PreventStasis(CPilotInputBot& input);
+    void Turn(const CBotAction& action, CPilotInputBot& input);
+    void Thrust(const CBotAction& action, CPilotInputBot& input);
+    void Shoot(CBotAction& action, CPilotInputBot& input);
 
 
 };

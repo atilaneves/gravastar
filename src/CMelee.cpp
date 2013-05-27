@@ -32,14 +32,15 @@ CMelee::CMelee(const CGravOptions &options):
     CActionPicker::SetPowerups(&mPowerups);
     mSong.PlayLoop();
 
-    for(const auto& pilotOptions: options.GetClientOptions().GetAllPilotOptions())
-        mPilots.push_back(CreatePilot(pilotOptions));
+    const auto& allPilotOptions = options.GetClientOptions().GetAllPilotOptions();
+    for(unsigned i = 0; i < allPilotOptions.size(); ++i)
+        mPilots.push_back(CreatePilot(allPilotOptions[i], i));
 }
 
 
-CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions) {
+CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions, unsigned pilotIndex) {
     const auto& shipYard = mGravMedia.GetShipYard();
-    const auto& type     = pilotOptions.GetType();
+    const auto& type     = mServer.GetPilotType(pilotOptions.GetType(), pilotIndex);
     return CPilotFactory::Instance().CreateObject(type, pilotOptions,
                                                   shipYard, mMeleeScore);
 }

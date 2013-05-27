@@ -43,7 +43,7 @@ protected:
     int          mWinner;
 
     void     CheckGameOver();
-    CPilot*  CreatePilot(const CPilotOptions&);
+    CPilot*  CreatePilot(const CPilotOptions&, unsigned pilotIndex);
     void     End(float avgFPS);
     Pilots GetActivePilots() const;
     void     Update(float dt);

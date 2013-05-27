@@ -16,7 +16,7 @@ REG_PILOT("Bot", CPilotBot)
 CPilotBot::CPilotBot(const CPilotOptions &options,
                      const CShipYard &shipYard,
                      CMeleeScore& meleeScore):
-    CPilot(options, shipYard, meleeScore),
+    CPilot(false/*split screen*/, options, shipYard, meleeScore),
     mMinAngle(0.1), mActionPicker(new CActionPicker(*this)) {
 
 }

@@ -13,8 +13,6 @@ public:
               CMeleeScore& meleeScore);
   virtual ~CPilotHuman() { }
 
-  virtual bool HasSplitScreen() const { return true; }
-
 
 private:
 
