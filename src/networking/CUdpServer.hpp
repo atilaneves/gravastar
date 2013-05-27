@@ -9,7 +9,7 @@ public:
 
     using Array = std::array<unsigned char, 1024*1024>;
 
-    CUdpServer();
+    CUdpServer(uint16_t port);
     virtual ~CUdpServer() { }
 
     void Run();
@@ -18,11 +18,12 @@ public:
 
 private:
 
+    int mPort;
     boost::asio::io_service mService;
     boost::asio::ip::udp::socket mSocket;
     boost::asio::ip::udp::endpoint mEndpoint;
     Array mRecvBuffer;
-    
+
     void Listen();
     void HandleReceive(const boost::system::error_code& error,
                        std::size_t numBytes);

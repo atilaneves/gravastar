@@ -1,7 +1,10 @@
 #include "CTcpClient.hpp"
+#include "Cerealiser.hpp"
 
+namespace asio = boost::asio;
+using namespace std;
 
-CTcpClient::CTcpClient(const std::string& addr, int port):
+CTcpClient::CTcpClient(const string& addr, int port):
     mSocket(mIoService),
     mServerAddress(address_v4::from_string(addr)),
     mServerPort(port),
@@ -20,27 +23,36 @@ void CTcpClient::BlockingConnect(double seconds) {
     }
 }
 
-bool CTcpClient::ReadForever(const MsgHandler& msgHandler) {
-    for(;;) {
-        std::array<unsigned char, 1024> buf;
+bool CTcpClient::ReadUntil(std::atomic_bool& condition,
+                           const MsgHandler& msgHandler) {
+    while(condition) {
+        array<unsigned char, 1024> buf;
         boost::system::error_code error;
 
-        const auto len = mSocket.read_some(boost::asio::buffer(buf), error);
+        const auto len = mSocket.read_some(asio::buffer(buf), error);
 
-        if(error == boost::asio::error::eof) {
-            std::cout << "Connection closed by server." << std::endl;
+        if(error == asio::error::eof) {
+            cout << "Connection closed by server." << endl;
             return true; // Connection closed cleanly by peer.
         } else if(error) {
-            std::cerr << "Error reading bytes from server" << std::endl;
-            throw boost::system::system_error(error); // Some other error.
+            const auto err = boost::system::system_error(error);
+            cerr << "Error reading bytes from server: " << err.what() << endl;
+            throw err; // Some other error.
         }
 
         msgHandler(buf, len);
-        std::lock_guard<std::mutex> lock{mStopMutex};
+        lock_guard<mutex> lock{mStopMutex};
         if(mStop) {
             break;
         }
     }
 
     return true;
+}
+
+void CTcpClient::Send(const std::vector<unsigned char>& bytes) {
+    cout << "TcpClient sending " << bytes.size() << " bytes to the server: ";
+    for(const auto byte: bytes) cout << static_cast<int>(byte) << ", ";
+    cout << endl;
+    asio::write(mSocket, asio::buffer(bytes));
 }

@@ -10,7 +10,8 @@
 class CGravConnection {
 public:
 
-    CGravConnection(const CTcpConnection::Pointer& tcpConnection);
+    CGravConnection(const CTcpConnection::Pointer& tcpConnection,
+                    int udpPort);
     ~CGravConnection();
 
     void SendUdpBytes(const std::vector<unsigned char>& bytes);

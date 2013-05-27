@@ -4,8 +4,10 @@
 unsigned CGravConnection::sNumConnections = 0;
 
 
-CGravConnection::CGravConnection(const CTcpConnection::Pointer& tcpConnection):
+CGravConnection::CGravConnection(const CTcpConnection::Pointer& tcpConnection,
+                                 int udpPort):
     mTcpConnection(tcpConnection),
+    mUdpClient(udpPort),
     mIndex(++sNumConnections) {
 }
 

@@ -5,6 +5,7 @@
 #include <functional>
 #include <vector>
 #include <mutex>
+#include <atomic>
 #include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
@@ -20,8 +21,9 @@ public:
     CTcpClient(const std::string& addr, int port);
     void BlockingConnect(double seconds=0);
     bool Connect();
-    bool ReadForever(const MsgHandler& msgHandler);
+    bool ReadUntil(std::atomic_bool& condition, const MsgHandler& msgHandler);
     void Stop() { std::lock_guard<std::mutex> lock{mStopMutex}; mStop = true; }
+    void Send(const std::vector<unsigned char>& bytes);
 
 private:
 

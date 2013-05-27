@@ -1,10 +1,12 @@
 #include "CUdpClient.hpp"
 
+
 using boost::asio::ip::udp;
 
-CUdpClient::CUdpClient():
+
+CUdpClient::CUdpClient(int port):
     mAddress{{{0x7f, 0, 0, 1}}} /*local*/,
-    mReceiverEndpoint(mAddress, 12345), /*port*/
+    mReceiverEndpoint(mAddress, port), /*port*/
     mSocket(mService) {
 
     mSocket.open(udp::v4());

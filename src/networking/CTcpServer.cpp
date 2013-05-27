@@ -3,7 +3,7 @@
 #include <boost/bind.hpp>
 
 using boost::asio::ip::tcp;
-
+using namespace std;
 
 
 CTcpServer::CTcpServer(boost::asio::io_service& ioService,
@@ -28,5 +28,7 @@ void CTcpServer::HandleAccept(CTcpConnection::Pointer newConnection,
     if(!error) {
         mTcpObserver.Handle(newConnection);
         StartAccept();
+    } else {
+        cerr << "Error in CTcpServer::HandleAccept" << endl;
     }
 }

@@ -17,7 +17,7 @@ public:
     using Sprites = SClientFrame::Sprites;
     using Pilots = SClientFrame::Pilots;
 
-    CGravUpdateServer(unsigned pilotIndex);
+    CGravUpdateServer(uint16_t serverUdpPort, unsigned pilotIndex);
     Pilots GetPilots() const;
     Sprites GetSprites() const;
 

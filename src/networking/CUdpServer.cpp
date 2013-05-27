@@ -5,11 +5,13 @@
 #include <iostream>
 #include <memory>
 
+
 using boost::asio::ip::udp;
 
 
-CUdpServer::CUdpServer():
-    mSocket(mService, udp::endpoint(udp::v4(), 12345)) {
+CUdpServer::CUdpServer(uint16_t port):
+    mPort(port),
+    mSocket(mService, udp::endpoint(udp::v4(), mPort)) {
     std::cout << "UDP server Listening\n";
     Listen();
 }
@@ -51,4 +53,3 @@ void CUdpServer::HandleSend(const boost::system::error_code& error, std::size_t 
     AfterSend(error, numBytes);
     Listen();
 }
-

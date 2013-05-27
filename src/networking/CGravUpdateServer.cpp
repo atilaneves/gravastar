@@ -6,7 +6,8 @@
 using namespace std;
 
 
-CGravUpdateServer::CGravUpdateServer(unsigned pilotIndex):
+CGravUpdateServer::CGravUpdateServer(uint16_t serverUdpPort, unsigned pilotIndex):
+    CUdpServer(serverUdpPort),
     mPilotIndex(pilotIndex) {
 
 }

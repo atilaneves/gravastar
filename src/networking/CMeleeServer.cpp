@@ -1,6 +1,7 @@
 #include "CMeleeServer.hpp"
 #include "CUdpServer.hpp"
 #include "CGravOptions.hpp"
+#include "network_buffers.hpp"
 #include <iostream>
 #include <string>
 
@@ -26,9 +27,18 @@ void CMeleeServer::SendFrame(const vector<unsigned char>& frameBytes) {
 }
 
 void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
-    mConnections.emplace_back(new CGravConnection{tcpConnection});
-    SendClientArgs();
+    cout << "CMeleeServer handling new tcpConnection" << endl;
+    tcpConnection->ReadBytesAsync(13, //"UdpPort" + space + 5 digits
+        [this, tcpConnection](const CTcpConnection::Array& bytes, size_t numBytes) {
+            const auto tokens = msgBufToDeque(bytes, numBytes);
+            assert(tokens[0] == "UdpPort");
+            const uint16_t udpPort = stoi(tokens[1]);
+            mConnections.emplace_back(new CGravConnection{tcpConnection, udpPort});
+            SendClientArgs();
+        });
+    cout << "CMeleeServer carrying on" << endl;
 }
+
 
 static string getRealPilotType(const string& type,
                                unsigned pilotIndex, unsigned connectionIndex) {

@@ -8,8 +8,10 @@
 using namespace std;
 
 CMeleeClientStarter::CMeleeClientStarter(CRootMenu& rootMenu,
-                                         const CClientMenu& clientMenu):
-    mRootMenu(rootMenu), mClientMenu(clientMenu) {
+                                         const CClientMenu& clientMenu,
+                                         uint16_t serverUdpPort):
+    mRootMenu(rootMenu), mClientMenu(clientMenu),
+    mServerUdpPort(serverUdpPort) {
 
 }
 
@@ -22,7 +24,7 @@ void CMeleeClientStarter::Start(std::deque<std::string> options,
 
     const unsigned pilotIndex = std::stoi(nextOption(options));
     cout << "pilotIndex is " << pilotIndex;
-    CGravUpdateServer updateServer{pilotIndex};
+    CGravUpdateServer updateServer{mServerUdpPort, pilotIndex};
     std::thread updateThread{[&](){ updateServer.Run(); }};
 
     mClientMenu.PrintCentre("Loading...");

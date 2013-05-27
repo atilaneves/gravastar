@@ -8,9 +8,11 @@
 #include "CTcpClient.hpp"
 #include "CMeleeClientStarter.hpp"
 #include "fontsdat.h"
+#include "network_buffers.hpp"
 #include <thread>
 #include <algorithm>
 #include <boost/asio.hpp>
+#include <cstdlib>
 
 
 CClientMenu::CClientMenu(const CSprite *cursorSprite, CGravMenu& gravMenu):
@@ -20,16 +22,6 @@ CClientMenu::CClientMenu(const CSprite *cursorSprite, CGravMenu& gravMenu):
 
 }
 
-static std::deque<std::string> msgBufToVec(const CTcpClient::MsgBuf& buf, size_t len) {
-    std::string bufStr{buf.cbegin(), buf.cbegin() + len};
-    std::cout << "Read " << len << " bytes: " << bufStr << std::endl;
-    std::istringstream stream{bufStr};
-    std::deque<std::string> tokens;
-    std::copy(std::istream_iterator<std::string>(stream),
-              std::istream_iterator<std::string>(),
-              std::back_inserter<std::deque<std::string>>(tokens));
-    return tokens;
-}
 
 std::string nextOption(std::deque<std::string>& strings) {
     auto str = strings.front();
@@ -37,35 +29,44 @@ std::string nextOption(std::deque<std::string>& strings) {
     return str;
 }
 
+static std::vector<unsigned char> portToBytes(uint16_t port) {
+    const auto str = std::string("UdpPort ") + std::to_string(port);
+    std::vector<unsigned char> vec;
+    for(char c: str) vec.push_back(static_cast<unsigned char>(c));
+    return vec;
+}
+
 void CClientMenu::Run(CRootMenu &rootMenu) {
     PrintCentre("Connecting to server...");
     CTcpClient tcpClient("127.0.0.1", 12346);
     tcpClient.BlockingConnect();
 
+    const uint16_t serverUdpPort = rand() % 40000 + 10000;
+    std::cout << "Port is " << serverUdpPort << std::endl;
+    tcpClient.Send(portToBytes(serverUdpPort));
+
     PrintCentre("Waiting for server...");
     std::thread meleeThread;
-    CMeleeClientStarter meleeStarter{rootMenu, *this};
-    auto meleeRunning = true;
-    while(meleeRunning) {
-        tcpClient.ReadForever([&](const CTcpClient::MsgBuf& buf, size_t len) {
-            auto tokens = msgBufToVec(buf, len);
-            const auto command = nextOption(tokens);
+    CMeleeClientStarter meleeStarter{rootMenu, *this, serverUdpPort};
+    std::atomic_bool meleeRunning{true};
+    tcpClient.ReadUntil(meleeRunning, [&](const CTcpClient::MsgBuf& buf, size_t len) {
+        auto tokens = msgBufToDeque(buf, len);
+        const auto command = nextOption(tokens);
 
-            if(command == "Start") {
-                std::cout << "Starting the melee" << std::endl;
-                //tokens gets modified, so no ref capture
-                meleeThread = std::thread([&, tokens] {
+        if(command == "Start") {
+            std::cout << "Starting the melee" << std::endl;
+            //tokens gets modified, so no ref capture
+            meleeThread = std::thread([&, tokens] {
                     meleeStarter.Start(tokens, mVersusMenu.GetClientOptions());
-                });
-            } else if(command == "Stop")  {
-                std::cout << "Stopping the melee" << std::endl;
-                meleeStarter.Stop();
-                meleeRunning = false;
-                meleeThread.join();
-                return; //exits the lambda
-            }
-        });
-    }
+            });
+        } else if(command == "Stop")  {
+            std::cout << "Stopping the melee" << std::endl;
+            meleeStarter.Stop();
+            meleeRunning = false;
+            meleeThread.join();
+            return; //exits the lambda
+        }
+    });
 
     tcpClient.Stop();
 }

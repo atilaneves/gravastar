@@ -14,7 +14,8 @@ class CClientOptions;
 
 class CMeleeClientStarter {
 public:
-    CMeleeClientStarter(CRootMenu& rootMenu, const CClientMenu& menu);
+    CMeleeClientStarter(CRootMenu& rootMenu, const CClientMenu& menu,
+                        uint16_t serverUdpPort);
 
     void Start(std::deque<std::string> options,
                const CClientOptions& vsClientOptions);
@@ -24,6 +25,7 @@ private:
 
     CRootMenu& mRootMenu;
     const CClientMenu& mClientMenu;
+    uint16_t mServerUdpPort;
     std::unique_ptr<CMeleeClient> mMelee;
 
     CGravOptions GetGravOptions(std::deque<std::string>& options,
