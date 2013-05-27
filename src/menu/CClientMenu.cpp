@@ -38,7 +38,6 @@ std::string nextOption(std::deque<std::string>& strings) {
 }
 
 void CClientMenu::Run(CRootMenu &rootMenu) {
-    std::cout << "CClientMenu::Run" << std::endl;
     PrintCentre("Connecting to server...");
     CTcpClient tcpClient("127.0.0.1", 12346);
     tcpClient.BlockingConnect();

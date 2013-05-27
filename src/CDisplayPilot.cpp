@@ -9,5 +9,4 @@ void CDisplayPilot::cerealise(Cereal& cereal) {
     cereal.grain(mVelocity.y);
     cereal.grain(mTeam);
     cereal.grain(mIsAlive);
-    cereal.grain(mHasSplitScreen);
 }

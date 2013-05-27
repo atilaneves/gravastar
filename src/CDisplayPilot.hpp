@@ -10,7 +10,7 @@ class Cereal;
 
 class CDisplayPilot {
 
-    friend class CFrameCereal; //to serialise
+    friend class SClientFrame;
 
 public:
 

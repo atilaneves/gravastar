@@ -1,8 +1,16 @@
 #include "CGravConnection.hpp"
 
 
+unsigned CGravConnection::sNumConnections = 0;
+
+
 CGravConnection::CGravConnection(const CTcpConnection::Pointer& tcpConnection):
-    mTcpConnection(tcpConnection) {
+    mTcpConnection(tcpConnection),
+    mIndex(++sNumConnections) {
+}
+
+CGravConnection::~CGravConnection() {
+    --sNumConnections;
 }
 
 void CGravConnection::SendUdpBytes(const std::vector<unsigned char>& bytes) {

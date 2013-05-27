@@ -4,7 +4,8 @@
 #include "CSound.hpp"
 #include "CClientMenu.hpp"
 #include <thread>
-
+#include <iostream>
+using namespace std;
 
 CMeleeClientStarter::CMeleeClientStarter(CRootMenu& rootMenu,
                                          const CClientMenu& clientMenu):
@@ -13,13 +14,15 @@ CMeleeClientStarter::CMeleeClientStarter(CRootMenu& rootMenu,
 }
 
 
-void CMeleeClientStarter::Start(const std::deque<std::string>& options,
+void CMeleeClientStarter::Start(std::deque<std::string> options,
                                 const CClientOptions& vsClientOptions) {
     mRootMenu.StopSong();
     CSound sound("meleeStart");
     sound.PlayCentre();
 
-    CGravUpdateServer updateServer;
+    const unsigned pilotIndex = std::stoi(nextOption(options));
+    cout << "pilotIndex is " << pilotIndex;
+    CGravUpdateServer updateServer{pilotIndex};
     std::thread updateThread{[&](){ updateServer.Run(); }};
 
     mClientMenu.PrintCentre("Loading...");
@@ -37,11 +40,12 @@ void CMeleeClientStarter::Stop() {
     mMelee->Stop();
 }
 
-CGravOptions CMeleeClientStarter::GetGravOptions(std::deque<std::string> options,
+CGravOptions CMeleeClientStarter::GetGravOptions(std::deque<std::string>& options,
                                                  const CClientOptions& vsClientOptions) const {
-    const auto levelNb  = std::stoi(nextOption(options));
-    const auto nbPilots = std::stoi(nextOption(options));
-    const auto nbShips  = std::stoi(nextOption(options));
+    const auto levelNb    = std::stoi(nextOption(options));
+    const auto nbPilots   = std::stoi(nextOption(options));
+    const auto nbShips    = std::stoi(nextOption(options));
+    cout << "level " << levelNb << " pilots: " << nbPilots << " ships: " << nbShips << endl;
 
     std::vector<CPilotOptions> allPilotOpts;
     for(int i = 0; i < nbPilots; ++i) {

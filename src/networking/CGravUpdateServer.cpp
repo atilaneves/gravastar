@@ -1,8 +1,13 @@
 #include "CGravUpdateServer.hpp"
 #include "Decerealiser.hpp"
+#include <iostream>
 
 
-CGravUpdateServer::CGravUpdateServer() {
+using namespace std;
+
+
+CGravUpdateServer::CGravUpdateServer(unsigned pilotIndex):
+    mPilotIndex(pilotIndex) {
 
 }
 
@@ -20,16 +25,19 @@ auto CGravUpdateServer::GetPilots() const -> Pilots {
 void CGravUpdateServer::AfterReceive(const boost::system::error_code& error,
                                      std::size_t numBytes, const Array& bytes) {
     if(error && error != boost::asio::error::message_size) {
+        cerr << "Error in GravUpdateServer::AfterReceive" << endl;
         return;
     }
 
-
     Decerealiser cereal(bytes);
-    {
-        std::lock_guard<std::mutex> lock{mFrameMutex};
-        mFrame = std::move(SClientFrame{});
-        cereal >> mFrame;
-    }
+    UpdateFrame(cereal);
+}
+
+void CGravUpdateServer::UpdateFrame(Decerealiser& cereal) {
+    std::lock_guard<std::mutex> lock{mFrameMutex};
+    mFrame = std::move(SClientFrame{}); //reset
+    cereal >> mFrame;
+    mFrame.SetPilot(mPilotIndex);
 }
 
 void CGravUpdateServer::AfterSend(const boost::system::error_code& error,

@@ -25,6 +25,8 @@ private:
     CTcpServer mTcpServer;
     std::thread mTcpThread;
     std::vector<std::unique_ptr<CGravConnection>> mConnections;
+
+    void SendClientArgs();
 };
 
 

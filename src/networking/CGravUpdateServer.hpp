@@ -1,6 +1,7 @@
 #ifndef CGRAV_UPDATE_SERVER_HPP_
 #define CGRAV_UPDATE_SERVER_HPP_
 
+class Decerealiser;
 #include "CUdpServer.hpp"
 #include "SClientFrame.hpp"
 #include <vector>
@@ -16,12 +17,13 @@ public:
     using Sprites = SClientFrame::Sprites;
     using Pilots = SClientFrame::Pilots;
 
-    CGravUpdateServer();
+    CGravUpdateServer(unsigned pilotIndex);
     Pilots GetPilots() const;
     Sprites GetSprites() const;
 
 private:
 
+    unsigned mPilotIndex;
     SClientFrame mFrame;
     mutable std::mutex mFrameMutex;
 
@@ -29,6 +31,7 @@ private:
                               std::size_t numBytes, const Array& bytes) override;
     virtual void AfterSend(const boost::system::error_code& error,
                            std::size_t numBytes) override;
+    void UpdateFrame(Decerealiser& cereal);
 };
 
 
