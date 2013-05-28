@@ -10,7 +10,7 @@ REG_MELEE2("Squad",   CMeleeSurvival)
 
 
 CMeleeSurvival::CMeleeSurvival(const CGravOptions &options):
-  CMelee(options) {
+  CMeleeOnServer(options) {
 }
 
 

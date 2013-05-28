@@ -34,3 +34,10 @@ void CMeleeClient::Run() {
         if(mIsGameOver) break;
     }
 }
+
+void CMeleeClient::Stop(int winner) {
+    mIsGameOver = true;
+    //mWinner = winner;
+    // const float avgFPS = 0;
+    // CMelee::End(avgFPS);
+}

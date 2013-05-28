@@ -11,7 +11,7 @@ REG_MELEE("Frag Limit", CMeleeFragNb)
 
 
 CMeleeFragNb::CMeleeFragNb(const CGravOptions &options):
-  CMelee(options),
+  CMeleeOnServer(options),
   mWinner(-1) {
 
   mSounds["Blue"]   = new CSound("nearly0");

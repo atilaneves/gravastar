@@ -2,10 +2,10 @@
 #define CMELEESURVIVAL_H
 
 
-#include "CMelee.hpp"
+#include "CMeleeOnServer.hpp"
 
 
-class CMeleeSurvival:public CMelee {
+class CMeleeSurvival:public CMeleeOnServer {
 
 public:
 

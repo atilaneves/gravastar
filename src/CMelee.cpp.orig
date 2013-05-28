@@ -3,9 +3,9 @@
 #include "CKeyboard.hpp"
 #include "CGravOptions.hpp"
 #include "CGravScreen.hpp"
+#include "CPilot.hpp"
 #include "CPilots.hpp"
 #include "CPilotInputBot.hpp"
-#include "CPilotFactory.hpp"
 #include "CMenuInputKey.hpp"
 #include "CStats.hpp"
 
@@ -31,7 +31,7 @@ CMelee::CMelee(const CGravOptions &options,
 
 
 void CMelee::End(float avgFPS) {
-    if(mServer) mServer->End();
+    if(mServer) mServer->End(mWinner);
     CKeyboard::Clear();
     if(mWinner >= 0) {
         CStats::AddWin(mWinner);

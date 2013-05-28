@@ -2,12 +2,12 @@
 #define CMELEEFRAGNB_H
 
 
-#include "CMelee.hpp"
+#include "CMeleeOnServer.hpp"
 #include <map>
 class CSound;
 
 
-class CMeleeFragNb:public CMelee {
+class CMeleeFragNb:public CMeleeOnServer {
 
 public:
 

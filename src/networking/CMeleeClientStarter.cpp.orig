@@ -38,8 +38,8 @@ void CMeleeClientStarter::Start(std::deque<std::string> options,
     mRootMenu.PlaySong();
 }
 
-void CMeleeClientStarter::Stop() {
-    mMelee->Stop();
+void CMeleeClientStarter::Stop(int winner) {
+    mMelee->Stop(winner);
 }
 
 CGravOptions CMeleeClientStarter::GetGravOptions(std::deque<std::string>& options,

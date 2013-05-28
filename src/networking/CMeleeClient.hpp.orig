@@ -17,8 +17,7 @@ public:
                  const CGravUpdateServer& updateServer);
 
     virtual void Run() override;
-    void Stop() { mIsGameOver = true; }
-    void SetWinner(int winner) { mWinner = winner; }
+    void Stop(int winner);
 
 private:
 

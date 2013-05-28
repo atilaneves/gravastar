@@ -11,7 +11,7 @@ REG_MELEE("Time Limit", CMeleeFragTime)
 
 
 CMeleeFragTime::CMeleeFragTime(const CGravOptions &options):
-  CMelee(options),
+  CMeleeOnServer(options),
   mPlayedWarning30(false), mPlayedWarning10(false),
   mWarning30("30seconds"), mWarning10("10seconds") {
 

@@ -2,12 +2,12 @@
 #define CMELEEFRAGTIME_H
 
 
-#include "CMelee.hpp"
+#include "CMeleeOnServer.hpp"
 #include "CTimeCounter.hpp"
 class CSound;
 
 
-class CMeleeFragTime:public CMelee {
+class CMeleeFragTime:public CMeleeOnServer {
 
 public:
 

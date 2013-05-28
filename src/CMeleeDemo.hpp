@@ -2,11 +2,10 @@
 #define CMELEEDEMO_H
 
 
-#include "CMelee.hpp"
-class CSound;
+#include "CMeleeOnServer.hpp"
 
 
-class CMeleeDemo:public CMelee {
+class CMeleeDemo:public CMeleeOnServer {
 
 public:
 
