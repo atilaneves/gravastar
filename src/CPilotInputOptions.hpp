@@ -20,13 +20,13 @@ public:
                      int index);
 
   const std::string& Type()    const { return mType;   }
-  int                        Left()    const { return mLeft;   }
-  int                        Right()   const { return mRight;  }
-  int                        Thrust()  const { return mThrust; }
-  int                        Weapon()  const { return mWeapon; }
-  int                        Special() const { return mSpecial; }
-  int                        Super()   const { return mSuper; }
-  int                        Start()   const { return mStart; }
+  int                Left()    const { return mLeft;   }
+  int                Right()   const { return mRight;  }
+  int                Thrust()  const { return mThrust; }
+  int                Weapon()  const { return mWeapon; }
+  int                Special() const { return mSpecial; }
+  int                Super()   const { return mSuper; }
+  int                Start()   const { return mStart; }
   int                GetControl(const std::string& which) const;
   int                GetIndex() const { return mIndex; }
 

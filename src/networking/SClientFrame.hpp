@@ -7,6 +7,7 @@
 #include <vector>
 #include <stdint.h>
 #include <cassert>
+#include <iostream>
 
 struct SClientFrame {
     using Pilots = std::vector<CDisplayPilot>;
@@ -20,7 +21,6 @@ struct SClientFrame {
         cereal.grain<uint16_t>(sprites);
     }
     void SetPilot(unsigned index) {
-        assert(pilots.size() > index || pilots.size() == 0);
         for(unsigned i = 0; i < pilots.size(); ++i) {
             pilots[i].mHasSplitScreen = i == index;
         }

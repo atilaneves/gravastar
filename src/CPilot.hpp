@@ -65,9 +65,9 @@ private:
 protected:
 
     std::unique_ptr<CPilotInput> mInput;
-    const CPilotOptions& mOptions;
-    const CShipYard&     mShipYard;
-    CMeleeScore&         mMeleeScore;
+    const CPilotOptions mOptions;
+    const CShipYard&    mShipYard;
+    CMeleeScore&        mMeleeScore;
 
     bool IsSurvival() const;
 

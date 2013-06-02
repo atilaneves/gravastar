@@ -60,8 +60,9 @@ void CClientMenu::Run(CRootMenu &rootMenu) {
                     meleeStarter.Start(tokens, mVersusMenu.GetClientOptions());
             });
         } else if(command == "Stop")  {
-            std::cout << "Stopping the melee" << std::endl;
-            meleeStarter.Stop();
+            const auto winner = std::stoi(nextOption(tokens));
+            std::cout << "Stopping the melee. Winner: " << winner << std::endl;
+            meleeStarter.Stop(winner);
             meleeRunning = false;
             meleeThread.join();
             return; //exits the lambda

@@ -10,7 +10,6 @@
 
 int CPilot::sIndex = 0;
 
-
 CPilot::CPilot(bool hasSplitScreen,
                const CPilotOptions &options, const CShipYard &shipYard,
                CMeleeScore &meleeScore):
@@ -24,7 +23,6 @@ CPilot::CPilot(bool hasSplitScreen,
 
     NextShip();
     CPilots::AddPilot(this);
-
 }
 
 

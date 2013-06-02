@@ -26,7 +26,7 @@ public:
     using Pilots = std::vector<CPilot*>;
 
     CMelee(const CGravOptions &options, CMeleeServer* server);
-    virtual ~CMelee() { }
+    virtual ~CMelee();
 
     virtual void Run() = 0;
 
@@ -35,6 +35,7 @@ private:
 
     virtual int  GetWinner()  = 0;
     virtual bool IsGameOver() = 0;
+    CPilot* CreatePilot(const CPilotOptions&, unsigned pilotIndex);
 
 protected:
 
@@ -46,6 +47,7 @@ protected:
     CMeleeScore  mMeleeScore;
     CTimeCounter mEndCounter;
     std::atomic_int mWinner;
+    Pilots mPilots;
 
     void     CheckGameOver();
     void     End(float avgFPS);

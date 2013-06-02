@@ -19,7 +19,7 @@ public:
 
     void Start(std::deque<std::string> options,
                const CClientOptions& vsClientOptions);
-    void Stop();
+    void Stop(int winner);
 
 private:
 

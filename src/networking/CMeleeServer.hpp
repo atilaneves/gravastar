@@ -16,7 +16,7 @@ public:
     ~CMeleeServer();
     void SendFrame(const std::vector<unsigned char>& frameBytes);
     virtual void Handle(const CTcpConnection::Pointer& tcpConnection) override;
-    void End();
+    void End(int winner);
     std::string GetPilotType(const std::string& type, unsigned pilotIndex) const;
 
 private:

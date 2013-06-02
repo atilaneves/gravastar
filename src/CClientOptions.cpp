@@ -8,16 +8,21 @@ CClientOptions::CClientOptions(const AllPilotOptions& options,
                                int musicVol, bool smart):
     mPilots(options), mWindowed(ww), mScreenWidth(w), mScreenHeight(h),
     mSoundVolume(soundVol), mMusicVolume(musicVol),
-    mSmartSplit(smart) { 
+    mSmartSplit(smart) {
 
 }
 
-CClientOptions::CClientOptions(const AllPilotOptions& allPilotOptions,
+CClientOptions::CClientOptions(const AllPilotOptions& options,
                                const CClientOptions& other):
-    CClientOptions(allPilotOptions, other.mWindowed,
+    CClientOptions(options, other.mWindowed,
                    other.mScreenWidth, other.mScreenHeight,
                    other.mSoundVolume, other.mMusicVolume,
                    other.mSmartSplit) {
+
+    //take input from passed-in options
+    for(unsigned i = 0; i < options.size(); ++i) {
+        mPilots[i].SetInputOptions(other.mPilots[i].GetInputOptions());
+    }
 }
 
 
@@ -115,7 +120,7 @@ void CClientOptions::Save() const {
             fprintf(fp,"%s    ", mPilots[i].GetInputOptions().Type().c_str());
             std::string names[] = {"Left", "Right", "Thrust", "Weapon", "Special",
                                    "Super", "Start"};
-            for(int b = 0; b < kNbButtons; b++) 
+            for(int b = 0; b < kNbButtons; b++)
                 fprintf(fp,"%d  ", mPilots[i].GetInputOptions().GetControl(names[b]));
             fprintf(fp,"\n"); //player separator
         }

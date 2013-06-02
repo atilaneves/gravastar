@@ -2,21 +2,21 @@
 #include "CPilotInputOptions.hpp"
 #include "CPilotInputKey.hpp"
 #include "CPilotInputJoy.hpp"
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
 
 
-CPilotInput* CPilotInputFactory::CreateInput(const CPilotInputOptions&
-					     options) {
+CPilotInput* CPilotInputFactory::CreateInput(const CPilotInputOptions& options) {
 
-  if(options.Type() == "Keyboard")
-    return new CPilotInputKey(options);
-  else if(options.Type() == "Joystick") {
-    return new CPilotInputJoy(options);
-  }
-  else {
-    fprintf(stderr, "Unknown input type %s\n", options.Type().c_str());
-    exit(1);
-  }
+    if(options.Type() == "Keyboard")
+        return new CPilotInputKey(options);
+    else if(options.Type() == "Joystick") {
+        return new CPilotInputJoy(options);
+    } else {
+        cerr << "Unknown input type: " << options.Type() << endl;
+        exit(1);
+    }
 
 }

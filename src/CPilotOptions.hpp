@@ -21,6 +21,7 @@ public:
                 const shipTypes_t &ships,
                 const CPilotInputOptions &inputOptions);
 
+   void SetInputOptions(const CPilotInputOptions& io) { mInputOptions = io; }
   const CPilotInputOptions& GetInputOptions() const { return mInputOptions; }
   const std::string& GetName()                const { return mName;         }
   const unsigned int GetNbShips()             const { return mShips.size(); }

@@ -55,13 +55,12 @@ void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
             mConnections.emplace_back(new CGravConnection{tcpConnection, udpPort});
             SendClientArgs();
         });
-    cout << "CMeleeServer carrying on" << endl;
 }
 
 
 static string getRealPilotType(const string& type,
                                unsigned pilotIndex, unsigned connectionIndex) {
-    return pilotIndex == connectionIndex ? "Human" : "Server";
+    return pilotIndex == connectionIndex ? "Client" : "Server";
 }
 
 template<typename T>
@@ -116,9 +115,11 @@ unsigned CMeleeServer::GetPilotIndex(unsigned connectionIndex) const {
     return 0;
 }
 
-void CMeleeServer::End() {
+void CMeleeServer::End(int winner) {
     for(auto& connection: mConnections) {
-        stringstream clientArgs{"Stop "};
+        stringstream clientArgs;
+        writeValue(clientArgs, "Stop");
+        writeValue(clientArgs, winner);
         connection->SendTcpBytes(clientArgs.str());
     }
 }

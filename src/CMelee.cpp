@@ -8,6 +8,11 @@
 #include "CPilotFactory.hpp"
 #include "CMenuInputKey.hpp"
 #include "CStats.hpp"
+#include "CPilots.hpp"
+#include "CProjectiles.hpp"
+#include "CPilotFactory.hpp"
+#include "CSpriteObjs.hpp"
+#include "CShips.hpp"
 
 
 CMelee::CMelee(const CGravOptions &options,
@@ -26,12 +31,33 @@ CMelee::CMelee(const CGravOptions &options,
 
     CKeyboard::Clear();
     mSong.PlayLoop();
+
+    const auto& allPilotOptions = options.GetClientOptions().GetAllPilotOptions();
+    for(unsigned i = 0; i < allPilotOptions.size(); ++i)
+        mPilots.push_back(CreatePilot(allPilotOptions[i], i));
+}
+
+CMelee::~CMelee() {
+    mSong.Stop();
+    for(unsigned int p = 0; p < mPilots.size(); p++) mPilots[p]->GameOver();
+    CSpriteObjs::DeleteAll();
+    CShips::RemoveAll();
+    CProjectiles::RemoveAll();
+    CPilot::ResetIndex();
+    CPilots::RemoveAll();
+    for(unsigned int p = 0; p < mPilots.size(); p++) delete mPilots[p];
+}
+
+CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions, unsigned pilotIndex) {
+    const auto& shipYard = mGravMedia.GetShipYard();
+    const auto& type     = mServer->GetPilotType(pilotOptions.GetType(), pilotIndex);
+    return CPilotFactory::Instance().CreateObject(type, pilotOptions,
+                                                  shipYard, mMeleeScore);
 }
 
 
-
 void CMelee::End(float avgFPS) {
-    if(mServer) mServer->End();
+    if(mServer) mServer->End(mWinner);
     CKeyboard::Clear();
     if(mWinner >= 0) {
         CStats::AddWin(mWinner);

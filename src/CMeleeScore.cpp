@@ -60,7 +60,7 @@ void CMeleeScore::Draw(int winner, const std::string& title,
 
 std::vector<CPilotScore> CMeleeScore::GetScores() const {
     std::vector<CPilotScore> scores;
-    for(int p=0; p<CPilots::GetNbPilots(); p++) scores.push_back(CPilotScore(p));
+    for(int p = 0; p < CPilots::GetNbPilots(); p++) scores.emplace_back(p);
     std::stable_sort(scores.begin(), scores.end(),
                      [](const CPilotScore &ps1, const CPilotScore &ps2) {
                          return ps1 > ps2;

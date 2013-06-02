@@ -7,9 +7,7 @@ CMeleeClient::CMeleeClient(const CGravOptions& options,
                            const CGravUpdateServer& updateServer):
     CMelee(options, nullptr), /*nullptr: no server*/
     mUpdateServer(updateServer),
-    mIsGameOver(),
-    mWinner(-1)
-{
+    mIsGameOver() {
 
 }
 
@@ -33,4 +31,11 @@ void CMeleeClient::Run() {
         mGravScreen.Draw(mUpdateServer.GetPilots());
         if(mIsGameOver) break;
     }
+    const auto avgFPS = 0.0f;
+    End(avgFPS);
+}
+
+void CMeleeClient::Stop(int winner) {
+    mIsGameOver = true;
+    mWinner = winner;
 }
