@@ -44,6 +44,7 @@ public:
             bool IsAlive() const;
     virtual void NextShip();
     static  void ResetIndex() { sIndex = 0; }
+            void SetScore(int s) { mNbShips = mNbFrags = s; }
    CDisplayPilot MakeDisplayPilot();
 
 

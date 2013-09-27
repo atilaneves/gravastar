@@ -40,12 +40,12 @@ CMeleeScore::~CMeleeScore() {
 void CMeleeScore::Draw(int winner, const std::string& title,
                        const CPilotInput &input) {
 
-    std::vector<CPilotScore> scores = GetScores();
-    int x = CResolution::GetWidth()  / 2 - CResolution::GetWidth() / 6;
-    int y = CResolution::GetHeight() / 2 - CResolution::GetHeight() / 12;
+    const auto scores = GetScores();
+    const int x = CResolution::GetWidth()  / 2 - CResolution::GetWidth() / 6;
+    const int y = CResolution::GetHeight() / 2 - CResolution::GetHeight() / 12;
     const CTeam &team = winner >=0 ? CPilots::GetPilot(winner).GetTeam() :
         CTeam::sWhite;
-    int colour = team.GetMainColour();
+    const int colour = team.GetMainColour();
     DrawGeometry(x, y, colour);
 
     for(unsigned int p = 0; p < scores.size(); p++)
@@ -61,10 +61,7 @@ void CMeleeScore::Draw(int winner, const std::string& title,
 std::vector<CPilotScore> CMeleeScore::GetScores() const {
     std::vector<CPilotScore> scores;
     for(int p = 0; p < CPilots::GetNbPilots(); p++) scores.emplace_back(p);
-    std::stable_sort(scores.begin(), scores.end(),
-                     [](const CPilotScore &ps1, const CPilotScore &ps2) {
-                         return ps1 > ps2;
-                     });
+    std::stable_sort(scores.begin(), scores.end(), std::greater<CPilotScore>());
     return scores;
 }
 

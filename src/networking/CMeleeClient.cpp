@@ -1,6 +1,10 @@
 #include "CMeleeClient.hpp"
 #include "CGravOptions.hpp"
 #include "CGravUpdateServer.hpp"
+#include "CPilot.hpp"
+#include <iostream>
+
+using namespace std;
 
 
 CMeleeClient::CMeleeClient(const CGravOptions& options,
@@ -28,7 +32,12 @@ void CMeleeClient::Run() {
                           levelSprite.GetX(), levelSprite.GetY());
         }
         oldSprites = newSprites;
-        mGravScreen.Draw(mUpdateServer.GetPilots());
+        const auto pilots = mUpdateServer.GetPilots();
+        assert(pilots.size() <= mPilots.size()); //server pilots could have died
+        for(size_t i = 0; i < pilots.size(); ++i)
+            mPilots[i]->SetScore(pilots[i].GetScore());
+
+        mGravScreen.Draw(pilots);
         if(mIsGameOver) break;
     }
     const auto avgFPS = 0.0f;

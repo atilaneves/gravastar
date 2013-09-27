@@ -54,7 +54,7 @@ void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
             const uint16_t udpPort = stoi(tokens[1]);
             mConnections.emplace_back(new CGravConnection{tcpConnection, udpPort});
             SendClientArgs();
-        });
+    });
 }
 
 

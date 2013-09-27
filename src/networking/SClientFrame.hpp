@@ -10,8 +10,9 @@
 #include <iostream>
 
 struct SClientFrame {
-    using Pilots = std::vector<CDisplayPilot>;
+    using Pilots  = std::vector<CDisplayPilot>;
     using Sprites = std::vector<CLevelSprite>;
+
     uint32_t milliseconds;
     Pilots pilots;
     Sprites sprites;
@@ -22,7 +23,7 @@ struct SClientFrame {
     }
     void SetPilot(unsigned index) {
         for(unsigned i = 0; i < pilots.size(); ++i) {
-            pilots[i].mHasSplitScreen = i == index;
+            pilots[i].mHasSplitScreen = (i == index);
         }
     }
 };

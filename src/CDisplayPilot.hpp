@@ -14,12 +14,11 @@ class CDisplayPilot {
 
 public:
 
-    CDisplayPilot():mStats(*static_cast<CPilotStats*>(nullptr)) { }
-    CDisplayPilot(const CScreenPos& pos, const CVector2& vel, const CTeam& team,
-                  CPilotStats& stats, bool isAlive, bool hasSplitScreen):
-        mPosition(pos.GetX(), pos.GetY()), mVelocity(vel.GetX(), vel.GetY()),
-        mTeam(team.GetHash()), mStats(stats), mIsAlive(isAlive), mHasSplitScreen(hasSplitScreen) {
-    }
+    CDisplayPilot();
+    CDisplayPilot(uint8_t index, const CScreenPos& pos, const CVector2& vel,
+                  const CTeam& team,
+                  uint8_t score, CPilotStats& stats, bool isAlive,
+                  bool hasSplitScreen);
 
     CScreenPos GetPosition() const { return { mPosition.x, mPosition.y }; }
     CVector2 GetVelocity() const {
@@ -27,6 +26,7 @@ public:
     }
     const CTeam& GetTeam() const {return CTeam::FromHash(mTeam); }
     CPilotStats& GetStats() { return mStats; }
+    uint8_t GetScore() const { return mScore; }
     bool IsAlive() const { return mIsAlive; }
     bool HasSplitScreen() const { return mHasSplitScreen; }
     void cerealise(Cereal& cereal);
@@ -39,13 +39,14 @@ private:
         T x, y;
     };
 
+    uint8_t mIndex;
     Vector<uint16_t> mPosition;
     Vector<int16_t> mVelocity;
     uint8_t mTeam;
+    uint8_t mScore;
     CPilotStats& mStats;
     bool mIsAlive;
     bool mHasSplitScreen;
-
 };
 
 

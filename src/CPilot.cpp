@@ -85,7 +85,9 @@ const CShipStatSprite& CPilot::GetShipStatSprite(int index) const {
 
 
 CDisplayPilot CPilot::MakeDisplayPilot() {
-    return { GetShip().GetPos(), GetShip().GetVel(),
-            mOptions.GetTeam(), mStats,
+    return { static_cast<uint8_t>(mIndex),
+            GetShip().GetPos(), GetShip().GetVel(),
+            mOptions.GetTeam(), static_cast<uint8_t>(GetScore()),
+            mStats,
             GetShip().IsAlive(), HasSplitScreen()};
 }
