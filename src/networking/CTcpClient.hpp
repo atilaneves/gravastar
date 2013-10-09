@@ -4,7 +4,6 @@
 #include <string>
 #include <functional>
 #include <vector>
-#include <mutex>
 #include <atomic>
 #include <boost/asio.hpp>
 
@@ -22,13 +21,12 @@ public:
     void BlockingConnect(double seconds=0);
     bool Connect();
     bool ReadUntil(std::atomic_bool& condition, const MsgHandler& msgHandler);
-    void Stop() { std::lock_guard<std::mutex> lock{mStopMutex}; mStop = true; }
+    void Stop() { mStop = true; }
     void Send(const std::vector<unsigned char>& bytes);
 
 private:
 
-    mutable std::mutex mStopMutex;
-    bool mStop;
+    std::atomic_bool mStop;
     boost::asio::io_service mIoService;
     tcp::socket mSocket;
     const address_v4 mServerAddress;

@@ -5,6 +5,7 @@ namespace asio = boost::asio;
 using namespace std;
 
 CTcpClient::CTcpClient(const string& addr, int port):
+    mStop(false),
     mSocket(mIoService),
     mServerAddress(address_v4::from_string(addr)),
     mServerPort(port),
@@ -36,13 +37,12 @@ bool CTcpClient::ReadUntil(std::atomic_bool& condition,
             return true; // Connection closed cleanly by peer.
         } else if(error) {
             const auto err = boost::system::system_error(error);
-            cerr << "Error reading bytes from server: " << err.what() << endl;
             throw err; // Some other error.
         }
 
         msgHandler(buf, len);
-        lock_guard<mutex> lock{mStopMutex};
         if(mStop) {
+            cout << "Stopping CTcpClient" << endl;
             break;
         }
     }

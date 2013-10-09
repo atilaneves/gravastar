@@ -2,16 +2,19 @@
 #include "CRootMenu.hpp"
 #include "CMeleeClient.hpp"
 #include "CSound.hpp"
-#include "CClientMenu.hpp"
 #include "CGravUpdateServer.hpp"
+#include "stl_utils.hpp"
+#include "output.hpp"
 #include <thread>
 #include <iostream>
+
+
 using namespace std;
 
+
 CMeleeClientStarter::CMeleeClientStarter(CRootMenu& rootMenu,
-                                         const CClientMenu& clientMenu,
                                          uint16_t serverUdpPort):
-    mRootMenu(rootMenu), mClientMenu(clientMenu),
+    mRootMenu(rootMenu),
     mServerUdpPort(serverUdpPort) {
 
 }
@@ -23,11 +26,11 @@ void CMeleeClientStarter::Start(std::deque<std::string> options,
     CSound sound("meleeStart");
     sound.PlayCentre();
 
-    const unsigned pilotIndex = std::stoi(nextOption(options));
+    const unsigned pilotIndex = std::stoi(popFront(options));
     CGravUpdateServer updateServer{mServerUdpPort, pilotIndex};
     std::thread updateThread{[&](){ updateServer.Run(); }};
 
-    mClientMenu.PrintCentre("Loading...");
+    printCentre("Loading...");
     mMelee.reset(new CMeleeClient{GetGravOptions(options, vsClientOptions),
                                   updateServer});
     mMelee->Run();
@@ -44,18 +47,18 @@ void CMeleeClientStarter::Stop(int winner) {
 
 CGravOptions CMeleeClientStarter::GetGravOptions(std::deque<std::string>& options,
                                                  const CClientOptions& vsClientOptions) const {
-    const auto levelNb    = std::stoi(nextOption(options));
-    const auto nbPilots   = std::stoi(nextOption(options));
-    const auto nbShips    = std::stoi(nextOption(options));
+    const auto levelNb  = std::stoi(popFront(options));
+    const auto nbPilots = std::stoi(popFront(options));
+    const auto nbShips  = std::stoi(popFront(options));
 
     std::vector<CPilotOptions> allPilotOpts;
     for(int i = 0; i < nbPilots; ++i) {
-        const auto name = nextOption(options);
-        const auto type = nextOption(options);
-        const auto& team = CTeam::FindByName(nextOption(options));
+        const auto name = popFront(options);
+        const auto type = popFront(options);
+        const auto& team = CTeam::FindByName(popFront(options));
         std::vector<std::string> ships;
         for(int j = 0; j < nbShips; ++j) {
-            ships.push_back(nextOption(options));
+            ships.push_back(popFront(options));
         }
 
         const CPilotInputOptions pilotInputOpts{"", 0, 0, 0, 0, 0, 0, 0, 0};

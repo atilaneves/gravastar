@@ -13,27 +13,26 @@ class CFont {
 
 public:
 
-  CFont(int fontIndex = -1);
-  CFont(const CFont& font);
-  CFont& operator=(const CFont& font);
-  ~CFont();
-  
-  int   GetHeight() const { return text_height(mFont); }
-  int   GetLength(const std::string &str) const {
-    return text_length(mFont,str.c_str()); }
-  void  Print(CCanvas &canvas, int x, int y, int col, int bg,
-	      const std::string &str) const;
-  void  PrintCentre(CCanvas &canvas,int x,int y,int col, int bg,
-		    const std::string &str) const;
+    CFont(int fontIndex = -1);
+    CFont(const CFont& font);
+    CFont& operator=(const CFont& font);
+    ~CFont();
+
+    int   GetHeight() const { return text_height(mFont); }
+    int   GetLength(const std::string &str) const {
+        return text_length(mFont,str.c_str()); }
+    void  Print(CCanvas &canvas, int x, int y, int col, int bg,
+                const std::string &str) const;
+    void  PrintCentre(CCanvas &canvas,int x,int y,int col, int bg,
+                      const std::string &str) const;
 
 
 private:
 
- static int        sNbFonts;
- static CDataFile *sDataFile;
+    static int        sNbFonts;
+    static CDataFile *sDataFile;
 
- FONT *mFont;
-
+    FONT *mFont;
 };
 
 #endif
