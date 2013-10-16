@@ -1,7 +1,6 @@
 #include "CMeleeFragNb.hpp"
 #include "CMeleeFactory.hpp"
 #include "CMeleeScore.hpp"
-#include "CRadar.hpp"
 #include "CSound.hpp"
 #include "CPilot.hpp"
 #include <stdio.h>

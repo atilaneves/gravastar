@@ -2,23 +2,25 @@
 #define CHULLSTATS_H
 
 
-class CPilot;
 class CCanvas;
+class CTeam;
 
 
 class CHullStats {
 
 public:
 
-  CHullStats(const CPilot &pilot, CCanvas &canvas);
+    CHullStats(CCanvas &canvas, const CTeam& team, float hull, float maxHull);
 
-  void Draw();
+    void Draw();
 
 
 private:
 
-  const CPilot& mPilot;
-  CCanvas&      mCanvas;
+    CCanvas& mCanvas;
+    const CTeam& mTeam;
+    const float mHull;
+    const float mMaxHull;
 
 };
 

@@ -9,8 +9,8 @@
 
 
 
-CHullStats::CHullStats(const CPilot& pilot, CCanvas& canvas):
-    mPilot(pilot), mCanvas(canvas) {
+CHullStats::CHullStats(CCanvas& canvas, const CTeam& team, float hull, float maxHull):
+    mCanvas(canvas), mTeam(team), mHull(hull), mMaxHull(maxHull) {
 
 }
 
@@ -21,20 +21,18 @@ void CHullStats::Draw() {
     const int kOuterRim = 2;
 
     const int x0 = 37, y0 = 1; //where hull bar starts
-    const float maxHull = mPilot.GetShip().GetMaxHull();
-    const int hullWidth = static_cast<int>(kMaxWidth*(maxHull/kMaxHull));
-    const int w0 = hullWidth + kOuterRim;
+    const int maxHullWidth = static_cast<int>(kMaxWidth*(mMaxHull/kMaxHull));
+    const int w0 = maxHullWidth + kOuterRim;
     const int h0 = 6;
 
     CRect rect(mCanvas, x0 , y0, x0+w0-1, y0+h0-1, CColour::GetWhite());
 
     const int x1 = x0 + kOuterRim/2;
     const int y1 = y0 + kOuterRim/2;
-    int w1 = hullWidth;
+    int w1 = static_cast<int>(kMaxWidth*(mHull/kMaxHull));
     if(w1<0) w1=0; //has to go forward...
     const int h1 = h0 - kOuterRim;
 
-    if(w1) CRectFill rectFill(mCanvas, x1, y1, x1+w1-1, y1+h1-1,
-                              mPilot.GetTeam().GetMainColour());
-
+    if(w1) CRectFill rectFill(mCanvas, x1, y1, x1 + w1 - 1, y1 + h1 - 1,
+                              mTeam.GetMainColour());
 }

@@ -28,7 +28,6 @@ public:
             void AddDamage(float amount, CPilot &pilot);
             void AddFrag(CPilot &pilot);
     virtual void CheckControls() = 0;
-            void DrawStats(CBitmap& b, int x, int y) { mStats.Draw(b, x, y); }
             void GameOver() { mNbShips = 0; }
             int  GetIndex()   const { return mIndex; }
     const CPilotInput& GetInput() const { return *mInput; }
@@ -39,7 +38,7 @@ public:
             int GetShipIndex() const { return mOptions.GetNbShips() - mNbShips; }
     const std::string& GetShipName(int i=0) const { return mOptions.GetShipName(i); }
     const CShipStatSprite& GetShipStatSprite(int index=0) const;
-    const CTeam& GetTeam()    const { return mOptions.GetTeam(); }
+    const CTeam& GetTeam() const { return mOptions.GetTeam(); }
             bool HasSplitScreen() const { return mHasSplitScreen; }
             bool IsAlive() const;
     virtual void NextShip();
@@ -58,7 +57,6 @@ private:
     int          mNbFrags;
     float        mSuperGauge;
     CShip*       mShip;
-    CPilotStats  mStats;
 
     CShip* SpawnShip();
 

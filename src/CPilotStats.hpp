@@ -15,19 +15,18 @@ public:
 
   enum { kCanvasWidth = 100, kCanvasHeight = 50 };
 
-  CPilotStats(const CPilot &pilot);
+    CPilotStats(const CPilot &pilot, const CTeam& team,
+                int score, float hull, float maxHull,
+                const CShipStatSprite& sprite);
 
-  void Draw(CBitmap& bitmap, int x, int y);
-  void SetStatSprite(const CShipStatSprite *sprite) {
-    mLives.SetStatSprite(sprite); }
-
+    void Draw(CBitmap& bitmap, int x, int y);
 
 private:
 
-  const CPilot& mPilot;
-  CCanvas       mCanvas;
-  CLivesStats   mLives;
-  CHullStats    mHull;
+    const CPilot& mPilot;
+    CCanvas       mCanvas;
+    CLivesStats   mLives;
+    CHullStats    mHull;
 
 };
 

@@ -1,3 +1,8 @@
+. Remove const_cast from CSplitScreen
+. Stats on client. The reason this is hard to do is the coupling between the stats classes
+  (CPilotStats and components CLivesStats and CHullStats on CPilot since CPilot doesn't exist
+  in the client. Worse, CPilot is used to get the ship)
+. Network sound effects
 . IP addr and port on command-line
 . Disable pause on network game or propagate it
 . Radar / split screens on client

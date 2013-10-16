@@ -7,6 +7,7 @@
 #include "CFont.hpp"
 #include "CPilot.hpp"
 #include "CProjectileFactory.hpp"
+#include <string>
 
 
 CProjSpecial::CProjSpecial(const CShipBluePrint &shipBluePrint,
@@ -44,9 +45,7 @@ void CProjSpecial::DrawStats(CCanvas &canvas) const {
     const int col = mTeam.GetMainColour();
     constexpr int x = 0, y = 11, dx = 10;
     const CFont font;
-    font.Print(canvas, x + dx, y , col, -1, "x");
-    char line[100];
-    sprintf(line, "%d", int(mGauge));
-    font.Print(canvas, x + 2*dx, y, col, -1, line);
-
+    font.Print(canvas, x + dx, y, col, -1, "x");
+    font.Print(canvas, x + 2*dx, y, col, -1,
+               std::to_string(static_cast<int>(mGauge)));
 }

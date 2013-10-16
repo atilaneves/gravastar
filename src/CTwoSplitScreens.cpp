@@ -19,7 +19,7 @@ CTwoSplitScreens::CTwoSplitScreens(const CCanvas &levelCanvas,
 void CTwoSplitScreens::Grab(const pilots_t& pilots) {
     assert(pilots.size() == 2);
     for(unsigned int i = 0; i < pilots.size(); ++i) {
-        pilots_t pilot(1, pilots[i]);
+        pilots_t pilot{ pilots[i] };
         mSplitScreens[i].Grab(pilot);
     }
 }

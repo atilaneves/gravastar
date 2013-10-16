@@ -1,6 +1,5 @@
 #include "CMeleeSurvival.hpp"
 #include "CMeleeFactory.hpp"
-#include "CRadar.hpp" //pilots_t
 #include "CPilot.hpp"
 #include <map>
 

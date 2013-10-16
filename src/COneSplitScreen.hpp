@@ -13,11 +13,6 @@ public:
 
   virtual void Grab(const pilots_t& pilots);
   virtual void DrawRadar(const pilots_t& pilots);
-
-
-private:
-
-
 };
 
 

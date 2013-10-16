@@ -31,7 +31,6 @@ void CSplitScreen::DrawRadar(const pilots_t& pilots, const pilots_t& humans) {
 
 
 void CSplitScreen::Grab(const pilots_t& pilots) {
-
     int flipX = mLevelCanvas->GetWidth() < mSubCanvas.GetWidth() ?
         mSubCanvas.GetWidth() / 2 - mLevelCanvas->GetWidth() / 2 - 1: 0;
     int flipY = mLevelCanvas->GetHeight() < mSubCanvas.GetHeight() ?
@@ -45,8 +44,9 @@ void CSplitScreen::Grab(const pilots_t& pilots) {
     const CTeam &team = pilots.size() == 1 ? pilots[0].GetTeam() : CTeam::sWhite;
     CRect rect(mSubCanvas, flipX, flipY, flipX + width - 1,
                flipY + height - 1, team.GetMainColour());
-    //for(unsigned int p = 0; p < pilots.size(); p++) //TODO: re-enable
-    //  pilots[p].GetStats().Draw(mSubCanvas, 2, 2 + p*25);
+    for(unsigned int p = 0; p < pilots.size(); p++)
+        //TODO: do away with the const cast
+        const_cast<CDisplayPilot&>(pilots[p]).DrawStats(mSubCanvas, 2, 2 + p*25);
 }
 
 
@@ -74,10 +74,6 @@ int CSplitScreen::GetRealGrabPos(int pos, int subLength, int levelLength) {
 
 
 CScreenPos CSplitScreen::GetCentre(const pilots_t& pilots) {
-    if(pilots.empty())
-        return { mLevelCanvas->GetWidth()  / 2,
-                 mLevelCanvas->GetHeight() / 2 };
-
     if(pilots.size() == 1)
         return { (int)pilots[0].GetPosition().GetX(),
                 (int)pilots[0].GetPosition().GetY() };

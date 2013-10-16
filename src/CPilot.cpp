@@ -17,7 +17,7 @@ CPilot::CPilot(bool hasSplitScreen,
     mIndex(sIndex++),
     mNbShips(options.GetNbShips() + 1), //gets dec'ed by 1 w NextShip
     mNbFrags(0), mSuperGauge(0),
-    mShip(0), mStats(*this),
+    mShip(0),
     mInput(CPilotInputFactory::CreateInput(options.GetInputOptions())),
     mOptions(options), mShipYard(shipYard), mMeleeScore(meleeScore) {
 
@@ -39,7 +39,6 @@ void CPilot::NextShip() {
     const CTeam& team = mOptions.GetTeam();
     if(mShip) mSuperGauge = mShip->GetWeapons().GetSuperGauge();
     mShip = mShipYard.CreateShip(name, team, *this);
-    mStats.SetStatSprite(&(GetShipStatSprite(GetShipIndex())));
     mShip->GetWeapons().SetSuperGauge(mSuperGauge);
     mShip->Draw();
 }
@@ -88,6 +87,7 @@ CDisplayPilot CPilot::MakeDisplayPilot() {
     return { static_cast<uint8_t>(mIndex),
             GetShip().GetPos(), GetShip().GetVel(),
             mOptions.GetTeam(), static_cast<uint8_t>(GetScore()),
-            mStats,
+            new CPilotStats(*this, GetTeam(), GetScore(), GetShip().GetHull(), GetShip().GetMaxHull(),
+                            GetShipStatSprite(GetShipIndex())),
             GetShip().IsAlive(), HasSplitScreen()};
 }

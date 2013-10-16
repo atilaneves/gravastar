@@ -2,14 +2,10 @@
 #include "Cereal.hpp"
 
 
-CDisplayPilot::CDisplayPilot():
-    mStats(*static_cast<CPilotStats*>(nullptr)) {
-}
-
 CDisplayPilot::CDisplayPilot(uint8_t index,
                              const CScreenPos& pos, const CVector2& vel,
                              const CTeam& team, uint8_t score,
-                             CPilotStats& stats, bool isAlive,
+                             CPilotStats* stats, bool isAlive,
                              bool hasSplitScreen):
     mIndex(index),mPosition(pos.GetX(), pos.GetY()),
     mVelocity(vel.GetX(), vel.GetY()),
@@ -26,4 +22,10 @@ void CDisplayPilot::cerealise(Cereal& cereal) {
     cereal.grain(mTeam);
     cereal.grain(mScore);
     cereal.grain(mIsAlive);
+}
+
+void CDisplayPilot::DrawStats(CBitmap& bmp, int x, int y) {
+    if(mStats) {
+        mStats->Draw(bmp, x, y);
+    }
 }

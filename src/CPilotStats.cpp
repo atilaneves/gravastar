@@ -5,9 +5,13 @@
 #include "CSuper.hpp"
 
 
-CPilotStats::CPilotStats(const CPilot &pilot):
+
+CPilotStats::CPilotStats(const CPilot &pilot, const CTeam& team,
+                         int score, float hull, float maxHull,
+                         const CShipStatSprite& sprite):
     mPilot(pilot), mCanvas(kCanvasWidth, kCanvasHeight),
-    mLives(pilot, mCanvas), mHull(pilot, mCanvas) {
+    mLives(mCanvas, team, sprite, score),
+    mHull(mCanvas, team, hull, maxHull) {
 
 }
 
