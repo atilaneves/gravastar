@@ -24,8 +24,8 @@ void CDisplayPilot::cerealise(Cereal& cereal) {
     cereal.grain(mIsAlive);
 }
 
-void CDisplayPilot::DrawStats(CBitmap& bmp, int x, int y) {
+void CDisplayPilot::DrawStats(CCanvas& canvas) const {
     if(mStats) {
-        mStats->Draw(bmp, x, y);
+        mStats->Draw(canvas);
     }
 }

@@ -10,14 +10,13 @@ class CHullStats {
 
 public:
 
-    CHullStats(CCanvas &canvas, const CTeam& team, float hull, float maxHull);
+    CHullStats(const CTeam& team, float hull, float maxHull);
 
-    void Draw();
+    void Draw(CCanvas &canvas) const;
 
 
 private:
 
-    CCanvas& mCanvas;
     const CTeam& mTeam;
     const float mHull;
     const float mMaxHull;

@@ -27,7 +27,7 @@ public:
         return { static_cast<float>(mVelocity.x), static_cast<float>(mVelocity.y) };
     }
     const CTeam& GetTeam() const {return CTeam::FromHash(mTeam); }
-    void DrawStats(CBitmap& bmp, int x, int y);
+    void DrawStats(CCanvas& canvas) const;
     uint8_t GetScore() const { return mScore; }
     bool IsAlive() const { return mIsAlive; }
     bool HasSplitScreen() const { return mHasSplitScreen; }

@@ -7,13 +7,13 @@
 #include <string>
 
 
-void CLivesStats::Draw() {
+void CLivesStats::Draw(CCanvas& canvas) const {
 
     constexpr int x = 0, y = 1, dx = 10;
-    mStatSprite.Draw(mCanvas, x, y);
+    mStatSprite.Draw(canvas, x, y);
     CFont font;
-    font.Print(mCanvas, x + dx, y, mTeam.GetMainColour(), -1, "x");
+    font.Print(canvas, x + dx, y, mTeam.GetMainColour(), -1, "x");
 
-    font.Print(mCanvas, x + 2*dx, y, mTeam.GetMainColour(), -1,
+    font.Print(canvas, x + 2*dx, y, mTeam.GetMainColour(), -1,
                std::to_string(mScore));
 }

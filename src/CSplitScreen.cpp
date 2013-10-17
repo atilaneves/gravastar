@@ -13,6 +13,7 @@
 CSplitScreen::CSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas,
                            int width, int height,
                            int drawX, int drawY):
+    mStatsCanvas(kStatsCanvasWidth, kStatsCanvasHeight),
     mSubCanvas(drawCanvas, drawX, drawY, width, height),
     mLevelCanvas(&levelCanvas) {
 
@@ -20,7 +21,9 @@ CSplitScreen::CSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas,
 
 
 CSplitScreen::CSplitScreen(const CSplitScreen &split):
-    mSubCanvas(split.mSubCanvas), mLevelCanvas(split.mLevelCanvas) {
+    mStatsCanvas(kStatsCanvasWidth, kStatsCanvasHeight),
+    mSubCanvas(split.mSubCanvas),
+    mLevelCanvas(split.mLevelCanvas) {
 }
 
 
@@ -45,10 +48,14 @@ void CSplitScreen::Grab(const pilots_t& pilots) {
     CRect rect(mSubCanvas, flipX, flipY, flipX + width - 1,
                flipY + height - 1, team.GetMainColour());
     for(unsigned int p = 0; p < pilots.size(); p++)
-        //TODO: do away with the const cast
-        const_cast<CDisplayPilot&>(pilots[p]).DrawStats(mSubCanvas, 2, 2 + p*25);
+        DrawStats(pilots[p], 2, 2 + p*25);
 }
 
+
+void CSplitScreen::DrawStats(const CDisplayPilot& pilot, int x, int y) {
+    pilot.DrawStats(mStatsCanvas);
+    mStatsCanvas.Draw(mSubCanvas, x, y);
+}
 
 CScreenPos CSplitScreen::GetGrabPos(const pilots_t &pilots) {
     CScreenPos pos = GetCentre(pilots);

@@ -33,12 +33,16 @@ public:
 
 private:
 
+    enum { kStatsCanvasWidth = 100, kStatsCanvasHeight = 50 };
+
+    CCanvas        mStatsCanvas;
     CSubCanvas     mSubCanvas;
     const CCanvas* mLevelCanvas;
     CRadar         mRadar;
 
     CScreenPos GetGrabPos(const pilots_t& pilots);
     int        GetRealGrabPos(int pos, int subLength, int levelLength);
+    void       DrawStats(const CDisplayPilot& pilot, int x, int y);
 
 };
 

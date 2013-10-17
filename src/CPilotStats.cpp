@@ -9,17 +9,16 @@
 CPilotStats::CPilotStats(const CPilot &pilot, const CTeam& team,
                          int score, float hull, float maxHull,
                          const CShipStatSprite& sprite):
-    mPilot(pilot), mCanvas(kCanvasWidth, kCanvasHeight),
-    mLives(mCanvas, team, sprite, score),
-    mHull(mCanvas, team, hull, maxHull) {
+    mPilot(pilot),
+    mLives(team, sprite, score),
+    mHull(team, hull, maxHull) {
 
 }
 
 
-void CPilotStats::Draw(CBitmap &bitmap, int x, int y) {
-    mCanvas.Clear(mCanvas.GetMask()); //we don't want garbage
-    mLives.Draw();
-    mHull.Draw();
-    mPilot.GetShip().GetWeapons().DrawStats(mCanvas);
-    mCanvas.Draw(bitmap, x, y); //draw it!
+void CPilotStats::Draw(CCanvas& canvas) const {
+    canvas.Clear(canvas.GetMask()); //we don't want garbage
+    mLives.Draw(canvas);
+    mHull.Draw(canvas);
+    mPilot.GetShip().GetWeapons().DrawStats(canvas);
 }
