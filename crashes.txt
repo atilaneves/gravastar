@@ -1,0 +1,62 @@
+rogram received signal SIGSEGV, Segmentation fault.
+0x00000000005805c4 in CSpriteVector::operator[] (this=0x17c1110, index=2147483648) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CSpriteVector.cpp:38
+38        return mSprites[index];
+(gdb) bt
+#0  0x00000000005805c4 in CSpriteVector::operator[] (this=0x17c1110, index=2147483648) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CSpriteVector.cpp:38
+#1  0x0000000000578f46 in CMoverObj::GetSprite (this=0x21323b0) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CMoverObj.hpp:20
+#2  0x0000000000583829 in CSpriteObj::Draw (this=0x21323b0) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CSpriteObj.cpp:20
+#3  0x00000000005978c0 in CSpriteObjs::DrawObj (sprObj=0x21323b0) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CSpriteObjs.cpp:113
+#4  0x0000000000597109 in CSpriteObjs::Update (dt=0.00150000001) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CSpriteObjs.cpp:28
+#5  0x0000000000564cb5 in CMeleeOnServer::Update (this=0xd28990, dt=0.00150000001) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CMeleeOnServer.cpp:48
+#6  0x0000000000564b96 in CMeleeOnServer::Run (this=0xd28990) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CMeleeOnServer.cpp:33
+#7  0x00000000005d983b in startMeleeFromMenu (rootMenu=..., gravOptions=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/MeleeStarter.cpp:30
+#8  0x00000000005e563d in CMeleeStart::Run (this=0x7430c0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/CMeleeStart.cpp:20
+#9  0x00000000005c5d0e in CMenuCursor::Update (this=0x7459f8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenuCursor.cpp:54
+#10 0x00000000005c9c5c in CMenu::IsActive (this=0x7459a8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:68
+#11 0x00000000005c9bd2 in CMenu::RunStep (this=0x7459a8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:56
+#12 0x00000000005c9b57 in CMenu::Run (this=0x7459a8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:49
+#13 0x00000000005cf5cb in CLevelMenu::Run (this=0x7459a8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/CLevelMenu.cpp:76
+#14 0x00000000005ded08 in CShipMenu::Run (this=0x745910, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/CShipMenu.cpp:83
+#15 0x00000000005c5d0e in CMenuCursor::Update (this=0x745800, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenuCursor.cpp:54
+#16 0x00000000005c9c5c in CMenu::IsActive (this=0x7457b0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:68
+#17 0x00000000005c9bd2 in CMenu::RunStep (this=0x7457b0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:56
+#18 0x00000000005c9b57 in CMenu::Run (this=0x7457b0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:49
+#19 0x00000000005c5d0e in CMenuCursor::Update (this=0x7fffffffda58, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenuCursor.cpp:54
+#20 0x00000000005c9c5c in CMenu::IsActive (this=0x7fffffffda10, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:68
+#21 0x00000000005c9bd2 in CMenu::RunStep (this=0x7fffffffda10, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:56
+#22 0x00000000005c9b57 in CMenu::Run (this=0x7fffffffda10, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:49
+#23 0x00000000005c4bf4 in CRootMenu::Run (this=0x7fffffffda00) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CRootMenu.cpp:55
+#24 0x0000000000532f71 in main (argc=1, argv=0x7fffffffdc08) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/server/grav_server.cpp:16
+
+
+Program received signal SIGSEGV, Segmentation fault.
+0x000000000056ea0f in CVector<float>::GetX (this=0xe0000001e) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CVector.hpp:16
+16          T     GetX()     const { return mX; }
+(gdb) bt
+#0  0x000000000056ea0f in CVector<float>::GetX (this=0xe0000001e) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CVector.hpp:16
+#1  0x000000000056ea5f in CVector<float>::CVector (this=0x7fffffffd390, v=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CVector.hpp:12
+#2  0x000000000056fbb4 in CVector<float>::operator- (this=0xe0000001e, v=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CVector.hpp:72
+#3  0x00000000005a4872 in CPowerups::NearestPowerup (this=0x14a1df0, shipPos=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CPowerups.cpp:67
+#4  0x00000000005aca8c in CSeekPowerup::Think (this=0x1aa1988) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/ai/CSeekPowerup.cpp:24
+#5  0x00000000005b05fa in CActionPicker::GetAction (this=0x1aa1920) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/ai/CActionPicker.cpp:29
+#6  0x00000000005b3507 in CPilotBot::CheckControls (this=0x1aa0fc0) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/ai/CPilotBot.cpp:27
+#7  0x0000000000564c7f in CMeleeOnServer::Update (this=0xfacbd0, dt=0.00449999981) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CMeleeOnServer.cpp:47
+#8  0x0000000000564b96 in CMeleeOnServer::Run (this=0xfacbd0) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/CMeleeOnServer.cpp:33
+#9  0x00000000005d983b in startMeleeFromMenu (rootMenu=..., gravOptions=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/MeleeStarter.cpp:30
+#10 0x00000000005e563d in CMeleeStart::Run (this=0x7430d0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/CMeleeStart.cpp:20
+#11 0x00000000005c5d0e in CMenuCursor::Update (this=0x745a08, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenuCursor.cpp:54
+#12 0x00000000005c9c5c in CMenu::IsActive (this=0x7459b8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:68
+#13 0x00000000005c9bd2 in CMenu::RunStep (this=0x7459b8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:56
+#14 0x00000000005c9b57 in CMenu::Run (this=0x7459b8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:49
+#15 0x00000000005cf5cb in CLevelMenu::Run (this=0x7459b8, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/CLevelMenu.cpp:76
+#16 0x00000000005ded08 in CShipMenu::Run (this=0x745920, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/menu/CShipMenu.cpp:83
+#17 0x00000000005c5d0e in CMenuCursor::Update (this=0x745810, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenuCursor.cpp:54
+#18 0x00000000005c9c5c in CMenu::IsActive (this=0x7457c0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:68
+#19 0x00000000005c9bd2 in CMenu::RunStep (this=0x7457c0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:56
+#20 0x00000000005c9b57 in CMenu::Run (this=0x7457c0, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:49
+#21 0x00000000005c5d0e in CMenuCursor::Update (this=0x7fffffffda58, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenuCursor.cpp:54
+#22 0x00000000005c9c5c in CMenu::IsActive (this=0x7fffffffda10, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:68
+#23 0x00000000005c9bd2 in CMenu::RunStep (this=0x7fffffffda10, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:56
+#24 0x00000000005c9b57 in CMenu::Run (this=0x7fffffffda10, rootMenu=...) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CMenu.cpp:49
+#25 0x00000000005c4bf4 in CRootMenu::Run (this=0x7fffffffda00) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/AllegroAPI/CRootMenu.cpp:55
+#26 0x0000000000532f71 in main (argc=1, argv=0x7fffffffdc08) at /home/aalvesne/coding/cpp/gravastar-project/gravastar/src/server/grav_server.cpp:16

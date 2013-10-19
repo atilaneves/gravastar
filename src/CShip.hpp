@@ -45,7 +45,8 @@ public:
           int      GetNose() const { return mNose.GetNose(); }
           CPilot&  GetPilot() const { return mPilot; }
   virtual int      GetSpriteIndex() const { return mNose.GetNose(); }
-         CWeapons& GetWeapons()  { return mWeapons; }
+   const CWeapons& GetWeapons() const { return mWeapons; }
+         CWeapons& GetWeapons() { return mWeapons; }
   virtual void     Hit(CSpriteObj& obj, CScreenPos pos, float dt) {
                        obj.Hit(*this, pos, dt); }
   virtual void     Hit(CProjectile& proj, CScreenPos pos, float dt);

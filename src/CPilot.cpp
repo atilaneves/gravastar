@@ -83,11 +83,27 @@ const CShipStatSprite& CPilot::GetShipStatSprite(int index) const {
 }
 
 
+static CSpecialStatDrawer makeSpecialDrawer(const CTeam& team, const CWeapons& weapons) {
+    return { weapons.GetSpecialHash(), weapons.GetSpecialStatHash(),
+            team.GetHash(), weapons.GetSpecialGauge(),
+            weapons.GetMaxSpecialGauge() };
+}
+
+static CSuperStatsDrawer makeSuperDrawer(const CWeapons& weapons) {
+    return {weapons.CanSuper(), weapons.GetSuperStatHash()};
+}
+
 CDisplayPilot CPilot::MakeDisplayPilot() {
+    const auto specialStatDrawer = makeSpecialDrawer(GetTeam(), GetShip().GetWeapons());
+    const auto superStatsDrawer  = makeSuperDrawer(GetShip().GetWeapons());
+    auto pilotStats = new CPilotStats(specialStatDrawer, superStatsDrawer,
+                                      GetTeam(), GetScore(),
+                                      GetShip().GetHull(), GetShip().GetMaxHull(),
+                                      GetShipStatSprite(GetShipIndex()));
+
     return { static_cast<uint8_t>(mIndex),
-            GetShip().GetPos(), GetShip().GetVel(),
-            mOptions.GetTeam(), static_cast<uint8_t>(GetScore()),
-            new CPilotStats(*this, GetTeam(), GetScore(), GetShip().GetHull(), GetShip().GetMaxHull(),
-                            GetShipStatSprite(GetShipIndex())),
-            GetShip().IsAlive(), HasSplitScreen()};
+             GetShip().GetPos(), GetShip().GetVel(),
+             GetTeam(), static_cast<uint8_t>(GetScore()),
+             pilotStats,
+             GetShip().IsAlive(), HasSplitScreen()};
 }

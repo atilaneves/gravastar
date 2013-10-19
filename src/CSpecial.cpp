@@ -8,12 +8,17 @@
 #include "CEMB.hpp"
 
 
-CSpecial::CSpecial(const CShipBluePrint &bluePrint, CShip &ship):
-    mShip(ship), mTeam(bluePrint.mTeam),
+CSpecial::CSpecial(const CShipBluePrint &bluePrint, CShip &ship,
+                   CLevel& level, CSound sound,
+                   const CShipStatSprite& statSprite):
+    mShip(ship), mLevel(level), mSound(sound),
+    mTeam(bluePrint.mTeam),
+    mStatSprite(statSprite),
+    mUsing(false),
+    mRepairSound(bluePrint.mSounds.mRepairSound),
     mRate(bluePrint.mSpecialRate), mMaxGauge(bluePrint.mMaxGauge),
     mGauge(mMaxGauge), mDepletion(bluePrint.mDepletion),
-    mRecovery(bluePrint.mRecovery), mUsing(false),
-    mRepairSound(bluePrint.mSounds.mRepairSound) {
+    mRecovery(bluePrint.mRecovery) {
 
 }
 
@@ -51,4 +56,16 @@ void CSpecial::LoseGauge(float amount) {
 bool CSpecial::CanUse() const {
     return mGauge >= mDepletion && !mShip.IsEffectOn(CEMP::GetID()) &&
         !mShip.IsEffectOn(CEMB::GetID());
+}
+
+void CSpecial::PlaySound() {
+    mSound.Play(mShip.GetPos());
+}
+
+size_t CSpecial::GetStatSpriteHash() const {
+    return mStatSprite.GetHash();
+}
+
+uint8_t CSpecial::GetTeamHash() const {
+    return mTeam.GetHash();
 }

@@ -30,11 +30,3 @@ void CWeapons::Update(float dt) {
         mSpecial->Update(dt);
     }
 }
-
-
-void CWeapons::DrawStats(CCanvas &canvas) const {
-    mSpecial->DrawStats(canvas);
-    mSuper.DrawStats(canvas);
-}
-
-
