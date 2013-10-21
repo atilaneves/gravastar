@@ -4,16 +4,20 @@
 #include <cstddef>
 
 class CCanvas;
+class Cereal;
 
 class CSuperStatsDrawer {
 public:
+
+    CSuperStatsDrawer() {}
     CSuperStatsDrawer(bool canUse, size_t spriteHash);
     void Draw(CCanvas& canvas) const;
+    void cerealise(Cereal& cereal);
 
 private:
 
-    const bool mCanUse;
-    const size_t mSpriteHash;
+    bool mCanUse;
+    size_t mSpriteHash;
 };
 
 

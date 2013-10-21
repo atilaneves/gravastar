@@ -10,8 +10,10 @@ class CCanvas;
 class CWeaponStats {
 public:
 
+    CWeaponStats() { }
     CWeaponStats(CSpecialStatDrawer specialDrawer, CSuperStatsDrawer superDrawer);
     void Draw(CCanvas& canvas) const;
+    void cerealise(Cereal& cereal);
 
 private:
 

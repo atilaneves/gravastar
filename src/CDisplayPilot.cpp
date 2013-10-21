@@ -4,12 +4,12 @@
 
 CDisplayPilot::CDisplayPilot(uint8_t index,
                              const CScreenPos& pos, const CVector2& vel,
-                             const CTeam& team, uint8_t score,
-                             CPilotStats* stats, bool isAlive,
+                             uint8_t teamHash, uint8_t score,
+                             CPilotStats stats, bool isAlive,
                              bool hasSplitScreen):
     mIndex(index),mPosition(pos.GetX(), pos.GetY()),
     mVelocity(vel.GetX(), vel.GetY()),
-    mTeam(team.GetHash()), mScore(score), mStats(stats),
+    mTeamHash(teamHash), mScore(score), mStats(stats),
     mIsAlive(isAlive), mHasSplitScreen(hasSplitScreen) {
 }
 
@@ -19,13 +19,12 @@ void CDisplayPilot::cerealise(Cereal& cereal) {
     cereal.grain(mPosition.y);
     cereal.grain(mVelocity.x);
     cereal.grain(mVelocity.y);
-    cereal.grain(mTeam);
+    cereal.grain(mTeamHash);
     cereal.grain(mScore);
+    cereal.grain(mStats);
     cereal.grain(mIsAlive);
 }
 
 void CDisplayPilot::DrawStats(CCanvas& canvas) const {
-    if(mStats) {
-        mStats->Draw(canvas);
-    }
+    mStats.Draw(canvas);
 }

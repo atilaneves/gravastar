@@ -1,13 +1,13 @@
-. Remove const_cast from CSplitScreen
-. Stats on client. The reason this is hard to do is the coupling between the stats classes
-  (CPilotStats and components CLivesStats and CHullStats on CPilot since CPilot doesn't exist
-  in the client. Worse, CPilot is used to get the ship)
 . Network sound effects
+. Bots add to total number of players, clients should all be human
+. Maintain client connnection
+. Split frame amongst several UDP packets / UDP packet size down to internet MTU
 . IP addr and port on command-line
-. Disable pause on network game or propagate it
-. Radar / split screens on client
-. UDP packets down to internet MTU
+. Propagate pause on client side
 . Ignore old packets
-. Coalesce packets?
+
+
+Bugs:
+. Bug where victory screen on client show wrong score
 . Bug where client fails to load same sprites if server already done a game
 . Bug where enemy sprites appear in the wrong place at beginning of match

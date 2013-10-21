@@ -2,16 +2,13 @@
 #include "CShip.hpp"
 #include "CWeapons.hpp"
 #include "CSuper.hpp"
+#include "Cereal.hpp"
 
 
-
-CPilotStats::CPilotStats(CSpecialStatDrawer specialDrawer, CSuperStatsDrawer superDrawer,
-                         const CTeam& team,
-                         int score, float hull, float maxHull,
-                         const CShipStatSprite& sprite):
-    mWeapon(specialDrawer, superDrawer),
-    mLives(team, sprite, score),
-    mHull(team, hull, maxHull) {
+CPilotStats::CPilotStats(CWeaponStats weapon, CLivesStats lives, CHullStats hull):
+    mWeapon(weapon),
+    mLives(lives),
+    mHull(hull) {
 
 }
 
@@ -21,4 +18,10 @@ void CPilotStats::Draw(CCanvas& canvas) const {
     mLives.Draw(canvas);
     mHull.Draw(canvas);
     mWeapon.Draw(canvas);
+}
+
+void CPilotStats::cerealise(Cereal& cereal) {
+    cereal.grain(mWeapon);
+    cereal.grain(mLives);
+    cereal.grain(mHull);
 }

@@ -25,6 +25,7 @@ CGravSprite::CGravSprite(void *data, const CTeam &team,
     if(sHashing) {
         mSpriteIndex = sSpriteIndex++;
         sSprites[mSpriteIndex] = this;
+        std::cout << "Sprite index " << mSpriteIndex << std::endl;
     }
 }
 

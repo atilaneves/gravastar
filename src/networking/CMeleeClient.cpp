@@ -27,6 +27,9 @@ void CMeleeClient::Run() {
         newSprites = mUpdateServer.GetSprites();
         for(const auto& levelSprite: newSprites) {
             const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());
+            if(!sprite) {
+                cerr << "Unknown sprite hash "<< levelSprite.GetHash() << endl;
+            }
             assert(sprite);
             sprite->Draw(mGravMedia.GetLevel().GetCanvas(),
                           levelSprite.GetX(), levelSprite.GetY());

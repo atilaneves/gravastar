@@ -7,7 +7,6 @@ class CBitmap;
 #include "CVector2.hpp"
 #include "CTeam.hpp"
 #include "CPilotStats.hpp"
-#include <memory>
 #include <stdint.h>
 
 class CDisplayPilot {
@@ -16,17 +15,17 @@ class CDisplayPilot {
 
 public:
 
-    CDisplayPilot() = default;
+    CDisplayPilot() {}
     CDisplayPilot(uint8_t index, const CScreenPos& pos, const CVector2& vel,
-                  const CTeam& team,
-                  uint8_t score, CPilotStats* stats, bool isAlive,
+                  uint8_t teamHash,
+                  uint8_t score, CPilotStats stats, bool isAlive,
                   bool hasSplitScreen);
 
     CScreenPos GetPosition() const { return { mPosition.x, mPosition.y }; }
     CVector2 GetVelocity() const {
         return { static_cast<float>(mVelocity.x), static_cast<float>(mVelocity.y) };
     }
-    const CTeam& GetTeam() const {return CTeam::FromHash(mTeam); }
+    const CTeam& GetTeam() const {return CTeam::FromHash(mTeamHash); }
     void DrawStats(CCanvas& canvas) const;
     uint8_t GetScore() const { return mScore; }
     bool IsAlive() const { return mIsAlive; }
@@ -44,9 +43,9 @@ private:
     uint8_t mIndex;
     Vector<uint16_t> mPosition;
     Vector<int16_t> mVelocity;
-    uint8_t mTeam;
+    uint8_t mTeamHash;
     uint8_t mScore;
-    std::shared_ptr<CPilotStats> mStats;
+    CPilotStats mStats;
     bool mIsAlive;
     bool mHasSplitScreen;
 };

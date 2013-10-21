@@ -4,6 +4,7 @@
 
 class CShip;
 class CShipStatSprite;
+class Cereal;
 #include "CCanvas.hpp"
 #include "CHullStats.hpp"
 #include "CLivesStats.hpp"
@@ -14,12 +15,11 @@ class CPilotStats {
 
 public:
 
-    CPilotStats(CSpecialStatDrawer specialDrawer, CSuperStatsDrawer superDrawer,
-                const CTeam& team,
-                int score, float hull, float maxHull,
-                const CShipStatSprite& sprite);
+    CPilotStats() {}
+    CPilotStats(CWeaponStats weapon, CLivesStats lives, CHullStats hull);
 
     void Draw(CCanvas& canvas) const;
+    void cerealise(Cereal& cereal);
 
 private:
 

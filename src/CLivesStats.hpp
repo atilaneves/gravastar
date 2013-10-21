@@ -2,25 +2,27 @@
 #define CSTATSLIVES_H
 
 
+#include <cstdint>
+#include <cstddef>
 class CCanvas;
 class CTeam;
 class CShipStatSprite;
+class Cereal;
 
 
 class CLivesStats {
-
 public:
 
-    CLivesStats(const CTeam& team,
-                const CShipStatSprite& statSprite, int score):
-        mTeam(team), mStatSprite(statSprite), mScore(score) { }
+    CLivesStats() {}
+    CLivesStats(uint8_t teamHash, size_t spriteHash, uint8_t score);
     void Draw(CCanvas& canvas) const;
+    void cerealise(Cereal& cereal);
 
 private:
 
-    const CTeam& mTeam;
-    const CShipStatSprite& mStatSprite;
-    const int mScore;
+    uint8_t mTeamHash;
+    size_t mSpriteHash;
+    uint8_t mScore;
 };
 
 

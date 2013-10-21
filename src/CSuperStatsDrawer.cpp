@@ -1,5 +1,6 @@
 #include "CSuperStatsDrawer.hpp"
 #include "CGravSprite.hpp"
+#include "Cereal.hpp"
 #include <cassert>
 
 
@@ -14,4 +15,9 @@ void CSuperStatsDrawer::Draw(CCanvas& canvas) const {
     assert(sprite);
     constexpr int x = 67, y = 10;
     sprite->Draw(canvas, x, y);
+}
+
+void CSuperStatsDrawer::cerealise(Cereal& cereal) {
+    cereal.grain(mCanUse);
+    cereal.grain(mSpriteHash);
 }
