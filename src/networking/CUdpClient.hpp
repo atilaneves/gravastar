@@ -7,7 +7,7 @@
 class CUdpClient {
 public:
 
-    CUdpClient(int port);
+    CUdpClient(const std::string& address, int port);
     void SendBytes(const std::vector<unsigned char>& sendBuffer);
 
 

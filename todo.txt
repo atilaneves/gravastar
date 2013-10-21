@@ -1,6 +1,7 @@
+. Make server be both TCP and UDP server.
 . Network sound effects
 . Bots add to total number of players, clients should all be human
-. Maintain client connnection
+. Maintain client TCP connnection
 . Split frame amongst several UDP packets / UDP packet size down to internet MTU
 . IP addr and port on command-line
 . Propagate pause on client side
