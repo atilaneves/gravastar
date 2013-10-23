@@ -4,13 +4,22 @@
 #include <boost/asio.hpp>
 
 
-class CUdpServer {
+class CUdpObserver {
 public:
 
     using Array = std::array<unsigned char, 1024*1024>;
 
-    CUdpServer(uint16_t port);
-    virtual ~CUdpServer() { }
+    virtual void UdpReceived(const boost::system::error_code& error,
+                             std::size_t numBytes, const Array& bytes) = 0;
+    virtual void UdpSent(const boost::system::error_code& error, std::size_t numBytes) { }
+};
+
+class CUdpServer {
+public:
+
+    using Array = CUdpObserver::Array;
+
+    CUdpServer(int port, CUdpObserver& observer);
 
     void Run();
     void Stop();
@@ -18,7 +27,7 @@ public:
 
 private:
 
-    int mPort;
+    CUdpObserver& mObserver;
     boost::asio::io_service mService;
     boost::asio::ip::udp::socket mSocket;
     boost::asio::ip::udp::endpoint mEndpoint;
@@ -29,10 +38,6 @@ private:
                        std::size_t numBytes);
     void HandleSend(const boost::system::error_code& error,
                     std::size_t numBytes);
-
-    virtual void AfterReceive(const boost::system::error_code& error,
-                              std::size_t numBytes, const Array& bytes) = 0;
-    virtual void AfterSend(const boost::system::error_code& error, std::size_t numBytes) = 0;
 };
 
 

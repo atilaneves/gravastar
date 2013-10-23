@@ -32,7 +32,7 @@ void CTcpServer::Accept() {
 void CTcpServer::HandleAccept(CTcpConnection::Pointer newConnection,
                               const boost::system::error_code& error) {
     if(!error) {
-        mTcpObserver.Handle(newConnection);
+        mTcpObserver.HandleTcpConnection(newConnection);
         Accept();
     } else {
         cerr << "Error in CTcpServer::HandleAccept" << endl;

@@ -4,30 +4,27 @@
 class Decerealiser;
 #include "CUdpServer.hpp"
 #include "SClientFrame.hpp"
-#include <vector>
-#include <tuple>
 #include <mutex>
-#include <stdint.h>
-#include <boost/asio.hpp>
 
 
-class CClientSocket: public CUdpServer {
+class CClientSocket: public CUdpObserver {
 public:
 
-    CClientSocket(uint16_t serverUdpPort, unsigned pilotIndex);
+    CClientSocket(int serverUdpPort, unsigned pilotIndex);
 
     SClientFrame GetFrame() const;
+    void Run()  { mUdpServer.Run();  }
+    void Stop() { mUdpServer.Stop(); }
 
 private:
 
+    CUdpServer mUdpServer;
     unsigned mPilotIndex;
     SClientFrame mFrame;
     mutable std::mutex mFrameMutex;
 
-    virtual void AfterReceive(const boost::system::error_code& error,
-                              std::size_t numBytes, const Array& bytes) override;
-    virtual void AfterSend(const boost::system::error_code& error,
-                           std::size_t numBytes) override {}
+    virtual void UdpReceived(const boost::system::error_code& error,
+                             std::size_t numBytes, const Array& bytes) override;
     void UpdateFrame(Decerealiser& cereal);
 };
 

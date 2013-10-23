@@ -12,3 +12,4 @@ Bugs:
 . Bug where victory screen on client show wrong score
 . Bug where client fails to load same sprites if server already done a game
 . Bug where enemy sprites appear in the wrong place at beginning of match
+. Bug where client crashes if pilots list is empty

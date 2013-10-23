@@ -19,7 +19,9 @@ static vector<string> getPilotTypes(const CGravOptions& options) {
 CServerSocket::CServerSocket(const CGravOptions& options):
     mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
-    mTcpServer(12346, *this) {
+    mTcpServer(options.GetServerPort(), *this),
+    mUdpServer(options.GetServerPort(), *this)
+{
 
     cout << "CServerSocket starting\n";
 }
@@ -40,7 +42,7 @@ void CServerSocket::SendFrame(const vector<unsigned char>& frameBytes) {
     }
 }
 
-void CServerSocket::Handle(const CTcpConnection::Pointer& tcpConnection) {
+void CServerSocket::HandleTcpConnection(const CTcpConnection::Pointer& tcpConnection) {
     cout << "CServerSocket handling new tcpConnection" << endl;
     tcpConnection->ReadBytesAsync(13, //"UdpPort" + space + 5 digits
         [this, tcpConnection](const CTcpConnection::Array& bytes, size_t numBytes) {
@@ -117,4 +119,8 @@ void CServerSocket::End(int winner) {
         writeValue(clientArgs, winner);
         connection->SendTcpBytes(clientArgs.str());
     }
+}
+
+void CServerSocket::UdpReceived(const boost::system::error_code& error,
+                                std::size_t numBytes, const Array& bytes) {
 }

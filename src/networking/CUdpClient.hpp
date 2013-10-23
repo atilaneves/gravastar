@@ -15,9 +15,11 @@ public:
 
 private:
 
-    const boost::asio::ip::udp::endpoint mServerEndpoint;
     boost::asio::io_service mService;
     boost::asio::ip::udp::socket mSocket;
+    const boost::asio::ip::udp::endpoint mServerEndpoint;
+
+    void HandleSend(const boost::system::error_code& error, std::size_t numBytes) {}
 };
 
 #endif

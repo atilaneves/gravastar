@@ -8,7 +8,7 @@
 
 class CTcpConnectionObserver {
 public:
-    virtual void Handle(const CTcpConnection::Pointer& tcpConnection) = 0;
+    virtual void HandleTcpConnection(const CTcpConnection::Pointer& tcpConnection) = 0;
 };
 
 class CTcpServer {
