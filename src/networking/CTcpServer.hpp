@@ -5,9 +5,6 @@
 #include <boost/asio.hpp>
 
 
-using boost::asio::ip::tcp;
-
-
 class CTcpConnectionObserver {
 public:
     virtual void Handle(const CTcpConnection::Pointer& tcpConnection) = 0;
@@ -22,7 +19,7 @@ public:
 private:
 
     CTcpConnectionObserver& mTcpObserver;
-    tcp::acceptor mAcceptor;    
+    boost::asio::ip::tcp::acceptor mAcceptor;
 
     void StartAccept();
     void HandleAccept(CTcpConnection::Pointer newConnection,

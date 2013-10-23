@@ -10,7 +10,7 @@ class CPilot;
 #include "CPowerups.hpp"
 #include "CMeleeScore.hpp"
 #include "CTimeCounter.hpp"
-#include "CMeleeServer.hpp"
+#include "CServerSocket.hpp"
 #include "CRandomSong.hpp"
 #include <vector>
 #include <memory>
@@ -25,7 +25,7 @@ public:
     using pilots_t = CGravScreen::pilots_t;
     using Pilots = std::vector<CPilot*>;
 
-    CMelee(const CGravOptions &options, CMeleeServer* server);
+    CMelee(const CGravOptions &options, CServerSocket* serverSocket);
     virtual ~CMelee();
 
     virtual void Run() = 0;
@@ -39,7 +39,7 @@ private:
 
 protected:
 
-    std::unique_ptr<CMeleeServer> mServer;
+    std::unique_ptr<CServerSocket> mServerSocket;
     CRandomSong  mSong;
     CGravMedia   mGravMedia;
     CGravScreen  mGravScreen;

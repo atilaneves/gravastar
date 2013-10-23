@@ -1,4 +1,4 @@
-#include "CMeleeServer.hpp"
+#include "CServerSocket.hpp"
 #include "CUdpServer.hpp"
 #include "CGravOptions.hpp"
 #include "network_buffers.hpp"
@@ -16,21 +16,21 @@ static vector<string> getPilotTypes(const CGravOptions& options) {
     return types;
 }
 
-CMeleeServer::CMeleeServer(const CGravOptions& options):
+CServerSocket::CServerSocket(const CGravOptions& options):
     mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
     mTcpServer(mTcpIoService, *this),
     mTcpThread([this]() { mTcpIoService.run(); }) {
 
-    cout << "CMeleeServer starting\n";
+    cout << "CServerSocket starting\n";
 }
 
-CMeleeServer::~CMeleeServer() {
+CServerSocket::~CServerSocket() {
     mTcpIoService.stop();
     mTcpThread.join();
 }
 
-std::string CMeleeServer::GetPilotType(const std::string& type,
+std::string CServerSocket::GetPilotType(const std::string& type,
                                        unsigned pilotIndex) const {
     if(pilotIndex == 0 || type == "Bot") {
         return type;
@@ -39,14 +39,14 @@ std::string CMeleeServer::GetPilotType(const std::string& type,
 }
 
 
-void CMeleeServer::SendFrame(const vector<unsigned char>& frameBytes) {
+void CServerSocket::SendFrame(const vector<unsigned char>& frameBytes) {
     for(auto& connection: mConnections) {
         connection->SendUdpBytes(frameBytes);
     }
 }
 
-void CMeleeServer::Handle(const CTcpConnection::Pointer& tcpConnection) {
-    cout << "CMeleeServer handling new tcpConnection" << endl;
+void CServerSocket::Handle(const CTcpConnection::Pointer& tcpConnection) {
+    cout << "CServerSocket handling new tcpConnection" << endl;
     tcpConnection->ReadBytesAsync(13, //"UdpPort" + space + 5 digits
         [this, tcpConnection](const CTcpConnection::Array& bytes, size_t numBytes) {
             const auto tokens = msgBufToDeque(bytes, numBytes);
@@ -68,9 +68,9 @@ static void writeValue(stringstream& args, T value) {
     args << value << " ";
 }
 
-void CMeleeServer::SendClientArgs() {
+void CServerSocket::SendClientArgs() {
     auto& gravConnection = mConnections.back();
-    cout << "CMeleeServer sending args to TCP connection #" <<
+    cout << "CServerSocket sending args to TCP connection #" <<
         gravConnection->GetIndex() << endl;
 
     if(gravConnection->GetIndex() >=
@@ -105,7 +105,7 @@ void CMeleeServer::SendClientArgs() {
     gravConnection->SendTcpBytes(clientArgs.str());
 }
 
-unsigned CMeleeServer::GetPilotIndex(unsigned connectionIndex) const {
+unsigned CServerSocket::GetPilotIndex(unsigned connectionIndex) const {
     unsigned numHumans = 0;
     for(unsigned i = 0; i < mPilotTypes.size(); ++i) {
         if(numHumans == connectionIndex) return i;
@@ -115,7 +115,7 @@ unsigned CMeleeServer::GetPilotIndex(unsigned connectionIndex) const {
     return 0;
 }
 
-void CMeleeServer::End(int winner) {
+void CServerSocket::End(int winner) {
     for(auto& connection: mConnections) {
         stringstream clientArgs;
         writeValue(clientArgs, "Stop");

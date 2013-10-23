@@ -1,5 +1,5 @@
-#ifndef CGRAV_UPDATE_SERVER_HPP_
-#define CGRAV_UPDATE_SERVER_HPP_
+#ifndef CCLIENT_SOCKET_HPP_
+#define CCLIENT_SOCKET_HPP_
 
 class Decerealiser;
 #include "CUdpServer.hpp"
@@ -11,15 +11,12 @@ class Decerealiser;
 #include <boost/asio.hpp>
 
 
-class CGravUpdateServer: public CUdpServer {
+class CClientSocket: public CUdpServer {
 public:
 
-    using Sprites = SClientFrame::Sprites;
-    using Pilots = SClientFrame::Pilots;
+    CClientSocket(uint16_t serverUdpPort, unsigned pilotIndex);
 
-    CGravUpdateServer(uint16_t serverUdpPort, unsigned pilotIndex);
-    Pilots GetPilots() const;
-    Sprites GetSprites() const;
+    SClientFrame GetFrame() const;
 
 private:
 
@@ -30,7 +27,7 @@ private:
     virtual void AfterReceive(const boost::system::error_code& error,
                               std::size_t numBytes, const Array& bytes) override;
     virtual void AfterSend(const boost::system::error_code& error,
-                           std::size_t numBytes) override;
+                           std::size_t numBytes) override {}
     void UpdateFrame(Decerealiser& cereal);
 };
 

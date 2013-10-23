@@ -2,7 +2,7 @@
 #define CMELEE_CLIENT_HPP_
 
 class CGravOptions;
-class CGravUpdateServer;
+class CClientSocket;
 #include "CMelee.hpp"
 #include <atomic>
 
@@ -12,14 +12,14 @@ class CMeleeClient: public CMelee {
 public:
 
     CMeleeClient(const CGravOptions &options,
-                 const CGravUpdateServer& updateServer);
+                 const CClientSocket& clientSocket);
 
     virtual void Run() override;
     void Stop(int winner);
 
 private:
 
-    const CGravUpdateServer& mUpdateServer;
+    const CClientSocket& mClientSocket;
     std::atomic_bool mIsGameOver;
 
     virtual int  GetWinner()  override { return mWinner;     }

@@ -1,6 +1,6 @@
 #include "CMeleeClient.hpp"
 #include "CGravOptions.hpp"
-#include "CGravUpdateServer.hpp"
+#include "CClientSocket.hpp"
 #include "CPilot.hpp"
 #include <iostream>
 
@@ -8,15 +8,15 @@ using namespace std;
 
 
 CMeleeClient::CMeleeClient(const CGravOptions& options,
-                           const CGravUpdateServer& updateServer):
+                           const CClientSocket& clientSocket):
     CMelee(options, nullptr), /*nullptr: no server*/
-    mUpdateServer(updateServer),
+    mClientSocket(clientSocket),
     mIsGameOver() {
 
 }
 
 void CMeleeClient::Run() {
-    CGravUpdateServer::Sprites oldSprites, newSprites;
+    SClientFrame::Sprites oldSprites, newSprites;
     for(;;) {
         for(const auto& levelSprite: oldSprites) {
             const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());
@@ -24,7 +24,9 @@ void CMeleeClient::Run() {
             sprite->Erase(mGravMedia.GetLevel().GetCanvas(),
                           levelSprite.GetX(), levelSprite.GetY());
         }
-        newSprites = mUpdateServer.GetSprites();
+
+        //TODO: find out why I can just get the frame here and use it
+        newSprites = mClientSocket.GetFrame().sprites;
         for(const auto& levelSprite: newSprites) {
             const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());
             if(!sprite) {
@@ -35,7 +37,7 @@ void CMeleeClient::Run() {
                           levelSprite.GetX(), levelSprite.GetY());
         }
         oldSprites = newSprites;
-        const auto pilots = mUpdateServer.GetPilots();
+        const auto pilots = mClientSocket.GetFrame().pilots;
         assert(pilots.size() <= mPilots.size()); //server pilots could have died
         for(size_t i = 0; i < pilots.size(); ++i)
             mPilots[i]->SetScore(pilots[i].GetScore());

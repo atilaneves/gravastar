@@ -16,8 +16,8 @@
 
 
 CMelee::CMelee(const CGravOptions &options,
-               CMeleeServer* server):
-    mServer(server),
+               CServerSocket* serverSocket):
+    mServerSocket(serverSocket),
     mGravMedia(options.GetMeleeOptions(),
                options.GetClientOptions().GetAllPilotOptions()),
     mGravScreen(mGravMedia.GetLevel().GetCanvas(), options.GetClientOptions(),
@@ -50,14 +50,14 @@ CMelee::~CMelee() {
 
 CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions, unsigned pilotIndex) {
     const auto& shipYard = mGravMedia.GetShipYard();
-    const auto& type     = mServer->GetPilotType(pilotOptions.GetType(), pilotIndex);
+    const auto& type     = mServerSocket->GetPilotType(pilotOptions.GetType(), pilotIndex);
     return CPilotFactory::Instance().CreateObject(type, pilotOptions,
                                                   shipYard, mMeleeScore);
 }
 
 
 void CMelee::End(float avgFPS) {
-    if(mServer) mServer->End(mWinner);
+    if(mServerSocket) mServerSocket->End(mWinner);
     CKeyboard::Clear();
     if(mWinner >= 0) {
         CStats::AddWin(mWinner);

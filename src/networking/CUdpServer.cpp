@@ -11,8 +11,7 @@ using boost::asio::ip::udp;
 
 CUdpServer::CUdpServer(uint16_t port):
     mPort(port),
-    mSocket(mService, udp::endpoint(udp::v4(), mPort)) {
-    std::cout << "UDP server Listening\n";
+    mSocket(mService, udp::endpoint(udp::v4(), mPort)) { //any address
     Listen();
 }
 

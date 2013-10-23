@@ -1,5 +1,5 @@
-#ifndef _CMELEE_SERVER_H_
-#define _CMELEE_SERVER_H_
+#ifndef _SERVER_SOCKET_H_
+#define _SERVER_SOCKET_H_
 
 
 class CGravOptions;
@@ -9,11 +9,11 @@ class CGravOptions;
 #include <vector>
 
 
-class CMeleeServer: public CTcpConnectionObserver {
+class CServerSocket: public CTcpConnectionObserver {
 public:
 
-    CMeleeServer(const CGravOptions& options);
-    ~CMeleeServer();
+    CServerSocket(const CGravOptions& options);
+    ~CServerSocket();
     void SendFrame(const std::vector<unsigned char>& frameBytes);
     virtual void Handle(const CTcpConnection::Pointer& tcpConnection) override;
     void End(int winner);

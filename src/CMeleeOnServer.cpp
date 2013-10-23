@@ -7,7 +7,7 @@
 
 
 CMeleeOnServer::CMeleeOnServer(const CGravOptions &options):
-    CMelee(options, new CMeleeServer(options)) {
+    CMelee(options, new CServerSocket(options)) {
 
     CActionPicker::SetPowerups(&mPowerups);
 }
@@ -47,7 +47,7 @@ void CMeleeOnServer::Update(float dt) {
     for(unsigned int p = 0; p < pilots.size(); ++p) pilots[p]->CheckControls();
     CSpriteObjs::Update(dt);
     const auto displayPilots = getDisplayPilots(GetActivePilots());
-    mServer->SendFrame(CSpriteObjs::Pack(displayPilots));
+    mServerSocket->SendFrame(CSpriteObjs::Pack(displayPilots));
     mPowerups.Generate(dt);
 
     mGravScreen.Draw(displayPilots);
