@@ -19,16 +19,11 @@ static vector<string> getPilotTypes(const CGravOptions& options) {
 CServerSocket::CServerSocket(const CGravOptions& options):
     mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
-    mTcpServer(mTcpIoService, *this),
-    mTcpThread([this]() { mTcpIoService.run(); }) {
+    mTcpServer(12346, *this) {
 
     cout << "CServerSocket starting\n";
 }
 
-CServerSocket::~CServerSocket() {
-    mTcpIoService.stop();
-    mTcpThread.join();
-}
 
 std::string CServerSocket::GetPilotType(const std::string& type,
                                        unsigned pilotIndex) const {

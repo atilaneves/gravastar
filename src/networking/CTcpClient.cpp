@@ -52,7 +52,7 @@ bool CTcpClient::ReadUntil(std::atomic_bool& condition,
 
 void CTcpClient::Send(const std::vector<unsigned char>& bytes) {
     cout << "TcpClient sending " << bytes.size() << " bytes to the server: ";
-    for(const auto byte: bytes) cout << static_cast<int>(byte) << ", ";
+    for(const auto byte: bytes) cout << static_cast<char>(byte);
     cout << endl;
     asio::write(mSocket, asio::buffer(bytes));
 }

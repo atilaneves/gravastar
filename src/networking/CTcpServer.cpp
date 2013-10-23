@@ -2,21 +2,27 @@
 #include <algorithm>
 #include <boost/bind.hpp>
 
+
 using boost::asio::ip::tcp;
 using namespace std;
 
 
-CTcpServer::CTcpServer(boost::asio::io_service& ioService,
-                       CTcpConnectionObserver& tcpObserver)
-    : mTcpObserver(tcpObserver),
-      mAcceptor(ioService, tcp::endpoint(tcp::v4(), 12346)) {
+CTcpServer::CTcpServer(int port, CTcpConnectionObserver& tcpObserver):
+    mTcpObserver(tcpObserver),
+    mAcceptor(mIoService, tcp::endpoint(tcp::v4(), port)),
+    mThread([this]{ mIoService.run();})
+{
 
-    StartAccept();
+    Accept();
 }
 
-void CTcpServer::StartAccept() {
-    CTcpConnection::Pointer newConnection =
-        CTcpConnection::Create(mAcceptor.get_io_service());
+CTcpServer::~CTcpServer() {
+    mIoService.stop();
+    mThread.join();
+}
+
+void CTcpServer::Accept() {
+    auto newConnection = CTcpConnection::Create(mAcceptor.get_io_service());
 
     mAcceptor.async_accept(newConnection->Socket(),
                            boost::bind(&CTcpServer::HandleAccept, this, newConnection,
@@ -27,7 +33,7 @@ void CTcpServer::HandleAccept(CTcpConnection::Pointer newConnection,
                               const boost::system::error_code& error) {
     if(!error) {
         mTcpObserver.Handle(newConnection);
-        StartAccept();
+        Accept();
     } else {
         cerr << "Error in CTcpServer::HandleAccept" << endl;
     }

@@ -2,6 +2,7 @@
 #define TCP_SERVER_HPP_
 
 #include "CTcpConnection.hpp"
+#include <thread>
 #include <boost/asio.hpp>
 
 
@@ -13,15 +14,17 @@ public:
 class CTcpServer {
 public:
 
-    CTcpServer(boost::asio::io_service& ioService,
-               CTcpConnectionObserver& tcpObserver);
+    CTcpServer(int port, CTcpConnectionObserver& tcpObserver);
+    ~CTcpServer();
 
 private:
 
+    boost::asio::io_service mIoService;
     CTcpConnectionObserver& mTcpObserver;
     boost::asio::ip::tcp::acceptor mAcceptor;
+    std::thread mThread;
 
-    void StartAccept();
+    void Accept();
     void HandleAccept(CTcpConnection::Pointer newConnection,
                       const boost::system::error_code& error);
 };
