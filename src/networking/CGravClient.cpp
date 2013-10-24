@@ -1,10 +1,10 @@
 #include "CGravClient.hpp"
 #include "CVersusMenu.hpp"
 #include "CSongPlayer.hpp"
-#include "CClientSocket.hpp"
 #include "network_buffers.hpp"
 #include "output.hpp"
 #include "stl_utils.hpp"
+#include "Decerealiser.hpp"
 #include <thread>
 
 
@@ -18,11 +18,10 @@ static std::vector<unsigned char> portToBytes(uint16_t port) {
 
 CGravClient::CGravClient(const std::string& addr, int port):
     mTcpClient(addr, port),
-    mPort(rand() % 40000 + 10000) {
-
+    mUdpSocket(*this)
+{
     mTcpClient.BlockingConnect();
-
-    mTcpClient.Send(portToBytes(mPort));
+    mTcpClient.Send(portToBytes(mUdpSocket.GetPort()));
 }
 
 
@@ -63,15 +62,15 @@ void CGravClient::StartMeleeClient(CSongPlayer& songPlayer, std::deque<std::stri
     sound.PlayCentre();
 
     const unsigned pilotIndex = std::stoi(popFront(options));
-    CClientSocket clientSocket{mPort, pilotIndex};
-    std::thread clientSocketThread{[&](){ clientSocket.Run(); }};
+    mClientSocket.reset(new CClientSocket{pilotIndex});
+    std::thread clientSocketThread{[&](){ mUdpSocket.Run(); }};
 
     printCentre("Loading...");
     mMelee.reset(new CMeleeClient{GetGravOptions(options, vsClientOptions),
-                                  clientSocket});
+                                  *mClientSocket});
     mMelee->Run();
 
-    clientSocket.Stop();
+    mUdpSocket.Stop();
     clientSocketThread.join();
 
     songPlayer.PlaySong();
@@ -107,4 +106,15 @@ CGravOptions CGravClient::GetGravOptions(std::deque<std::string>& options,
 
     const CClientOptions clientOptions{allPilotOpts, vsClientOptions};
     return {meleeOptions, clientOptions};
+}
+
+void CGravClient::UdpReceived(const boost::system::error_code& error,
+                              size_t numBytes, const Array& bytes) {
+    if(error && error != boost::asio::error::message_size) {
+        std::cerr << "Error in CGravClient::AfterReceive" << std::endl;
+        return;
+    }
+
+    Decerealiser cereal{bytes};
+    mClientSocket->UpdateFrame(cereal);
 }

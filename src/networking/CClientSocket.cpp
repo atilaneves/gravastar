@@ -6,8 +6,7 @@
 using namespace std;
 
 
-CClientSocket::CClientSocket(int serverUdpPort, unsigned pilotIndex):
-    mUdpServer(serverUdpPort, *this),
+CClientSocket::CClientSocket(unsigned pilotIndex):
     mPilotIndex(pilotIndex) {
 
 }
@@ -17,16 +16,6 @@ SClientFrame CClientSocket::GetFrame() const {
     return mFrame;
 }
 
-void CClientSocket::UdpReceived(const boost::system::error_code& error,
-                                size_t numBytes, const Array& bytes) {
-    if(error && error != boost::asio::error::message_size) {
-        cerr << "Error in Clientsocket::AfterReceive" << endl;
-        return;
-    }
-
-    Decerealiser cereal(bytes);
-    UpdateFrame(cereal);
-}
 
 void CClientSocket::UpdateFrame(Decerealiser& cereal) {
     if(!mReady) mReady = true;

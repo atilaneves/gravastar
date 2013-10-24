@@ -9,6 +9,13 @@
 using boost::asio::ip::udp;
 
 
+CUdpServer::CUdpServer(CUdpObserver& observer):
+    CUdpSocket(),
+    mObserver(observer) {
+
+    Listen();
+}
+
 CUdpServer::CUdpServer(int port, CUdpObserver& observer):
     CUdpSocket(port),
     mObserver(observer) {

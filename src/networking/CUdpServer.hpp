@@ -19,6 +19,7 @@ public:
 class CUdpServer:public CUdpSocket {
 public:
 
+    CUdpServer(CUdpObserver& observer);
     CUdpServer(int port, CUdpObserver& observer);
 
     void Run();

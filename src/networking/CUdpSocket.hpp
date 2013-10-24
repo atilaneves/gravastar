@@ -12,10 +12,11 @@ public:
     using Array = std::array<unsigned char, 1024*1024>;
 
     void SendBytes(const std::vector<unsigned char>& sendBuffer);
+    int GetPort() const { return mSocket.local_endpoint().port(); }
 
 protected:
 
-    CUdpSocket(int port);
+    CUdpSocket(int port = 0);
     CUdpSocket(const std::string& address, int port);
     CUdpSocket(boost::asio::ip::address address, int port);
 
