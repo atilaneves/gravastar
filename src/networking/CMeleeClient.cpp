@@ -16,7 +16,7 @@ CMeleeClient::CMeleeClient(const CGravOptions& options,
 }
 
 void CMeleeClient::Run() {
-    while(!mClientSocket.IsReady()) ;
+    while(!mClientSocket.IsReady());
     SClientFrame::Sprites oldSprites, newSprites;
     for(;;) {
         for(const auto& levelSprite: oldSprites) {
@@ -26,8 +26,8 @@ void CMeleeClient::Run() {
                           levelSprite.GetX(), levelSprite.GetY());
         }
 
-        //TODO: find out why I can just get the frame here and use it
-        newSprites = mClientSocket.GetFrame().sprites;
+        const auto frame = mClientSocket.GetFrame();
+        newSprites = frame.sprites;
         for(const auto& levelSprite: newSprites) {
             const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());
             if(!sprite) {
@@ -38,7 +38,7 @@ void CMeleeClient::Run() {
                           levelSprite.GetX(), levelSprite.GetY());
         }
         oldSprites = newSprites;
-        const auto pilots = mClientSocket.GetFrame().pilots;
+        const auto pilots = frame.pilots;
         assert(pilots.size() <= mPilots.size()); //server pilots could have died
         for(size_t i = 0; i < pilots.size(); ++i)
             mPilots[i]->SetScore(pilots[i].GetScore());
