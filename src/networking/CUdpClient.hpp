@@ -2,24 +2,20 @@
 #define CUDP_CLIENT_HPP_
 
 
-#include <vector>
-#include <boost/asio.hpp>
+#include "CUdpSocket.hpp"
 
 
-class CUdpClient {
+class CUdpClient: public CUdpSocket {
 public:
 
     CUdpClient(const std::string& address, int port);
-    void SendBytes(const std::vector<unsigned char>& sendBuffer);
-
 
 private:
 
-    boost::asio::io_service mService;
-    boost::asio::ip::udp::socket mSocket;
-    const boost::asio::ip::udp::endpoint mServerEndpoint;
-
-    void HandleSend(const boost::system::error_code& error, std::size_t numBytes) {}
+    virtual void HandleReceive(const boost::system::error_code& error,
+                               std::size_t numBytes) override {}
+    virtual void HandleSend(const boost::system::error_code& error,
+                            std::size_t numBytes) override {}
 };
 
 #endif
