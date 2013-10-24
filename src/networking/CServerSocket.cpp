@@ -48,8 +48,8 @@ void CServerSocket::HandleTcpConnection(const CTcpConnection::Pointer& tcpConnec
         [this, tcpConnection](const CTcpConnection::Array& bytes, size_t numBytes) {
             const auto tokens = msgBufToDeque(bytes, numBytes);
             assert(tokens[0] == "UdpPort");
-            const uint16_t udpPort = stoi(tokens[1]);
-            mConnections.emplace_back(new CGravConnection{tcpConnection, udpPort});
+            const uint16_t remoteUdpPort = stoi(tokens[1]);
+            mConnections.emplace_back(new CGravConnection{tcpConnection, remoteUdpPort});
             SendClientArgs();
     });
 }

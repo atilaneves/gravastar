@@ -7,7 +7,7 @@ unsigned CGravConnection::sNumConnections = 0;
 CGravConnection::CGravConnection(const CTcpConnection::Pointer& tcpConnection,
                                  int udpPort):
     mTcpConnection(tcpConnection),
-    mUdpClient("127.0.0.1", udpPort),
+    mUdpClient(tcpConnection->Socket().remote_endpoint().address(), udpPort),
     mIndex(++sNumConnections) {
 }
 

@@ -16,13 +16,18 @@ CUdpSocket::CUdpSocket(int port): //server
 }
 
 CUdpSocket::CUdpSocket(const std::string& address, int port): //client
+    CUdpSocket(address_v4::from_string(address), port)
+{
+}
+
+
+CUdpSocket::CUdpSocket(boost::asio::ip::address address, int port): //client
     mSocket(mService),
-    mEndpoint(address_v4::from_string(address), port)
+    mEndpoint(address, port)
 {
 
     mSocket.open(udp::v4());
 }
-
 
 void CUdpSocket::SendBytes(const std::vector<unsigned char>& sendBuffer) {
     mSocket.async_send_to(boost::asio::buffer(sendBuffer), mEndpoint,

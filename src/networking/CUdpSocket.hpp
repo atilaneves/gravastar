@@ -17,6 +17,7 @@ protected:
 
     CUdpSocket(int port);
     CUdpSocket(const std::string& address, int port);
+    CUdpSocket(boost::asio::ip::address address, int port);
 
     boost::asio::io_service mService;
     boost::asio::ip::udp::socket mSocket;

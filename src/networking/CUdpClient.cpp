@@ -6,3 +6,8 @@ CUdpClient::CUdpClient(const std::string& address, int port):
 {
 
 }
+
+CUdpClient::CUdpClient(boost::asio::ip::address address, int port):
+    CUdpSocket(address, port)
+{
+}

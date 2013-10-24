@@ -9,6 +9,7 @@ class CUdpClient: public CUdpSocket {
 public:
 
     CUdpClient(const std::string& address, int port);
+    CUdpClient(boost::asio::ip::address address, int port);
 
 private:
 
