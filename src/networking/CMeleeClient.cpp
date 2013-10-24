@@ -16,6 +16,7 @@ CMeleeClient::CMeleeClient(const CGravOptions& options,
 }
 
 void CMeleeClient::Run() {
+    while(!mClientSocket.IsReady()) ;
     SClientFrame::Sprites oldSprites, newSprites;
     for(;;) {
         for(const auto& levelSprite: oldSprites) {

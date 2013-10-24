@@ -5,6 +5,7 @@ class Decerealiser;
 #include "CUdpServer.hpp"
 #include "SClientFrame.hpp"
 #include <mutex>
+#include <atomic>
 
 
 class CClientSocket: public CUdpObserver {
@@ -15,11 +16,13 @@ public:
     SClientFrame GetFrame() const;
     void Run()  { mUdpServer.Run();  }
     void Stop() { mUdpServer.Stop(); }
+    bool IsReady() const { return mReady; }
 
 private:
 
     CUdpServer mUdpServer;
     unsigned mPilotIndex;
+    std::atomic_bool mReady;
     SClientFrame mFrame;
     mutable std::mutex mFrameMutex;
 

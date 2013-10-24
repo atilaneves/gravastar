@@ -29,6 +29,7 @@ void CClientSocket::UdpReceived(const boost::system::error_code& error,
 }
 
 void CClientSocket::UpdateFrame(Decerealiser& cereal) {
+    if(!mReady) mReady = true;
     lock_guard<mutex> lock{mFrameMutex};
     mFrame = move(SClientFrame{}); //reset
     cereal >> mFrame;
