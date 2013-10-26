@@ -3,6 +3,7 @@
 
 
 #include <boost/asio.hpp>
+#include <thread>
 
 
 class CUdpObserver {
@@ -21,16 +22,16 @@ public:
     using Array = CUdpObserver::Array;
 
     CUdpReceiver(CUdpObserver& observer, int port = 0);
+    ~CUdpReceiver();
 
-    void Run();
-    void Stop();
-    int  GetPort() const { return mSocket.local_endpoint().port(); }
+    int GetPort() const { return mSocket.local_endpoint().port(); }
 
 private:
 
     CUdpObserver& mObserver;
     boost::asio::io_service mService;
     boost::asio::ip::udp::socket mSocket;
+    std::thread mThread;
     Array mRecvBuffer;
 
     void Listen();

@@ -12,20 +12,17 @@ using boost::asio::ip::address_v4;
 
 CUdpReceiver::CUdpReceiver(CUdpObserver& observer, int port):
     mObserver(observer),
-    mSocket(mService, udp::endpoint(udp::v4(), port)) //any address
+    mSocket(mService, udp::endpoint(udp::v4(), port)), //any address
+    mThread([this]{ mService.run();})
 {
 
     Listen();
 }
 
 
-void CUdpReceiver::Run() {
-    mService.run();
-}
-
-
-void CUdpReceiver::Stop() {
+CUdpReceiver::~CUdpReceiver() {
     mService.stop();
+    mThread.join();
 }
 
 

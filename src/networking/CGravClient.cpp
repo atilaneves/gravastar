@@ -63,15 +63,11 @@ void CGravClient::StartMeleeClient(CSongPlayer& songPlayer, std::deque<std::stri
 
     const unsigned pilotIndex = std::stoi(popFront(options));
     mClientSocket.reset(new CClientSocket{pilotIndex, mUdpSender});
-    std::thread udpReceiverThread{[&](){ mUdpReceiver.Run(); }};
 
     printCentre("Loading...");
     mMelee.reset(new CMeleeClient{GetGravOptions(options, vsClientOptions),
                                   *mClientSocket});
     mMelee->Run();
-
-    mUdpReceiver.Stop();
-    udpReceiverThread.join();
 
     songPlayer.PlaySong();
 }
