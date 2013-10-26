@@ -19,7 +19,7 @@ static vector<string> getPilotTypes(const CGravOptions& options) {
 CServerSocket::CServerSocket(const CGravOptions& options):
     mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
-    mTcpServer(options.GetServerPort(), *this),
+    mTcpServer(*this, options.GetServerPort()),
     mUdpReceiver(*this, options.GetServerPort())
 {
 

@@ -7,7 +7,7 @@ using boost::asio::ip::tcp;
 using namespace std;
 
 
-CTcpServer::CTcpServer(int port, CTcpConnectionObserver& tcpObserver):
+CTcpServer::CTcpServer(CTcpConnectionObserver& tcpObserver, int port):
     mTcpObserver(tcpObserver),
     mAcceptor(mIoService, tcp::endpoint(tcp::v4(), port)),
     mThread([this]{ mIoService.run();})

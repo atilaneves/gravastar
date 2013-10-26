@@ -14,7 +14,7 @@ public:
 class CTcpServer {
 public:
 
-    CTcpServer(int port, CTcpConnectionObserver& tcpObserver);
+    CTcpServer(CTcpConnectionObserver& tcpObserver, int port);
     ~CTcpServer();
 
 private:
