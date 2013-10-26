@@ -18,10 +18,10 @@ static std::vector<unsigned char> portToBytes(uint16_t port) {
 
 CGravClient::CGravClient(const std::string& addr, int port):
     mTcpClient(addr, port),
-    mUdpSocket(*this)
+    mUdpReceiver(*this)
 {
     mTcpClient.BlockingConnect();
-    mTcpClient.Send(portToBytes(mUdpSocket.GetPort()));
+    mTcpClient.Send(portToBytes(mUdpReceiver.GetPort()));
 }
 
 
@@ -63,14 +63,14 @@ void CGravClient::StartMeleeClient(CSongPlayer& songPlayer, std::deque<std::stri
 
     const unsigned pilotIndex = std::stoi(popFront(options));
     mClientSocket.reset(new CClientSocket{pilotIndex});
-    std::thread clientSocketThread{[&](){ mUdpSocket.Run(); }};
+    std::thread clientSocketThread{[&](){ mUdpReceiver.Run(); }};
 
     printCentre("Loading...");
     mMelee.reset(new CMeleeClient{GetGravOptions(options, vsClientOptions),
                                   *mClientSocket});
     mMelee->Run();
 
-    mUdpSocket.Stop();
+    mUdpReceiver.Stop();
     clientSocketThread.join();
 
     songPlayer.PlaySong();

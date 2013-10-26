@@ -1,5 +1,5 @@
 #include "CServerSocket.hpp"
-#include "CUdpServer.hpp"
+#include "CUdpReceiver.hpp"
 #include "CGravOptions.hpp"
 #include "network_buffers.hpp"
 #include <iostream>
@@ -20,7 +20,7 @@ CServerSocket::CServerSocket(const CGravOptions& options):
     mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
     mTcpServer(options.GetServerPort(), *this),
-    mUdpServer(*this, options.GetServerPort())
+    mUdpReceiver(*this, options.GetServerPort())
 {
 
     cout << "CServerSocket starting\n";

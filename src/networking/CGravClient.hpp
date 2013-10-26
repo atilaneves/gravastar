@@ -4,7 +4,7 @@
 #include "CTcpClient.hpp"
 #include "CGravOptions.hpp"
 #include "CMeleeClient.hpp"
-#include "CUdpServer.hpp"
+#include "CUdpReceiver.hpp"
 #include "CClientSocket.hpp"
 #include <deque>
 #include <string>
@@ -24,7 +24,7 @@ public:
 private:
 
     CTcpClient mTcpClient;
-    CUdpServer mUdpSocket;
+    CUdpReceiver mUdpReceiver;
     std::unique_ptr<CClientSocket> mClientSocket;
     std::unique_ptr<CMeleeClient> mMelee;
 

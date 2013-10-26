@@ -4,7 +4,7 @@
 
 class CGravOptions;
 #include "CTcpServer.hpp"
-#include "CUdpServer.hpp"
+#include "CUdpReceiver.hpp"
 #include "CGravConnection.hpp"
 #include <vector>
 
@@ -27,7 +27,7 @@ private:
     std::vector<std::string> mPilotTypes;
     const CGravOptions& mGravOptions;
     CTcpServer mTcpServer;
-    CUdpServer mUdpServer;
+    CUdpReceiver mUdpReceiver;
     std::vector<std::unique_ptr<CGravConnection>> mConnections;
 
     void SendClientArgs();

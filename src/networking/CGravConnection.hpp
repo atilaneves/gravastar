@@ -3,7 +3,7 @@
 
 
 #include "CTcpConnection.hpp"
-#include "CUdpClient.hpp"
+#include "CUdpSender.hpp"
 #include <vector>
 
 
@@ -22,7 +22,7 @@ public:
 private:
 
     CTcpConnection::Pointer mTcpConnection;
-    CUdpClient mUdpClient;
+    CUdpSender mUdpSender;
     unsigned mIndex;
     static unsigned sNumConnections;
 };
