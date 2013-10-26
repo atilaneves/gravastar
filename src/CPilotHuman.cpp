@@ -15,8 +15,7 @@ CPilotHuman::CPilotHuman(const CPilotOptions &options,
 }
 
 
-void CPilotHuman::CheckControls() {
-    std::cout << "CheckControls\n";
+void CPilotHuman::CheckControls(CClientSocket* clientSocket) {
     GetShip().ApplyInput(*mInput);
     if(mInput->Start() && mReleasedStart) {
         mReleasedStart = false;

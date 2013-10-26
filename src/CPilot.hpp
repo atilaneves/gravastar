@@ -15,6 +15,7 @@ class CBitmap;
 class CMeleeScore;
 class CGravSprite;
 class CShipStatSprite;
+class CClientSocket;
 
 
 class CPilot {
@@ -27,10 +28,10 @@ public:
 
             void AddDamage(float amount, CPilot &pilot);
             void AddFrag(CPilot &pilot);
-    virtual void CheckControls() = 0;
+    virtual void CheckControls(CClientSocket* clientSocket) = 0;
             void GameOver() { mNbShips = 0; }
             int  GetIndex()   const { return mIndex; }
-    const CPilotInput& GetInput() const { return *mInput; }
+    CPilotInput& GetInput() const { return *mInput; }
     const std::string& GetName() const;
             int  GetNbShips() const { return mNbShips; }
             int  GetScore()   const;

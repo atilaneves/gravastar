@@ -16,7 +16,7 @@ private:
 
   bool mReleasedStart;
 
-  virtual void CheckControls();
+  virtual void CheckControls(CClientSocket* clientSocket);
 
 
 };

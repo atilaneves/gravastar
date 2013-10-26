@@ -22,7 +22,7 @@ CPilotBot::CPilotBot(const CPilotOptions &options,
 }
 
 
-void CPilotBot::CheckControls() {
+void CPilotBot::CheckControls(CClientSocket* clientSocket) {
     if(!IsAlive() || !GetShip().IsActive()) return;
     CBotAction &action = mActionPicker->GetAction();
     CPilotInputBot input;

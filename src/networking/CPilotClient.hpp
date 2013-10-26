@@ -9,7 +9,7 @@ public:
                  CMeleeScore& meleeScore);
 private:
 
-    virtual void CheckControls() override;
+    virtual void CheckControls(CClientSocket* clientSocket) override;
 };
 
 

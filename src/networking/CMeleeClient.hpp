@@ -12,14 +12,14 @@ class CMeleeClient: public CMelee {
 public:
 
     CMeleeClient(const CGravOptions &options,
-                 const CClientSocket& clientSocket);
+                 CClientSocket& clientSocket);
 
     virtual void Run() override;
     void Stop(int winner);
 
 private:
 
-    const CClientSocket& mClientSocket;
+    CClientSocket& mClientSocket;
     std::atomic_bool mIsGameOver;
 
     virtual int  GetWinner()  override { return mWinner;     }

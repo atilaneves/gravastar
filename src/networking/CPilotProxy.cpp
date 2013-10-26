@@ -10,5 +10,5 @@ CPilotProxy::CPilotProxy(const CPilotOptions &options, const CShipYard &shipYard
     CPilot(false, /*split screen*/ options, shipYard, meleeScore) {
 }
 
-void CPilotProxy::CheckControls() {
+void CPilotProxy::CheckControls(CClientSocket* clientSocket) {
 }

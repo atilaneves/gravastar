@@ -8,7 +8,7 @@ using namespace std;
 
 
 CMeleeClient::CMeleeClient(const CGravOptions& options,
-                           const CClientSocket& clientSocket):
+                           CClientSocket& clientSocket):
     CMelee(options, nullptr), /*nullptr: no server*/
     mClientSocket(clientSocket),
     mIsGameOver() {
@@ -21,7 +21,7 @@ void CMeleeClient::Run() {
     SClientFrame::Sprites oldSprites, newSprites;
     while(!mIsGameOver) {
 
-        for(const auto& p: mPilots) p->CheckControls();
+        for(const auto& p: mPilots) p->CheckControls(&mClientSocket);
 
         for(const auto& levelSprite: oldSprites) {
             const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());

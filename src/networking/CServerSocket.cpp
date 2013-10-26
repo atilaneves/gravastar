@@ -24,7 +24,7 @@ CServerSocket::CServerSocket(const CGravOptions& options):
 {
 
     cout << "CServerSocket starting\n";
-    sleep(1);
+    sleep(2);
 }
 
 
@@ -115,4 +115,5 @@ void CServerSocket::End(int winner) {
 
 void CServerSocket::UdpReceived(const boost::system::error_code& error,
                                 std::size_t numBytes, const Array& bytes) {
+    cout << "UDP received" << endl;
 }

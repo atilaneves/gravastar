@@ -28,7 +28,7 @@ private:
     float mMinAngle;
     std::unique_ptr<CActionPicker> mActionPicker;
 
-    virtual void CheckControls() override;
+    virtual void CheckControls(CClientSocket* clientSocket) override;
 
     void PreventStasis(CPilotInputBot& input);
     void Turn(const CBotAction& action, CPilotInputBot& input);

@@ -28,7 +28,7 @@ CPilot::CPilot(bool hasSplitScreen,
 
 bool CPilot::IsSurvival() const {
     return mMeleeScore.GetMeleeType() == "Survival" ||
-        mMeleeScore.GetMeleeType() == "Squad";
+           mMeleeScore.GetMeleeType() == "Squad";
 }
 
 

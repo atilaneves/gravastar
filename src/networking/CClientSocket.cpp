@@ -1,13 +1,18 @@
 #include "CClientSocket.hpp"
 #include "Decerealiser.hpp"
+#include "Cerealiser.hpp"
+#include "CUdpSender.hpp"
 #include <iostream>
 
 
 using namespace std;
 
 
-CClientSocket::CClientSocket(unsigned pilotIndex):
-    mPilotIndex(pilotIndex) {
+CClientSocket::CClientSocket(unsigned pilotIndex, CUdpSender& udpSender):
+    mPilotIndex(pilotIndex),
+    mUdpSender(udpSender),
+    mReady(false)
+{
 
 }
 
@@ -23,4 +28,11 @@ void CClientSocket::UpdateFrame(Decerealiser& cereal) {
     mFrame = move(SClientFrame{}); //reset
     cereal >> mFrame;
     mFrame.SetPilot(mPilotIndex);
+}
+
+
+void CClientSocket::SendControls(CPilotInputProxy input) {
+    Cerealiser cereal;
+    cereal << input;
+    mUdpSender.SendBytes(cereal.getBytes());
 }
