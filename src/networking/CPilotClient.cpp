@@ -11,4 +11,5 @@ CPilotClient::CPilotClient(const CPilotOptions &options, const CShipYard &shipYa
 }
 
 void CPilotClient::CheckControls() {
+
 }

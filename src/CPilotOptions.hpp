@@ -16,29 +16,28 @@ class CPilotOptions {
 
 public:
 
-  CPilotOptions(const std::string &name, const std::string& type,
-                const CTeam &team,
-                const shipTypes_t &ships,
-                const CPilotInputOptions &inputOptions);
+    CPilotOptions(const std::string &name, const std::string& type,
+                  const CTeam &team,
+                  const shipTypes_t &ships,
+                  const CPilotInputOptions &inputOptions);
 
-   void SetInputOptions(const CPilotInputOptions& io) { mInputOptions = io; }
-  const CPilotInputOptions& GetInputOptions() const { return mInputOptions; }
-  const std::string& GetName()                const { return mName;         }
-  const unsigned int GetNbShips()             const { return mShips.size(); }
-  const std::string& GetShipName(unsigned s)  const { return mShips[s]; }
-  const shipTypes_t& GetShipNames()           const { return mShips; }
-  const CTeam&       GetTeam()                const { return *mTeam;        }
-  const std::string& GetType()                const { return mType;         }
-        void         SetBot()                       { mType = "Bot"; }
-
+    void SetInputOptions(const CPilotInputOptions& io) { mInputOptions = io; }
+    const CPilotInputOptions& GetInputOptions() const { return mInputOptions; }
+    const std::string& GetName()                const { return mName;         }
+    const unsigned int GetNbShips()             const { return mShips.size(); }
+    const std::string& GetShipName(unsigned s)  const { return mShips[s]; }
+    const shipTypes_t& GetShipNames()           const { return mShips; }
+    const CTeam&       GetTeam()                const { return *mTeam; }
+    const std::string& GetType()                const { return mType;  }
+          void         SetBot()                       { mType = "Bot"; }
 
 private:
 
-  std::string         mName;
-  std::string         mType;
-  const CTeam*        mTeam;  //has to be ptr cos of STL
-  shipTypes_t         mShips;
-  CPilotInputOptions  mInputOptions;
+  std::string        mName;
+  std::string        mType;
+  const CTeam*       mTeam;  //has to be ptr cos of STL
+  shipTypes_t        mShips;
+  CPilotInputOptions mInputOptions;
 
 };
 

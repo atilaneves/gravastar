@@ -16,7 +16,6 @@ public:
 
     CPilotBot(const CPilotOptions &options, const CShipYard &shipYard,
               CMeleeScore& meleeScore);
-    virtual ~CPilotBot() { }
 
     float GetMinAngle()    const { return mMinAngle; }
     bool  IsClearLine(const CVector2 &pos);

@@ -24,11 +24,12 @@ CServerSocket::CServerSocket(const CGravOptions& options):
 {
 
     cout << "CServerSocket starting\n";
+    sleep(1);
 }
 
 
 std::string CServerSocket::GetPilotType(const std::string& type,
-                                       unsigned pilotIndex) const {
+                                        unsigned pilotIndex) const {
     if(pilotIndex == 0 || type == "Bot") {
         return type;
     }

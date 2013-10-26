@@ -34,7 +34,7 @@ CMelee::CMelee(const CGravOptions &options,
 
     const auto& allPilotOptions = options.GetClientOptions().GetAllPilotOptions();
     for(unsigned i = 0; i < allPilotOptions.size(); ++i)
-        mPilots.push_back(CreatePilot(allPilotOptions[i], i));
+        mPilots.emplace_back(CreatePilot(allPilotOptions[i], i));
 }
 
 CMelee::~CMelee() {
@@ -45,13 +45,17 @@ CMelee::~CMelee() {
     CProjectiles::RemoveAll();
     CPilot::ResetIndex();
     CPilots::RemoveAll();
-    for(unsigned int p = 0; p < mPilots.size(); p++) delete mPilots[p];
 }
 
 CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions, unsigned pilotIndex) {
-    const auto& shipYard = mGravMedia.GetShipYard();
-    const auto& type     = mServerSocket->GetPilotType(pilotOptions.GetType(), pilotIndex);
-    return CPilotFactory::Instance().CreateObject(type, pilotOptions,
+    const auto& shipYard   = mGravMedia.GetShipYard();
+    const auto& optionType = pilotOptions.GetType();
+    const auto& realType   = mServerSocket ?
+                             mServerSocket->GetPilotType(optionType, pilotIndex) :
+                             optionType;
+    std::cout << "real type: " << realType << std::endl;
+
+    return CPilotFactory::Instance().CreateObject(realType, pilotOptions,
                                                   shipYard, mMeleeScore);
 }
 

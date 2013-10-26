@@ -22,7 +22,7 @@ class CMelee {
 public:
 
     enum { kMaxNbPilots = 4 };
-    using Pilots = std::vector<CPilot*>;
+    using Pilots = std::vector<std::shared_ptr<CPilot>>;
 
     CMelee(const CGravOptions &options, CServerSocket* serverSocket);
     virtual ~CMelee();
@@ -48,8 +48,8 @@ protected:
     std::atomic_int mWinner;
     Pilots mPilots;
 
-    void     CheckGameOver();
-    void     End(float avgFPS);
+    void CheckGameOver();
+    void End(float avgFPS);
 
 };
 

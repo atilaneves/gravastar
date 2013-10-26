@@ -16,9 +16,13 @@ CMeleeClient::CMeleeClient(const CGravOptions& options,
 }
 
 void CMeleeClient::Run() {
-    while(!mClientSocket.IsReady());
+    while(!mClientSocket.IsReady()) ; //wait for server
+
     SClientFrame::Sprites oldSprites, newSprites;
-    for(;;) {
+    while(!mIsGameOver) {
+
+        for(const auto& p: mPilots) p->CheckControls();
+
         for(const auto& levelSprite: oldSprites) {
             const auto sprite = CGravSprite::GetSprite(levelSprite.GetHash());
             assert(sprite);
@@ -44,10 +48,9 @@ void CMeleeClient::Run() {
             mPilots[i]->SetScore(pilots[i].GetScore());
 
         mGravScreen.Draw(pilots);
-        if(mIsGameOver) break;
     }
-    const auto avgFPS = 0.0f;
-    End(avgFPS);
+
+    End(0.0f /*avgFPS*/);
 }
 
 void CMeleeClient::Stop(int winner) {

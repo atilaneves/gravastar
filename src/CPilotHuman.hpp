@@ -11,8 +11,6 @@ public:
 
   CPilotHuman(const CPilotOptions &options, const CShipYard &shipYard,
               CMeleeScore& meleeScore);
-  virtual ~CPilotHuman() { }
-
 
 private:
 

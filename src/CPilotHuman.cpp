@@ -12,7 +12,6 @@ CPilotHuman::CPilotHuman(const CPilotOptions &options,
     CPilot(true /*splitscreen*/, options, shipYard, meleeScore),
     mReleasedStart(true) {
 
-
 }
 
 

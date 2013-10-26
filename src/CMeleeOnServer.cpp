@@ -43,8 +43,7 @@ void CMeleeOnServer::Run() {
 }
 
 void CMeleeOnServer::Update(float dt) {
-    auto pilots = GetActivePilots();
-    for(unsigned int p = 0; p < pilots.size(); ++p) pilots[p]->CheckControls();
+    for(const auto& p: GetActivePilots()) p->CheckControls();
     CSpriteObjs::Update(dt);
     const auto displayPilots = getDisplayPilots(GetActivePilots());
     mServerSocket->SendFrame(CSpriteObjs::Pack(displayPilots));
