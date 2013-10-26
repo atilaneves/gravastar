@@ -21,13 +21,13 @@ class CGravScreen {
 
 public:
 
-    using pilots_t = CRadar::pilots_t;
+    using DisplayPilots = CRadar::DisplayPilots;
 
     CGravScreen(const CCanvas &levelCanvas, const CClientOptions &options,
                 const CSong& song);
     ~CGravScreen();
 
-    void     Draw(const pilots_t& pilots);
+    void     Draw(const DisplayPilots& pilots);
     CCanvas& GetCanvas() { return mCanvas; }
 
 

@@ -18,17 +18,17 @@ class CSplitScreen: public CSubDisplay {
 public:
 
     enum { kSplitBorder=20 };
-    using pilots_t = CRadar::pilots_t;
+    using DisplayPilots = CRadar::DisplayPilots;
 
     CSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas,
                  int width, int height,
                  int drawX, int drawY);
     CSplitScreen(const CSplitScreen &split);
 
-    void       DrawRadar(const pilots_t& pilots, const pilots_t& humans);
-    CScreenPos GetCentre(const pilots_t& pilots);
-    pilots_t   GetHumans(const pilots_t& pilots);
-    void       Grab(const pilots_t& pilots);
+    void       DrawRadar(const DisplayPilots& pilots, const DisplayPilots& humans);
+    CScreenPos GetCentre(const DisplayPilots& pilots);
+    DisplayPilots   GetHumans(const DisplayPilots& pilots);
+    void       Grab(const DisplayPilots& pilots);
 
 
 private:
@@ -40,7 +40,7 @@ private:
     const CCanvas* mLevelCanvas;
     CRadar         mRadar;
 
-    CScreenPos GetGrabPos(const pilots_t& pilots);
+    CScreenPos GetGrabPos(const DisplayPilots& pilots);
     int        GetRealGrabPos(int pos, int subLength, int levelLength);
     void       DrawStats(const CDisplayPilot& pilot, int x, int y);
 

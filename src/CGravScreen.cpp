@@ -29,9 +29,9 @@ CGravScreen::~CGravScreen() {
 }
 
 
-void CGravScreen::Draw(const pilots_t &pilots) {
+void CGravScreen::Draw(const DisplayPilots &pilots) {
     mCanvas.Clear();
-    pilots_t humans = mOneSplitScreen.GetHumans(pilots);
+    DisplayPilots humans = mOneSplitScreen.GetHumans(pilots);
     CScreenPos pos  = mOneSplitScreen.GetCentre(humans);
     CSplitScreens& screens = GetSplitScreens(pos, humans.size());
 

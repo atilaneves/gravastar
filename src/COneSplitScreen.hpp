@@ -11,8 +11,8 @@ public:
 
   COneSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas);
 
-  virtual void Grab(const pilots_t& pilots);
-  virtual void DrawRadar(const pilots_t& pilots);
+  virtual void Grab(const DisplayPilots& pilots);
+  virtual void DrawRadar(const DisplayPilots& pilots);
 };
 
 

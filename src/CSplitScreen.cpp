@@ -27,13 +27,13 @@ CSplitScreen::CSplitScreen(const CSplitScreen &split):
 }
 
 
-void CSplitScreen::DrawRadar(const pilots_t& pilots, const pilots_t& humans) {
+void CSplitScreen::DrawRadar(const DisplayPilots& pilots, const DisplayPilots& humans) {
     mRadar.Draw(mSubCanvas, mSubCanvas.GetWidth() - 30, 5, pilots, humans,
                 GetCentre(humans));
 }
 
 
-void CSplitScreen::Grab(const pilots_t& pilots) {
+void CSplitScreen::Grab(const DisplayPilots& pilots) {
     int flipX = mLevelCanvas->GetWidth() < mSubCanvas.GetWidth() ?
         mSubCanvas.GetWidth() / 2 - mLevelCanvas->GetWidth() / 2 - 1: 0;
     int flipY = mLevelCanvas->GetHeight() < mSubCanvas.GetHeight() ?
@@ -57,7 +57,7 @@ void CSplitScreen::DrawStats(const CDisplayPilot& pilot, int x, int y) {
     mStatsCanvas.Draw(mSubCanvas, x, y);
 }
 
-CScreenPos CSplitScreen::GetGrabPos(const pilots_t &pilots) {
+CScreenPos CSplitScreen::GetGrabPos(const DisplayPilots &pilots) {
     CScreenPos pos = GetCentre(pilots);
     const float velFactor = 0.25; //screen modifier for speed
 
@@ -80,7 +80,7 @@ int CSplitScreen::GetRealGrabPos(int pos, int subLength, int levelLength) {
 }
 
 
-CScreenPos CSplitScreen::GetCentre(const pilots_t& pilots) {
+CScreenPos CSplitScreen::GetCentre(const DisplayPilots& pilots) {
     if(pilots.size() == 1)
         return { (int)pilots[0].GetPosition().GetX(),
                 (int)pilots[0].GetPosition().GetY() };
@@ -105,8 +105,8 @@ CScreenPos CSplitScreen::GetCentre(const pilots_t& pilots) {
 }
 
 
-auto CSplitScreen::GetHumans(const pilots_t& pilots) -> pilots_t{
-    pilots_t humans;
+auto CSplitScreen::GetHumans(const DisplayPilots& pilots) -> DisplayPilots{
+    DisplayPilots humans;
     for(unsigned int i = 0; i < pilots.size(); i++)
         if(pilots[i].HasSplitScreen()) humans.push_back(pilots[i]);
     return humans.empty() ? pilots : humans;

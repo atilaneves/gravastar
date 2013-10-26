@@ -14,8 +14,8 @@ CMeleeOnServer::CMeleeOnServer(const CGravOptions &options):
 
 
 
-static CMeleeOnServer::pilots_t getDisplayPilots(const CMeleeOnServer::Pilots& pilots) {
-    CMeleeOnServer::pilots_t displayPilots;
+static CMeleeOnServer::DisplayPilots getDisplayPilots(const CMeleeOnServer::Pilots& pilots) {
+    CMeleeOnServer::DisplayPilots displayPilots;
     for(const auto& pilot: pilots) {
         displayPilots.push_back(pilot->MakeDisplayPilot());
     }

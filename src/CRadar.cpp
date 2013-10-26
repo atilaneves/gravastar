@@ -12,8 +12,8 @@ CRadar::CRadar():
 
 }
 
-void CRadar::Draw(CBitmap &bmp, int x, int y, const pilots_t &pilots,
-                  const pilots_t& humans, const CScreenPos &centrePos) {
+void CRadar::Draw(CBitmap &bmp, int x, int y, const DisplayPilots &pilots,
+                  const DisplayPilots& humans, const CScreenPos &centrePos) {
 
     mCanvas.Clear(makecol(255, 0, 255));
     const CTeam &team = humans.size()== 1 ? humans[0].GetTeam() : CTeam::sWhite;

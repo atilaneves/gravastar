@@ -22,7 +22,6 @@ class CMelee {
 public:
 
     enum { kMaxNbPilots = 4 };
-    using pilots_t = CGravScreen::pilots_t;
     using Pilots = std::vector<CPilot*>;
 
     CMelee(const CGravOptions &options, CServerSocket* serverSocket);

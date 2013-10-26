@@ -17,7 +17,7 @@ public:
     typedef std::list<CSpriteObj*> objs_t;
     typedef objs_t::iterator objPlace_t;
     typedef objs_t::reverse_iterator robjPlace_t;
-    using Pilots = CRadar::pilots_t;
+    using Pilots = CRadar::DisplayPilots;
     using FrameBytes = Cereal::Bytes;
     using SpritePositions = std::vector<CLevelSprite>;
 

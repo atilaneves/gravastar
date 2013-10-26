@@ -8,6 +8,8 @@
 class CMeleeOnServer: public CMelee {
 public:
 
+    using DisplayPilots = CGravScreen::DisplayPilots;
+
     CMeleeOnServer(const CGravOptions &options);
 
     virtual void Run() override;

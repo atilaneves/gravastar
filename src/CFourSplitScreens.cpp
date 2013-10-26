@@ -29,19 +29,19 @@ CFourSplitScreens::CFourSplitScreens(const CCanvas &levelCanvas,
 }
 
 
-void CFourSplitScreens::Grab(const pilots_t& pilots) {
+void CFourSplitScreens::Grab(const DisplayPilots& pilots) {
     assert(pilots.size() >= 3);
     for(unsigned int i = 0; i < pilots.size(); ++i) {
-        pilots_t pilot{pilots[i]};
+        DisplayPilots pilot{pilots[i]};
         mSplitScreens[i].Grab(pilot);
     }
 }
 
 
-void CFourSplitScreens::DrawRadar(const pilots_t& pilots) {
-    pilots_t humans = GetHumans(pilots);
+void CFourSplitScreens::DrawRadar(const DisplayPilots& pilots) {
+    DisplayPilots humans = GetHumans(pilots);
     for(unsigned int i = 0; i < humans.size(); ++i) {
-        pilots_t pilot(1, humans[i]);
+        DisplayPilots pilot(1, humans[i]);
         mSplitScreens[i].DrawRadar(pilots, pilot);
     }
 }

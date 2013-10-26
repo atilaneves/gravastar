@@ -15,14 +15,14 @@ class CRadar {
 public:
 
     enum { kRadius = 25 };
-    using pilots_t = std::vector<CDisplayPilot>;
+    using DisplayPilots = std::vector<CDisplayPilot>;
 
     CRadar();
 
-    void Draw(CBitmap &bmp, int x, int y, const pilots_t &pilots,
-              const pilots_t& humans,
+    void Draw(CBitmap &bmp, int x, int y,
+              const DisplayPilots &pilots,
+              const DisplayPilots& humans,
               const CScreenPos &centrePos);
-
 
 private:
 

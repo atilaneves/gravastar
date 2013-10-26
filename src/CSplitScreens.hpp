@@ -10,17 +10,17 @@ class CSplitScreens {
 
 public:
 
-    using pilots_t = CSplitScreen::pilots_t;
+    using DisplayPilots = CSplitScreen::DisplayPilots;
     virtual ~CSplitScreens() { }
 
-    CScreenPos GetCentre(const pilots_t& pilots) {
+    CScreenPos GetCentre(const DisplayPilots& pilots) {
         return mSplitScreens[0].GetCentre(pilots); }
-    pilots_t   GetHumans(const pilots_t& pilots) {
+    DisplayPilots   GetHumans(const DisplayPilots& pilots) {
         return mSplitScreens[0].GetHumans(pilots);
     }
 
-    virtual void DrawRadar(const pilots_t& pilots) = 0;
-    virtual void Grab(const pilots_t& pilots) = 0;
+    virtual void DrawRadar(const DisplayPilots& pilots) = 0;
+    virtual void Grab(const DisplayPilots& pilots) = 0;
 
 
 protected:
