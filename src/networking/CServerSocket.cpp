@@ -28,15 +28,6 @@ CServerSocket::CServerSocket(const CGravOptions& options):
 }
 
 
-std::string CServerSocket::GetPilotType(const std::string& type,
-                                        unsigned pilotIndex) const {
-    if(pilotIndex == 0 || type == "Bot") {
-        return type;
-    }
-    return "Client";
-}
-
-
 void CServerSocket::SendFrame(const vector<unsigned char>& frameBytes) {
     for(auto& connection: mConnections) {
         connection->SendUdpBytes(frameBytes);
@@ -56,9 +47,9 @@ void CServerSocket::HandleTcpConnection(const CTcpConnection::Pointer& tcpConnec
 }
 
 
-static string getRealPilotType(const string& type,
-                               unsigned pilotIndex, unsigned connectionIndex) {
-    return pilotIndex == connectionIndex ? "Client" : "Server";
+static string getRealClientPilotType(const string& type,
+                                     unsigned pilotIndex, unsigned connectionIndex) {
+    return pilotIndex == connectionIndex ? "Client" : "Proxy";
 }
 
 template<typename T>
@@ -90,7 +81,7 @@ void CServerSocket::SendClientArgs() {
     int i = 0;
     for(const auto& pilotOpts: allPilotOpts) {
         writeValue(clientArgs, pilotOpts.GetName());
-        const auto type = getRealPilotType(pilotOpts.GetType(), i, clientIndex);
+        const auto type = getRealClientPilotType(pilotOpts.GetType(), i, clientIndex);
         writeValue(clientArgs, type);
         writeValue(clientArgs, pilotOpts.GetTeam().GetName());
         const auto ships = pilotOpts.GetShipNames();

@@ -48,15 +48,21 @@ CMelee::~CMelee() {
 }
 
 CPilot* CMelee::CreatePilot(const CPilotOptions& pilotOptions, unsigned pilotIndex) {
-    const auto& shipYard   = mGravMedia.GetShipYard();
-    const auto& optionType = pilotOptions.GetType();
-    const auto& realType   = mServerSocket ?
-                             mServerSocket->GetPilotType(optionType, pilotIndex) :
-                             optionType;
-    std::cout << "real type: " << realType << std::endl;
+    const auto& shipYard  = mGravMedia.GetShipYard();
+    const auto& pilotType = GetRealPilotType(pilotOptions.GetType(), pilotIndex);
 
-    return CPilotFactory::Instance().CreateObject(realType, pilotOptions,
+    return CPilotFactory::Instance().CreateObject(pilotType, pilotOptions,
                                                   shipYard, mMeleeScore);
+}
+
+std::string CMelee::GetRealPilotType(const std::string& type, unsigned pilotIndex) const {
+    if(!mServerSocket) return type; //client: as received from server
+    //server: transform human to proxy (except for 1st), bots stay the same
+    if(pilotIndex == 0 || type == "Bot") {
+        return type;
+    }
+
+    return "Proxy";
 }
 
 

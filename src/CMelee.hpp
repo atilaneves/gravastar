@@ -12,6 +12,7 @@ class CPilot;
 #include "CTimeCounter.hpp"
 #include "CServerSocket.hpp"
 #include "CRandomSong.hpp"
+#include <string>
 #include <vector>
 #include <memory>
 #include <atomic>
@@ -35,6 +36,7 @@ private:
     virtual int  GetWinner()  = 0;
     virtual bool IsGameOver() = 0;
     CPilot* CreatePilot(const CPilotOptions&, unsigned pilotIndex);
+    std::string GetRealPilotType(const std::string& type, unsigned pilotIndex) const;
 
 protected:
 

@@ -16,7 +16,6 @@ public:
 
     void SendFrame(const std::vector<unsigned char>& frameBytes);
     void End(int winner);
-    std::string GetPilotType(const std::string& type, unsigned pilotIndex) const;
 
     virtual void HandleTcpConnection(const CTcpConnection::Pointer& tcpConnection) override;
     virtual void UdpReceived(const boost::system::error_code& error,

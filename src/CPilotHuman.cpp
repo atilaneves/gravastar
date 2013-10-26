@@ -16,6 +16,7 @@ CPilotHuman::CPilotHuman(const CPilotOptions &options,
 
 
 void CPilotHuman::CheckControls() {
+    std::cout << "CheckControls\n";
     GetShip().ApplyInput(*mInput);
     if(mInput->Start() && mReleasedStart) {
         mReleasedStart = false;
