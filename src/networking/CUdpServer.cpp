@@ -9,14 +9,7 @@
 using boost::asio::ip::udp;
 
 
-CUdpServer::CUdpServer(CUdpObserver& observer):
-    CUdpSocket(),
-    mObserver(observer) {
-
-    Listen();
-}
-
-CUdpServer::CUdpServer(int port, CUdpObserver& observer):
+CUdpServer::CUdpServer(CUdpObserver& observer, int port):
     CUdpSocket(port),
     mObserver(observer) {
 
@@ -45,10 +38,5 @@ void CUdpServer::Listen() {
 void CUdpServer::HandleReceive(const boost::system::error_code& error,
                                std::size_t numBytes) {
     mObserver.UdpReceived(error, numBytes, mRecvBuffer);
-    Listen();
-}
-
-void CUdpServer::HandleSend(const boost::system::error_code& error, std::size_t numBytes) {
-    mObserver.UdpSent(error, numBytes);
     Listen();
 }

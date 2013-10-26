@@ -20,7 +20,7 @@ CServerSocket::CServerSocket(const CGravOptions& options):
     mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
     mTcpServer(options.GetServerPort(), *this),
-    mUdpServer(options.GetServerPort(), *this)
+    mUdpServer(*this, options.GetServerPort())
 {
 
     cout << "CServerSocket starting\n";

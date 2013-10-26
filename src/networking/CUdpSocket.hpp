@@ -16,19 +16,14 @@ public:
 
 protected:
 
-    CUdpSocket(int port = 0);
-    CUdpSocket(const std::string& address, int port);
-    CUdpSocket(boost::asio::ip::address address, int port);
+    CUdpSocket(int port = 0); //server
+    CUdpSocket(const std::string& address, int port); //client
+    CUdpSocket(boost::asio::ip::address address, int port); //client
 
     boost::asio::io_service mService;
     boost::asio::ip::udp::socket mSocket;
     boost::asio::ip::udp::endpoint mEndpoint;
     Array mRecvBuffer;
-
-    virtual void HandleReceive(const boost::system::error_code& error,
-                               std::size_t numBytes) = 0;
-    virtual void HandleSend(const boost::system::error_code& error,
-                            std::size_t numBytes) = 0;
 };
 
 

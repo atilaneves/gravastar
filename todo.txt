@@ -1,14 +1,18 @@
-. Make server be both TCP and UDP server.
-. Network sound effects
+. Gamma laser showing on client (not CSpriteObj...)
+. Clients send input to server
+. Propagate pause on client side
 . Bots add to total number of players, clients should all be human
+. Client landing screen on server
+. Have server go first, clients connect, server starts at will
+. Network sound effects
 . Maintain client TCP connnection
 . Split frame amongst several UDP packets / UDP packet size down to internet MTU
-. IP addr and port on command-line
-. Propagate pause on client side
+. Selectable IP addr and port for clients connecting to the server
 . Ignore old packets
 
 
 Bugs:
 . Bug where victory screen on client show wrong score
-. Bug where client fails to load same sprites if server already done a game
 . Bug where enemy sprites appear in the wrong place at beginning of match
+. Bug where client waits for the server because the server didn't have time
+  to receive the TCP packet from the client

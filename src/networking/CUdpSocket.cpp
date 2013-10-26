@@ -28,10 +28,3 @@ CUdpSocket::CUdpSocket(boost::asio::ip::address address, int port): //client
 
     mSocket.open(udp::v4());
 }
-
-void CUdpSocket::SendBytes(const std::vector<unsigned char>& sendBuffer) {
-    mSocket.async_send_to(boost::asio::buffer(sendBuffer), mEndpoint,
-                          boost::bind(&CUdpSocket::HandleSend, this,
-                                      boost::asio::placeholders::error,
-                                      boost::asio::placeholders::bytes_transferred));
-}

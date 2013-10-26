@@ -10,13 +10,6 @@ public:
 
     CUdpClient(const std::string& address, int port);
     CUdpClient(boost::asio::ip::address address, int port);
-
-private:
-
-    virtual void HandleReceive(const boost::system::error_code& error,
-                               std::size_t numBytes) override {}
-    virtual void HandleSend(const boost::system::error_code& error,
-                            std::size_t numBytes) override {}
 };
 
 #endif

@@ -19,8 +19,7 @@ public:
 class CUdpServer:public CUdpSocket {
 public:
 
-    CUdpServer(CUdpObserver& observer);
-    CUdpServer(int port, CUdpObserver& observer);
+    CUdpServer(CUdpObserver& observer, int port = 0);
 
     void Run();
     void Stop();
@@ -31,9 +30,7 @@ private:
 
     void Listen();
     virtual void HandleReceive(const boost::system::error_code& error,
-                               std::size_t numBytes) override;
-    virtual void HandleSend(const boost::system::error_code& error,
-                            std::size_t numBytes) override;
+                               std::size_t numBytes);
 };
 
 
