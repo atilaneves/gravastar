@@ -11,7 +11,6 @@
 #include <memory>
 
 class CSongPlayer;
-class CVersusMenu;
 
 //Networking client class for connecting from the menu
 class CGravClient: public CUdpObserver {
@@ -19,7 +18,7 @@ public:
 
     CGravClient(const std::string& addr, int port);
 
-    void Run(CSongPlayer& songPlayer, CVersusMenu& versusMenu);
+    void Run(CSongPlayer& songPlayer, const CClientOptions& vsClientOptions);
 
 private:
 

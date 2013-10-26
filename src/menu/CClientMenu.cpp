@@ -1,6 +1,7 @@
 #include "CClientMenu.hpp"
 #include "CGravMenu.hpp"
 #include "CGravClient.hpp"
+#include "CVersusMenu.hpp"
 #include "output.hpp"
 
 
@@ -16,5 +17,5 @@ void CClientMenu::Run(CRootMenu &rootMenu) {
     CGravClient gravClient("127.0.0.1", 12346);
 
     printCentre("Waiting for server...");
-    gravClient.Run(rootMenu, mVersusMenu);
+    gravClient.Run(rootMenu, mVersusMenu.GetClientOptions());
 }

@@ -1,5 +1,4 @@
 #include "CGravClient.hpp"
-#include "CVersusMenu.hpp"
 #include "CSongPlayer.hpp"
 #include "network_buffers.hpp"
 #include "output.hpp"
@@ -25,7 +24,7 @@ CGravClient::CGravClient(const std::string& addr, int port):
 }
 
 
-void CGravClient::Run(CSongPlayer& songPlayer, CVersusMenu& versusMenu) {
+void CGravClient::Run(CSongPlayer& songPlayer, const CClientOptions& vsClientOptions) {
     std::thread meleeThread;
     std::atomic_bool meleeRunning{true};
 
@@ -37,7 +36,7 @@ void CGravClient::Run(CSongPlayer& songPlayer, CVersusMenu& versusMenu) {
             std::cout << "Starting the melee" << std::endl;
             //tokens gets modified, so no ref capture
             meleeThread = std::thread([&, tokens] {
-                    StartMeleeClient(songPlayer, tokens, versusMenu.GetClientOptions());
+                    StartMeleeClient(songPlayer, tokens, vsClientOptions);
             });
         } else if(command == "Stop")  {
             const auto winner = std::stoi(popFront(tokens));
