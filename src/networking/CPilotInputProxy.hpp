@@ -9,6 +9,7 @@ class Cereal;
 class CPilotInputProxy: public CPilotInput {
 public:
 
+    CPilotInputProxy();
     CPilotInputProxy(bool left, bool right, bool thrust,
                      bool weapon, bool special, bool super, bool start);
 

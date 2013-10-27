@@ -3,6 +3,7 @@
 
 
 class CGravOptions;
+class CMeleeOnServer;
 #include "CTcpServer.hpp"
 #include "CUdpReceiver.hpp"
 #include "CGravConnection.hpp"
@@ -12,7 +13,7 @@ class CGravOptions;
 class CServerSocket: public CTcpConnectionObserver, public CUdpObserver {
 public:
 
-    CServerSocket(const CGravOptions& options);
+    CServerSocket(const CGravOptions& options, CMeleeOnServer& melee);
 
     void SendFrame(const std::vector<unsigned char>& frameBytes);
     void End(int winner);
@@ -25,6 +26,7 @@ private:
 
     std::vector<std::string> mPilotTypes;
     const CGravOptions& mGravOptions;
+    CMeleeOnServer& mMelee;
     CTcpServer mTcpServer;
     CUdpReceiver mUdpReceiver;
     std::vector<std::unique_ptr<CGravConnection>> mConnections;

@@ -4,10 +4,11 @@
 #include "CClock.hpp"
 #include "CPilot.hpp"
 #include "CSpriteObjs.hpp"
+#include "CPilotInputProxy.hpp"
 
 
 CMeleeOnServer::CMeleeOnServer(const CGravOptions &options):
-    CMelee(options, new CServerSocket(options)) {
+    CMelee(options, new CServerSocket(options, *this)) {
 
     CActionPicker::SetPowerups(&mPowerups);
 }
@@ -62,4 +63,8 @@ auto CMeleeOnServer::GetActivePilots() const -> Pilots {
             if(mPilots[p]->IsAlive())
                 pilots.push_back(mPilots[p]);
     return pilots;
+}
+
+void CMeleeOnServer::SetControls(int pilotIndex, const CPilotInputProxy& input) {
+    std::cout << "left: " << input.Left() << std::endl;
 }

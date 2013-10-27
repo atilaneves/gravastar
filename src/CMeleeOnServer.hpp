@@ -3,6 +3,7 @@
 
 
 #include "CMelee.hpp"
+class CPilotInputProxy;
 
 
 class CMeleeOnServer: public CMelee {
@@ -13,6 +14,7 @@ public:
     CMeleeOnServer(const CGravOptions &options);
 
     virtual void Run() override;
+    void SetControls(int pilotIndex, const CPilotInputProxy& input);
 
 private:
 

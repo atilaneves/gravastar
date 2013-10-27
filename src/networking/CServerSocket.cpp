@@ -2,6 +2,9 @@
 #include "CUdpReceiver.hpp"
 #include "CGravOptions.hpp"
 #include "network_buffers.hpp"
+#include "Decerealiser.hpp"
+#include "CPilotInputProxy.hpp"
+#include "CMeleeOnServer.hpp"
 #include <iostream>
 #include <string>
 
@@ -16,9 +19,11 @@ static vector<string> getPilotTypes(const CGravOptions& options) {
     return types;
 }
 
-CServerSocket::CServerSocket(const CGravOptions& options):
+CServerSocket::CServerSocket(const CGravOptions& options,
+                             CMeleeOnServer& melee):
     mPilotTypes(getPilotTypes(options)),
     mGravOptions(options),
+    mMelee(melee),
     mTcpServer(*this, options.GetServerPort()),
     mUdpReceiver(*this, options.GetServerPort())
 {
@@ -115,5 +120,15 @@ void CServerSocket::End(int winner) {
 
 void CServerSocket::UdpReceived(const boost::system::error_code& error,
                                 std::size_t numBytes, const Array& bytes) {
-    cout << "UDP received" << endl;
+    if(error && error != boost::asio::error::message_size) {
+        std::cerr << "Error in CGravClient::AfterReceive" << std::endl;
+        return;
+    }
+
+    cout << "UdpReceived\n";
+
+    Decerealiser cereal{bytes};
+    CPilotInputProxy input;
+    cereal >> input;
+    mMelee.SetControls(1, input); //TODO: use proper pilotIndex
 }

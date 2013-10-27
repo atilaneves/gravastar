@@ -9,6 +9,9 @@ CPilotInputProxy::CPilotInputProxy(bool left, bool right, bool thrust,
 {
 }
 
+CPilotInputProxy::CPilotInputProxy() {
+}
+
 
 void CPilotInputProxy::cerealise(Cereal& cereal) {
     cereal.grain(mLeft);
