@@ -38,8 +38,8 @@ public:
 
 protected:
 
-    CFactory()  {} //protected ctor
-    ~CFactory() {} //protected dtor
+    CFactory()  {}
+    ~CFactory() {}
 
 private:
 

@@ -25,7 +25,7 @@ public:
     enum { kMaxNbPilots = 4 };
     using Pilots = std::vector<std::shared_ptr<CPilot>>;
 
-    CMelee(const CGravOptions &options, CServerSocket* serverSocket);
+    CMelee(const CGravOptions &options, CServerSocket* serverSocket = nullptr);
     virtual ~CMelee();
 
     virtual void Run() = 0;

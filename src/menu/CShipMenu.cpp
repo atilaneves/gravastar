@@ -49,7 +49,7 @@ void CShipMenu::CreateCursors() {
         if(mVersus.GetPilotType(i) == "Human")
             nbHumans++;
 
-    CMenuInputPilot *firstMenuInputPilot = NULL; //might be used below
+    CMenuInputPilot *firstMenuInputPilot = nullptr; //might be used below
 
     //when calling new, cursor gets added to mCursors automatically
     for(int i = 0; i < mVersus.GetNbPilots(); i++) {
@@ -61,7 +61,7 @@ void CShipMenu::CreateCursors() {
 
         if(nbHumans > 1) { //more than 1 human, special menu controls
             if(i < nbHumans) {
-                CMenuInputPilot *input = new CMenuInputPilot(i, mVersus.GetGravOptions().GetClientOptions());
+                CMenuInputPilot *input = new CMenuInputPilot(i, mVersus.GetClientOptions());
                 mCursors[i]->AdoptInput(input);
                 if(i == 0) firstMenuInputPilot = input;
             }

@@ -94,7 +94,7 @@ std::string CVersusMenu::GetPilotType(int p) const {
 
 
 float CVersusMenu::GetPowerupRate() const {
-    return (0.05*mPowerupRate->GetCycle()) / mPowerupRate->GetMax();
+    return (0.05 * mPowerupRate->GetCycle()) / mPowerupRate->GetMax();
 }
 
 

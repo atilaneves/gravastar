@@ -29,7 +29,8 @@ private:
     std::unique_ptr<CClientSocket> mClientSocket;
     std::unique_ptr<CMeleeClient> mMelee;
 
-    void StartMeleeClient(CSongPlayer& songPlayer, std::deque<std::string> options,
+    void StartMeleeClient(CSongPlayer& songPlayer,
+                          std::deque<std::string> serverOptions,
                           const CClientOptions& vsClientOptions);
     void StopMeleeClient(int winner);
     CGravOptions GetGravOptions(std::deque<std::string>& options,

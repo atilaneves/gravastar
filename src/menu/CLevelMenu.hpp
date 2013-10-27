@@ -7,10 +7,11 @@
 #include "CGravOptions.hpp"
 #include "CLevelCounter.hpp"
 #include "CSound.hpp"
+#include "CLevelMenuSprite.hpp"
 #include <vector>
+#include <memory>
 class CVersusMenu;
 class CMeleeStart;
-class CLevelMenuSprite;
 class CSprite;
 class CVersusMenu;
 
@@ -19,26 +20,24 @@ class CLevelMenu: public CStringMenu {
 
 public:
 
-  CLevelMenu(const CVersusMenu &versusMenu);
-  ~CLevelMenu();
+    CLevelMenu(const CVersusMenu &versusMenu);
 
-  virtual void Draw(CCanvas &canvas);
-  CGravOptions GetOptions() const;
-          int  GetLevelNb() const;
-  virtual void Run(CRootMenu &rootMenu);
-
+    virtual void Draw(CCanvas &canvas) override;
+    CGravOptions GetOptions() const;
+    int  GetLevelNb() const;
+    virtual void Run(CRootMenu &rootMenu) override;
 
 private:
 
-  CLevelCounter mLevelCounter;
-  CMenuCursor mCursor;
-  CSound mSound;
-  CMeleeStart* mMeleeStart;
-  std::vector<CLevelMenuSprite*> mSprites;
+    CLevelCounter mLevelCounter;
+    CMenuCursor mCursor;
+    CSound mSound;
+    CMeleeStart* mMeleeStart;
+    std::vector<std::unique_ptr<CLevelMenuSprite>> mSprites;
 
-  const CLevelMenuSprite& GetSprite() const;
-  virtual int GetSubMenuX(int column) const;
-  virtual int GetSubMenuY(int row) const;
+    const CLevelMenuSprite& GetSprite() const;
+    virtual int GetSubMenuX(int column) const;
+    virtual int GetSubMenuY(int row) const;
 
 };
 

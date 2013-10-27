@@ -57,7 +57,7 @@ private:
             void CreateTypes();
             void KeepInBounds();
             void SetTypeString();
-    virtual void Update(CRootMenu &rootMenu);
+    virtual void Update(CRootMenu &rootMenu) override;
 
 };
 

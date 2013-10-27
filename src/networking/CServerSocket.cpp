@@ -28,7 +28,6 @@ CServerSocket::CServerSocket(const CGravOptions& options,
     mUdpReceiver(*this, options.GetServerPort())
 {
 
-    cout << "CServerSocket starting\n";
     sleep(2);
 }
 
@@ -89,9 +88,8 @@ void CServerSocket::SendClientArgs() {
         const auto type = getRealClientPilotType(pilotOpts.GetType(), i, clientIndex);
         writeValue(clientArgs, type);
         writeValue(clientArgs, pilotOpts.GetTeam().GetName());
-        const auto ships = pilotOpts.GetShipNames();
-        for(const auto& ship: ships) {
-            writeValue(clientArgs, ship);
+        for(const auto& shipName: pilotOpts.GetShipNames()) {
+            writeValue(clientArgs, shipName);
         }
         ++i;
     }

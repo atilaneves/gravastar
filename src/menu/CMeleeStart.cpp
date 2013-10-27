@@ -1,11 +1,6 @@
 #include "CMeleeStart.hpp"
 #include "MeleeStarter.hpp"
-#include "CMeleeFactory.hpp"
-#include "CSound.hpp"
-#include "CRootMenu.hpp"
 #include "CVersusMenu.hpp"
-#include "CFont.hpp"
-#include "fontsdat.h"
 
 
 CMeleeStart::CMeleeStart(const CVersusMenu &versusMenu,

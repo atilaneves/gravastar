@@ -7,4 +7,5 @@ CServerMenu::CServerMenu(const CSprite *cursorSprite, CGravMenu& gravMenu):
     mVersusMenu(gravMenu.GetVersusMenu()) {
 
     AddMenu(mVersusMenu);
+    AddMenu(new CVersusMenu(&gravMenu.GetCursorSprite(), gravMenu));
 }

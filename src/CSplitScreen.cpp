@@ -7,7 +7,7 @@
 #include "CRect.hpp"
 #include "CTeam.hpp"
 #include <algorithm>
-#include <assert.h>
+#include <iostream>
 
 
 CSplitScreen::CSplitScreen(const CCanvas &levelCanvas, CCanvas &drawCanvas,
@@ -82,8 +82,12 @@ int CSplitScreen::GetRealGrabPos(int pos, int subLength, int levelLength) {
 
 CScreenPos CSplitScreen::GetCentre(const DisplayPilots& pilots) {
     if(pilots.size() == 1)
-        return { (int)pilots[0].GetPosition().GetX(),
+        return {(int)pilots[0].GetPosition().GetX(),
                 (int)pilots[0].GetPosition().GetY() };
+    if(!pilots.size()) {
+        std::cerr << "No pilots in " << __FUNCTION__ << std::endl;
+        exit(1);
+    }
 
     const auto humans = GetHumans(pilots);
     std::vector<int> sx, sy;

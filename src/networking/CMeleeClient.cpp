@@ -9,7 +9,7 @@ using namespace std;
 
 CMeleeClient::CMeleeClient(const CGravOptions& options,
                            CClientSocket& clientSocket):
-    CMelee(options, nullptr), /*nullptr: no server*/
+    CMelee(options),
     mClientSocket(clientSocket),
     mIsGameOver() {
 

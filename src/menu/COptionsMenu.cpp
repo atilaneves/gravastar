@@ -20,13 +20,12 @@ COptionsMenu::COptionsMenu(CSprite *cursorSprite,
 }
 
 CClientOptions COptionsMenu::GetClientOptions(int nbPilots) const {
-    return CClientOptions(mVersus.GetPilotOptions(nbPilots,
-                                                  mControlsMenu->GetPilotInputOptions(nbPilots)),
-                          mVideoMenu->GetWindowed(),
-                          mVideoMenu->GetWidth(), mVideoMenu->GetHeight(),
-                          mSoundMenu->GetSoundVolume(),
-                          mSoundMenu->GetMusicVolume(),
-                          mVideoMenu->GetSmartSplit());
+    return {mVersus.GetPilotOptions(nbPilots, mControlsMenu->GetPilotInputOptions(nbPilots)),
+            mVideoMenu->GetWindowed(),
+            mVideoMenu->GetWidth(), mVideoMenu->GetHeight(),
+            mSoundMenu->GetSoundVolume(),
+            mSoundMenu->GetMusicVolume(),
+            mVideoMenu->GetSmartSplit()};
 }
 
 

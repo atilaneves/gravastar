@@ -55,11 +55,11 @@ void CGravClient::Run(CSongPlayer& songPlayer, const CClientOptions& vsClientOpt
     mTcpClient.Stop();
 }
 
-void CGravClient::StartMeleeClient(CSongPlayer& songPlayer, std::deque<std::string> options,
+void CGravClient::StartMeleeClient(CSongPlayer& songPlayer,
+                                   std::deque<std::string> serverOptions,
                                    const CClientOptions& vsClientOptions) {
     songPlayer.StopSong();
-    CSound sound("meleeStart");
-    sound.PlayCentre();
+    CSound{"meleeStart"}.PlayCentre();
 
     const unsigned pilotIndex = std::stoi(popFront(options));
     mClientSocket.reset(new CClientSocket{pilotIndex, mUdpSender});

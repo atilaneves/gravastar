@@ -4,7 +4,6 @@
 #include "CMenuIconString.hpp"
 #include "CRect.hpp"
 #include "CColour.hpp"
-#include "CLevelMenuSprite.hpp"
 #include "CCanvas.hpp"
 #include "CMeleeStart.hpp"
 #include "CGravOptions.hpp"
@@ -17,18 +16,12 @@ CLevelMenu::CLevelMenu(const CVersusMenu &versusMenu):
 
     strings_t titles;
     for(int i = 0; i <= mLevelCounter.GetNbLevels(); i++) {
-        mSprites.push_back(new CLevelMenuSprite(i));
-        titles.push_back(mSprites[i]->GetTitle());
+        mSprites.emplace_back(new CLevelMenuSprite(i));
+        titles.emplace_back(mSprites[i]->GetTitle());
     }
 
     AddMenu(mMeleeStart = new CMeleeStart(versusMenu, titles));
     mMeleeStart->SetCycle(0);
-}
-
-
-CLevelMenu::~CLevelMenu() {
-    for(unsigned int i = 0; i < mSprites.size(); i++)
-        delete mSprites[i];
 }
 
 
