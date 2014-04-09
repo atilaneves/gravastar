@@ -14,17 +14,17 @@ class CFlickerEffect : public CShipEffect {
 public:
 
   CFlickerEffect(const CTeam &team, CShip& ship, CLevel &level,
-		 float duration, const CSpriteVector& sprites);
-  
+                 float duration, const CSpriteVector& sprites);
+
   virtual void AtStart();
   virtual void AtJustFinished();
-  
-  
+
+
 private:
-  
+
   const CSpriteVector& mSprites;
   CFlicker *mFlicker;
-  
+
 };
 
 

@@ -10,21 +10,21 @@ class CIndestructible: public COneSpriteObj {
 
 public:
 
-  CIndestructible(CLevel &level, const CVector2 &pos, CGravSprite *sprite,
-		  const CSound& klang);
+    CIndestructible(CLevel &level, const CVector2 &pos, CGravSprite *sprite,
+                    const CSound& klang);
 
-  virtual void Erase()          { Draw(); } //always there to be hit
-  virtual void Hit(CSpriteObj& obj, CScreenPos pos, float dt);
-  virtual void Hit(CShip&     ship, CScreenPos pos, float dt);
-  virtual void Hit(CProjectile& proj, CScreenPos pos, float dt);
-  virtual void Update(float dt) { }
+    virtual void Erase()          { Draw(); } //always there to be hit
+    virtual void Hit(CSpriteObj& obj, CScreenPos pos, float dt);
+    virtual void Hit(CShip&     ship, CScreenPos pos, float dt);
+    virtual void Hit(CProjectile& proj, CScreenPos pos, float dt);
+    virtual void Update(float dt) { (void)dt;}
 
 
 private:
 
-  CSound mKlang;
+    CSound mKlang;
 
-  virtual void ShipLanded(CShip& ship, float dt) { } //if it lands...
+    virtual void ShipLanded(CShip& ship, float dt) { (void)ship;(void)dt;}
 
 
 };

@@ -20,7 +20,7 @@ public:
     virtual int      GetSpriteIndex() const override { return mSpriteIndex; }
     virtual bool     IsActive() override { return mActive && mFollowed.IsAlive(); }
     virtual void     Move(float dt) override;
-    virtual void     OutOfBounds(float dt) override { }
+    virtual void     OutOfBounds(float dt) override { (void)dt;}
 
 
 protected:

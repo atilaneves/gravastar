@@ -31,7 +31,6 @@ CMelee::CMelee(const CGravOptions &options,
 
     CKeyboard::Clear();
     mSong.PlayLoop();
-
     const auto& allPilotOptions = options.GetClientOptions().GetAllPilotOptions();
     for(unsigned i = 0; i < allPilotOptions.size(); ++i)
         mPilots.emplace_back(CreatePilot(allPilotOptions[i], i));

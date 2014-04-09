@@ -67,7 +67,7 @@ void CProjectile::Hit(CShip& ship, CScreenPos pos, float dt) {
     HitShipEffect(ship, pos, dt);
     ship.LoseHull(mDamage, mPilot); //ship gets hit
   }
-  
+
   mHitObj = &ship;
   Die(); //either way, we die
 }

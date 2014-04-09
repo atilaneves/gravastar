@@ -27,10 +27,10 @@ public:
             positions_t   GetCollisions() const;
             int           GetTopLeftX() const { return (int)mPos.GetX() - GetWidth()/2;  }
             int           GetTopLeftY() const { return (int)mPos.GetY() - GetHeight()/2; }
-    virtual void          Hit(CSpriteObj&   obj, CScreenPos pos, float dt) { }
-    virtual void          Hit(CShip&       ship, CScreenPos pos, float dt) { }
-    virtual void          Hit(CProjectile& proj, CScreenPos pos, float dt) { }
-    virtual void          HitTerrain(const CScreenPos &where, float dt)    { }
+    virtual void          Hit(CSpriteObj&   obj, CScreenPos pos, float dt) { (void)obj;(void)pos;(void)dt;}
+    virtual void          Hit(CShip&       ship, CScreenPos pos, float dt) { (void)ship;(void)pos;(void)dt;}
+    virtual void          Hit(CProjectile& proj, CScreenPos pos, float dt) { (void)proj;(void)pos;(void)dt;}
+    virtual void          HitTerrain(const CScreenPos &where, float dt)    { (void)where;(void)dt;}
     virtual CLevelSprite  Draw();
     virtual void          Erase();
             int           GetHeight() const { return GetSprite().GetHeight(); }
