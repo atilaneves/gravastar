@@ -2,3 +2,4 @@ flycheck_.+\.[ch]pp
 \.dir-locals.el
 cscope\.files
 cscope\.out
+.+~
