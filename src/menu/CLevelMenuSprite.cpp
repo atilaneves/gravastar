@@ -8,7 +8,7 @@
 
 
 CLevelMenuSprite::CLevelMenuSprite(int levelNb) {
- 
+
  CLevelHeader levelHeader(levelNb);
  mTitle        = levelHeader.GetTitle();
  mWidthString  = GetWidthDim(levelHeader.GetWidth());
@@ -20,7 +20,7 @@ CLevelMenuSprite::CLevelMenuSprite(int levelNb) {
  const int x = 0, y = 0;
  levelHeader.GetCanvas().StretchBlit(canvas, x, y, stretchW, stretchH);
 
- for(int y = 0; y < canvas.GetHeight(); y++) 
+ for(int y = 0; y < canvas.GetHeight(); y++)
    for(int x = 0; x < canvas.GetWidth(); x++)
      if(canvas.GetPixel(x, y) == CColour::GetBlack())
        canvas.PutPixel(x, y, canvas.GetMask());

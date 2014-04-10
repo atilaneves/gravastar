@@ -32,7 +32,7 @@ void CWeaponFollow::Hit(CShip& ship, CScreenPos pos, float dt) {
 }
 
 
-void CWeaponFollow::Move(float dt) { 
+void CWeaponFollow::Move(float dt) {
   CFollower::Move(dt);
   CheckCollision(dt);
 }

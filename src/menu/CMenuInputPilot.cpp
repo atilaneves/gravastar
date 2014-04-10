@@ -52,6 +52,3 @@ bool CMenuInputPilot::Cancel() {
     return PressedNow(mInput->MenuCancel(), mCancel) ||
         CMenuInput::Cancel();
 }
-
-
-

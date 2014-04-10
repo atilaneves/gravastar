@@ -52,9 +52,9 @@ void CVulcan::ApplyInput(const CPilotInput &controls) {
   CShip::ApplyInput(controls);
   if(mReleasedCluster && controls.Special() && IsSpecialActive())
     LaunchSpawn();
-  
+
   if(mReleasedCluster && !controls.Special()) mReleasedSpawn   = true;
-  if(mReleasedSpawn   && !controls.Special()) mReleasedCluster = true; 
+  if(mReleasedSpawn   && !controls.Special()) mReleasedCluster = true;
 }
 
 

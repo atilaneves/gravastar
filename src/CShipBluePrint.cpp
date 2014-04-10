@@ -60,7 +60,7 @@ void CShipBluePrint::SetAttributes(char *data) {
   fmt += "%*s %*s %f %f %*s %*s %*s %*s %d %d %f %f  ";
   fmt += "%*s %*s %*s %*s %d %f %f %f  %*s %*s %f %f ";
   fmt += "%*s %*s %d %f";  //super rate and duration
-  
+
   sscanf(data, fmt.c_str(),
          &mMass, &mMaxHull, &mMaxVel,
          &mThrust, &mTurnPower,

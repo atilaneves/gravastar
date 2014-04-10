@@ -11,7 +11,7 @@ class CControlTypeMenu: public CCycleStringEnter {
 
 public:
 
-  CControlTypeMenu(CRedefineMenu &redefine, 
+  CControlTypeMenu(CRedefineMenu &redefine,
 		   const CPilotInputOptions& options,
 		   const std::string &title,
 		   const strings_t& strings,

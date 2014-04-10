@@ -11,7 +11,7 @@ public:
 
   CStasisBomb(const CProjBluePrint &bluePrint, CShip& ship,
 	     const CVector2& pos, const CVector2& vel, bool shadow = false);
-  virtual ~CStasisBomb() {} 
+  virtual ~CStasisBomb() {}
 
 
 private:

@@ -9,7 +9,7 @@ public:
 
     CRefOrPointer(T* obj):mReference(*obj), mPointer(obj) { }
     CRefOrPointer(T& obj):mReference(obj) { }
-    
+
     explicit operator T*() { return &mReference; }
     operator const T*() const { return &mReference; }
     T* operator->() const { return &mReference; }

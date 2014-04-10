@@ -29,7 +29,7 @@ public:
 		       int x1, int y1, int x2, int y2) const;
   bool        InSprite(int x, int y) const;
   void        push_back(const SSpritePixel &p) { mPixels.push_back(p); }
-  
+
 
 private:
 

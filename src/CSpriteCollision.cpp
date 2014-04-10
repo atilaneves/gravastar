@@ -20,7 +20,7 @@ positions_t CSpriteCollision::Collided(const CCanvas &canvas,
     if(size && IsLessThanMinDiff(p, positions[size - 1])) continue;
     positions.push_back(CScreenPos(x + mPixels[p].x, y + mPixels[p].y));
   }
-  
+
   return positions;
 }
 
@@ -49,11 +49,11 @@ bool CSpriteCollision::Collided(const CCanvas &canvas,
 
 indices_t CSpriteCollision::GetIndices(const CCanvas &canvas,
 				       int x, int y) const {
-  
+
   indices_t indices;
   bool chkBounds = x < mWidth  || x >= canvas.GetWidth() - mWidth ||
                    y < mHeight || y >= canvas.GetHeight() - mHeight;
-  
+
   for(unsigned int p = 0; p < mPixels.size(); ++p) {
     if(chkBounds && OutOfBounds(canvas, x, y, p)) continue;
     if(IsPixelThere(canvas, x, y, p)) indices.push_back(p);
@@ -65,7 +65,7 @@ indices_t CSpriteCollision::GetIndices(const CCanvas &canvas,
 
 bool CSpriteCollision::IsPixelThere(const CCanvas &canvas,
 				    int x, int y, int p) const {
-  return canvas.GetPixel(x + mPixels[p].x, y + mPixels[p].y) != 
+  return canvas.GetPixel(x + mPixels[p].x, y + mPixels[p].y) !=
     CColour::GetBlack();
 }
 

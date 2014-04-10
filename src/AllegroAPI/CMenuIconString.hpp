@@ -11,10 +11,10 @@ class CFont;
 class CMenuIconString:public CMenuIcon {
 
 public:
-  
+
   CMenuIconString(const std::string &title, const CFont &font);
   virtual ~CMenuIconString() { }
-  
+
   virtual void Draw(CCanvas &canvas, int x, int y, bool highlight=false) const override;
   virtual int  GetHeight() const override;
   static  int  GetColour(bool h) { return  h ? GetMenuHi() : GetMenuLo(); }
@@ -28,7 +28,7 @@ private:
 
   std::string  mTitle;
   const CFont& mFont;
-  
+
 };
 
 #endif

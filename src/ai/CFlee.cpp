@@ -27,11 +27,11 @@ void CFlee::Think() {
   CAstar<CPoint2D> search(new CPoint2D(mPilot.GetShip().GetPos()),
 			  new CPoint2D(base.GetPos()));
   int op = search.Search();
-  
+
   if(op >= 0) {
     mTargetAngle = CPoint2D::OpToAngle(op);
     SetNoseAngle();
-  }  
+  }
 }
 
 
@@ -58,7 +58,7 @@ void CFlee::SetDefaults() {
   CShip& ship = mPilot.GetShip();
 
   if(ship.GetVel().GetY() > minVelY ||
-     fabs(mPilot.GetShip().GetVel().GetX()) > minVelX) 
+     fabs(mPilot.GetShip().GetVel().GetX()) > minVelX)
     mTargetAngle = 1.5*M_PI; //thrust a bit to not bounce
 
   if(fabs(ship.GetVel().GetX()) > minVelX) //too fast in x
@@ -68,7 +68,7 @@ void CFlee::SetDefaults() {
     mNoseAngle = 1.5*M_PI - ship.GetVel().GetX() * 0.05;
     if(ship.GetVel().GetY() > 100) mTargetAngle = 1.5*M_PI;
   }
-}  
+}
 
 
 int CFlee::GetBaseIndex() const {
@@ -76,7 +76,7 @@ int CFlee::GetBaseIndex() const {
   const Bases_t& bases = mPilot.GetShip().GetLevel().GetBases();
   int baseIndex = 0;
   float minDist2 = 9e20;
- 
+
   for(unsigned int b = 0; b < bases.size(); b++) {
     int bx = int(bases[b]->GetPos().GetX());
     int by = int(bases[b]->GetPos().GetY() -
@@ -89,6 +89,6 @@ int CFlee::GetBaseIndex() const {
       }
     }
   }
-  
+
  return baseIndex;
 }

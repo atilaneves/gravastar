@@ -31,10 +31,10 @@ void CMoverObj::Move(float dt) {
 void CMoverObj::KeepInBounds() {
 
   const CCanvas &canvas = mLevel.GetCanvas();
-  
+
   if(mPos.GetX() < GetWidth() / 2)
     OutOfBounds(0);
-  if(mPos.GetX() > canvas.GetWidth() - GetWidth() / 2) //thu the right 
+  if(mPos.GetX() > canvas.GetWidth() - GetWidth() / 2) //thu the right
     OutOfBounds(M_PI);
   if(mPos.GetY() < GetHeight() / 2) //through the top of the level
     OutOfBounds(0.5*M_PI);

@@ -10,21 +10,21 @@ CDefineButtonMenu::CDefineButtonMenu(const std::string &title,
 				     int button):
   CStringMenu(title),
   mTitle(title), mType(type), mButton(button) {
-  
+
 }
 
 
 void CDefineButtonMenu::DrawIcon(CCanvas &canvas, int x, int y,
 				 bool highlight) {
-  CMenu::DrawIcon(canvas, x, y, highlight);  
+  CMenu::DrawIcon(canvas, x, y, highlight);
   const CFont& font = CStringMenu::GetFont();
   font.Print(canvas, x + 100, y,
-	     CMenuIconString::GetColour(highlight), -1, GetButtonName());  
+	     CMenuIconString::GetColour(highlight), -1, GetButtonName());
 }
 
 
 std::string CDefineButtonMenu::GetButtonName() const {
-  char buttonName[200] = "";  
+  char buttonName[200] = "";
 
   if(mType == "Keyboard")
     sprintf(buttonName, "%c", CKeyboard::ScanToASCII(mButton));

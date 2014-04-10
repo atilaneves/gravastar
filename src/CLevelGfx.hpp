@@ -21,7 +21,7 @@ public:
   bool  IsFreeSquare(int xc,int yc,int side = 5) const;
 
  //inlines
-  bool BlackPixel(int x,int y) const { 
+  bool BlackPixel(int x,int y) const {
     //int p=mCanvas.GetPixel(x,y);
     //return p==CColour::GetBlack() || p<0; }
     return mCanvas.GetPixel(x,y) == 0; }
@@ -35,4 +35,3 @@ private:
 
 
 #endif
-

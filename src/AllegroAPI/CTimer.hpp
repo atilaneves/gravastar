@@ -8,7 +8,7 @@ typedef void (*timerFunction_t)();
 class CTimer {
 
 public:
- 
+
   bool IsReady(int counterIndex = 0, int rate = 0);
   int  GetCounter(int counterIndex = 0);
   int  GetFrequency() const { return mFrequency; }

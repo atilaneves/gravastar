@@ -15,12 +15,12 @@ public:
   virtual void AtJustFinished() override {}
   virtual void AtStart() override {}
   static  int  GetID() { return sID; }
-  
-  
+
+
 private:
-  
+
  static int sID; //id in the factory
-  
+
 
 };
 

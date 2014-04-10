@@ -15,7 +15,7 @@ CSoundMenu::CSoundMenu(CSprite *cursorSprite, const CClientOptions& options):
   mSoundVolume->SetCycle(options.GetSoundVolume());
   mMusicVolume->SetCycle(options.GetMusicVolume());
 
-  SetVolumes();  
+  SetVolumes();
 }
 
 

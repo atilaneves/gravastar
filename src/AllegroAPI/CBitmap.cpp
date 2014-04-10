@@ -15,7 +15,7 @@ CBitmap::~CBitmap() {
 
 BitmapImp_t* CBitmap::CopyBitmap(void *data) {
   BitmapImp_t *bmp=(BitmapImp_t*)data;
-  int w = bmp->w; 
+  int w = bmp->w;
   int h = bmp->h;
   BitmapImp_t *newData = create_bitmap(w, h);
   blit(bmp, newData, 0, 0, 0, 0, w, h); //copy the data here
@@ -23,13 +23,13 @@ BitmapImp_t* CBitmap::CopyBitmap(void *data) {
 }
 
 
-void CBitmap::Clear(int colour) { 
+void CBitmap::Clear(int colour) {
   if(colour < 0) colour = bitmap_mask_color(mData);
-  clear_to_color(mData, colour); 
+  clear_to_color(mData, colour);
 }
 
 
-void CBitmap::Draw(const CBitmap &bitmap, int x, int y, int fixAngle) { 
+void CBitmap::Draw(const CBitmap &bitmap, int x, int y, int fixAngle) {
   if(!fixAngle) //no rotation
     draw_sprite((BITMAP*)bitmap.GetData(), mData, x, y);
   else

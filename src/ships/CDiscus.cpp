@@ -45,7 +45,7 @@ void CDiscus::SpawnBullet(float dt, float dAngle, float dVelAngle) {
 
 
 void CDiscus::UseSpecial(float dt) {
-  mWeapons.UseSpecialAt(mPos, mVel, gFollowName);  
+  mWeapons.UseSpecialAt(mPos, mVel, gFollowName);
 }
 
 
@@ -59,7 +59,7 @@ void CDiscus::UseSuper(float dt, bool use) {
 void CDiscus::LoseHull(float amount, CPilot &pilot) {
   if(mWeapons.IsSpecialActive() && &pilot != &mPilot) {
     CExplosive::LoseHull(-amount / 2);  //add hull
-    mWeapons.AddSuperGauge(amount / 3); 
+    mWeapons.AddSuperGauge(amount / 3);
   }
  else
     CShip::LoseHull(amount, pilot);

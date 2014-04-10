@@ -17,7 +17,7 @@ float CLevelGfx::FindEdge(CScreenPos pos) const {
   int leftX  = x - 1;
   int upY    = y - 1;
   int downY  = y + 1; //y is inverted
-  
+
   //return angle of vector pointing outwards from edge
   do {
     if(BlackPixel(x, upY))    return 1.5*M_PI; //hit horizontal edge below
@@ -27,8 +27,8 @@ float CLevelGfx::FindEdge(CScreenPos pos) const {
 
     leftX--; if(leftX < 0) leftX = 0;
 
-    rightX++; 
-    if(rightX >= mCanvas.GetWidth()) 
+    rightX++;
+    if(rightX >= mCanvas.GetWidth())
       rightX = mCanvas.GetWidth() - 1;
 
     upY--; if(upY < 0) upY = 0;
@@ -48,16 +48,16 @@ bool CLevelGfx::IsFreeSquare(int xc, int yc, int side) const {
   int y0 = yc - side/2;
   int x1 = xc + side/2;
   int y1 = yc + side/2;
-  
+
   if(x0 < 0) x0=0;
   if(y0 < 0) y0=0;
   if(x1 > mCanvas.GetWidth())  x1 = mCanvas.GetWidth();
   if(y1 > mCanvas.GetHeight()) y1 = mCanvas.GetHeight();
-  
+
   for(int y = y0; y < y1; y += side) //y 1st makes gfx faster
     for(int x = x0; x < x1; x += side)
       if(!BlackPixel(x,y)) return false;
-  
+
   return true; //nth here!
 }
 
@@ -77,14 +77,14 @@ bool CLevelGfx::IsClearLine(float x1,float y1,
   float dist = dPos.Radius();
   dPos *= step/dist; //measures step now
   float stepCmp = step + 0.25;
-  
-  //chk pixels in the space between us and them 
+
+  //chk pixels in the space between us and them
   while(dist > stepCmp) {
     pos1 += dPos;
     dist -= step;
     if(!BlackPixel((int)pos1.GetX(), (int)pos1.GetY())) return false;
  }
-  
+
   return true; //nth in the way
 }
 

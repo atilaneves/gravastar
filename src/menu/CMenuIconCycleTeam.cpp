@@ -10,7 +10,7 @@ CMenuIconCycleTeam::CMenuIconCycleTeam(const std::string &title,
   CMenuIconCycle(title, cycleMenu),
   mCycleTeam(cycleMenu) {
 
-  
+
 }
 
 
@@ -20,5 +20,3 @@ void CMenuIconCycleTeam::Draw(CCanvas &canvas, int x, int y, bool highlight) con
               mCycleTeam.GetTeam().GetDarkColour(), -1,
               mCycleTeam.GetString());
 }
-
-

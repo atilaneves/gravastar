@@ -13,7 +13,7 @@ class CCycleLeaf;
 class CMenuIconCycle:public CMenuIcon {
 
 public:
-  
+
   CMenuIconCycle(const std::string &title, const CCycleLeaf &cycleMenu);
   virtual ~CMenuIconCycle() { }
 
@@ -22,8 +22,8 @@ public:
   virtual int GetWidth() const override;
           void SetTitle(const std::string& t) { mTitle.SetTitle(t); }
 
-  
-  
+
+
 protected:
 
   const CFont& mFont;
@@ -31,7 +31,7 @@ protected:
   const CCycleLeaf& mCycleMenu;
 
   virtual void Draw(CCanvas &canvas, int x, int y, bool highlight=false) const override;
-  
+
 };
 
 #endif

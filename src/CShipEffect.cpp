@@ -13,15 +13,15 @@ CShipEffect::CShipEffect(CLevel &level, CShip& ship, float duration):
 
 void CShipEffect::Start(float duration) {
   if(duration < 0) //standard case, use defined duration
-    mCounter.Start(mDuration); 
+    mCounter.Start(mDuration);
   else //override and use the duration sent to us
     mCounter.Start(duration);
   AtStart();
 }
 
 
-void CShipEffect::Reset() { 
-  mCounter.Reset(); 
+void CShipEffect::Reset() {
+  mCounter.Reset();
 }
 
 

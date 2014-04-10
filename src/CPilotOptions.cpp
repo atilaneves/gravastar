@@ -8,6 +8,6 @@ CPilotOptions::CPilotOptions(const std::string &name,
                              const shipTypes_t &ships,
                              const CPilotInputOptions &inputOptions):
     mName(name), mType(type), mTeam(&team), mShips(ships),
-    mInputOptions(inputOptions) { 
+    mInputOptions(inputOptions) {
 
 }

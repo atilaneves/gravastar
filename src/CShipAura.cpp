@@ -16,7 +16,7 @@ CShipAura::CShipAura(CLevel &level, CShip &ship,
       mSprites(CNose::kNbNoses, &bluePrint.mAuraSprite),
       mSound(bluePrint.mSounds.mRepairSound), mAura(nullptr) {}
 
-void CShipAura::Repair(float dt) { 
+void CShipAura::Repair(float dt) {
   if(mShip.GetHull() < mShip.GetMaxHull() ||
      (!mShip.GetWeapons().IsAtMax() && mBaseSpecial < 0.01))
     mRepairing = true;
@@ -34,7 +34,7 @@ void CShipAura::Update() {
     mSound.Play(mShip.GetPos());
     counter.Start(0.4);
   }
-  
+
   if(mRepairing && !CSpriteObjs::HasFlicker(mAura)) {
     mAura = new CFlicker(kAuraHz, mLevel,
 			 new CFollower(mSprites, mLevel, mShip));
@@ -44,7 +44,7 @@ void CShipAura::Update() {
     mAura->Die();
     mAura = nullptr;
   }
-  
+
   mRepairing = false;
 }
 

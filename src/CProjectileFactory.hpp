@@ -10,7 +10,7 @@ class CProjBluePrint;
 class CShip;
 
 
-typedef CProjectile* (*CreateProjCB)(const CProjBluePrint&, 
+typedef CProjectile* (*CreateProjCB)(const CProjBluePrint&,
                                      CShip&, const CVector2&,
                                      const CVector2&, bool);
 

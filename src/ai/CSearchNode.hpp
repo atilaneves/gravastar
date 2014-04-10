@@ -83,21 +83,21 @@ CSearchNode<T>::CSearchNode(T *state, CSearchNode<T> *parent, int op):
 
 
 template<typename T>
-float CSearchNode<T>::CalcCost(int op) { 
+float CSearchNode<T>::CalcCost(int op) {
   return mState->Cost(op) + mParent->mCost;
 }
 
 
 template<typename T>
-CSearchNode<T> * CSearchNode<T>::CreateNode(int op) { 
+CSearchNode<T> * CSearchNode<T>::CreateNode(int op) {
   T *newState = mState->CreateState(op);
   return newState ? new CSearchNode<T>(newState,this,op) : 0;
 }
 
 
 template<typename T>
-CSearchNode<T> * CSearchNode<T>::GetParent() const { 
-  return mParent; 
+CSearchNode<T> * CSearchNode<T>::GetParent() const {
+  return mParent;
 }
 
 

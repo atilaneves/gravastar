@@ -11,7 +11,7 @@
 
 CPowerups::CPowerups(CLevel& level, float rate):
     mLevel(level), mRate(rate) {
-  
+
     const std::vector<std::string>& keys = CPowerupFactory::Instance().GetKeys();
     for (auto &key : keys) {
       mPowerups.push_back(nullptr); // have the space, but not the powerup yet
@@ -58,10 +58,10 @@ float CPowerups::NearestDistance(const CVector2& shipPos) const {
 
 
 const CPowerup* CPowerups::NearestPowerup(const CVector2& shipPos) const {
-  
+
     float minDist = 9e9;
     int minPowerup = -1;
-  
+
     for(unsigned int i = 0; i<mPowerups.size(); i++) {
         if(mPowerups[i]) {
             float distance = (mPowerups[i]->GetPos() - shipPos).Radius();

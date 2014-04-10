@@ -23,14 +23,14 @@ void CSeekPowerup::Think() {
   CShip& ship  = mPilot.GetShip();
   const CPowerup* powerup = mPowerups.NearestPowerup(ship.GetPos());
   assert(powerup);
-  
-  if(!mPilot.IsClearLine(powerup->GetPos()) || 
+
+  if(!mPilot.IsClearLine(powerup->GetPos()) ||
      (ship.GetPos() - powerup->GetPos()).Radius() > 50) {
     CPoint2D::SetStepSizes(ship, 20, 60);
     CAstar<CPoint2D> search(new CPoint2D(ship.GetPos()),
 			    new CPoint2D(powerup->GetPos()));
     int op = search.Search();
-    
+
     if(op >= 0) {
       mTargetAngle = CPoint2D::OpToAngle(op);
       SetNoseAngle();

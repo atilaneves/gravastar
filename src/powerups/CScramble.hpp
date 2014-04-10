@@ -6,9 +6,9 @@
 
 
 class CScramble:public CFlickerEffect {
-  
+
 public:
-  
+
   CScramble(const CTeam &team, CShip& ship, CLevel& level);
 
   virtual void Affect() override;

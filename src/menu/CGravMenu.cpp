@@ -22,18 +22,18 @@ static CSprite *cursorSprite;
 CGravMenu::CGravMenu(const CGravOptions &options):
     CRootMenu(options.GetClientOptions().IsWindowed(),
               options.GetClientOptions().GetWidth(),
-              options.GetClientOptions().GetHeight(), 
+              options.GetClientOptions().GetHeight(),
               CFont(0),
               cursorSprite = new CSprite(CDataFile("Ships/Delta.dat").GetData(BLUE_000))),
     mCursorSprite(cursorSprite), mTitle("title"),
     mAdFont(EmpireBuilderDocument9) {
-    
+
     AddMenu(mVersusMenu = new CVersusMenu(cursorSprite, *this));
     AddMenu(new COnlineMenu(cursorSprite, *this));
     AddMenu(mOptionsMenu = new COptionsMenu(cursorSprite, *mVersusMenu,
                                             CClientOptions()));
     AdoptTitle(new CFontTitle(kFontSpaceAge52,
-                              makecol(0, 0, 190), "Gravastar")); 
+                              makecol(0, 0, 190), "Gravastar"));
     AdoptBackground(new CStarField(options.GetClientOptions().GetWidth(),
                                    options.GetClientOptions().GetHeight()));
     AdoptSong(new CSoundMP3("../Gravastar"));

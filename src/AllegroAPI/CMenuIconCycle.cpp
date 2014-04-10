@@ -9,7 +9,7 @@
 CMenuIconCycle::CMenuIconCycle(const std::string &title,
                                const CCycleLeaf &cycleMenu):
     mFont(CStringMenu::GetFont()), mTitle(title, mFont), mCycleMenu(cycleMenu) {
-  
+
 }
 
 

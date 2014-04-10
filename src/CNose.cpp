@@ -15,13 +15,13 @@ CNose::CNose(const CShipBluePrint &bluePrint, CShip& ship):
 
 void CNose::ApplyInput(const CPilotInput &controls) {
   if(mSpinCounter.IsActive()) return; //don't bother if spinning
-  mOmega = 0; 
+  mOmega = 0;
   if(controls.Left())  mOmega += mTurnPower; //could add up to 0 if
   if(controls.Right()) mOmega -= mTurnPower; //both of them are pressed
 }
 
 
-void CNose::Update(float dt) { 
+void CNose::Update(float dt) {
   float amount = mOmega * dt;
   if(mShip.IsEffectOn(CTurnUp::GetID())) amount*=1.5; //powerup!
   mNose += amount;
@@ -29,8 +29,8 @@ void CNose::Update(float dt) {
 }
 
 
-void CNose::BackTrack() { 
-  mNose -= mLastUpdate; 
+void CNose::BackTrack() {
+  mNose -= mLastUpdate;
 }
 
 
@@ -51,9 +51,9 @@ int CNose::GetNose() const {
 }
 
 
-void CNose::Set(float orientation, float omega) { 
+void CNose::Set(float orientation, float omega) {
  mNose  = orientation;
- mOmega = omega; 
+ mOmega = omega;
 }
 
 

@@ -20,5 +20,3 @@ CGameTimer::~CGameTimer() {
 int CGameTimer::GetCounter() {
  return counter;
 }
-
-

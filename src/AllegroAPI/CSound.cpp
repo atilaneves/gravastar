@@ -37,7 +37,7 @@ CSound::~CSound() {
 void CSound::Play(const CVector2 &pos, float volume, bool loop) {
  if(!mIsPlaying) {
     int vol = GetVolume(pos, volume);
-    if(vol>0.01) play_sample(mSample, vol, GetPan(pos.GetX()),IntFreq(),loop); 
+    if(vol>0.01) play_sample(mSample, vol, GetPan(pos.GetX()),IntFreq(),loop);
     if(loop) mIsPlaying = true;
  }
 }
@@ -74,5 +74,5 @@ int CSound::GetVolume(const CVector2 &pos, float volume) {
   volume *= sMasterVolume*mVolume;
   //volume *= exp(-CPilotMan::Nearest(pos)/365); //decay exp.
   return int(volume*255);
-  
+
 }

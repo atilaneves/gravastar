@@ -17,7 +17,7 @@ static const float kGreed = 0.65; //0 to 1, > means +accurate && +slower
 
 
 CPoint2D::CPoint2D(int x,int y,int stepSize):
-   mStepSize(stepSize), mOldStepSize(stepSize), mX(x), mY(y) {  
+   mStepSize(stepSize), mOldStepSize(stepSize), mX(x), mY(y) {
   Constructor();
 }
 
@@ -33,7 +33,7 @@ void CPoint2D::Constructor() {
  if(sNbPoints > 20)           mStepSize += sMinStepSize;
  if(mStepSize > sMaxStepSize) mStepSize  = sMaxStepSize;
  if(mStepSize < sMinStepSize) mStepSize  = sMinStepSize;
- mOldGreedSize = mOldStepSize * kGreed; 
+ mOldGreedSize = mOldStepSize * kGreed;
  sNbPoints++;
 }
 
@@ -49,9 +49,9 @@ float CPoint2D::Distance(CPoint2D *point) const {
   int dy = abs(point->GetY() - mY);
   int minDir = std::min(dx, dy);
   int maxDir = std::max(dx, dy);
-  //diagonal distance to close min dir, plus leftover in 
+  //diagonal distance to close min dir, plus leftover in
   //direction of max dir
-  return minDir * kSqrt2 + maxDir - minDir; 
+  return minDir * kSqrt2 + maxDir - minDir;
 }
 
 
@@ -101,7 +101,7 @@ CPoint2D * CPoint2D::CreateState(int op) {
  int y = mY - dy*mStepSize; //y is inverted
  const int side = 25;
 
- if(x >= 0 && x <= sLevel->GetWidth()  - 1 && 
+ if(x >= 0 && x <= sLevel->GetWidth()  - 1 &&
     y >= 0 && y <= sLevel->GetHeight() - 1 &&
      sLevel->IsFreeSquare(int(x), int(y), side))
     return new CPoint2D(x, y, mStepSize);
@@ -128,12 +128,12 @@ float CPoint2D::OpToAngle(int op) { //operator to angle
 
 
 int CPoint2D::GetIndex() const {
- return (mY/sMinStepSize)*(sLevel->GetWidth()/sMinStepSize) + 
+ return (mY/sMinStepSize)*(sLevel->GetWidth()/sMinStepSize) +
     mX/sMinStepSize;
 }
 
 
-void CPoint2D::SetMinStepSize(int s) { 
+void CPoint2D::SetMinStepSize(int s) {
  sMinStepSize = s;
  //0 to n = n+1 nodes, hence the +1 at the end
  int widthInSteps  = sLevel->GetWidth() /  sMinStepSize + 1;

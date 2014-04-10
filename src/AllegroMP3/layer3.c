@@ -1616,4 +1616,3 @@ int do_layer3(struct frame *fr, unsigned char *pcm_sample, int *pcm_point)
 
   return 0;
 }
-

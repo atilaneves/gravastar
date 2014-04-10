@@ -26,7 +26,7 @@ CControlsMenu::CControlsMenu(const CVersusMenu &versus,
     }
 }
 
-  
+
 
 int CControlsMenu::GetSubMenuX(int column) const {
     return CMenu::GetSubMenuX(column) + CResolution::GetWidth() / 35;
@@ -62,7 +62,7 @@ void CControlsMenu::Draw(CCanvas &canvas) {
     CStringMenu::GetFont().Print(canvas, CResolution::GetWidth() / 8,
                                  (CResolution::GetHeight()*17)/20,
                                  CMenuIconString::GetMenuHi(), -1, str1);
-  
+
     CStringMenu::GetFont().Print(canvas, CResolution::GetWidth() / 8,
                                  (CResolution::GetHeight()*17)/20 + 15,
                                  CMenuIconString::GetMenuHi(), -1, str2);

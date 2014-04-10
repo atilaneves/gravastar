@@ -55,7 +55,7 @@ void CLuna::UseSpecial(float dt) {
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
 					     *this, dist);
   bool shadow = false;
-  mWeapons.UseSpecialAt(pos, vel, gProjName, shadow);  
+  mWeapons.UseSpecialAt(pos, vel, gProjName, shadow);
 }
 
 

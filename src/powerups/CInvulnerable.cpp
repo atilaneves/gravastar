@@ -11,5 +11,3 @@ CInvulnerable::CInvulnerable(const CTeam &team, CShip& ship, CLevel& level):
   CFlickerEffect(team, ship, level, gDuration, ship.mInvSprites) {
 
 }
-
-

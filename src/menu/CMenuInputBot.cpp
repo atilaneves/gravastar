@@ -6,7 +6,7 @@ CMenuInputBot::CMenuInputBot(CMenuInputPilot &menuInputPilot):
   mActive(false) {
   menuInputPilot.AddBot(this);
 }
-  
+
 
 bool CMenuInputBot::Up() {
   return mActive ? CMenuInput::Up() : false;

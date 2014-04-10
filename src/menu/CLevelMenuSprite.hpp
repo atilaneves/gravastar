@@ -39,7 +39,7 @@ private:
   int         GetStretchWidth(CCanvas &canvas)  const;
   std::string GetWidthDim(int w)   { return GetDim("Width", w); }
 
- 
+
 
 };
 

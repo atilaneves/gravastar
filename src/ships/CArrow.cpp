@@ -38,7 +38,7 @@ void CArrow::UseSpecial(float dt) {
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
 					     *this, dist);
   bool shadow = false;
-  mWeapons.UseSpecialAt(pos, vel, gMissName, shadow);  
+  mWeapons.UseSpecialAt(pos, vel, gMissName, shadow);
 }
 
 

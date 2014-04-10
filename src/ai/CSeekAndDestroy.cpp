@@ -56,7 +56,7 @@ int CSeekAndDestroy::FindTarget(CVector2& pos) {  //get nearest pilot
 
 bool CSeekAndDestroy::IsValidTarget(const CPilot& pilot) {
   return pilot.IsAlive() && pilot.GetTeam() != mPilot.GetTeam() &&
-         pilot.GetShip().IsAlive() && 
+         pilot.GetShip().IsAlive() &&
          (!pilot.GetShip().IsEffectOn(CInvulnerable::GetID()) ||
 	  mPilot.GetShip().IsEffectOn(CInvulnerable::GetID()));
 }
@@ -66,10 +66,10 @@ float CSeekAndDestroy::FindTargetAngle(const CVector2& pos) {
 
   CVector2 dist = pos - mPilot.GetShip().GetPos();
   float angle;
-  
+
   if(!mPilot.IsClearLine(pos) &&
      !mPilot.GetShip().GetWeapons().IsSuperActive() ) {
-    
+
     CPoint2D::SetStepSizes(mPilot.GetShip(), 25, 60);
     CAstar<CPoint2D> search(new CPoint2D(mPilot.GetShip().GetPos()),
 			    new CPoint2D(pos));
@@ -79,7 +79,7 @@ float CSeekAndDestroy::FindTargetAngle(const CVector2& pos) {
     angle = dist.Theta(); //clear shot, straight towards target
     mPointAtTarget=true;
   }
-  
+
   if(angle < 0) angle += 2*M_PI; //guarantee it's in the [0,2pi[ interval
   return angle;
 }
@@ -91,17 +91,17 @@ CVector2 CSeekAndDestroy::SetNearestPoint(const CVector2& pos, float pullAngle) 
   int x0 = int(pos.GetX());    int y0 = int(pos.GetY());
   int x  = int(newPos.GetX()); int y  = int(newPos.GetY());
   if(mPilot.GetShip().GetLevel().IsFreeSquare(int(x), int(y))) return pos;
-  
+
   const int stepSize = 20;
   const int r0 = (3*stepSize)/2; //initial r
-  int r  = r0; //init it 
+  int r  = r0; //init it
   const float deltaTheta = M_PI/4; //45 degrees, 8 directions
-  
+
   while(true) {
     for(float theta = pullAngle;theta < pullAngle + 2*M_PI;theta+=deltaTheta) {
       newPos += CVector2(theta) * r;
       int x = int(newPos.GetX()); int y = int(newPos.GetY());
-      if(x >= 0 && x < mPilot.GetShip().GetLevel().GetWidth() && 
+      if(x >= 0 && x < mPilot.GetShip().GetLevel().GetWidth() &&
 	 y >= 0 && y < mPilot.GetShip().GetLevel().GetHeight() &&
 	 mPilot.GetShip().GetLevel().IsFreeSquare(x, y) &&
 	 (r > r0 || mPilot.GetShip().GetLevel().IsClearLine(x, y, x0, y0)))

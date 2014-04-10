@@ -31,6 +31,6 @@ void CVoidharSeek::SetShootControl(CPilotInputBot &input) {
     input.SetSpecial();
   else if(!IsTooHot()) //not waiting to cool down, fire away!
     input.SetWeapon();
-  
+
 
 }

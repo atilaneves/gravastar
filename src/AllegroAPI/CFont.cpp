@@ -9,12 +9,12 @@ CDataFile *CFont::sDataFile = nullptr;
 CFont::CFont(int fontIndex) {
   if(sNbFonts == 0) //1st font ever, load the file
     sDataFile = new CDataFile("fonts.dat");
-  
+
   if(fontIndex >= 0)
     mFont=(FONT*)sDataFile->GetData(fontIndex);
   else
     mFont=font; //default allegro font
-  
+
   sNbFonts++;
 }
 

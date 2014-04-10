@@ -13,7 +13,7 @@ public:
 
  virtual void Affect() override {}
   static  int  GetID() { return sID; }
-  
+
 
 private:
 

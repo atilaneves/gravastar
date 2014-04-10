@@ -9,7 +9,7 @@ class CGameTimer:public CTimer {
 
 public:
 
- static CGameTimer& Instance(int bps=100) { 
+ static CGameTimer& Instance(int bps=100) {
   if(!sGameTimer) sGameTimer=new CGameTimer(bps); return *sGameTimer; }
  static void Delete() { delete sGameTimer;
    sGameTimer = nullptr;

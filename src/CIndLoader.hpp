@@ -34,7 +34,7 @@ private:
   IndsPos_t  FindIndsPos(IndsBmp_t bmps);
   bool       LoadCoords();
   CScreenPos LoadPos(FILE *fp);
-  CVector2   Pos2Vector(const CScreenPos& pos) const { 
+  CVector2   Pos2Vector(const CScreenPos& pos) const {
     return CVector2(pos.GetX(), pos.GetY()); }
   void       SaveCoords();
 

@@ -12,12 +12,12 @@ public:
   static CFrameTimer& Instance();
          bool         IsReady() { return CTimer::IsReady(kCounterIndex,
 							 kRate); }
-  
+
 
 private:
-  
+
   enum { kCounterIndex=0, kRate=1 };
-    
+
   CFrameTimer();
   CFrameTimer(const CFrameTimer& timer);
   CFrameTimer& operator=(const CFrameTimer& timer);

@@ -31,4 +31,3 @@ void CPowerup::Hit(CShip& ship, CScreenPos pos, float dt) {
   AffectShip(ship);
   mActive = false;
 }
-

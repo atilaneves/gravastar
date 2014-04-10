@@ -39,7 +39,7 @@ public:
     virtual  void Right() { }
     virtual  void Run(CRootMenu &rootMenu);
     virtual  void Update(CRootMenu &rootMenu) { }
- 
+
 
 protected:
 

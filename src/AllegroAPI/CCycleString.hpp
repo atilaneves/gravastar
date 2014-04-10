@@ -19,7 +19,7 @@ public:
 
   virtual std::string GetString() const override {
     return mStrings[mCycle.ToInt() - mCycle.GetMin()]; }
-  
+
 
 private:
 

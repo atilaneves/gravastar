@@ -15,14 +15,14 @@ CShipMenuItem::CShipMenuItem(const std::string &title,
   CMenu(new CMenuIconShip(gDataFile = new CDataFile(GetFileName(title)),
 			  GetIndex(title))),
   mVersus(versus), mDir("Ships") {
-  
+
   SetNames(title, *gDataFile);
   delete gDataFile;
 }
 
 
 std::string CShipMenuItem::GetFileName(const std::string &title) {
-  return title == "Random" ? "menu.dat" : "Ships/" + title + ".dat"; 
+  return title == "Random" ? "menu.dat" : "Ships/" + title + ".dat";
 }
 
 
@@ -33,7 +33,7 @@ int CShipMenuItem::GetIndex(const std::string &title) {
 
 void CShipMenuItem::SetNames(const std::string &title,
 			     const CDataFile &dataFile) {
-  
+
   char shipName[200], weaponName[200], specialName[200], superName[200];
   char quirks[200];
 
@@ -51,7 +51,7 @@ void CShipMenuItem::SetNames(const std::string &title,
   }
 }
 
-const std::string& CShipMenuItem::GetShipName() const { 
+const std::string& CShipMenuItem::GetShipName() const {
   if(mShipName != "Random") return mShipName;
   int shipIndex = rand() % mDir.GetNbEntries();
   return mDir.GetEntryNoExt(shipIndex);

@@ -11,5 +11,3 @@ CCoolant::CCoolant(const CTeam &team, CShip& ship, CLevel& level):
 
 
 }
-
-

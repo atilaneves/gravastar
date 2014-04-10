@@ -6,10 +6,10 @@ class CCanvas;
 
 
 class CResolution {
-  
+
 public:
-  
-  
+
+
   static int      GetHeight();
   static CCanvas &GetScreen() { return *sScreen; }
   static int      GetWidth();
@@ -19,11 +19,11 @@ public:
 
 
 private:
-  
+
   static CCanvas *sScreen;
   static bool     sWindowed;
   static bool     sChangedWindowed;
-  
+
 };
 
 

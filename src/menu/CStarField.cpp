@@ -18,10 +18,10 @@ CStarField::CStarField(int width,int height):
    mDataFile("stars.dat"), mWidth(width), mHeight(height),
    mBackgroundX(0), mBackgroundStep(0) {
 
-  mStar1.reset(new CCanvas(mDataFile.GetData(kSTAR1))); 
-  mStar2.reset(new CCanvas(mDataFile.GetData(kSTAR2))); 
+  mStar1.reset(new CCanvas(mDataFile.GetData(kSTAR1)));
+  mStar2.reset(new CCanvas(mDataFile.GetData(kSTAR2)));
   NewCanvas(width, height);
-  
+
   LOCK_VARIABLE(timer_counter);
   LOCK_FUNCTION(inc_timer_counter);
   int nbMilliSecs = 1;
@@ -83,7 +83,7 @@ void CStarField::MoveStars() {
  whenToDraw++;
 
  if (whenToDraw > kLayersStars-1) c = kLayersStars-1;
- if (whenToDraw > kLayersStars) { 
+ if (whenToDraw > kLayersStars) {
     c = kLayersStars;
     whenToDraw = 0;
  }
@@ -91,9 +91,9 @@ void CStarField::MoveStars() {
  for(int a = 1; a < c ; a++) {
     for(int b=0 ; b<kNbStars; b++) {
        mStars[a][b].x -= (kSpeedStars * mWidth) / 640;
-       
+
        if(mStars[a][b].x > mWidth) mStars[a][b].x = 0;
-       if(mStars[a][b].x < 0) { 
+       if(mStars[a][b].x < 0) {
 	  mStars[a][b].x = mWidth;
 	  mStars[a][b].y = (rand() % mHeight);
        }

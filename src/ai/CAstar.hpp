@@ -11,9 +11,9 @@ class CAstar {
 public:
 
   CAstar(T *start, T *goal);
-  
+
   int Search(); //Return operator
-  
+
 private:
 
   std::auto_ptr<T> mGoalState;
@@ -44,7 +44,7 @@ int CAstar<T>::Search() {
       while(parent);
       return node->GetFirstOperator();
     }
-    else 
+    else
       mQueue->ExpandAndAdd(node);
   }
 

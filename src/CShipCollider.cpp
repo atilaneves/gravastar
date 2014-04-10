@@ -31,7 +31,7 @@ bool CShipCollider::BouncedOff(const CScreenPos& pos, float &edgeAngle) {
   const float kDot = mShip.GetVel() * CVector2(edgeAngle);
   //dot will be < 0 if we're going towards the edge
   if(kDot < 0 && spriteIndex >= kNose1 && spriteIndex <= kNose2) {
-    mShip.mNose.Set(kNoseIndex + 0.1); //crashes if 0 
+    mShip.mNose.Set(kNoseIndex + 0.1); //crashes if 0
     return true;
   }
   else
@@ -42,13 +42,13 @@ bool CShipCollider::BouncedOff(const CScreenPos& pos, float &edgeAngle) {
 CVector2 CShipCollider::VelAfterFriction(float angle,
 					 const CVector2& vel) const {
   const float f = 0.4;
-  return CVector2((f-1) * vel.GetX() * fabs(sin(angle)), 
+  return CVector2((f-1) * vel.GetX() * fabs(sin(angle)),
 		  (f-1) * vel.GetY() * fabs(cos(angle)));
 }
 
 
-void CShipCollider::Klang() { 
-  mKlang.Play(mShip.GetPos()); 
+void CShipCollider::Klang() {
+  mKlang.Play(mShip.GetPos());
 }
 
 
@@ -114,5 +114,5 @@ void CShipCollider::Hit(CShip &ship, float dt) {
     ((CEffectPush*)ship.mEffects.GetEffect(CEffectPush::GetID()))->
       SetPilot(mShip.GetPilot());
 
-  if(ship.GetVel().Radius2() > 10) mKlang.Play(mShip.GetPos()); 
+  if(ship.GetVel().Radius2() > 10) mKlang.Play(mShip.GetPos());
 }

@@ -9,7 +9,7 @@ class CPowerupWeapon: public CPowerup {
 
 public:
 
- CPowerupWeapon(CPowerups &powerups, 
+ CPowerupWeapon(CPowerups &powerups,
 		CLevel &level, const CVector2 &pos, const CGravSprite& sprite);
 
 

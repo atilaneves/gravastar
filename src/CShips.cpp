@@ -92,7 +92,7 @@ bool CShips::IsClearLine(const CShip &ship, int x, int y) {
         ship.GetLevel().IsClearLine((sShip)->GetPos(), CVector2(x, y)))
       return true;
   }
-  
+
  return false; //nobody else has a clear line of sight to x,y
 }
 
@@ -103,6 +103,6 @@ bool CShips::IsAllElseInvulnerable(CShip& ship) {
     if ((sShip)->IsAlive() && sShip != &ship &&
         !(sShip)->IsEffectOn(CInvulnerable::GetID()))
       return false;
-    
+
   return true; //yep, eb else's invulnerable, and we're not
 }

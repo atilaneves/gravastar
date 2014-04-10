@@ -34,11 +34,11 @@ CBotAction& CActionPicker::PickAction() {
 
   if(ship.IsEffectOn(CEMB::GetID())) return mFlee;
 
-  if(CShips::IsAllElseInvulnerable(ship)) { 
+  if(CShips::IsAllElseInvulnerable(ship)) {
     if(ship.IsEffectOn(CInvulnerable::GetID())) return *mSeekAndDestroy;
     else                                        return mFlee;
   }
-  
+
   if(ship.GetWeapons().IsSuperActive()) return *mSeekAndDestroy;
 
   float dist = sPowerups->NearestDistance(ship.GetPos());
@@ -53,7 +53,7 @@ CBotAction& CActionPicker::PickAction() {
       return mFlee;
     }
   }
-  
+
   mWasRecharging = false; //if we got here, this is false
 
   if(!CPilots::IsAlone(mPilot)) //not alone, kill sb!

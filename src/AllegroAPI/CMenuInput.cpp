@@ -11,7 +11,7 @@ bool CMenuInput::sSelect=false;
 bool CMenuInput::sCancel=false;
 
 
-bool CMenuInput::Up() { 
+bool CMenuInput::Up() {
     return PressedNow(CKeyboard::KeyPressed(CKeyboard::kUp) ||
                       CJoystick::JoyUp(), sUp);
 }

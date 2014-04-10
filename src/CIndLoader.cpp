@@ -73,7 +73,7 @@ CScreenPos CIndLoader::LoadPos(FILE *fp) {
 void CIndLoader::SaveCoords() {
 
   FILE *fp = fopen(mFileName.c_str(), "w");
-  
+
   if(fp) {
     fprintf(fp, "nbBases: %zu nbInds: %zu\n", mBasesPos.size(), mIndsPos.size());
     for (auto &elem : mBasesPos)

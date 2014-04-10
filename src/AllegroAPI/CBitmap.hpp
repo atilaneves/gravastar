@@ -13,7 +13,7 @@ public:
 
   CBitmap(BitmapImp_t *data);
   ~CBitmap();
-  
+
   void         Blit(CBitmap &bitmap, int x0, int y0, int x1, int y1,
 		    int w, int h) const ;
   void         Blit(CBitmap &bitmap, int x1 = 0, int y1 = 0) const;
@@ -32,11 +32,11 @@ public:
   void         StretchBlit(CBitmap &bitmap, int x, int y, int w, int h) const;
 
 
-  
+
 protected:
-  
+
   BitmapImp_t *mData; //this is where it's at
-    
+
 };
 
 

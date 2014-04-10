@@ -15,12 +15,12 @@ public:
   void Pause(int counterIndex = 0);
   void Unpause(int counterIndex = 0);
 
-  
+
 
 private:
-  
+
   enum { kCounterIndex=0, kRate=1 };
-    
+
   CClockTimer();
   CClockTimer(const CClockTimer& timer);
   CClockTimer& operator=(const CClockTimer& timer);

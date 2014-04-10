@@ -15,9 +15,9 @@ CWeapon::CWeapon(const CShipBluePrint &shipBluePrint, CShip &ship,
   mMaxTemperature(shipBluePrint.mMaxTemperature),
   mCoolingRate(shipBluePrint.mCoolingRate),
   mFiring(false), mTemperature(0),
-  mBluePrint(*shipBluePrint.mWeaponBluePrint), 
+  mBluePrint(*shipBluePrint.mWeaponBluePrint),
   mShip(ship), mLevel(level), mSound(mBluePrint.mSound) {
-  
+
 
 }
 
@@ -32,14 +32,14 @@ void CWeapon::Update(float dt) {
   if(mFiring &&
      CWeaponTimer::Instance().IsReady(mShip.GetPilot().GetIndex(),
 				      GetRate())) {
-    if(!mShip.IsEffectOn(CCoolant::GetID())) 
+    if(!mShip.IsEffectOn(CCoolant::GetID()))
       mTemperature += 1.0/CWeaponTimer::Instance().GetFrequency(); //heats up
     mShip.UseWeapon(dt);
     mFiring = false;
   }
   if(!mFiring)
     mTemperature -= mCoolingRate/CWeaponTimer::Instance().GetFrequency();
-  
+
   KeepTempInRange();
   mFiring = false;
 }

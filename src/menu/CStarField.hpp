@@ -25,7 +25,7 @@ private:
   struct Stars2D {
     int x, y;
   };
-  
+
   CDataFile mDataFile;
   int mWidth;
   int mHeight;
@@ -35,7 +35,7 @@ private:
   std::unique_ptr<CCanvas> mBackground;
   std::unique_ptr<CCanvas> mStar1;
   std::unique_ptr<CCanvas> mStar2;
-  
+
   void AnimateStars();
   void InitStars();
   void MoveStars();

@@ -22,7 +22,7 @@ void CTempusSeek::Think() {
   if(mTargetIndex != -1) { //we have a target
     const CShip &ship = CPilots::GetPilot(mTargetIndex).GetShip();
     CTempus *tempus = (CTempus*)&mPilot.GetShip();
-    
+
     if(tempus->IsSpecialActive() &&
        (ship.GetPos() - tempus->GetSpecialPos()).Radius() < 200)
       mDetonate = true; //cluster!

@@ -43,8 +43,8 @@ bool CProjectiles::HasTowards(const CShip& ship) {
     const CVector2 posDiff = ship.GetPos() - (sProjectile)->GetPos();
     const CVector2 &projVel = (sProjectile)->GetVel();
     const float maxAngle    = GetMaxAngle(ship.GetWidth(), posDiff.Radius());
-    if(posDiff.Radius() < kMaxDist && posDiff.Angle(projVel) < maxAngle) 
-      return true; //close enough and pointing towards us       
+    if(posDiff.Radius() < kMaxDist && posDiff.Angle(projVel) < maxAngle)
+      return true; //close enough and pointing towards us
   }
 
   return false;

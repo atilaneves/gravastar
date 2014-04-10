@@ -30,7 +30,7 @@ CLevel::CLevel(unsigned int levelNb):
 
   for(unsigned int i = 0; i < indBmps.size(); ++i) {
     auto sprite = new CGravSprite(indBmps[i]);
-    mInds.push_back(new CIndestructible(*this, indLoader.GetIndPos(i), 
+    mInds.push_back(new CIndestructible(*this, indLoader.GetIndPos(i),
 					sprite, mKlang));
   }
 }
@@ -61,7 +61,7 @@ CVector2 CLevel::GetFreePos(const CGravSprite &sprite) const {
      indices.erase(where); //not considering this one anymore
      pos = mBases[index]->GetFreePos(sprite);
    } while(pos.GetX() < 0 && indices.size() > 0); //til empty spot's found
-   
+
    assert(pos.GetX() > 0);
    return pos;
 }

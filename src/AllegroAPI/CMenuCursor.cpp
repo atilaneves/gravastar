@@ -40,7 +40,7 @@ CMenu* CMenuCursor::Update(CRootMenu &rootMenu) {
         else GetSubMenu().Left();
     }
 
-    if(mInput->Right()) { 
+    if(mInput->Right()) {
         if(mMenu.GetNbCols() > 1) ++mCol;
         else GetSubMenu().Right();
     }
@@ -81,7 +81,7 @@ void CMenuCursor::DrawPointee(CCanvas &canvas) {
 void CMenuCursor::DrawSprite(CCanvas &canvas) {
 
     int x = mMenu.GetSubMenuX(mCol.ToInt()) - mSprite->GetWidth() - 10;
-    int y = mMenu.GetSubMenuY(mRow.ToInt()) + mMenu.GetHeight()/2 - 
+    int y = mMenu.GetSubMenuY(mRow.ToInt()) + mMenu.GetHeight()/2 -
         mSprite->GetHeight()/2;
 
     mSprite->Draw(canvas, x, y);

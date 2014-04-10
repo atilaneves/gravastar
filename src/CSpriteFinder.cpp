@@ -7,12 +7,12 @@ Positions_t CSpriteFinder::FindSprites(const CCanvas &haystack,
 				       const CCanvas &needle) {
 
   Positions_t positions;
-  
+
   for(int y = 0; y < haystack.GetHeight() - needle.GetHeight() + 1; y++)
     for(int x = 0; x < haystack.GetWidth() - needle.GetWidth() + 1; x++)
       if(IsSpriteHere(haystack, needle, x, y))
 	positions.push_back(CScreenPos(x, y));
-  
+
   return positions;
 }
 

@@ -23,14 +23,14 @@ void CVulcanSeek::Think() {
   CSeekAndDestroy::Think();
   mIsBombing = mIsClustering = false;
   if(mPilot.GetShip().GetWeapons().IsSuperActive()) return;
-  
+
   if(mTargetIndex != -1) { //we have a target
     const CShip &ship = CPilots::GetPilot(mTargetIndex).GetShip();
     CVulcan *vulcan = (CVulcan*)&mPilot.GetShip();
-    
+
     if(!vulcan->IsSpecialActive() && //no cluster active
        //no super, above its target, has clear line, and has mines
-       vulcan->GetPos().GetY() < ship.GetPos().GetY() && 
+       vulcan->GetPos().GetY() < ship.GetPos().GetY() &&
        vulcan->GetWeapons().CanSpecial() &&
        mPilot.IsClearLine(ship.GetPos())) {
       mNoseAngle += M_PI;

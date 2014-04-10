@@ -23,7 +23,7 @@ private:
   const CLevel& mLevel;
 
   float GetFriction();
-  
+
 };
 
 

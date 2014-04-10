@@ -14,10 +14,10 @@ public:
   CCanvas(void *data);
   CCanvas(int w, int h);
   CCanvas(const CBitmap &bitmap);
-    
+
   CCanvas& operator=(const CCanvas &canvas);
 
-  
+
 private:
   CCanvas() : CBitmap(nullptr) {}
 };

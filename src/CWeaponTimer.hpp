@@ -10,7 +10,7 @@ class CWeaponTimer:public CTimer {
 public:
 
  static CWeaponTimer& Instance(int bps=20)
-  { static CWeaponTimer weaponTimer(bps); 
+  { static CWeaponTimer weaponTimer(bps);
     return weaponTimer; }
 
 

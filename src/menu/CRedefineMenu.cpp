@@ -26,7 +26,7 @@ CRedefineMenu::CRedefineMenu(const CVersusMenu &versus, int pilotNb,
     mButtons[name] = new CDefineButtonMenu(name, options.Type(),
 					   options.GetControl(name));
     AddMenu(mButtons[name]);
-  }  
+  }
 
 }
 
@@ -67,7 +67,7 @@ int CRedefineMenu::ReadScan(CRootMenu &rootMenu) {
   CKeyboard::Clear();
   while(true) {
     if(mMenuInputRedefine->Cancel()) return 0;
-    
+
     for(int i = 1; i < KEY_MAX; i++) {
       if(i == CKeyboard::kEsc)     continue;
       if(CKeyboard::KeyPressed(i)) return i;
@@ -78,10 +78,10 @@ int CRedefineMenu::ReadScan(CRootMenu &rootMenu) {
 }
 
 
-int CRedefineMenu::ReadNextButton(CRootMenu &rootMenu, int joyNb) { 
+int CRedefineMenu::ReadNextButton(CRootMenu &rootMenu, int joyNb) {
   //1st, wait til no button is pressed
   while(CJoystick::IsPressedAny(joyNb)) RunStep(rootMenu);
-  while(true) { 
+  while(true) {
     if(mMenuInputRedefine->Cancel()) return 0;
 
     poll_joystick();

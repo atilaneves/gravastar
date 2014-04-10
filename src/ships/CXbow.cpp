@@ -35,7 +35,7 @@ void CXbow::UseSpecial(float dt) {
     //if a projectile hits both the deflector and the ship, the
     //deflector should have priority, so we change its order in the queue
     CSpriteObjs::RemoveObj(mDeflector); //take it off the back of the list
-    bool back = false; 
+    bool back = false;
     CSpriteObjs::AddObj(mDeflector, back); //add it to the front
 }
 

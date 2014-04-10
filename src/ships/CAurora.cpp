@@ -45,7 +45,7 @@ void CAurora::SpawnShard(float dt, float dAngle, bool shadow) {
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, dAngle);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
 					     *this, dist, dAngle);
-  mWeapons.UseSpecialAt(pos, vel, gShotName, shadow);  
+  mWeapons.UseSpecialAt(pos, vel, gShotName, shadow);
 }
 
 

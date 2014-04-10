@@ -29,7 +29,7 @@ private:
   std::string mWeaponName;
   std::string mSpecialName;
   std::string mSuperName;
-  
+
   static std::string GetFileName(const std::string &title);
   static int         GetIndex(const std::string &title);
          void        SetNames(const std::string &title,

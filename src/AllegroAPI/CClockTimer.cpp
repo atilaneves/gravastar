@@ -9,7 +9,7 @@ static int frequency = 2000;
 
 
 CClockTimer::CClockTimer():
-  CTimer(frequency, update, &counter) { 
+  CTimer(frequency, update, &counter) {
 
 }
 

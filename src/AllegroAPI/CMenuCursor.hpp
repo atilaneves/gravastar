@@ -33,7 +33,7 @@ public:
 
 protected:
 
-  CIntWrap mRow, mCol; 
+  CIntWrap mRow, mCol;
   CMenu   &mMenu;
   const CSprite *mSprite;
   std::unique_ptr<CMenuInput> mInput;

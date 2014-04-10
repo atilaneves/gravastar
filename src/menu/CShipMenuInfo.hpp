@@ -41,7 +41,7 @@ private:
   CTimeCounter mTimeCounter;
   std::map<std::string, CCanvas*> mSprites;
   std::map<std::string, CShipStatSprite*> mStatSprites;
- 
+
 
   void AddSprite(const std::string& name, CCanvas *canvas);
   void DrawGeometry();

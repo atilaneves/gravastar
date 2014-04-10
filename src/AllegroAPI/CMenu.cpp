@@ -25,7 +25,7 @@ int CMenu::GetSubMenuX(int column) const {
 
 
 int CMenu::GetSubMenuY(int row) const {
-    int y = (2*CResolution::GetHeight())/5;  
+    int y = (2*CResolution::GetHeight())/5;
     return y + (int)(row * 1.5 * mMaxHeight);
 }
 

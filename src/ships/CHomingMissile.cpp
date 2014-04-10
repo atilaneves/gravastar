@@ -25,17 +25,17 @@ void CHomingMissile::Move(float dt) {
     float dtheta  = dist.Theta() - theta;
 
     float kStepTheta = 1.5;
-    
+
     if((dtheta > 0 && dtheta <= M_PI) ||
        (dtheta < 0 && dtheta <= -M_PI)) //adjust by a certain step
       theta += kStepTheta * dt;
     else if((dtheta < 0 && dtheta>=-M_PI) ||
 	    (dtheta > 0 && dtheta>=M_PI)) //adjust by a certain step
       theta -= kStepTheta * dt;
-    
+
     if(theta < 0)      theta += 2*M_PI;
     if(theta > 2*M_PI) theta -= 2*M_PI;
-    
+
     mVel = mVel.Radius() * CVector2(theta);
     mNose = CNose::Angle2NoseIndex(theta);
   }
@@ -56,7 +56,7 @@ int CHomingMissile::GetTargetIndex() {
 
       CVector2 dist = ship.GetPos() - GetPos();
       float cosAngle = CVector2(dist.Theta()) * CVector2(mVel.Theta());
-      const float kMaxCosAngle = 0.4; 
+      const float kMaxCosAngle = 0.4;
       if(cosAngle > kMaxCosAngle) { //forward cone
 	float dist2 = dist.Radius2();
 	if(dist2 < minDist2) {
@@ -66,6 +66,6 @@ int CHomingMissile::GetTargetIndex() {
       }
     }
   }
-  
+
   return targetIndex;
 }

@@ -14,23 +14,23 @@ class CSearchQueue {
 public:
 
   typedef std::vector<CSearchNode<T>*> searchQueue_t;
-  
+
   CSearchQueue(T *startState);
   ~CSearchQueue();
-  
+
   void            ExpandAndAdd(CSearchNode<T> *node);
   CSearchNode<T> *GetNextNode();
   bool            IsEmpty() const { return mNbOpenNodes == 0; }
-  
+
 
 private:
-  
+
   searchQueue_t mOpenArray;   //not all are valid
   searchQueue_t mClosedArray; //not all are valid
   searchQueue_t mOpenNodes;
   searchQueue_t mClosedNodes;
   int mNbOpenNodes;
-  
+
 };
 
 
@@ -59,7 +59,7 @@ CSearchQueue<T>::~CSearchQueue() {
   for(unsigned int i = 0; i < mOpenNodes.size(); i++)
     delete mOpenNodes[i];
 
-  for(unsigned int i = 0; i < mClosedNodes.size(); i++) 
+  for(unsigned int i = 0; i < mClosedNodes.size(); i++)
     delete mClosedNodes[i];
 }
 
@@ -81,11 +81,11 @@ void CSearchQueue<T>::ExpandAndAdd(CSearchNode<T> *node) {
 	inClosed = true;
 
       if(mOpenArray[newNode->GetIndex()]) { //already have it
-	  
+
 	inOpen = true; //already have it
 
-	if(newNode->GetTotal() < 
-	   mOpenArray[newNode->GetIndex()]->GetTotal()) { 
+	if(newNode->GetTotal() <
+	   mOpenArray[newNode->GetIndex()]->GetTotal()) {
 	  //this one's better, replace it
 	  CSearchNode<T> *oldNode = mOpenArray[newNode->GetIndex()];
 	  std::replace(mOpenNodes.begin(), mOpenNodes.end(), oldNode, newNode);
@@ -106,7 +106,7 @@ void CSearchQueue<T>::ExpandAndAdd(CSearchNode<T> *node) {
 }
 
 
-template <typename T> //true if n1 is smaller 
+template <typename T> //true if n1 is smaller
 bool smallerTotal(CSearchNode<T> *n1, CSearchNode<T> *n2) {
   if(int(n1->GetTotal()) != int(n2->GetTotal()))
     return n1->GetTotal() < n2->GetTotal();

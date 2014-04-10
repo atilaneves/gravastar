@@ -19,7 +19,7 @@ public:
   virtual bool Thrust()     const = 0;
   virtual bool Weapon()     const = 0;
   virtual bool Special()    const = 0;
-  virtual bool Super()      const = 0; 
+  virtual bool Super()      const = 0;
   virtual bool Start()      const = 0;
   virtual bool MenuUp()     const = 0;
   virtual bool MenuDown()   const = 0;
