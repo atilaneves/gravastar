@@ -6,8 +6,8 @@
 
 
 CVector2 CProjLauncher::GetLaunchPos(const CGravSprite& sprite, float dt,
-				     const CShip& ship,
-				     float radius, float dAngle) {
+                                     const CShip& ship,
+                                     float radius, float dAngle) {
 
   double posAngle   = CNose::NoseIndex2Angle(ship.GetNose());
   int    heights    = ship.GetSprite().GetHeight()/2 + sprite.GetHeight()/2;
@@ -21,7 +21,7 @@ CVector2 CProjLauncher::GetLaunchPos(const CGravSprite& sprite, float dt,
 
 
 CVector2 CProjLauncher::GetLaunchVel(const CShip& ship,
-				     float velNorm, float dVelAngle) {
+                                     float velNorm, float dVelAngle) {
   const float velAngle = CNose::NoseIndex2Angle(ship.GetNose()) + dVelAngle;
   return CVector2(velAngle) * velNorm;
 }

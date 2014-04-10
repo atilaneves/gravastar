@@ -6,7 +6,7 @@
 #include <math.h>
 
 CIndestructible::CIndestructible(CLevel &level, const CVector2 &pos,
-				 CGravSprite *sprite, const CSound& klang):
+                                 CGravSprite *sprite, const CSound& klang):
   COneSpriteObj(level, pos, sprite),
   mKlang(klang) {
 

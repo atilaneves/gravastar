@@ -5,7 +5,7 @@
 
 
 CDeflector::CDeflector(const CSpriteVector &sprites, CLevel &level,
-		       CMoverObj &obj, CSound *sound , const CVector2& offset):
+                       CMoverObj &obj, CSound *sound , const CVector2& offset):
   CFollower(sprites, level, obj, sound, offset) {
 
 
@@ -34,7 +34,7 @@ void CDeflector::Hit(CProjectile& proj, CScreenPos pos, float dt) {
 
 
 float CDeflector::GetThetaPrime(const CProjectile& proj, const CScreenPos& pos,
-				bool grav) const {
+                                bool grav) const {
   CVector2 vel = grav ? proj.GetVel() - mFollowed.GetVel() : proj.GetVel();
   CVector2 dPos = mFollowed.GetPos() - CVector2(pos.GetX(),pos.GetY());
   float alpha     = dPos.Angle(vel);

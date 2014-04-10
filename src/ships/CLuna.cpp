@@ -43,7 +43,7 @@ void CLuna::SpawnShot(float dt, int shotIndex, float shotVel) {
                          dDirAngle - dDirAngle2;
   CVector2 vel = CVector2(velAngle) * shotVel + mVel;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 
@@ -53,7 +53,7 @@ void CLuna::UseSpecial(float dt) {
   const float dist = 0.65, velNorm = 500;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist);
+                                             *this, dist);
   bool shadow = false;
   mWeapons.UseSpecialAt(pos, vel, gProjName, shadow);
 }

@@ -13,13 +13,13 @@
 static std::string gMissName = "homingMissile";
 static std::string gShotName = "lavaBig";
 REG_PROJ_SHIP("Phoenix", CPhoenix, gShotName, gMissName, CHomingMissile,
-	      CProjSpecial)
+              CProjSpecial)
 REG_WEAPON_PROJ(gShotName, CProjectile)
 REG_EXTRA_BLUEPRINT("Phoenix", "fusion")
 
 
 CPhoenix::CPhoenix(const CShipBluePrint& bluePrint, CPilot& pilot,
-		   CLevel &level):
+                   CLevel &level):
     CShip(bluePrint, pilot, level) {
 
 }
@@ -30,7 +30,7 @@ void CPhoenix::UseWeapon(float dt) {
   const float velAngle = CNose::NoseIndex2Angle(GetNose());
   CVector2 vel = CVector2(velAngle) * velNorm + mVel / 2;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetWeaponSprite(), dt,
-					     *this, dist);
+                                             *this, dist);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 

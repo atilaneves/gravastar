@@ -78,29 +78,29 @@ void CSearchQueue<T>::ExpandAndAdd(CSearchNode<T> *node) {
       bool inClosed = false;
 
       if(mClosedArray[newNode->GetIndex()]) //already have it
-	inClosed = true;
+        inClosed = true;
 
       if(mOpenArray[newNode->GetIndex()]) { //already have it
 
-	inOpen = true; //already have it
+        inOpen = true; //already have it
 
-	if(newNode->GetTotal() <
-	   mOpenArray[newNode->GetIndex()]->GetTotal()) {
-	  //this one's better, replace it
-	  CSearchNode<T> *oldNode = mOpenArray[newNode->GetIndex()];
-	  std::replace(mOpenNodes.begin(), mOpenNodes.end(), oldNode, newNode);
-	  mOpenArray[newNode->GetIndex()] = newNode; //replace it w new one
-	  newNode = oldNode; //old one gets deleted below
-	}
+        if(newNode->GetTotal() <
+           mOpenArray[newNode->GetIndex()]->GetTotal()) {
+          //this one's better, replace it
+          CSearchNode<T> *oldNode = mOpenArray[newNode->GetIndex()];
+          std::replace(mOpenNodes.begin(), mOpenNodes.end(), oldNode, newNode);
+          mOpenArray[newNode->GetIndex()] = newNode; //replace it w new one
+          newNode = oldNode; //old one gets deleted below
+        }
       }
 
       if(!inOpen && !inClosed) { //truly a new node, add it
-	mOpenArray[newNode->GetIndex()] = newNode;
-	mOpenNodes.push_back(newNode);
-	mNbOpenNodes++;
+        mOpenArray[newNode->GetIndex()] = newNode;
+        mOpenNodes.push_back(newNode);
+        mNbOpenNodes++;
       }
       else
-	delete newNode; //we've allocated memory for it, so..
+        delete newNode; //we've allocated memory for it, so..
     }
   }
 }

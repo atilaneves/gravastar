@@ -9,7 +9,7 @@ CSpriteCollision::CSpriteCollision(BITMAP *bmp):
 }
 
 positions_t CSpriteCollision::Collided(const CCanvas &canvas,
-				      int x, int y) const {
+                                      int x, int y) const {
   indices_t indices = GetIndices(canvas, x, y);
   positions_t positions;
   for (auto &indice : indices) {
@@ -26,7 +26,7 @@ positions_t CSpriteCollision::Collided(const CCanvas &canvas,
 
 
 bool CSpriteCollision::IsLessThanMinDiff(int p,
-					 const CScreenPos& pos) const {
+                                         const CScreenPos& pos) const {
   const int kMinDiff = 10;
   return abs(mPixels[p].x - pos.GetX()) < kMinDiff &&
          abs(mPixels[p].y - pos.GetY()) < kMinDiff;
@@ -34,8 +34,8 @@ bool CSpriteCollision::IsLessThanMinDiff(int p,
 
 
 bool CSpriteCollision::Collided(const CCanvas &canvas,
-				const CSpriteCollision& collision,
-				int x1, int y1, int x2, int y2) const {
+                                const CSpriteCollision& collision,
+                                int x1, int y1, int x2, int y2) const {
   indices_t indices = GetIndices(canvas, x1, y1);
   for (auto &indice : indices) {
     int p = indice;
@@ -48,7 +48,7 @@ bool CSpriteCollision::Collided(const CCanvas &canvas,
 
 
 indices_t CSpriteCollision::GetIndices(const CCanvas &canvas,
-				       int x, int y) const {
+                                       int x, int y) const {
 
   indices_t indices;
   bool chkBounds = x < mWidth  || x >= canvas.GetWidth() - mWidth ||
@@ -64,14 +64,14 @@ indices_t CSpriteCollision::GetIndices(const CCanvas &canvas,
 
 
 bool CSpriteCollision::IsPixelThere(const CCanvas &canvas,
-				    int x, int y, int p) const {
+                                    int x, int y, int p) const {
   return canvas.GetPixel(x + mPixels[p].x, y + mPixels[p].y) !=
     CColour::GetBlack();
 }
 
 
 bool CSpriteCollision::OutOfBounds(const CCanvas &canvas,
-				   int x, int y, int p) const {
+                                   int x, int y, int p) const {
  return x < 0 || y < 0 || x + mPixels[p].x >= canvas.GetWidth() ||
         y+mPixels[p].y >= canvas.GetHeight();
 }

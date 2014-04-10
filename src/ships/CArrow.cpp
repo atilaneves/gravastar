@@ -10,7 +10,7 @@
 static std::string gMissName = "homingMissile";
 static std::string gShotName = "plasma";
 REG_PROJ_SHIP("Arrow", CArrow, gShotName, gMissName, CHomingMissile,
-	      CProjSpecial)
+              CProjSpecial)
 REG_WEAPON_PROJ(gShotName, CProjectile)
 REG_EXTRA_BLUEPRINT("Arrow", "fusion")
 
@@ -26,7 +26,7 @@ void CArrow::UseWeapon(float dt) {
   const float velAngle = CNose::NoseIndex2Angle(GetNose());
   CVector2 vel = CVector2(velAngle) * velNorm + mVel * 0.7;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetWeaponSprite(), dt,
-					     *this, dist);
+                                             *this, dist);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 
@@ -36,7 +36,7 @@ void CArrow::UseSpecial(float dt) {
   const float velAngle = CNose::NoseIndex2Angle(GetNose());
   CVector2 vel = CVector2(velAngle) * velNorm;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist);
+                                             *this, dist);
   bool shadow = false;
   mWeapons.UseSpecialAt(pos, vel, gMissName, shadow);
 }

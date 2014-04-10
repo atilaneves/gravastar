@@ -17,7 +17,7 @@ public:
   float FindEdge(CScreenPos pos) const;
   bool  IsClearLine(float x1,float y1,float x2,float y2,int step=5) const;
   bool  IsClearLine(const CVector2& pos1, const CVector2& pos2,
-		    int step=5) const;
+                    int step=5) const;
   bool  IsFreeSquare(int xc,int yc,int side = 5) const;
 
  //inlines

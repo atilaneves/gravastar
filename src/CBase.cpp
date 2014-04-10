@@ -7,7 +7,7 @@
 
 
 CBase::CBase(CLevel &level, const CVector2 &pos, CGravSprite *sprite,
-	     const CSound &klang):
+             const CSound &klang):
   CIndestructible(level, pos, sprite, klang),
   mCanvas(level.GetCanvas()) {
   CCanvas canvas(1, 30);

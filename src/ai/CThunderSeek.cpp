@@ -30,7 +30,7 @@ void CThunderSeek::SetShootControl(CPilotInputBot &input) {
      dist.Radius() < maxDistSuper)
     input.SetSuper();
   else if(mPilot.GetShip().GetWeapons().GetSpecialGauge() > 0.1 &&
-	  dist.Radius() < maxDistSpecial)
+          dist.Radius() < maxDistSpecial)
     input.SetSpecial();
   else //not waiting to cool down, fire away!
     input.SetWeapon();

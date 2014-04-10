@@ -37,10 +37,10 @@ void CShipAura::Update() {
 
   if(mRepairing && !CSpriteObjs::HasFlicker(mAura)) {
     mAura = new CFlicker(kAuraHz, mLevel,
-			 new CFollower(mSprites, mLevel, mShip));
+                         new CFollower(mSprites, mLevel, mShip));
   }
   else if(CSpriteObjs::HasFlicker(mAura) &&
-	  (!mRepairing || !mShip.IsAlive())) {
+          (!mRepairing || !mShip.IsAlive())) {
     mAura->Die();
     mAura = nullptr;
   }

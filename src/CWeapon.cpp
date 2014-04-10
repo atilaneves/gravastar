@@ -10,7 +10,7 @@
 
 
 CWeapon::CWeapon(const CShipBluePrint &shipBluePrint, CShip &ship,
-		 CLevel& level):
+                 CLevel& level):
   mFastRate(shipBluePrint.mFastRate), mSlowRate(shipBluePrint.mSlowRate),
   mMaxTemperature(shipBluePrint.mMaxTemperature),
   mCoolingRate(shipBluePrint.mCoolingRate),
@@ -31,7 +31,7 @@ void CWeapon::Update(float dt) {
 
   if(mFiring &&
      CWeaponTimer::Instance().IsReady(mShip.GetPilot().GetIndex(),
-				      GetRate())) {
+                                      GetRate())) {
     if(!mShip.IsEffectOn(CCoolant::GetID()))
       mTemperature += 1.0/CWeaponTimer::Instance().GetFrequency(); //heats up
     mShip.UseWeapon(dt);
@@ -60,12 +60,12 @@ int CWeapon::GetRate() const {
 
 
 CProjectile* CWeapon::UseAt(const CVector2& pos, const CVector2& vel,
-			    const std::string& name) {
+                            const std::string& name) {
   mSound.Play(pos);
   bool shadow = false;
   CProjectile *proj =
     CProjectileFactory::Instance().CreateObject(name, mBluePrint, mShip,
-						pos, vel, shadow);
+                                                pos, vel, shadow);
   if(!proj) //no specific projectile, do a generic one
     proj = new CProjectile(mBluePrint, mShip, pos, vel, shadow);
 

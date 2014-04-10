@@ -13,8 +13,8 @@
 
 
 CRedefineMenu::CRedefineMenu(const CVersusMenu &versus, int pilotNb,
-			     const CControlsMenu &controlsMenu,
-			     const CPilotInputOptions &options):
+                             const CControlsMenu &controlsMenu,
+                             const CPilotInputOptions &options):
   CMenu(new CRedefineIcon(*this, versus, pilotNb)),
   mCursor(*this), mIndex(pilotNb), mControlsMenu(controlsMenu) {
 
@@ -24,7 +24,7 @@ CRedefineMenu::CRedefineMenu(const CVersusMenu &versus, int pilotNb,
   for(int i = 0; i < CPilotInput::GetNbControls(); i++) {
     const std::string& name = CPilotInput::GetName(i);
     mButtons[name] = new CDefineButtonMenu(name, options.Type(),
-					   options.GetControl(name));
+                                           options.GetControl(name));
     AddMenu(mButtons[name]);
   }
 

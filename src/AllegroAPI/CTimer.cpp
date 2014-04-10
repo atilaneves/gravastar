@@ -3,7 +3,7 @@
 
 
 CTimer::CTimer(int bps, timerFunction_t function,
-	       volatile int *counters, int nbCounters):
+               volatile int *counters, int nbCounters):
   mFrequency(bps), mCounters(counters), mFunction(function) {
 
  if(nbCounters == 1)

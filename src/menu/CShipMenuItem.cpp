@@ -11,9 +11,9 @@ static CDataFile* gDataFile;
 
 
 CShipMenuItem::CShipMenuItem(const std::string &title,
-			     const CVersusMenu &versus):
+                             const CVersusMenu &versus):
   CMenu(new CMenuIconShip(gDataFile = new CDataFile(GetFileName(title)),
-			  GetIndex(title))),
+                          GetIndex(title))),
   mVersus(versus), mDir("Ships") {
 
   SetNames(title, *gDataFile);
@@ -32,14 +32,14 @@ int CShipMenuItem::GetIndex(const std::string &title) {
 
 
 void CShipMenuItem::SetNames(const std::string &title,
-			     const CDataFile &dataFile) {
+                             const CDataFile &dataFile) {
 
   char shipName[200], weaponName[200], specialName[200], superName[200];
   char quirks[200];
 
   if(title != "Random") {
     sscanf((char*)dataFile.GetData(NAMES),"%s %s %s %s %s",
-	   shipName, weaponName, specialName, superName, quirks);
+           shipName, weaponName, specialName, superName, quirks);
     mShipName    = CUnderscoreRemover::Remove(shipName);
     mWeaponName  = CUnderscoreRemover::Remove(weaponName);
     mSpecialName = CUnderscoreRemover::Remove(specialName);

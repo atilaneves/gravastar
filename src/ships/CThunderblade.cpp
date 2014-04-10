@@ -33,7 +33,7 @@ void CThunderblade::UseWeapon(float dt) {
 
 void CThunderblade::SpawnBullet(float dt, float dAngle, float dVelAngle) {
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetWeaponSprite(), dt,
-					     *this, 0.55, dAngle);
+                                             *this, 0.55, dAngle);
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, 600, dVelAngle);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }

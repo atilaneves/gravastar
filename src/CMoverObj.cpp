@@ -7,7 +7,7 @@
 
 
 CMoverObj::CMoverObj(const CSpriteVector &sprites, CLevel &level,
-		     const CVector2 &pos, const CVector2 &vel):
+                     const CVector2 &pos, const CVector2 &vel):
   CSpriteObj(level, pos),
   mSprites(sprites),
   mVel(vel) {

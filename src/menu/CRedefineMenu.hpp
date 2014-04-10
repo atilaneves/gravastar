@@ -18,8 +18,8 @@ class CRedefineMenu: public CMenu {
 public:
 
   CRedefineMenu(const CVersusMenu &versus, int pilotNb,
-		const CControlsMenu& controlsMenu,
-		const CPilotInputOptions& options);
+                const CControlsMenu& controlsMenu,
+                const CPilotInputOptions& options);
   virtual ~CRedefineMenu() { }
 
   virtual void Run(CRootMenu &rootMenu) override;

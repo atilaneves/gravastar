@@ -28,7 +28,7 @@ void CSeekPowerup::Think() {
      (ship.GetPos() - powerup->GetPos()).Radius() > 50) {
     CPoint2D::SetStepSizes(ship, 20, 60);
     CAstar<CPoint2D> search(new CPoint2D(ship.GetPos()),
-			    new CPoint2D(powerup->GetPos()));
+                            new CPoint2D(powerup->GetPos()));
     int op = search.Search();
 
     if(op >= 0) {

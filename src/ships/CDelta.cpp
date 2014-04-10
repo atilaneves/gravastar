@@ -31,7 +31,7 @@ void CDelta::SpawnShot(float dt, float dAngle) {
   const double dist = 0.65, velNorm = 200;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, dAngle) + mVel;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 
@@ -56,6 +56,6 @@ void CDelta::SpawnMissile(float dt, float dAngle, bool shadow) {
   const float dist = 0.75, velNorm = 500;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, dAngle);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mWeapons.UseSpecialAt(pos, vel, gMissName, shadow);
 }

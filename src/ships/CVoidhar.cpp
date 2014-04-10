@@ -17,13 +17,13 @@ static std::string gShotName = "wave";
 
 
 REG_PROJ_SHIP(gShipName, CVoidhar, gShotName, gMissName,
-	      CProjectile, CProjSpecial)
+              CProjectile, CProjSpecial)
 REG_WEAPON_PROJ(gShotName, CProjectile)
 
 
 
 CVoidhar::CVoidhar(const CShipBluePrint& bluePrint,
-		   CPilot& pilot, CLevel &level):
+                   CPilot& pilot, CLevel &level):
   CShip(bluePrint, pilot, level),
   mEMP(bluePrint.mSounds.mEMP),
   mSpecialExpSprites(bluePrint.mSpecialExpSprites) {
@@ -33,7 +33,7 @@ CVoidhar::CVoidhar(const CShipBluePrint& bluePrint,
 
 void CVoidhar::UseWeapon(float dt) {
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetWeaponSprite(), dt,
-					     *this, 0.75);
+                                             *this, 0.75);
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, 400);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }

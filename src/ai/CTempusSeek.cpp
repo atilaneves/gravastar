@@ -35,7 +35,7 @@ void CTempusSeek::SetShootControl(CPilotInputBot &input) {
   if(mPilot.GetShip().GetWeapons().CanSuper())
     input.SetSuper();
   else if(mPilot.GetShip().GetWeapons().CanSpecial() &&
-	  !CPilots::GetPilot(mTargetIndex).GetShip().IsStopped())
+          !CPilots::GetPilot(mTargetIndex).GetShip().IsStopped())
     input.SetSpecial();
   else if(mDetonate)
     input.SetSpecial();

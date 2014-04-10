@@ -33,7 +33,7 @@ private:
   static std::string GetFileName(const std::string &title);
   static int         GetIndex(const std::string &title);
          void        SetNames(const std::string &title,
-			      const CDataFile &dataFile);
+                              const CDataFile &dataFile);
 
 };
 

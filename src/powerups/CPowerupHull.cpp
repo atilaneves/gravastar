@@ -8,8 +8,8 @@ REG_POWERUP("hull", CPowerupHull) //register in the factory
 
 
 CPowerupHull::CPowerupHull(CPowerups &powerups, CLevel &level,
-			   const CVector2 &pos,
-			   const CGravSprite& sprite):
+                           const CVector2 &pos,
+                           const CGravSprite& sprite):
    CPowerup(powerups, level, pos, sprite) {
 
   //mSound=new CSound("repair"); //when ship gets hit w this powerup

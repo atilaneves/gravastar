@@ -23,7 +23,7 @@ CXbow::CXbow(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level)
 void CXbow::UseWeapon(float dt) {
   if(mWeapons.IsSpecialActive()) return;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetWeaponSprite(), dt,
-					     *this, 0.75);
+                                             *this, 0.75);
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, 700);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }

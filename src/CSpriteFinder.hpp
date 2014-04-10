@@ -15,10 +15,10 @@ class CSpriteFinder {
 public:
 
   static Positions_t FindSprites(const CCanvas &haystack,
-				 const CCanvas &needle);
+                                 const CCanvas &needle);
 
   static bool IsSpriteHere(const CCanvas &haystack, const CCanvas &needle,
-			   int x0, int y0);
+                           int x0, int y0);
 
 
 private:

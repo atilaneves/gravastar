@@ -10,7 +10,7 @@ class CPowerupHull: public CPowerup {
 public:
 
  CPowerupHull(CPowerups &powerups, CLevel &level,
-	      const CVector2 &pos, const CGravSprite& sprite);
+              const CVector2 &pos, const CGravSprite& sprite);
 
 
 private:

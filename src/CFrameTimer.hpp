@@ -11,7 +11,7 @@ public:
 
   static CFrameTimer& Instance();
          bool         IsReady() { return CTimer::IsReady(kCounterIndex,
-							 kRate); }
+                                                         kRate); }
 
 
 private:

@@ -12,10 +12,10 @@ class CControlTypeMenu: public CCycleStringEnter {
 public:
 
   CControlTypeMenu(CRedefineMenu &redefine,
-		   const CPilotInputOptions& options,
-		   const std::string &title,
-		   const strings_t& strings,
-		   int max, int min = 1);
+                   const CPilotInputOptions& options,
+                   const std::string &title,
+                   const strings_t& strings,
+                   int max, int min = 1);
 
 
 private:

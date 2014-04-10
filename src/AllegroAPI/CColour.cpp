@@ -26,11 +26,11 @@ void CColour::RGBtoHSV(int colour, float &h, float &s, float &v) {
   int b = getb(colour);
   int min = std::min(std::min(r, g), b);
   int max = std::max(std::max(r, g), b);
-  v = max;				// v
+  v = max;                              // v
   float delta = max - min;
 
   if(max != 0)
-    s = delta / max;		// s
+    s = delta / max;            // s
   else {
     // r = g = b = 0  // s = 0, v is undefined
     h = -1;
@@ -59,7 +59,7 @@ int CColour::HSVtoRGB(float h, float s, float v) {
 
   h /= 60;
   int i = int(floor(h));
-  float f = h - i;			// factorial part of h
+  float f = h - i;                      // factorial part of h
   float p = v * ( 1 - s );
   float q = v * ( 1 - s * f );
   float t = v * ( 1 - s * ( 1 - f ) );
@@ -91,7 +91,7 @@ int CColour::HSVtoRGB(float h, float s, float v) {
     g = (int)p;
     b = (int)v;
     break;
-  default:		// case 5:
+  default:              // case 5:
     r = (int)v;
     g = (int)p;
     b = (int)q;

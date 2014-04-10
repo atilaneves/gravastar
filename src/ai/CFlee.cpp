@@ -25,7 +25,7 @@ void CFlee::Think() {
 
   CPoint2D::SetStepSizes(mPilot.GetShip(), 20, 60);
   CAstar<CPoint2D> search(new CPoint2D(mPilot.GetShip().GetPos()),
-			  new CPoint2D(base.GetPos()));
+                          new CPoint2D(base.GetPos()));
   int op = search.Search();
 
   if(op >= 0) {
@@ -80,12 +80,12 @@ int CFlee::GetBaseIndex() const {
   for(unsigned int b = 0; b < bases.size(); b++) {
     int bx = int(bases[b]->GetPos().GetX());
     int by = int(bases[b]->GetPos().GetY() -
-		 bases[b]->GetHeight() / 2 - 1); //top of the base
+                 bases[b]->GetHeight() / 2 - 1); //top of the base
     if(!CShips::IsClearLine(mPilot.GetShip(), bx, by)) { //nb else has
       CVector2 dist = CVector2(bx, by) - mPilot.GetShip().GetPos();
       if(dist.Radius2() < minDist2) {
-	minDist2 = dist.Radius2();
-	baseIndex = b;
+        minDist2 = dist.Radius2();
+        baseIndex = b;
       }
     }
   }

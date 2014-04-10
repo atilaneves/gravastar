@@ -338,8 +338,8 @@ static int III_get_side_info_1(struct III_sideinfo *si,int stereo,
           gr_info->big_values = 288;
        }
        {
-	 unsigned int qss = getbits_fast(8);
-	 gr_info->pow2gain = gainpow2+256 - qss + powdiff;
+         unsigned int qss = getbits_fast(8);
+         gr_info->pow2gain = gainpow2+256 - qss + powdiff;
        }
        if(ms_stereo)
          gr_info->pow2gain += 2;
@@ -360,9 +360,9 @@ static int III_get_side_info_1(struct III_sideinfo *si,int stereo,
           */
          gr_info->table_select[2] = 0;
          for(i=0;i<3;i++) {
-	   unsigned int sbg = (getbits_fast(3)<<3);
+           unsigned int sbg = (getbits_fast(3)<<3);
            gr_info->full_gain[i] = gr_info->pow2gain + sbg;
-	 }
+         }
 
 
          if(gr_info->block_type == 0) {
@@ -438,9 +438,9 @@ static int III_get_side_info_2(struct III_sideinfo *si,int stereo,
           */
          gr_info->table_select[2] = 0;
          for(i=0;i<3;i++) {
-	   unsigned int sbg = (getbits_fast(3)<<3);
+           unsigned int sbg = (getbits_fast(3)<<3);
            gr_info->full_gain[i] = gr_info->pow2gain + sbg;
-	 }
+         }
 
          if(gr_info->block_type == 0) {
            return -1;
@@ -834,7 +834,7 @@ static int III_dequantize_sample(real xr[SBLIMIT][SSLIMIT],int *scf,
 
   }
   else {
-	/*
+        /*
      * decoding with 'long' BandIndex table (block_type != 2)
      */
     int *pretab = gr_info->preflag ? pretab1 : pretab2;
@@ -847,7 +847,7 @@ static int III_dequantize_sample(real xr[SBLIMIT][SSLIMIT],int *scf,
     me = mapend[sfreq][2];
 #endif
 
-	/*
+        /*
      * long hash table values
      */
     for(i=0;i<3;i++) {
@@ -914,7 +914,7 @@ static int III_dequantize_sample(real xr[SBLIMIT][SSLIMIT],int *scf,
       }
     }
 
-	/*
+        /*
      * short (count1table) values
      */
     for(;l3 && (part2remain > 0);l3--) {
@@ -957,7 +957,7 @@ static int III_dequantize_sample(real xr[SBLIMIT][SSLIMIT],int *scf,
       }
     }
 
-	/*
+        /*
      * zero part
      */
     for(i=(&xr[SBLIMIT][0]-xrpnt)>>1;i;i--) {
@@ -994,7 +994,7 @@ static void III_i_stereo(real xr_buf[2][SBLIMIT][SSLIMIT],int *scalefac,
 
       if(lsf) {
         int p = gr_info->scalefac_compress & 0x1;
-	    if(ms_stereo) {
+            if(ms_stereo) {
           tab1 = pow1_2[p]; tab2 = pow2_2[p];
         }
         else {
@@ -1202,21 +1202,21 @@ static void dct36(real *inbuf,real *o1,real *o2,real *wintab,real *tsbuf)
     ts[SBLIMIT*(8-(v))] = out1[8-(v)] + sum0 * w[8-(v)]; \
     ts[SBLIMIT*(9+(v))] = out1[9+(v)] + sum0 * w[9+(v)];
 #define MACRO1(v) { \
-	real sum0,sum1; \
+        real sum0,sum1; \
     sum0 = tmp1a + tmp2a; \
-	sum1 = (tmp1b + tmp2b) * tfcos36[(v)]; \
-	MACRO0(v); }
+        sum1 = (tmp1b + tmp2b) * tfcos36[(v)]; \
+        MACRO0(v); }
 #define MACRO2(v) { \
     real sum0,sum1; \
     sum0 = tmp2a - tmp1a; \
     sum1 = (tmp2b - tmp1b) * tfcos36[(v)]; \
-	MACRO0(v); }
+        MACRO0(v); }
 
     register const real *c = COS9;
     register real *out2 = o2;
-	register real *w = wintab;
-	register real *out1 = o1;
-	register real *ts = tsbuf;
+        register real *w = wintab;
+        register real *out1 = o1;
+        register real *ts = tsbuf;
 
     real ta33,ta66,tb33,tb66;
 
@@ -1269,12 +1269,12 @@ static void dct36(real *inbuf,real *o1,real *o2,real *wintab,real *tsbuf)
       MACRO2(5);
     }
 
-	{
-		real sum0,sum1;
-    	sum0 =  in[2*0+0] - in[2*2+0] + in[2*4+0] - in[2*6+0] + in[2*8+0];
-    	sum1 = (in[2*0+1] - in[2*2+1] + in[2*4+1] - in[2*6+1] + in[2*8+1] ) * tfcos36[4];
-		MACRO0(4);
-	}
+        {
+                real sum0,sum1;
+        sum0 =  in[2*0+0] - in[2*2+0] + in[2*4+0] - in[2*6+0] + in[2*8+0];
+        sum1 = (in[2*0+1] - in[2*2+1] + in[2*4+1] - in[2*6+1] + in[2*8+1] ) * tfcos36[4];
+                MACRO0(4);
+        }
   }
 
   }

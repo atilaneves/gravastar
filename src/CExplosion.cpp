@@ -3,8 +3,8 @@
 
 
 CExplosion::CExplosion(CLevel& level, const CVector2& pos,
-		       const CSpriteVector& sprites,
-		       const CSound& sound, float speed):
+                       const CSpriteVector& sprites,
+                       const CSound& sound, float speed):
   CSpriteObj(level, pos),
   mSprites(sprites), mSound(sound),
   mSpeed(speed), mFrame(0), mDead(false) {

@@ -12,7 +12,7 @@ public:
 
   CRectFill(CCanvas &canvas, int x1, int y1, int x2, int y2, int colour);
   CRectFill(CCanvas &canvas, const CScreenPos &corner1,
-	    const CScreenPos &corner2, int colour);
+            const CScreenPos &corner2, int colour);
 
 
 private:

@@ -6,7 +6,7 @@
 
 
 CBoomerang::CBoomerang(const CProjBluePrint &bluePrint, CShip& ship,
-		       const CVector2& pos, const CVector2& vel, bool shadow):
+                       const CVector2& pos, const CVector2& vel, bool shadow):
   CProjectile(bluePrint, ship, pos, vel, shadow) {
 
 }

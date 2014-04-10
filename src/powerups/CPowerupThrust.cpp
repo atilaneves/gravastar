@@ -8,8 +8,8 @@ REG_POWERUP("thrust", CPowerupThrust) //register in the factory
 
 
 CPowerupThrust::CPowerupThrust(CPowerups &powerups,
-			       CLevel &level, const CVector2 &pos,
-			       const CGravSprite& sprite):
+                               CLevel &level, const CVector2 &pos,
+                               const CGravSprite& sprite):
   CPowerup(powerups, level, pos, sprite) {
 
 

@@ -48,8 +48,8 @@ void CShips::StartEffect(const CShip* ship, int effect, float duration) {
 
 
 void CShips::PushAll(const CVector2& collision,
-		     float force, CSpriteObj* hitShip, CPilot& pilot,
-		     float damage) {
+                     float force, CSpriteObj* hitShip, CPilot& pilot,
+                     float damage) {
 
   for (auto &sShip : sShips) {
     //process everyone except the ship we hit

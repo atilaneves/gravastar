@@ -14,10 +14,10 @@ public:
 
 
   static CVector2 GetLaunchPos(const CGravSprite& sprite, float dt,
-			       const CShip& ship,
-			       float radius, float dAngle = 0);
+                               const CShip& ship,
+                               float radius, float dAngle = 0);
   static CVector2 GetLaunchVel(const CShip& ship,
-			       float velNorm, float dVelAngle = 0);
+                               float velNorm, float dVelAngle = 0);
 
 private:
 

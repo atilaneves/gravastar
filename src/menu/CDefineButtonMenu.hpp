@@ -10,7 +10,7 @@ class CDefineButtonMenu: public CStringMenu {
 public:
 
   CDefineButtonMenu(const std::string &title, const std::string &type,
-		    int button);
+                    int button);
 
   void DrawIcon(CCanvas &canvas, int x, int y, bool highlight) override;
   int         GetButton() const { return mButton; }

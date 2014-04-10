@@ -2,7 +2,7 @@
 
 
 COneSpriteObj::COneSpriteObj(CLevel &level, const CVector2 &pos,
-			     CGravSprite *sprite):
+                             CGravSprite *sprite):
   CSpriteObj(level, pos), mSprite(sprite) {
 
 }

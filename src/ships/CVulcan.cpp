@@ -12,7 +12,7 @@
 static std::string gMissName = "cluster";
 static std::string gShotName = "lavaMedium";
 REG_PROJ_SHIP("Vulcan", CVulcan, gShotName, gMissName, CGravityProj,
-	      CProjSpecial)
+              CProjSpecial)
 REG_EXTRA_BLUEPRINT("Vulcan", "clusterSpawn")
 
 CVulcan::CVulcan(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level)
@@ -23,7 +23,7 @@ void CVulcan::UseWeapon(float dt) {
   const float dist = 0.6, velNorm = 375;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetWeaponSprite(), dt,
-					     *this, dist);
+                                             *this, dist);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 
@@ -40,7 +40,7 @@ void CVulcan::LaunchCluster(float dt) {
   const float dist = -0.6, velNorm = 125;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, M_PI);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist);
+                                             *this, dist);
   bool shadow = false;
   mCluster = mWeapons.UseSpecialAt(pos, vel, gMissName, shadow);
   mReleasedCluster = false;
@@ -81,7 +81,7 @@ void CVulcan::UseSuper(float dt, bool use) {
   const float dAngle = (rand()/(float)RAND_MAX) * 2 * spread - spread;
   CVector2 vel = CVector2(velAngle + dAngle) * velNorm;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   bool shadow = true;
   mWeapons.UseSpecialAt(pos, vel, gMissName, shadow);
 }

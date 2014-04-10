@@ -11,7 +11,7 @@ extern bool gDebug;
 
 
 CIndLoader::CIndLoader(std::string &fileName, const CCanvas &canvas,
-		       IndsBmp_t indBmps, void *baseBmp):
+                       IndsBmp_t indBmps, void *baseBmp):
   mFileName(CDataFile::GetFileName(fileName)), mCanvas(canvas) {
 
   bool loaded = LoadCoords();

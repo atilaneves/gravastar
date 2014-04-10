@@ -4,10 +4,10 @@
 
 
 CControlTypeMenu::CControlTypeMenu(CRedefineMenu &redefine,
-				   const CPilotInputOptions& options,
-				   const std::string &title,
-				   const strings_t& strings,
-				   int max, int min):
+                                   const CPilotInputOptions& options,
+                                   const std::string &title,
+                                   const strings_t& strings,
+                                   int max, int min):
   CCycleStringEnter(title, strings, max, min),
   mRedefine(redefine) {
 

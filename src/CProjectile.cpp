@@ -40,7 +40,7 @@ void CProjectile::CreateShadow() {
   const float frequency = 50;
   CVector2 offset = CVector2(0) * GetHeight() * -1.75;
   new CFlicker(frequency, mLevel,
-	       new CFollower(mShadowSprites, mLevel, *this, sound, offset));
+               new CFollower(mShadowSprites, mLevel, *this, sound, offset));
 }
 
 

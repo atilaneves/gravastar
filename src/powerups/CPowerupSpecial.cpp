@@ -7,8 +7,8 @@ REG_POWERUP("special", CPowerupSpecial) //register in the factory
 
 
 CPowerupSpecial::CPowerupSpecial(CPowerups &powerups,
-				 CLevel &level, const CVector2 &pos,
-				 const CGravSprite& sprite):
+                                 CLevel &level, const CVector2 &pos,
+                                 const CGravSprite& sprite):
    CPowerup(powerups, level, pos, sprite) {
 
 

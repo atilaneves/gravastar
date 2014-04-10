@@ -10,7 +10,7 @@ class CPowerupTurn: public CPowerup {
 public:
 
  CPowerupTurn(CPowerups &powerups,
-	      CLevel &level, const CVector2 &pos, const CGravSprite& sprite);
+              CLevel &level, const CVector2 &pos, const CGravSprite& sprite);
 
 
 private:

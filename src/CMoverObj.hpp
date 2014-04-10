@@ -12,7 +12,7 @@ class CMoverObj: public CSpriteObj {
 public:
 
   CMoverObj(const CSpriteVector &sprites, CLevel &level,
-	    const CVector2 &pos, const CVector2 &vel);
+            const CVector2 &pos, const CVector2 &vel);
 
   virtual CVector2     CalcAcc() = 0;
   virtual void         Die() = 0;

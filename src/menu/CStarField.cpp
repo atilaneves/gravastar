@@ -61,10 +61,10 @@ void CStarField::Draw(CCanvas &canvas) {
     mBackground->Draw(canvas,0,0);
  else {
     mBackground->MaskBlit(canvas, mBackgroundX, 0, 0, 0,
-			  canvas.GetWidth() - mBackgroundX,
-			  canvas.GetHeight());
+                          canvas.GetWidth() - mBackgroundX,
+                          canvas.GetHeight());
     mBackground->MaskBlit(canvas, 0, 0, canvas.GetWidth() - mBackgroundX,
-			  0, mBackgroundX, canvas.GetHeight());
+                          0, mBackgroundX, canvas.GetHeight());
  }
 
  for(int b=0; b<kNbStars; b++) {
@@ -94,8 +94,8 @@ void CStarField::MoveStars() {
 
        if(mStars[a][b].x > mWidth) mStars[a][b].x = 0;
        if(mStars[a][b].x < 0) {
-	  mStars[a][b].x = mWidth;
-	  mStars[a][b].y = (rand() % mHeight);
+          mStars[a][b].x = mWidth;
+          mStars[a][b].y = (rand() % mHeight);
        }
     }
  }

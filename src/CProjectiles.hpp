@@ -20,10 +20,10 @@ public:
 
   static projPlace_t AddProjectile(CProjectile *projectile);
   static void        DamageAll(const CVector2& collision,
-			       float damage);
+                               float damage);
   static bool        HasTowards(const CShip& ship);
-  static void 	     RemoveAll();
-  static void 	     RemoveProjectile(CProjectile *projectile);
+  static void        RemoveAll();
+  static void        RemoveProjectile(CProjectile *projectile);
 
 
 private:

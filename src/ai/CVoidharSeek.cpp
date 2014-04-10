@@ -24,10 +24,10 @@ void CVoidharSeek::SetShootControl(CPilotInputBot &input) {
   if(mPilot.GetShip().GetWeapons().CanSuper())
     input.SetSuper();
   else if(mPilot.GetShip().GetWeapons().CanSpecial() &&
-	  !CPilots::GetPilot(mTargetIndex).GetShip().
-	  IsEffectOn(CEMP::GetID()) &&
-	  !CPilots::GetPilot(mTargetIndex).GetShip().
-	  IsEffectOn(CEMB::GetID()))
+          !CPilots::GetPilot(mTargetIndex).GetShip().
+          IsEffectOn(CEMP::GetID()) &&
+          !CPilots::GetPilot(mTargetIndex).GetShip().
+          IsEffectOn(CEMB::GetID()))
     input.SetSpecial();
   else if(!IsTooHot()) //not waiting to cool down, fire away!
     input.SetWeapon();

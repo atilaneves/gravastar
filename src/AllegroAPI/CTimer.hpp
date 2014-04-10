@@ -20,7 +20,7 @@ public:
 protected:
 
  CTimer(int bps, timerFunction_t function,
-	volatile int *counters, int nbCounters = 1);
+        volatile int *counters, int nbCounters = 1);
  ~CTimer();
 
 

@@ -6,8 +6,8 @@
 
 
 CDefineButtonMenu::CDefineButtonMenu(const std::string &title,
-				     const std::string &type,
-				     int button):
+                                     const std::string &type,
+                                     int button):
   CStringMenu(title),
   mTitle(title), mType(type), mButton(button) {
 
@@ -15,11 +15,11 @@ CDefineButtonMenu::CDefineButtonMenu(const std::string &title,
 
 
 void CDefineButtonMenu::DrawIcon(CCanvas &canvas, int x, int y,
-				 bool highlight) {
+                                 bool highlight) {
   CMenu::DrawIcon(canvas, x, y, highlight);
   const CFont& font = CStringMenu::GetFont();
   font.Print(canvas, x + 100, y,
-	     CMenuIconString::GetColour(highlight), -1, GetButtonName());
+             CMenuIconString::GetColour(highlight), -1, GetButtonName());
 }
 
 

@@ -12,7 +12,7 @@ class CStealthMine: public CProjectile {
 public:
 
   CStealthMine(const CProjBluePrint &bluePrint, CShip& ship,
-	       const CVector2& pos, const CVector2& vel, bool shadow = false);
+               const CVector2& pos, const CVector2& vel, bool shadow = false);
   virtual ~CStealthMine();
 
   virtual CVector2 CalcAcc() override;

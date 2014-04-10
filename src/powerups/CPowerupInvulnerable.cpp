@@ -9,8 +9,8 @@ REG_POWERUP("invulnerable", CPowerupInvulnerable) //register in the factory
 
 
 CPowerupInvulnerable::CPowerupInvulnerable(CPowerups &powerups,
-					   CLevel &level, const CVector2 &pos,
-					   const CGravSprite& sprite):
+                                           CLevel &level, const CVector2 &pos,
+                                           const CGravSprite& sprite):
     CPowerup(powerups, level, pos, sprite) {
 
 }

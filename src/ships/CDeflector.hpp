@@ -20,7 +20,7 @@ class CDeflector: public CFollower {
 
   float GetVelNorm(const CProjectile& proj, bool grav) const;
   float GetThetaPrime(const CProjectile& proj, const CScreenPos& pos,
-		      bool grav) const;
+                      bool grav) const;
 
 };
 

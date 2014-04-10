@@ -12,7 +12,7 @@
 static std::string gMissName = "stasisBomb";
 static std::string gShotName = "shot";
 REG_PROJ_SHIP("Tempus", CTempus, gShotName, gMissName, CStasisBomb,
-	      CProjSpecial)
+              CProjSpecial)
 REG_WEAPON_PROJ(gShotName, CGravityProj)
 
 CTempus::CTempus(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level)
@@ -33,7 +33,7 @@ void CTempus::SpawnShot(float dt, float dAngle, float dVelAngle) {
   const double dist = 1, velNorm = 200;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, dVelAngle) + mVel;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 
@@ -54,7 +54,7 @@ void CTempus::SpawnMissile(float dt, float dAngle, bool shadow) {
   const float dist = 0.75, velNorm = 300;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, dAngle);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mBomb = mWeapons.UseSpecialAt(pos, vel, gMissName, shadow);
   mButton = true;
 }

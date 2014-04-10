@@ -20,16 +20,16 @@ CGravSprite* CShipMenuCursorSprite::CreateSprite(int index, const CTeam &team) {
  //int deltaX = width -radius + rectHeight + 4; //set this for client code
  CCanvas canvas(width, height);
  CCircle c(canvas, rectHeight + radius, rectHeight + radius, radius,
-	 team.GetDarkColour());
+         team.GetDarkColour());
  int dy = 0;
  if(index == 2) dy = rectHeight + radius*2;
  CRectFill r(canvas, rectHeight+radius-halfWidth, dy,
-	     rectHeight + radius + halfWidth, rectHeight + dy,
-	     team.GetDarkColour());
+             rectHeight + radius + halfWidth, rectHeight + dy,
+             team.GetDarkColour());
  char title[200];
  sprintf(title,"P%d",index+1);
  CStringMenu::GetFont().PrintCentre(canvas, rectHeight + radius + 2, 2 + dy,
-				    CColour::GetBlack(), -1, title);
+                                    CColour::GetBlack(), -1, title);
  float angle = index*(M_PI/2);
  if(index == 2) angle = 0; //don't rotate 180 degrees
 

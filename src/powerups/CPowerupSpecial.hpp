@@ -9,7 +9,7 @@ class CPowerupSpecial:public CPowerup {
 public:
 
  CPowerupSpecial(CPowerups &powerups, CLevel &level, const CVector2 &pos,
-		 const CGravSprite& sprite);
+                 const CGravSprite& sprite);
 
 
 private:

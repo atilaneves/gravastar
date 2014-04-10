@@ -25,13 +25,13 @@ CLevel::CLevel(unsigned int levelNb):
   for(int i = 0; i < indLoader.GetNbBases(); ++i) {
     auto sprite = new CGravSprite(baseBmp);
     mBases.push_back(new CBase(*this, indLoader.GetBasePos(i),
-			       sprite, mKlang));
+                               sprite, mKlang));
   }
 
   for(unsigned int i = 0; i < indBmps.size(); ++i) {
     auto sprite = new CGravSprite(indBmps[i]);
     mInds.push_back(new CIndestructible(*this, indLoader.GetIndPos(i),
-					sprite, mKlang));
+                                        sprite, mKlang));
   }
 }
 

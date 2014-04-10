@@ -12,7 +12,7 @@ class CMoverBluePrint {
 public:
 
   CMoverBluePrint(int startPos, const CDataFile &dataFile,
-		  const CTeam &team, int colour = -1);
+                  const CTeam &team, int colour = -1);
 
   const CSpriteVector& GetSprites() const { return mSprites; }
 

@@ -5,7 +5,7 @@
 
 
 CAbsorber::CAbsorber(const CSpriteVector &sprites, CLevel &level,
-		     CMoverObj &obj, CSound *sound , const CVector2& offset):
+                     CMoverObj &obj, CSound *sound , const CVector2& offset):
   CFollower(sprites, level, obj, sound, offset) {
 
 }

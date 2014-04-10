@@ -12,7 +12,7 @@ static int grp_3tab[32 * 3] = { 0, };   /* used: 27 */
 static int grp_5tab[128 * 3] = { 0, };  /* used: 125 */
 static int grp_9tab[1024 * 3] = { 0, }; /* used: 729 */
 
-real muls[27][64];	/* also used by layer 1 */
+real muls[27][64];      /* also used by layer 1 */
 
 void init_layer2(void)
 {
@@ -177,7 +177,7 @@ void II_step_two(unsigned int *bit_alloc,real fraction[2][4][SBLIMIT],int *scale
     for (i=jsbound;i<sblimit;i++,alloc1+=(1<<step))
     {
       step = alloc1->bits;
-      bita++;	/* channel 1 and channel 2 bitalloc are the same */
+      bita++;   /* channel 1 and channel 2 bitalloc are the same */
       if ( (ba=*bita++) )
       {
         k=(alloc2 = alloc1+ba)->bits;

@@ -11,7 +11,7 @@ public:
 
   static CClockTimer& Instance();
          bool         IsReady() { return CTimer::IsReady(kCounterIndex,
-							 kRate); }
+                                                         kRate); }
   void Pause(int counterIndex = 0);
   void Unpause(int counterIndex = 0);
 

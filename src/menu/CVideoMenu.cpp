@@ -11,7 +11,7 @@ CVideoMenu::CVideoMenu(CSprite *cursorSprite, const CClientOptions& options):
   mCursor(*this, cursorSprite) {
 
   const std::string rnames[] = {"640x480", "800x600", "1024x640", "1024x768",
-				"1280x720", "1280x768", "1280x800"};
+                                "1280x720", "1280x768", "1280x800"};
   int size = sizeof(rnames) / sizeof(std::string);
   strings_t rNames(rnames, rnames + size);
   AddMenu(mResolution = new CCycleString("Resolution: ", rNames, size - 1, 0));
@@ -30,7 +30,7 @@ CVideoMenu::CVideoMenu(CSprite *cursorSprite, const CClientOptions& options):
     mResolution->SetCycle(mode);
     ++mode;
   } while(GetWidth() != options.GetWidth() ||
-	  GetHeight() != options.GetHeight());
+          GetHeight() != options.GetHeight());
 
   mWindowed->SetCycle(options.IsWindowed());
 

@@ -40,10 +40,10 @@ bool CShipCollider::BouncedOff(const CScreenPos& pos, float &edgeAngle) {
 
 
 CVector2 CShipCollider::VelAfterFriction(float angle,
-					 const CVector2& vel) const {
+                                         const CVector2& vel) const {
   const float f = 0.4;
   return CVector2((f-1) * vel.GetX() * fabs(sin(angle)),
-		  (f-1) * vel.GetY() * fabs(cos(angle)));
+                  (f-1) * vel.GetY() * fabs(cos(angle)));
 }
 
 
@@ -63,7 +63,7 @@ void CShipCollider::LandDamage(float dt) const {
     mShip.LoseHull(damage, mShip.GetPilot()); //do the deed
     if(!mShip.IsAlive() && mShip.IsEffectOn(CEffectPush::GetID())) {
       CPilot &pilot=((CEffectPush*)mShip.mEffects.
-		     GetEffect(CEffectPush::GetID()))->GetPilot();
+                     GetEffect(CEffectPush::GetID()))->GetPilot();
       pilot.AddFrag(mShip.GetPilot());
       pilot.AddDamage(damage, mShip.GetPilot());
     }
@@ -79,7 +79,7 @@ void calcV1V2(float m1, float m2, float u1, float u2, float &v1, float &v2) {
 
 void calcV1V2Ship(CShip& mShip, CShip &ship, float &v1, float &v2) {
   calcV1V2(mShip.GetMass(), ship.GetMass(), mShip.GetVel().Radius(),
-	   ship.GetVel().Radius(), v1, v2);
+           ship.GetVel().Radius(), v1, v2);
 }
 
 

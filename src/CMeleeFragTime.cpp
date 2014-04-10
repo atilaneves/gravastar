@@ -64,7 +64,7 @@ int CMeleeFragTime::GetWinner() {
   if(winTeam != -1)
     for(unsigned int p = 0;  p < pilots.size(); p++)
       if(pilots[p]->GetTeam().GetName() == tNames[winTeam]) {
-	return p;
+        return p;
       }
 
   return  -1;

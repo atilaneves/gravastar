@@ -13,12 +13,12 @@
 
 static std::string gShotName = "miniBullet2";
 REG_PROJ_SHIP("Soliton", CSoliton, gShotName, gShotName, CProjectile,
-	      CProjSpecial)
+              CProjSpecial)
 REG_WEAPON_PROJ(gShotName, CGravityProj)
 
 
 CSoliton::CSoliton(const CShipBluePrint& bluePrint, CPilot& pilot,
-		   CLevel &level):
+                   CLevel &level):
   CShip(bluePrint, pilot, level),
   mShockwave(bluePrint.mSounds.mShockwave),
   mSpecialExpSprites(bluePrint.mSpecialExpSprites) {
@@ -43,7 +43,7 @@ void CSoliton::SpawnShot(float dt, float dist, float dAngle) {
   const float velNorm = 350;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm) + mVel / 2;
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 

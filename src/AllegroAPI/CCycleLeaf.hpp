@@ -14,9 +14,9 @@ public:
 
   CCycleLeaf(const std::string& title, int max, int min = 1);
 
-  int  		       GetCycle() const { return mCycle.ToInt();  }
-  int  		       GetMax()   const { return mCycle.GetMax(); }
-  int  		       GetMin()   const { return mCycle.GetMin(); }
+  int                  GetCycle() const { return mCycle.ToInt();  }
+  int                  GetMax()   const { return mCycle.GetMax(); }
+  int                  GetMin()   const { return mCycle.GetMin(); }
   virtual std::string  GetString() const;
   const   std::string& GetTitle() const { return mTitle; }
           void         SetCycle(int c)  { mCycle = c; }

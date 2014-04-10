@@ -47,8 +47,8 @@ bool CMeleeFragNb::IsGameOver() {
     if(teams[tNames[t]] >= fragLimit) {
       winTeam = winTeam == -1 ? t : -2;
       if(!mPlayedSounds[t] && teams[tNames[t]] == fragLimit-1) {
-	mSounds[tNames[t]]->PlayCentre(); //warn the players
-	mPlayedSounds[t] = true; //don't play it again
+        mSounds[tNames[t]]->PlayCentre(); //warn the players
+        mPlayedSounds[t] = true; //don't play it again
       }
     }
   }
@@ -56,7 +56,7 @@ bool CMeleeFragNb::IsGameOver() {
   if(winTeam != -1)
     for(unsigned int p = 0;  p < pilots.size(); p++)
       if(pilots[p]->GetTeam().GetName() == tNames[winTeam] && mWinner == -1)
-	mWinner = p;
+        mWinner = p;
 
   return mWinner != -1;
 }

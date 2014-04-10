@@ -16,7 +16,7 @@ public:
   virtual void Affect() override {}
   virtual void AtJustFinished() override {}
   virtual void AtStart() override {}
-  static  int  	  GetID() { return sID; }
+  static  int     GetID() { return sID; }
           CPilot& GetPilot() const { return *mPilot; }
           void    SetPilot(CPilot &pilot) { mPilot = &pilot; }
 

@@ -40,8 +40,8 @@ void CVulcanSeek::Think() {
     else {
       CVector2 pos = vulcan->GetSpecialPos();
       if(vulcan->IsSpecialActive() && pos.GetY() < ship.GetPos().GetY() &&
-	 (ship.GetPos() - pos).Radius() < 200)
-	mIsClustering = true; //cluster!
+         (ship.GetPos() - pos).Radius() < 200)
+        mIsClustering = true; //cluster!
     }
   }
 }

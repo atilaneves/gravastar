@@ -69,7 +69,7 @@ static int gDim(float x, int dim) {
 
 
 bool CLevelGfx::IsClearLine(float x1,float y1,
-			    float x2,float y2,int step) const {
+                            float x2,float y2,int step) const {
 
   CVector2 pos1(gDim(x1, mCanvas.GetWidth()), gDim(y1, mCanvas.GetHeight()));
   CVector2 pos2(gDim(x2, mCanvas.GetWidth()), gDim(y2, mCanvas.GetHeight()));
@@ -90,7 +90,7 @@ bool CLevelGfx::IsClearLine(float x1,float y1,
 
 
 bool CLevelGfx::IsClearLine(const CVector2& pos1, const CVector2& pos2,
-			    int step) const {
+                            int step) const {
   int x1 = int(pos1.GetX());
   int y1 = int(pos1.GetY());
   int x2 = int(pos2.GetX());

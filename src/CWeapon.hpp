@@ -24,7 +24,7 @@ public:
   float GetTemperature() const { return mTemperature/mMaxTemperature; }
   void  Update(float dt);
   CProjectile* UseAt(const CVector2& pos, const CVector2& vel,
-		     const std::string& name = "");
+                     const std::string& name = "");
 
 
 private:

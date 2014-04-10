@@ -10,8 +10,8 @@ int CStealthMine::sNbStealths = 0;
 CGravSprite *CStealthMine::sInvisible = nullptr;
 
 CStealthMine::CStealthMine(const CProjBluePrint &bluePrint, CShip& ship,
-			   const CVector2& pos, const CVector2& vel,
-			   bool shadow):
+                           const CVector2& pos, const CVector2& vel,
+                           bool shadow):
   CProjectile(bluePrint, ship, pos, vel, shadow),
   mIsInvisible(false) {
 
@@ -33,7 +33,7 @@ CGravSprite* CStealthMine::CreateInvisible() {
   oldSprite.Draw(canvas, 0, 0);
   float angle = 0, scale = 1;
   return new CGravSprite(canvas.GetData(), CTeam::sWhite, angle, scale,
-			 CColour::GetColour(0, 0, 1));
+                         CColour::GetColour(0, 0, 1));
 }
 
 

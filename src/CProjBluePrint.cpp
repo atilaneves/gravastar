@@ -18,5 +18,5 @@ CProjBluePrint::CProjBluePrint(const std::string &name, const CTeam &team):
 
 void CProjBluePrint::SetAttributes(char *data) {
   sscanf(data, "%*s %*s %*s %*s %f %f %f %f",
-	 &mMaxDamage, &mMaxHull, &mShockWaveForce, &mMass);
+         &mMaxDamage, &mMaxHull, &mShockWaveForce, &mMass);
 }

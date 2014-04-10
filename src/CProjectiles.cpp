@@ -28,7 +28,7 @@ void CProjectiles::RemoveAll() {
 
 
 void CProjectiles::DamageAll(const CVector2& collision,
-			     float damage) {
+                             float damage) {
   for (auto &sProjectile : sProjectiles) {
     CVector2 direction = (sProjectile)->GetPos() - collision;
     (sProjectile)->LoseHull(damage * CShips::GetDistanceScaling(direction));

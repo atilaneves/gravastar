@@ -4,7 +4,7 @@
 
 
 CPowerup::CPowerup(CPowerups& powerups, CLevel &level, const CVector2 &pos,
-		   const CGravSprite& sprite):
+                   const CGravSprite& sprite):
   CSpriteObj(level, pos),
   mPowerups(powerups), mSprite(sprite), mActive(true) {
 

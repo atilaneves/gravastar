@@ -38,7 +38,7 @@ void CBitmap::Draw(const CBitmap &bitmap, int x, int y, int fixAngle) {
 
 
 void CBitmap::Blit(CBitmap &bitmap,
-		   int x0,int y0,int x1,int y1,int w,int h) const {
+                   int x0,int y0,int x1,int y1,int w,int h) const {
   blit(mData,(BITMAP*)bitmap.GetData(), x0, y0, x1, y1, w, h);
 }
 
@@ -49,7 +49,7 @@ void CBitmap::Blit(CBitmap &bitmap, int x1, int y1) const {
 
 
 void CBitmap::MaskBlit(CBitmap &bitmap,
-		     int x0,int y0,int x1,int y1,int w,int h) const {
+                     int x0,int y0,int x1,int y1,int w,int h) const {
   masked_blit(mData, (BITMAP*)bitmap.GetData(), x0, y0, x1, y1, w, h);
 }
 
@@ -66,5 +66,5 @@ int CBitmap::GetMask() const {
 
 void CBitmap::StretchBlit(CBitmap &bitmap, int x, int y, int w, int h) const {
   stretch_blit(mData, bitmap.mData, 0, 0, GetWidth(), GetHeight(),
-	       x, y, w, h);
+               x, y, w, h);
 }

@@ -27,7 +27,7 @@ public:
 private:
 
   CSound         mSpawnSound, mExaustSound;
-  CSound 	 mSuperSound, mSuperExpSound, mSuperBeamSound;
+  CSound         mSuperSound, mSuperExpSound, mSuperBeamSound;
   CSound         mRepairSound, mKlangSound;
   CSound         mFlashForward, mShockwave, mEMP;
 

@@ -75,7 +75,7 @@ bool CPoint2D::IsFreeSquare(int op) {
 
   if(sNbPoints > 17) //less precision away from the start
     return sLevel->BlackPixel(mX - dx*(mOldStepSize/2),
-			      mY + dy*(mOldStepSize/2));
+                              mY + dy*(mOldStepSize/2));
 
   const int step = 1; //chk every pixel!
   int x = mX - dx * mOldStepSize; //all the way back to our mother node

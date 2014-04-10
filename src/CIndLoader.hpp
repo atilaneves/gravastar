@@ -18,7 +18,7 @@ class CIndLoader {
 public:
 
   CIndLoader(std::string &fileName, const CCanvas &canvas, IndsBmp_t indBmps,
-	     void* baseBmp);
+             void* baseBmp);
 
   CVector2 GetBasePos(int i) const { return Pos2Vector(mBasesPos[i]); }
   CVector2 GetIndPos(int i)  const { return Pos2Vector(mIndsPos[i]);  }

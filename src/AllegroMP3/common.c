@@ -79,7 +79,7 @@ int decode_header(struct frame *fr,unsigned long newhead)
     {
       case 1:
 #if 0
-		fr->do_layer = do_layer1;
+                fr->do_layer = do_layer1;
         fr->jsbound = (fr->mode == MPG_MD_JOINT_STEREO) ?
                          (fr->mode_ext<<2)+4 : 32;
         fr->framesize  = (long) tabsel_123[fr->lsf][0][fr->bitrate_index] * 12000;
@@ -89,7 +89,7 @@ int decode_header(struct frame *fr,unsigned long newhead)
         break;
       case 2:
 #if 1
-		fr->do_layer = do_layer2;
+                fr->do_layer = do_layer2;
 // in layer2.c
 //        II_select_table(fr);
 //        fr->jsbound = (fr->mode == MPG_MD_JOINT_STEREO) ?

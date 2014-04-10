@@ -10,7 +10,7 @@ class CPowerupInvulnerable:public CPowerup {
 public:
 
  CPowerupInvulnerable(CPowerups &powerups, CLevel &level, const CVector2 &pos,
-		      const CGravSprite& sprite);
+                      const CGravSprite& sprite);
 
 
 private:

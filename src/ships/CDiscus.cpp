@@ -16,7 +16,7 @@ REG_FOLLOW_SHIP("Discus", CDiscus, gShotName, gFollowName,
 
 
 CDiscus::CDiscus(const CShipBluePrint& bluePrint,
-		 CPilot& pilot, CLevel &level):
+                 CPilot& pilot, CLevel &level):
     CShip(bluePrint, pilot, level) {
 
 
@@ -38,7 +38,7 @@ void CDiscus::SpawnBullet(float dt, float dAngle, float dVelAngle) {
   const float velNorm = std::max(velMin, mVel.Radius()) + mVel.Radius()/5;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, dVelAngle);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mWeapons.UseWeaponAt(pos, vel, gShotName);
 }
 

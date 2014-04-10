@@ -27,7 +27,7 @@
 #endif
 
 #ifndef M_SQRT2
-# define M_SQRT2	1.41421356237309504880
+# define M_SQRT2        1.41421356237309504880
 #endif
 
 
@@ -41,7 +41,7 @@
 
 
 /* AUDIOBUFSIZE = n*64 with n=1,2,3 ...  */
-#define		AUDIOBUFSIZE		16384
+#define         AUDIOBUFSIZE            16384
 
 #ifndef FALSE
 #define         FALSE                   0

@@ -10,7 +10,7 @@ class CCycleStringEnter: public CCycleString {
 public:
 
   CCycleStringEnter(const std::string &title, const strings_t& strings,
-		    int max, int min = 1);
+                    int max, int min = 1);
 
 
 protected:

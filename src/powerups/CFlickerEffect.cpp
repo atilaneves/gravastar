@@ -13,7 +13,7 @@ void CFlickerEffect::AtStart() {
   const double invHz = 50;
   if(!mFlicker)
     mFlicker = new CFlicker(invHz, mLevel,
-			    new CFollower(mSprites, mLevel, mShip));
+                            new CFollower(mSprites, mLevel, mShip));
 }
 
 

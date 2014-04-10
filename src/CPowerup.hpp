@@ -13,7 +13,7 @@ class CPowerup:public CSpriteObj {
 public:
 
   CPowerup(CPowerups &powerups, CLevel &level,
-	   const CVector2 &pos, const CGravSprite& sprite);
+           const CVector2 &pos, const CGravSprite& sprite);
   virtual ~CPowerup();
 
 
@@ -23,7 +23,7 @@ private:
   const CGravSprite& mSprite;
   bool mActive;
 
-  virtual void 		     AffectShip(CShip& ship) = 0;
+  virtual void               AffectShip(CShip& ship) = 0;
   virtual void Hit(CSpriteObj &obj, CScreenPos pos, float dt) override;
   virtual void Hit(CShip &ship, CScreenPos pos, float dt) override;
   virtual bool IsActive() override { return mActive; }

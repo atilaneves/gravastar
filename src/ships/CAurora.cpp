@@ -9,12 +9,12 @@
 static std::string gMissName = "shard";
 static std::string gShotName = "shard";
 REG_PROJ_SHIP("Aurora", CAurora, gShotName, gMissName, CProjectile,
-	      CProjSpecial)
+              CProjSpecial)
 REG_WEAPON_PROJ(gShotName, CGravityProj)
 
 
 CAurora::CAurora(const CShipBluePrint& bluePrint, CPilot& pilot,
-		 CLevel &level):
+                 CLevel &level):
     CShip(bluePrint, pilot, level) {
 
 }
@@ -44,7 +44,7 @@ void CAurora::SpawnShard(float dt, float dAngle, bool shadow) {
   const float dist = 0.75, velNorm = 500;
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, velNorm, dAngle);
   CVector2 pos = CProjLauncher::GetLaunchPos(mWeapons.GetSpecialSprite(), dt,
-					     *this, dist, dAngle);
+                                             *this, dist, dAngle);
   mWeapons.UseSpecialAt(pos, vel, gShotName, shadow);
 }
 

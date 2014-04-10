@@ -5,7 +5,7 @@
 
 
 CLightning::CLightning(const CSpriteVector &sprites, CLevel &level,
-		       CMoverObj &obj, CSound *sound , const CVector2& offset):
+                       CMoverObj &obj, CSound *sound , const CVector2& offset):
   CWeaponFollow(sprites, level, obj, sound, offset) {
 
   SetDamage(30);
