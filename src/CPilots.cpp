@@ -9,10 +9,9 @@ std::vector<CPilot*> CPilots::sPilots;
 
 bool CPilots::IsAlone(CPilot& pilot) {
 
-    for(unsigned int p = 0; p < sPilots.size(); p++) {
-        if(sPilots[p]->IsAlive() &&
-           sPilots[p]->GetShip().IsAlive() &&
-           sPilots[p]->GetTeam() != pilot.GetTeam())
+  for (auto &sPilot : sPilots) {
+    if (sPilot->IsAlive() && sPilot->GetShip().IsAlive() &&
+        sPilot->GetTeam() != pilot.GetTeam())
             return false;
     }
 
@@ -23,13 +22,12 @@ bool CPilots::IsAlone(CPilot& pilot) {
 bool CPilots::IsCoastClear(CPilot &pilot) { //ab near?
 
     if(IsAlone(pilot)) return true; //as is obvious
-    for(unsigned int p = 0; p < sPilots.size(); p++) {
-        if(sPilots[p]->IsAlive() &&
-           sPilots[p]->GetShip().IsAlive() &&
-           sPilots[p]->GetTeam() != pilot.GetTeam()) {
+    for (auto &sPilot : sPilots) {
+      if (sPilot->IsAlive() && sPilot->GetShip().IsAlive() &&
+          sPilot->GetTeam() != pilot.GetTeam()) {
 
             const CVector2& pos1 = pilot.GetShip().GetPos();
-            const CVector2& pos2 = sPilots[p]->GetShip().GetPos();
+            const CVector2 &pos2 = sPilot->GetShip().GetPos();
             if(pilot.GetShip().GetLevel().IsClearLine(pos1, pos2))
                 return false; //can't be clear if they can take a shot!
 
@@ -45,7 +43,8 @@ bool CPilots::IsCoastClear(CPilot &pilot) { //ab near?
 
 int CPilots::GetNbLivePilots() {
     int nbPilots = 0;
-    for(unsigned int p = 0; p < sPilots.size(); p++)
-        if(sPilots[p]->IsAlive()) nbPilots++;
+    for (auto &sPilot : sPilots)
+      if (sPilot->IsAlive())
+        nbPilots++;
     return nbPilots;
 }

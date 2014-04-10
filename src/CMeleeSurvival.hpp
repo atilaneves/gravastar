@@ -14,10 +14,8 @@ public:
 
 
 protected:
-
-  virtual int  GetWinner();
-  virtual bool IsGameOver();
-
+  virtual int GetWinner() override;
+  virtual bool IsGameOver() override;
 };
 
 #endif

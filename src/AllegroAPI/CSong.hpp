@@ -3,13 +3,12 @@
 
 
 #include <string>
-
+#include <utility>
 
 class CSong {
 
 public:
-
-  CSong(const std::string& name):mName(name) { }
+  CSong(std::string name) : mName(std::move(name)) {}
   virtual ~CSong() { }
   virtual void Adjust(bool loop = true) = 0;
   const std::string& GetName() const { return mName; }

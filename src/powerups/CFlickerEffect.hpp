@@ -16,9 +16,8 @@ public:
   CFlickerEffect(const CTeam &team, CShip& ship, CLevel &level,
                  float duration, const CSpriteVector& sprites);
 
-  virtual void AtStart();
-  virtual void AtJustFinished();
-
+  virtual void AtStart() override;
+  virtual void AtJustFinished() override;
 
 private:
 

@@ -22,24 +22,27 @@ void CSpriteObjs::Update(float dt) {
 
     sSpritePositions.clear();
 
-    for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o) {
+    for (auto &sObj : sObjs) {
         //DEBUG("Update  obj %p of type %s\n", *o, typeid(**o).name());
-        (*o)->Update(dt);
-        if((*o)->IsActive()) DrawObj(*o);
+      (sObj)->Update(dt);
+      if ((sObj)->IsActive())
+        DrawObj(sObj);
     }
 
     std::vector<CSpriteObj*> toDelete; //inactive sprite objs
 
-    for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o)
-        if(!(*o)->IsActive()) toDelete.push_back(*o); //find all at same time
+    for (auto &sObj : sObjs)
+      if (!(sObj)->IsActive())
+        toDelete.push_back(sObj); // find all at same time
 
-    for(unsigned int i = 0; i < toDelete.size(); i++)
-        DeleteObj(toDelete[i]); //safe to delete all of them now
+    for (auto &elem : toDelete)
+      DeleteObj(elem); // safe to delete all of them now
 }
 
 
 void CSpriteObjs::Erase() {
-    for(objPlace_t o = sObjs.begin(); o!=sObjs.end(); ++o) EraseObj(*o);
+  for (auto &sObj : sObjs)
+    EraseObj(sObj);
 }
 
 
@@ -63,22 +66,23 @@ void CSpriteObjs::DeleteObj(CSpriteObj *obj) {
 void CSpriteObjs::RemoveObj(CSpriteObj *obj) {
     DEBUG("Removing obj %p of type %s, total will be %d\n",
           static_cast<void*>(obj), typeid(*obj).name(), (int)sObjs.size() - 1);
-    objPlace_t where = find(sObjs.begin(), sObjs.end(), obj);
+    auto where = find(sObjs.begin(), sObjs.end(), obj);
     if(where != sObjs.end()) sObjs.erase(where);
 }
 
 
 void CSpriteObjs::DeleteAll() {
-    for(objPlace_t o = sObjs.begin(); o!=sObjs.end(); ++o) {
-        DEBUG("(all) deleting obj %p of type %s\n", static_cast<void*>(*o), typeid(**o).name());
-        delete *o;
+  for (auto &sObj : sObjs) {
+    DEBUG("(all) deleting obj %p of type %s\n", static_cast<void *>(sObj),
+          typeid(*sObj).name());
+    delete sObj;
     }
     sObjs.clear();
 }
 
 
 bool CSpriteObjs::HasObj(CSpriteObj *obj) {
-    objPlace_t where = find(sObjs.begin(), sObjs.end(), obj);
+  auto where = find(sObjs.begin(), sObjs.end(), obj);
     return where != sObjs.end();
 }
 
@@ -89,22 +93,23 @@ bool CSpriteObjs::HasFlicker(CSpriteObj* flicker) {
 
 
 CSpriteObj* CSpriteObjs::HitObj(CScreenPos pos, bool drawn) { //anybody here?
-    for(robjPlace_t o = sObjs.rbegin(); o != sObjs.rend(); ++o)
+  for (auto o = sObjs.rbegin(); o != sObjs.rend(); ++o)
         //if they've hit - drawn specifies if they had to have been drawn or not
         if(((*o)->IsUpdated() || !drawn) && (*o)->InSprite(pos))
             return (*o); //we have our target!
-    return 0; //couldn't find any spr obj in (x,y)
+  return nullptr; // couldn't find any spr obj in (x,y)
 }
 
 
 void CSpriteObjs::Stop(const CVector2& pos, const CSpriteObj &ship,
                        float maxTime) {
-    for(objPlace_t o = sObjs.begin(); o != sObjs.end(); ++o) {
-        if(*o == &ship) continue;
-        CVector2 direction = (*o)->GetPos() - pos;
+  for (auto &sObj : sObjs) {
+    if (sObj == &ship)
+      continue;
+    CVector2 direction = (sObj)->GetPos() - pos;
         float scale = CShips::GetDistanceScaling(direction);
         float deltaT = maxTime * scale;
-        (*o)->Stop(deltaT);
+        (sObj)->Stop(deltaT);
     }
 }
 

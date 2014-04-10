@@ -11,7 +11,7 @@ int CPoint2D::sMaxStepSize = 100;
 int CPoint2D::sMaxNbStates = 0;
 int CPoint2D::sNbPoints = 0;
 int CPoint2D::sHalfWidth = 10;
-const CLevel* CPoint2D::sLevel = 0;
+const CLevel *CPoint2D::sLevel = nullptr;
 static const float kSqrt2 = sqrt(2);
 static const float kGreed = 0.65; //0 to 1, > means +accurate && +slower
 
@@ -106,7 +106,7 @@ CPoint2D * CPoint2D::CreateState(int op) {
      sLevel->IsFreeSquare(int(x), int(y), side))
     return new CPoint2D(x, y, mStepSize);
  else
-    return 0;
+   return nullptr;
 }
 
 

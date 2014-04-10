@@ -13,20 +13,20 @@ CPowerups::CPowerups(CLevel& level, float rate):
     mLevel(level), mRate(rate) {
   
     const std::vector<std::string>& keys = CPowerupFactory::Instance().GetKeys();
-    for(unsigned int p=0; p<keys.size(); p++) {
-        mPowerups.push_back(0); //have the space, but not the powerup yet
-        CDataFile file("Powerups/" + keys[p] + ".dat");
+    for (auto &key : keys) {
+      mPowerups.push_back(nullptr); // have the space, but not the powerup yet
+        CDataFile file("Powerups/" + key + ".dat");
         const int kFileIndex = 0;
-        CGravSprite *sprite = new CGravSprite(file.GetData(kFileIndex));
-        mNames.push_back(keys[p]);
-        mSpritesMap[keys[p]] = sprite;
+        auto sprite = new CGravSprite(file.GetData(kFileIndex));
+        mNames.push_back(key);
+        mSpritesMap[key] = sprite;
     }
 }
 
 
 CPowerups::~CPowerups() {
-    for(spritePlace_t i = mSpritesMap.begin(); i != mSpritesMap.end(); ++i)
-        delete (*i).second;
+  for (auto &elem : mSpritesMap)
+    delete (elem).second;
 }
 
 
@@ -71,12 +71,13 @@ const CPowerup* CPowerups::NearestPowerup(const CVector2& shipPos) const {
             }
         }
     }
-    
-    return minPowerup > 0 ? mPowerups[minPowerup] : 0;
+
+    return minPowerup > 0 ? mPowerups[minPowerup] : nullptr;
 }
 
 
 void CPowerups::Remove(CPowerup *powerup) {
-    for(unsigned int i=0; i<mPowerups.size(); i++)
-        if(mPowerups[i] == powerup) mPowerups[i] = 0;
+  for (auto &elem : mPowerups)
+    if (elem == powerup)
+      elem = nullptr;
 }

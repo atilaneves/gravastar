@@ -24,12 +24,11 @@ private:
   bool mActive;
 
   virtual void 		     AffectShip(CShip& ship) = 0;
-  virtual void         	     Hit(CSpriteObj&   obj, CScreenPos pos, float dt);
-  virtual void         	     Hit(CShip&       ship, CScreenPos pos, float dt);
-  virtual bool 		     IsActive()        { return mActive; }
-  virtual const CGravSprite& GetSprite() const { return mSprite; }
-  virtual void               Update(float dt);
-
+  virtual void Hit(CSpriteObj &obj, CScreenPos pos, float dt) override;
+  virtual void Hit(CShip &ship, CScreenPos pos, float dt) override;
+  virtual bool IsActive() override { return mActive; }
+  virtual const CGravSprite &GetSprite() const override { return mSprite; }
+  virtual void Update(float dt) override;
 };
 
 

@@ -23,10 +23,8 @@ private:
   CSound mWarning30, mWarning10;
   CTimeCounter mTimeCounter;
 
-  virtual int  GetWinner();
-  virtual bool IsGameOver();
-
-
+  virtual int GetWinner() override;
+  virtual bool IsGameOver() override;
 };
 
 #endif

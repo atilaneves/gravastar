@@ -8,18 +8,13 @@
 #include "CFollowBluePrint.hpp"
 #include "CSpriteObjs.hpp"
 
-
-CFollowSpecial::CFollowSpecial(const CShipBluePrint &shipBluePrint,
-                               CShip &ship, CLevel &level):
-    CSpecial(shipBluePrint, ship, level,
-             shipBluePrint.mFollowSpecBluePrint->mSound,
-             shipBluePrint.mFollowSpecBluePrint->mStatSprite),
-    mBluePrint(*shipBluePrint.mFollowSpecBluePrint),
-    mSprites(mBluePrint.GetSprites()),
-    mFollower(0) {
-
-
-}
+CFollowSpecial::CFollowSpecial(const CShipBluePrint &shipBluePrint, CShip &ship,
+                               CLevel &level)
+    : CSpecial(shipBluePrint, ship, level,
+               shipBluePrint.mFollowSpecBluePrint->mSound,
+               shipBluePrint.mFollowSpecBluePrint->mStatSprite),
+      mBluePrint(*shipBluePrint.mFollowSpecBluePrint),
+      mSprites(mBluePrint.GetSprites()), mFollower(nullptr) {}
 
 const CGravSprite& CFollowSpecial::GetSprite() const {
     return *((mBluePrint.GetSprites())[0]);
@@ -30,7 +25,7 @@ CMoverObj* CFollowSpecial::UseAt(const CVector2& pos, const CVector2& vel,
                                  const std::string& name, bool shadow) {
 
     if(!mFollower) {
-        CSound * const sound = 0;
+      CSound *const sound = nullptr;
         const CVector2 offset(0, 0);
         CFollowFactory& factory = CFollowFactory::Instance();
         mFollower = factory.CreateObject(name, mBluePrint.GetSprites(),

@@ -3,14 +3,13 @@
 
 
 #include <string>
-
+#include <utility>
 
 class CMeleeOptions {
 
 public:
-
-  CMeleeOptions(const std::string &type, int levelNb, float powerupRate):
-    mType(type), mLevelNb(levelNb), mPowerupRate(powerupRate) { }
+  CMeleeOptions(std::string type, int levelNb, float powerupRate)
+      : mType(std::move(type)), mLevelNb(levelNb), mPowerupRate(powerupRate) {}
 
   CMeleeOptions():mType("Survival"), mLevelNb(4), mPowerupRate(0.1) { }
 

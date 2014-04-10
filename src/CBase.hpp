@@ -23,8 +23,7 @@ private:
   const CCanvas& mCanvas;
   std::unique_ptr<CGravSprite> mSprite;
 
-  virtual void ShipLanded(CShip &ship, float dt);
-
+  virtual void ShipLanded(CShip &ship, float dt) override;
 };
 
 #endif

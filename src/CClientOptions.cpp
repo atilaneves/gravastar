@@ -88,7 +88,8 @@ static std::string getFileName() {
 
 void CClientOptions::Load() {
     FILE *fp = fopen(getFileName().c_str(), "r");
-    if(fp == NULL) return;
+    if (fp == nullptr)
+      return;
     mPilots.clear();
     fscanf(fp, "%d %d %d", &mScreenWidth, &mScreenHeight, (int*)&mWindowed);
     fscanf(fp, "%d %d %d", &mSoundVolume, &mMusicVolume, (int*)&mSmartSplit);
@@ -96,8 +97,8 @@ void CClientOptions::Load() {
         char controlType[100];
         fscanf(fp, "%s", controlType);
         int bts[kNbButtons];
-        for(int b = 0; b < kNbButtons; b++)
-            fscanf(fp,"%d", &bts[b]);
+        for (auto &bt : bts)
+          fscanf(fp, "%d", &bt);
         int index = 0;
         mPilots.push_back(CPilotOptions(getName(i), getType(i), getTeam(i), gShips,
                                         CPilotInputOptions(controlType, bts[0],
@@ -112,7 +113,7 @@ void CClientOptions::Load() {
 
 void CClientOptions::Save() const {
     FILE *fp=fopen(getFileName().c_str(), "w");
-    if(fp != NULL) {
+    if (fp != nullptr) {
         int windowed = mWindowed ? 0 : 1;
         fprintf(fp,"%d %d %d\n", mScreenWidth, mScreenHeight, windowed);
         fprintf(fp,"%d %d %d\n", mSoundVolume, mMusicVolume, mSmartSplit);
@@ -120,8 +121,9 @@ void CClientOptions::Save() const {
             fprintf(fp,"%s    ", mPilots[i].GetInputOptions().Type().c_str());
             std::string names[] = {"Left", "Right", "Thrust", "Weapon", "Special",
                                    "Super", "Start"};
-            for(int b = 0; b < kNbButtons; b++)
-                fprintf(fp,"%d  ", mPilots[i].GetInputOptions().GetControl(names[b]));
+            for (auto &name : names)
+              fprintf(fp, "%d  ",
+                      mPilots[i].GetInputOptions().GetControl(name));
             fprintf(fp,"\n"); //player separator
         }
         fclose(fp);
@@ -133,6 +135,6 @@ void CClientOptions::Save() const {
 
 
 void CClientOptions::SetAllBots() {
-    for(unsigned int i = 0; i < mPilots.size(); i++)
-        mPilots[i].SetBot();
+  for (auto &elem : mPilots)
+    elem.SetBot();
 }

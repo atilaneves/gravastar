@@ -64,7 +64,7 @@ FILE* CTeam::OpenFile() {
     std::string fileName = CDataFile::GetFileName("cfg/colours/" + mName + ".cfg");
     FILE *fp = fopen(fileName.c_str(), "r");
 
-    if(fp == NULL) {
+    if (fp == nullptr) {
         fprintf(stderr, "Unable to open file %s", fileName.c_str());
         exit(1);
     }

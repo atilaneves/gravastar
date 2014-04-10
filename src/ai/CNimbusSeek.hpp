@@ -11,9 +11,8 @@ public:
 
   CNimbusSeek(CPilotBot &pilot);
 
-  virtual void  SetShootControl(CPilotInputBot &input);
-  virtual bool  WantsToShoot();
-
+  virtual void SetShootControl(CPilotInputBot &input) override;
+  virtual bool WantsToShoot() override;
 
 private:
 

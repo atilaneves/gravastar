@@ -19,15 +19,9 @@ REG_FOLLOW_SHIP(gShipName, CThunderblade, gShotName, gFollowName,
 REG_EXTRA_FOLLOW_BLUEPRINT("Thunderblade", gSuperName)
 REG_EXTRA_FOLLOW(gSuperName, CWeaponFollow)
 
-
-
-CThunderblade::CThunderblade(const CShipBluePrint& bluePrint,
-			     CPilot& pilot, CLevel &level):
-    CShip(bluePrint, pilot, level),
-    mTempest(0) {
-
-}
-
+CThunderblade::CThunderblade(const CShipBluePrint &bluePrint, CPilot &pilot,
+                             CLevel &level)
+    : CShip(bluePrint, pilot, level), mTempest(nullptr) {}
 
 void CThunderblade::UseWeapon(float dt) {
   float dPosAngle = 1.5; //small variation in angle
@@ -54,14 +48,14 @@ void CThunderblade::UseSpecial(float dt) {
 void CThunderblade::UseSuper(float dt, bool use) {
   if(!use && mTempest) {
     mTempest->Die();
-    mTempest = 0;
+    mTempest = nullptr;
   }
   else if (use && !mTempest) {
     static CSound sound = mExtraFollowBluePrint.GetSound();
     const CVector2 offset(0, 0);
     const CSpriteVector &sprites = mExtraFollowBluePrint.GetSprites();
     const float kFrequency = 70;
-    mTempest = new CWeaponFollow(sprites, mLevel, *this, 0, offset);
+    mTempest = new CWeaponFollow(sprites, mLevel, *this, nullptr, offset);
     mTempest->SetDamage(75);
     new CFlicker(kFrequency, mLevel, mTempest);
     mEffects.Start(CThrustUp::GetID(), 4);

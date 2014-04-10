@@ -11,10 +11,9 @@ public:
 
   CTurnUp(const CTeam &team, CShip& ship, CLevel& level);
 
-  
-  virtual void Affect() { }
-  virtual void AtJustFinished() { }
-  virtual void AtStart() { }
+  virtual void Affect() override {}
+  virtual void AtJustFinished() override {}
+  virtual void AtStart() override {}
   static  int  GetID() { return sID; }
   
   

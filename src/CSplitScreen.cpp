@@ -111,7 +111,8 @@ CScreenPos CSplitScreen::GetCentre(const DisplayPilots& pilots) {
 
 auto CSplitScreen::GetHumans(const DisplayPilots& pilots) -> DisplayPilots{
     DisplayPilots humans;
-    for(unsigned int i = 0; i < pilots.size(); i++)
-        if(pilots[i].HasSplitScreen()) humans.push_back(pilots[i]);
+    for (auto &pilot : pilots)
+      if (pilot.HasSplitScreen())
+        humans.push_back(pilot);
     return humans.empty() ? pilots : humans;
 }

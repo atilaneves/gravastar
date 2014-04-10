@@ -4,9 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-const CFont* CStringMenu::sFont = 0;     //default font
-
+const CFont *CStringMenu::sFont = nullptr; // default font
 
 CStringMenu::CStringMenu(const std::string &title):
   CMenu(new CMenuIconString(title, *sFont)) {

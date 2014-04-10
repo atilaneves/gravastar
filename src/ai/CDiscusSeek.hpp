@@ -12,16 +12,14 @@ public:
 
   CDiscusSeek(CPilotBot &pilot);
 
-  virtual bool WantsToShoot() { return mShieldCounter.IsActive(); }
-
+  virtual bool WantsToShoot() override { return mShieldCounter.IsActive(); }
 
 private:
 
   CTimeCounter mShieldCounter;
 
-  virtual void SetShootControl(CPilotInputBot &input);
-  virtual void  Think();
-
+  virtual void SetShootControl(CPilotInputBot &input) override;
+  virtual void Think() override;
 };
 
 

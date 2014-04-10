@@ -23,8 +23,8 @@ private:
 
   CMenuCursor mCursor;
   CCycleLeaf *mSoundVolume, *mMusicVolume;
-  
-  virtual void Update(CRootMenu &rootMenu);
+
+  virtual void Update(CRootMenu &rootMenu) override;
           void SetVolumes();
 
 };

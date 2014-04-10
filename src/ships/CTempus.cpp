@@ -15,14 +15,8 @@ REG_PROJ_SHIP("Tempus", CTempus, gShotName, gMissName, CStasisBomb,
 	      CProjSpecial)
 REG_WEAPON_PROJ(gShotName, CGravityProj)
 
-
-CTempus::CTempus(const CShipBluePrint& bluePrint, CPilot& pilot,
-		 CLevel &level):
-    CShip(bluePrint, pilot, level),
-    mButton(false), mBomb(0) {
-
-}
-
+CTempus::CTempus(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level)
+    : CShip(bluePrint, pilot, level), mButton(false), mBomb(nullptr) {}
 
 void CTempus::UseWeapon(float dt) {
   float da  = 0.75;  //small variation in angle
@@ -70,7 +64,7 @@ void CTempus::ApplyInput(const CPilotInput &controls) {
   if(!controls.Special()) mButton = false;
   if(controls.Special() && !mButton && IsSpecialActive()) {
     mBomb->Die();
-    mBomb = 0;
+    mBomb = nullptr;
     mButton = true;
   }
   CShip::ApplyInput(controls);

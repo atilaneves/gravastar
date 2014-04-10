@@ -14,8 +14,7 @@ public:
 		 bool shadow = false);
   virtual ~CHomingMissile() { }
 
-  virtual void Move(float dt);
-
+  virtual void Move(float dt) override;
 
 private:
 

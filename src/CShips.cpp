@@ -17,7 +17,7 @@ shipPlace_t CShips::AddShip(CShip *ship) {
 
 
 void CShips::RemoveShip(CShip *ship) {
-  shipPlace_t where = find(sShips.begin(), sShips.end(), ship);
+  auto where = find(sShips.begin(), sShips.end(), ship);
   if(where != sShips.end()) sShips.erase(where);
 }
 
@@ -28,20 +28,20 @@ void CShips::RemoveAll() {
 
 
 bool CShips::HasShip(CShip *ship) {
-  shipPlace_t where = find(sShips.begin(), sShips.end(), ship);
+  auto where = find(sShips.begin(), sShips.end(), ship);
   return where != sShips.end();
 }
 
 
 void CShips::StartEffect(const CShip* ship, int effect, float duration) {
-  for(shipPlace_t s = sShips.begin(); s != sShips.end(); ++s) {
+  for (auto &sShip : sShips) {
     //process everyone except us
-    if((*s)->IsAlive() && *s != ship && !(*s)->IsEffectOn(effect)) { 
-      CVector2 direction = (*s)->GetPos() - ship->GetPos();
+    if ((sShip)->IsAlive() && sShip != ship && !(sShip)->IsEffectOn(effect)) {
+      CVector2 direction = (sShip)->GetPos() - ship->GetPos();
       float scale = GetDistanceScaling(direction);
       float realDuration = duration * scale;
       if(realDuration > 0.5) //only if big enough to be worth the bother
-	(*s)->StartEffect(effect, realDuration);
+        (sShip)->StartEffect(effect, realDuration);
     }
   }
 }
@@ -51,14 +51,15 @@ void CShips::PushAll(const CVector2& collision,
 		     float force, CSpriteObj* hitShip, CPilot& pilot,
 		     float damage) {
 
-  for(shipPlace_t s = sShips.begin(); s != sShips.end(); ++s) {
+  for (auto &sShip : sShips) {
     //process everyone except the ship we hit
-    if((*s)->IsAlive() && *s != hitShip) { 
-      CVector2 direction = (*s)->GetPos() - collision;
+    if ((sShip)->IsAlive() && sShip != hitShip) {
+      CVector2 direction = (sShip)->GetPos() - collision;
       float scale = GetDistanceScaling(direction);
       float speed = force * scale * 0.675;
-      (*s)->Push(CVector2(direction.Theta()) * speed, pilot);
-      if(damage > 0) (*s)->LoseHull(damage*scale, pilot);
+      (sShip)->Push(CVector2(direction.Theta()) * speed, pilot);
+      if(damage > 0)
+        (sShip)->LoseHull(damage * scale, pilot);
     }
   }
 }
@@ -75,20 +76,20 @@ float CShips::GetDistanceScaling(const CVector2& direction) {
 
 CShip* CShips::Find(const CScreenPos &pos, bool updated) {
 
-  for(shipPlace_t s = sShips.begin(); s != sShips.end(); ++s)
-    if(((*s)->IsUpdated() || !updated) && (*s)->IsAlive() &&
-       (*s)->InSprite(pos))
-      return *s;
-  
-  return 0; //didn't find any ships
+  for (auto &sShip : sShips)
+    if (((sShip)->IsUpdated() || !updated) && (sShip)->IsAlive() &&
+        (sShip)->InSprite(pos))
+      return sShip;
+
+  return nullptr; // didn't find any ships
 }
 
 
 bool CShips::IsClearLine(const CShip &ship, int x, int y) {
 
-  for(shipPlace_t s = sShips.begin(); s != sShips.end(); ++s) {
-    if((*s)->IsAlive() && *s != &ship &&
-       ship.GetLevel().IsClearLine((*s)->GetPos(), CVector2(x, y)))
+  for (auto &sShip : sShips) {
+    if ((sShip)->IsAlive() && sShip != &ship &&
+        ship.GetLevel().IsClearLine((sShip)->GetPos(), CVector2(x, y)))
       return true;
   }
   
@@ -97,10 +98,10 @@ bool CShips::IsClearLine(const CShip &ship, int x, int y) {
 
 
 bool CShips::IsAllElseInvulnerable(CShip& ship) {
-  
-  for(shipPlace_t s = sShips.begin(); s != sShips.end(); ++s)
-    if((*s)->IsAlive() && *s != &ship &&
-       !(*s)->IsEffectOn(CInvulnerable::GetID()))
+
+  for (auto &sShip : sShips)
+    if ((sShip)->IsAlive() && sShip != &ship &&
+        !(sShip)->IsEffectOn(CInvulnerable::GetID()))
       return false;
     
   return true; //yep, eb else's invulnerable, and we're not

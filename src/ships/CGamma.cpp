@@ -25,14 +25,10 @@ REG_PROJ_SHIP(gShipName, CGamma, gShotName, gMissName, CPulseLaser,
 REG_WEAPON_PROJ(gShotName, CGravityProj)
 REG_EXTRA_FOLLOW_BLUEPRINT(gShipName, gSuperName)
 
-
-CGamma::CGamma(const CShipBluePrint& bluePrint, CPilot& pilot, CLevel &level):
-    CShip(bluePrint, pilot, level),
-    mAngle(0), mDirection(0.05), mSuperBeam(0), mPulse(0),
-    mSuperBeamSound(bluePrint.mSounds.mSuperBeamSound) {
-
-}
-
+CGamma::CGamma(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level)
+    : CShip(bluePrint, pilot, level), mAngle(0), mDirection(0.05),
+      mSuperBeam(nullptr), mPulse(nullptr),
+      mSuperBeamSound(bluePrint.mSounds.mSuperBeamSound) {}
 
 CGamma::~CGamma() {
     mSuperBeamSound.Stop();
@@ -62,7 +58,7 @@ void CGamma::UseSpecial(float dt) {
 void CGamma::UseSuper(float dt, bool use) {
     if(!use && mSuperBeam) {
         mSuperBeam->Die();
-        mSuperBeam = 0;
+        mSuperBeam = nullptr;
         mSuperBeamSound.Stop();
     }
     else if(use && !mSuperBeam) {

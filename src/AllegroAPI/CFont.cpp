@@ -4,8 +4,7 @@
 
 
 int        CFont::sNbFonts  = 0;
-CDataFile* CFont::sDataFile = 0;
-
+CDataFile *CFont::sDataFile = nullptr;
 
 CFont::CFont(int fontIndex) {
   if(sNbFonts == 0) //1st font ever, load the file

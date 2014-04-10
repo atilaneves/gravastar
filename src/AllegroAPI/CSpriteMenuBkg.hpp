@@ -13,8 +13,7 @@ public:
   CSpriteMenuBkg(CSprite &sprite, int x, int y);
   virtual ~CSpriteMenuBkg() { }
 
-  virtual void Draw(CCanvas &canvas);
-
+  virtual void Draw(CCanvas &canvas) override;
 
 private:
 

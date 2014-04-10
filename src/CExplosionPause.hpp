@@ -12,11 +12,11 @@ public:
 
   CExplosionPause(const CTeam &team, CShip& ship, CLevel &level);
   virtual ~CExplosionPause() { }
-  
-  virtual void Affect() { }
-  virtual void AtJustFinished() { }
-  virtual void AtStart() { }
-  virtual bool WorksOnDeadShip() const { return true; }
+
+  virtual void Affect() override {}
+  virtual void AtJustFinished() override {}
+  virtual void AtStart() override {}
+  virtual bool WorksOnDeadShip() const override { return true; }
 
   static  int  GetID() { return sID; }
   

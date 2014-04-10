@@ -10,11 +10,10 @@ class CNullSong: public CSong {
 public:
 
   CNullSong():CSong("") { }
-  virtual void Adjust(bool loop = true) { }
-  virtual void PlayLoop() { }
-  virtual bool Poll() { return true; }
-  virtual void Stop() { }
-
+  virtual void Adjust(bool loop = true) override {}
+  virtual void PlayLoop() override {}
+  virtual bool Poll() override { return true; }
+  virtual void Stop() override {}
 };
 
 #endif

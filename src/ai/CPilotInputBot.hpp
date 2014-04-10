@@ -12,17 +12,17 @@ public:
     CPilotInputBot():mLeft(false), mRight(false), mThrust(false), mWeapon(false),
                      mSpecial(false), mSuper(false) { }
 
-    virtual bool Left()       const { return mLeft;    }
-    virtual bool Right()      const { return mRight;   }
-    virtual bool Thrust()     const { return mThrust;  }
-    virtual bool Weapon()     const { return mWeapon;  }
-    virtual bool Special()    const { return mSpecial; }
-    virtual bool Super()      const { return mSuper;   }
-    virtual bool Start()      const { return false;    }
-    virtual bool MenuUp()     const { return false;    }
-    virtual bool MenuDown()   const { return false;    }
-    virtual bool MenuSelect() const { return false;    }
-    virtual bool MenuCancel() const { return false;    }
+    virtual bool Left() const override { return mLeft; }
+    virtual bool Right() const override { return mRight; }
+    virtual bool Thrust() const override { return mThrust; }
+    virtual bool Weapon() const override { return mWeapon; }
+    virtual bool Special() const override { return mSpecial; }
+    virtual bool Super() const override { return mSuper; }
+    virtual bool Start() const override { return false; }
+    virtual bool MenuUp() const override { return false; }
+    virtual bool MenuDown() const override { return false; }
+    virtual bool MenuSelect() const override { return false; }
+    virtual bool MenuCancel() const override { return false; }
 
     void SetLeft(bool s = true)    { mLeft    = s; }
     void SetRight(bool s = true)   { mRight   = s; }

@@ -12,7 +12,7 @@ public:
   CDefineButtonMenu(const std::string &title, const std::string &type,
 		    int button);
 
-  void        DrawIcon(CCanvas &canvas, int x, int y, bool highlight);
+  void DrawIcon(CCanvas &canvas, int x, int y, bool highlight) override;
   int         GetButton() const { return mButton; }
   std::string GetButtonName() const;
   std::string GetType() const { return mType; }

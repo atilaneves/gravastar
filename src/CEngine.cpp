@@ -11,16 +11,11 @@
 #include "CSpriteObjs.hpp"
 #include <math.h>
 
-
-CEngine::CEngine(const CShipBluePrint &bluePrint, CLevel &level, CShip &ship):
-    mOn(false),
-    mThrust(bluePrint.mThrust), mMaxVel(bluePrint.mMaxVel), mExaust(0),
-    mLevel(level), mShip(ship),
-    mExaustSprites(bluePrint.GetExaustSprites()),
-    mSound(bluePrint.mSounds.mExaustSound) {
-
-}
-
+CEngine::CEngine(const CShipBluePrint &bluePrint, CLevel &level, CShip &ship)
+    : mOn(false), mThrust(bluePrint.mThrust), mMaxVel(bluePrint.mMaxVel),
+      mExaust(nullptr), mLevel(level), mShip(ship),
+      mExaustSprites(bluePrint.GetExaustSprites()),
+      mSound(bluePrint.mSounds.mExaustSound) {}
 
 void CEngine::ApplyInput(const CPilotInput &controls) {
     mOn = controls.Thrust();
@@ -49,7 +44,7 @@ void CEngine::ExaustOn() {
 
 void CEngine::ExaustOff() {
     if(CSpriteObjs::HasFlicker(mExaust)) mExaust->Die();
-    mExaust = 0;
+    mExaust = nullptr;
     mSound.Stop();
 }
 

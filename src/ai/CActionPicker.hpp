@@ -30,7 +30,7 @@ private:
 
   CPilotBot& mPilot;
   bool mWasRecharging;
-  std::auto_ptr<CSeekAndDestroy> mSeekAndDestroy;
+  std::unique_ptr<CSeekAndDestroy> mSeekAndDestroy;
   CFlee mFlee;
   CWait mWait;
   CSeekPowerup mSeekPowerup;

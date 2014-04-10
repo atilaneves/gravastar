@@ -13,12 +13,10 @@ public:
 
  CSeekAndDestroy(CPilotBot &pilot);
 
-  virtual void Think();
-
+ virtual void Think() override;
 
 protected:
-
-  virtual void SetShootControl(CPilotInputBot &input);
+  virtual void SetShootControl(CPilotInputBot &input) override;
           bool IsTooHot();
 
 

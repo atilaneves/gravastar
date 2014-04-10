@@ -13,10 +13,7 @@ public:
 
 
 private:
-
- virtual void Think();
-
-
+  virtual void Think() override;
 };
 
 

@@ -19,7 +19,7 @@
 
 
 CCanvas* createCanvas(const CDataFile& dataFile, int index) {
-    CCanvas *canvas = new CCanvas(dataFile.GetData(index));
+  auto canvas = new CCanvas(dataFile.GetData(index));
     for(int y = 0; y < canvas->GetHeight(); ++y)
         for(int x = 0; x < canvas->GetWidth(); ++x)
             if(canvas->GetPixel(x, y) == CColour::GetBlack())
@@ -55,10 +55,10 @@ void CShipMenuInfo::AddSprite(const std::string& name, CCanvas *canvas) {
 
 
 CShipMenuInfo::~CShipMenuInfo() {
-    for(spritePlace_t i = mSprites.begin(); i != mSprites.end(); ++i)
-        delete (*i).second;
-    for(statPlace_t i = mStatSprites.begin(); i != mStatSprites.end(); ++i)
-        delete (*i).second;
+  for (auto &elem : mSprites)
+    delete (elem).second;
+  for (auto &elem : mStatSprites)
+    delete (elem).second;
 }
 
 

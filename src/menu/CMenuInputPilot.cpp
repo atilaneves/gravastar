@@ -13,8 +13,8 @@ CMenuInputPilot::CMenuInputPilot(int index, const CClientOptions& options):
 
 CMenuInputPilot::~CMenuInputPilot() {
     //turn on the bot inputs when we die
-    for(unsigned int i = 0; i < mBots.size(); ++i)
-        mBots[i]->SetActive();
+  for (auto &elem : mBots)
+    elem->SetActive();
 }
 
 

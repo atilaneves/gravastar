@@ -18,9 +18,9 @@ public:
     CShipStatSprite(const CShipStatSprite& sprite);
     virtual ~CShipStatSprite() { }
 
-    virtual void Draw(CCanvas& canvas, int x, int y) const;
-    virtual int  GetWidth()  const { return mSprite->GetWidth(); }
-    virtual int  GetHeight() const { return mSprite->GetHeight(); }
+    virtual void Draw(CCanvas &canvas, int x, int y) const override;
+    virtual int GetWidth() const override { return mSprite->GetWidth(); }
+    virtual int GetHeight() const override { return mSprite->GetHeight(); }
           size_t GetHash() const { return mSprite->GetHash(); }
 
 
@@ -28,7 +28,7 @@ private:
 
     float        mScale;
     const CTeam& mTeam;
-    std::auto_ptr<CGravSprite> mSprite;
+    std::unique_ptr<CGravSprite> mSprite;
 };
 
 #endif

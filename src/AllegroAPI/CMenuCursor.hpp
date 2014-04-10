@@ -15,8 +15,7 @@ class CSound;
 class CMenuCursor {
 
 public:
-
-  CMenuCursor(CMenu &mMenu, const CSprite *mSprite = 0);
+  CMenuCursor(CMenu &mMenu, const CSprite *mSprite = nullptr);
   virtual ~CMenuCursor();
 
           void   AdoptInput(CMenuInput *input) { mInput.reset(input); }
@@ -37,7 +36,7 @@ protected:
   CIntWrap mRow, mCol; 
   CMenu   &mMenu;
   const CSprite *mSprite;
-  std::auto_ptr<CMenuInput> mInput;
+  std::unique_ptr<CMenuInput> mInput;
 
   static int sNbCursors;
   static CSound* sSelectSound;

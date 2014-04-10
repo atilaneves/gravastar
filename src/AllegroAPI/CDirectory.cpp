@@ -5,7 +5,7 @@
 
 
 CDirectory::CDirectory(const std::string& dirName) {
-  Constructor(dirName, NULL);
+  Constructor(dirName, nullptr);
 }
 
 
@@ -22,19 +22,20 @@ void CDirectory::Constructor(const std::string& dirName, const std::string *exte
  std::string devDataDirName = DEV_DATAFILE_DIR"/" + dirName;
 
  dir = opendir(dirName.c_str());
- if(dir == NULL) {
+ if (dir == nullptr) {
    dir = opendir(dataDirName.c_str());
-   if(dir == NULL) 
+   if (dir == nullptr)
      dir = opendir(devDataDirName.c_str());
  }
 
- if(dir == NULL)
+ if (dir == nullptr)
    perror("Can't open directory");
  else {
-   while ((ent = readdir(dir)) != NULL)
-       if(ent->d_name[0] != '.' && //nth that starts with "."
-	  (extension == NULL || strstr(ent->d_name, extension->c_str()) != NULL))
-	 mEntries.push_back(std::string(ent->d_name));
+   while ((ent = readdir(dir)) != nullptr)
+     if (ent->d_name[0] != '.' && // nth that starts with "."
+         (extension == nullptr ||
+          strstr(ent->d_name, extension->c_str()) != nullptr))
+         mEntries.push_back(std::string(ent->d_name));
  }
 
  FillNoExt();

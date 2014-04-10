@@ -11,7 +11,7 @@ public:
 
  CInvulnerable(const CTeam &team, CShip& ship, CLevel &level);
 
-  virtual void Affect()  { }
+ virtual void Affect() override {}
   static  int  GetID() { return sID; }
   
 

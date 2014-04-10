@@ -14,9 +14,8 @@ public:
   CFontTitle(int fontIndex, int colour, const std::string &title);
   virtual ~CFontTitle() { }
 
-  virtual void Draw(CCanvas &canvas);
-  virtual void NewCanvas(int width, int height) { }
-
+  virtual void Draw(CCanvas &canvas) override;
+  virtual void NewCanvas(int width, int height) override {}
 
 private:
 

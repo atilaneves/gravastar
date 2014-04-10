@@ -14,10 +14,7 @@ public:
 
 
 private:
-
-
- virtual void AffectShip(CShip &ship);
-
+  virtual void AffectShip(CShip &ship) override;
 };
 
 #endif

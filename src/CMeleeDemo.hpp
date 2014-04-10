@@ -14,9 +14,8 @@ public:
 
 
 private:
-
-  virtual int  GetWinner();
-  virtual bool IsGameOver();
+  virtual int GetWinner() override;
+  virtual bool IsGameOver() override;
   CGravOptions RandomOptions(CClientOptions clientOptions) const;
 
 };

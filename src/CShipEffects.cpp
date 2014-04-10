@@ -13,34 +13,35 @@ CShipEffects::CShipEffects(const CTeam &team, CShip& ship, CLevel &level) {
 
 
 CShipEffects::~CShipEffects() {
-    for(unsigned int i = 0; i < mEffects.size(); i++)
-        delete mEffects[i];
+  for (auto &elem : mEffects)
+    delete elem;
 }
 
 
-void CShipEffects::Reset() { 
-    for(unsigned int i=0; i<mEffects.size(); i++)
-        mEffects[i]->Reset();
+void CShipEffects::Reset() {
+  for (auto &elem : mEffects)
+    elem->Reset();
 }
 
 
 void CShipEffects::Update() {
     bool unpause = mPauseCounter.JustFinished();
-    for(unsigned int i=0; i<mEffects.size(); i++) {
-        mEffects[i]->Update();
-        if(unpause) mEffects[i]->Unpause();
+    for (auto &elem : mEffects) {
+      elem->Update();
+        if(unpause)
+          elem->Unpause();
     }
 }
 
 
 void CShipEffects::Pause(float t) {
     mPauseCounter.Start(t);
-    for(unsigned int i=0; i<mEffects.size(); i++)
-        mEffects[i]->Pause();
+    for (auto &elem : mEffects)
+      elem->Pause();
 }
 
 
 void CShipEffects::Unpause() {
-    for(unsigned int i=0; i<mEffects.size(); i++)
-        mEffects[i]->Unpause();
+  for (auto &elem : mEffects)
+    elem->Unpause();
 }

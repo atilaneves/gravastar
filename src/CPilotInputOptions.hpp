@@ -3,6 +3,7 @@
 
 
 #include <string>
+#include <utility>
 class CRedefineMenu;
 class CCycleStringEnter;
 
@@ -10,12 +11,11 @@ class CCycleStringEnter;
 class CPilotInputOptions {
 
 public:
-
-  CPilotInputOptions(const std::string& type, int left, int right, int thrust,
-                     int weapon, int special, int super, int start,
-                     int index):
-    mType(type), mLeft(left), mRight(right), mThrust(thrust), mWeapon(weapon),
-    mSpecial(special), mSuper(super), mStart(start), mIndex(index) { }
+  CPilotInputOptions(std::string type, int left, int right, int thrust,
+                     int weapon, int special, int super, int start, int index)
+      : mType(std::move(type)), mLeft(left), mRight(right), mThrust(thrust),
+        mWeapon(weapon), mSpecial(special), mSuper(super), mStart(start),
+        mIndex(index) {}
   CPilotInputOptions(CCycleStringEnter &typeMenu, CRedefineMenu &menu,
                      int index);
 

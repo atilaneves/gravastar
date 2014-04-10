@@ -15,13 +15,12 @@ public:
 
   void SetActive() { mActive = true; }
 
-  virtual bool Up();     
-  virtual bool Down();   
-  virtual bool Left();   
-  virtual bool Right();  
-  virtual bool Select(); 
-  virtual bool Cancel(); 
-
+  virtual bool Up() override;
+  virtual bool Down() override;
+  virtual bool Left() override;
+  virtual bool Right() override;
+  virtual bool Select() override;
+  virtual bool Cancel() override;
 
 private:
 

@@ -11,19 +11,16 @@ public:
 
   CVulcanSeek(CPilotBot &pilot);
 
-  virtual float GetWeaponAngle() const;
-  virtual bool  WantsToShoot() { return mIsClustering; }
-
+  virtual float GetWeaponAngle() const override;
+  virtual bool WantsToShoot() override { return mIsClustering; }
 
 private:
 
   bool mIsBombing;
   bool mIsClustering;
 
-  virtual void SetShootControl(CPilotInputBot &input);
-  virtual void Think();
-
-
+  virtual void SetShootControl(CPilotInputBot &input) override;
+  virtual void Think() override;
 };
 
 

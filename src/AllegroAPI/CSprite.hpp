@@ -14,9 +14,9 @@ public:
     virtual ~CSprite();
 
     static  BITMAP* CreateBitmap(void *data, float angle, float scale);
-    virtual void    Draw (CCanvas &canvas, int x, int y) const;
-            int     GetHeight() const { return mData->h; }
-            int     GetWidth()  const { return mData->w; }
+    virtual void Draw(CCanvas &canvas, int x, int y) const override;
+    int GetHeight() const override { return mData->h; }
+    int GetWidth() const override { return mData->w; }
 
 private:
 

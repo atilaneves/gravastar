@@ -46,10 +46,9 @@ void CSuperBeam::Move(float dt) {
 
 CLevelSprite CSuperBeam::Draw() {
     std::vector<CScreenPos> positions = GetPositions();
-    for(unsigned int i = 0; i < positions.size(); i++)
-        GetSprite().Draw(mLevel.GetCanvas(),
-                         positions[i].GetX() - GetWidth() / 2,
-                         positions[i].GetY() - GetWidth() / 2);
+    for (auto &position : positions)
+      GetSprite().Draw(mLevel.GetCanvas(), position.GetX() - GetWidth() / 2,
+                       position.GetY() - GetWidth() / 2);
     return {};
 }
 
@@ -57,10 +56,9 @@ CLevelSprite CSuperBeam::Draw() {
 
 void CSuperBeam::Erase() {
     std::vector<CScreenPos> positions = GetPositions();
-    for(unsigned int i = 0; i < positions.size(); i++)
-        GetSprite().Erase(mLevel.GetCanvas(),
-                          positions[i].GetX() - GetWidth() / 2,
-                          positions[i].GetY() - GetWidth() / 2);
+    for (auto &position : positions)
+      GetSprite().Erase(mLevel.GetCanvas(), position.GetX() - GetWidth() / 2,
+                        position.GetY() - GetWidth() / 2);
 }
 
 

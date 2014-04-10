@@ -14,9 +14,8 @@ public:
  virtual ~CMenuIconSprite() { }
  
  virtual void Draw(CCanvas &canvas, int x, int y, bool highlight = false) const override;
- virtual int  GetHeight() const;
- virtual int  GetWidth()  const;
-
+ virtual int GetHeight() const override;
+ virtual int GetWidth() const override;
 
 protected:
 

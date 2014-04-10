@@ -11,11 +11,10 @@ public:
 
   CAurora(const CShipBluePrint& bluePrint, CPilot& pilot, CLevel &level);
 
-  virtual void LoseHull(float amount, CPilot &pilot);
-  virtual void UseSpecial(float dt);
-  virtual void UseSuper(float dt, bool use = true);
-  virtual void UseWeapon(float dt);
-
+  virtual void LoseHull(float amount, CPilot &pilot) override;
+  virtual void UseSpecial(float dt) override;
+  virtual void UseSuper(float dt, bool use = true) override;
+  virtual void UseWeapon(float dt) override;
 
 private:
 

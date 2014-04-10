@@ -33,9 +33,8 @@ private:
     COptionsMenu*            mOptionsMenu;
     CFont                    mAdFont;
 
-    virtual void AtExit();
-    virtual void BeforeMenu();
-
+    virtual void AtExit() override;
+    virtual void BeforeMenu() override;
 };
 
 

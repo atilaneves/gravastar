@@ -18,14 +18,17 @@ bool CMeleeSurvival::IsGameOver() {
   const int kMaxNbTeams = 4;
   std::string tNames[kMaxNbTeams] = {"Blue", "Red", "Green", "Yellow"};
   std::map<std::string, int> teams;
-  for(int t = 0; t < kMaxNbTeams; t++) teams[tNames[t]] = 0;
+  for (auto &tName : tNames)
+    teams[tName] = 0;
   auto pilots = GetActivePilots();
-  for(unsigned int p = 0; p < pilots.size(); p++) {
-    std::string name = pilots[p]->GetTeam().GetName();
+  for (auto &pilot : pilots) {
+    std::string name = pilot->GetTeam().GetName();
     teams[name] = teams[name] + 1;
   }
   int nbTeams = 0;
-  for(int t = 0; t < kMaxNbTeams; t++) if(teams[tNames[t]]) nbTeams++;
+  for (auto &tName : tNames)
+    if (teams[tName])
+      nbTeams++;
 
   return nbTeams == 1; //only one team left, game over
 }

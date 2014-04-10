@@ -19,17 +19,16 @@ public:
                     std::vector<std::string>& shipTypes);
     virtual ~CShipMenuCursor() { }
 
-    virtual void DrawSprite(CCanvas &canvas);
+    virtual void DrawSprite(CCanvas &canvas) override;
     int GetIndex() const { return mIndex; }
-    virtual void OnSelect();
-
+    virtual void OnSelect() override;
 
 private:
 
     int mIndex;
     const CVersusMenu &mVersus;
     std::vector<std::string>& mShipTypes;
-    std::auto_ptr<CGravSprite> mGravSprite;
+    std::unique_ptr<CGravSprite> mGravSprite;
     CShipMenuInfo mInfo;
 
 };

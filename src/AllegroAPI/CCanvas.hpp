@@ -19,10 +19,7 @@ public:
 
   
 private:
-
-  CCanvas():CBitmap(0) { }
-  
-  
+  CCanvas() : CBitmap(nullptr) {}
 };
 
 #endif

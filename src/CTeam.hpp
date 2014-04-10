@@ -8,7 +8,7 @@
 #include <allegro.h>
 #include <string>
 #include <vector>
-
+#include <utility>
 
 class CTeam {
 
@@ -38,8 +38,8 @@ private:
   const float mStart, mEnd;
   std::vector<int> mColours;
 
-  CTeam(const std::string &name, float start, float end):
-    mName(name),mStart(start), mEnd(end) { }
+  CTeam(std::string name, float start, float end)
+      : mName(std::move(name)), mStart(start), mEnd(end) {}
 
   static int   GetBlueIndex(int colour);
          void  LoadMyColours();

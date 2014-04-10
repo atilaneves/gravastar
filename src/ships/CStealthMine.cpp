@@ -7,9 +7,7 @@
 #include "CPilot.hpp"
 
 int CStealthMine::sNbStealths = 0;
-CGravSprite* CStealthMine::sInvisible = 0;
-
-
+CGravSprite *CStealthMine::sInvisible = nullptr;
 
 CStealthMine::CStealthMine(const CProjBluePrint &bluePrint, CShip& ship,
 			   const CVector2& pos, const CVector2& vel,

@@ -22,7 +22,7 @@ CSoundMP3::~CSoundMP3() {
   Stop();
   almp3_destroy_mp3(mMP3);
   delete mFile;
-  mp3Place_t where = std::find(sMP3s.begin(), sMP3s.end(), this);
+  auto where = std::find(sMP3s.begin(), sMP3s.end(), this);
   if(where != sMP3s.end()) sMP3s.erase(where);
 }
 
@@ -57,7 +57,7 @@ void CSoundMP3::Adjust(bool loop) {
 
 
 void CSoundMP3::SetMasterVolume(float v) {
-  if(v >= 0 && v <= 1) sVolume = v; 
-  for(mp3Place_t i = sMP3s.begin(); i != sMP3s.end(); ++i)
-    (*i)->Adjust();
+  if(v >= 0 && v <= 1) sVolume = v;
+  for (auto &sMP3 : sMP3s)
+    (sMP3)->Adjust();
 }

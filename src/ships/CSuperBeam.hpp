@@ -9,9 +9,8 @@ class CPulseLaser;
 class CSuperBeam: public CWeaponFollow {
 
  public:
-
-  CSuperBeam(const CSpriteVector &sprites, CLevel &level, CShip &ship,
-             CPulseLaser *pulseLaser = 0);
+   CSuperBeam(const CSpriteVector &sprites, CLevel &level, CShip &ship,
+              CPulseLaser *pulseLaser = nullptr);
 
   virtual CLevelSprite Draw() override;
   virtual void Erase() override;

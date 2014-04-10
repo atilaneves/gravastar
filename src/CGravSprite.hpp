@@ -28,12 +28,12 @@ public:
     positions_t      Collided(const CCanvas &canvas, const CVector2 &pos) const;
     bool             Collided(const CCanvas& canvas, const CGravSprite& sprite,
                               const CVector2& pos1, const CVector2& pos2) const;
-    virtual void     Draw (CCanvas &canvas, int x, int y) const;
-    virtual void     Erase(CCanvas &canvas, int x, int y) const;
+    virtual void Draw(CCanvas &canvas, int x, int y) const override;
+    virtual void Erase(CCanvas &canvas, int x, int y) const override;
             size_t   GetHash() const { return mSpriteIndex; }
-             int     GetHeight() const;
+            int GetHeight() const override;
     const CSprite*   GetSprite() const { return mSprite.get(); }
-             int     GetWidth()  const;
+    int GetWidth() const override;
              bool    InSprite(int x, int y) const { return mCollision.InSprite(x, y); }
 
 private:

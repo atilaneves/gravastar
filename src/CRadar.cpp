@@ -31,10 +31,11 @@ void CRadar::Draw(CBitmap &bmp, int x, int y, const DisplayPilots &pilots,
     CRectFill r(mCanvas, x0, y0, x0 + blipWidth - 1,y0 + blipWidth - 1,col); //us
     CVector2 centre(centrePos.GetX(), centrePos.GetY());
 
-    for(unsigned int p = 0; p < pilots.size(); p++) {
-        if(!pilots[p].IsAlive()) continue;
-        col = pilots[p].GetTeam().GetMainColour();
-        CVector2 where = CalcRadiusAngle(pilots[p], centre);
+    for (auto &pilot : pilots) {
+      if (!pilot.IsAlive())
+        continue;
+      col = pilot.GetTeam().GetMainColour();
+      CVector2 where = CalcRadiusAngle(pilot, centre);
         where += CVector2(width/2 - blipWidth/2, height/2 - blipWidth/2);
         CScreenPos corner1(int(where.GetX()), int(where.GetY()));
         CScreenPos corner2 = corner1 + CScreenPos(blipWidth-1, blipWidth-1);

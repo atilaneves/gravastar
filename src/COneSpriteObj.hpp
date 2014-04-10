@@ -13,8 +13,7 @@ public:
 
   COneSpriteObj(CLevel &level, const CVector2 &pos, CGravSprite *sprite);
 
-  virtual const CGravSprite& GetSprite() const;
-
+  virtual const CGravSprite &GetSprite() const override;
 
 private:
 

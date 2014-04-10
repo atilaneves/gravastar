@@ -22,7 +22,7 @@ public:
 		const CPilotInputOptions& options);
   virtual ~CRedefineMenu() { }
 
-  virtual void Run(CRootMenu &rootMenu);
+  virtual void Run(CRootMenu &rootMenu) override;
 
   CDefineButtonMenu& GetButton(const std::string& s)  {
     return *mButtons[s]; }

@@ -36,9 +36,8 @@ private:
     std::vector<std::unique_ptr<CLevelMenuSprite>> mSprites;
 
     const CLevelMenuSprite& GetSprite() const;
-    virtual int GetSubMenuX(int column) const;
-    virtual int GetSubMenuY(int row) const;
-
+    virtual int GetSubMenuX(int column) const override;
+    virtual int GetSubMenuY(int row) const override;
 };
 
 

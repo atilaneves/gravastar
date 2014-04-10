@@ -44,7 +44,7 @@ CSearchQueue<T>::CSearchQueue(T *startState):
   for(int i = 0; i < T::GetMaxNbStates(); i++)
     mOpenArray[i] = mClosedArray[i] = 0; //just to make sure
 
-  CSearchNode<T> *startNode = new CSearchNode<T>(startState);
+  auto startNode = new CSearchNode<T>(startState);
   mOpenNodes.reserve(200);
   mOpenNodes.push_back(startNode);
   mOpenArray[startNode->GetIndex()] = startNode;

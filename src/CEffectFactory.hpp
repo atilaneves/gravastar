@@ -5,6 +5,8 @@
 #include "CIndexFactory.hpp"
 class CShipEffect;
 class CTeam;
+class CShip;
+class CLevel;
 
 
 typedef CShipEffect* (*createEffect_t)(const CTeam&, CShip&, CLevel&);

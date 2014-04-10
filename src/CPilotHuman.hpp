@@ -16,9 +16,7 @@ private:
 
   bool mReleasedStart;
 
-  virtual void CheckControls(CClientSocket* clientSocket);
-
-
+  virtual void CheckControls(CClientSocket *clientSocket) override;
 };
 
 

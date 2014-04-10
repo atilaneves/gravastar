@@ -4,14 +4,10 @@
 #include "CSuper.hpp"
 #include "Cereal.hpp"
 
-
-CPilotStats::CPilotStats(CWeaponStats weapon, CLivesStats lives, CHullStats hull):
-    mWeapon(weapon),
-    mLives(lives),
-    mHull(hull) {
-
-}
-
+CPilotStats::CPilotStats(CWeaponStats weapon, CLivesStats lives,
+                         CHullStats hull)
+    : mWeapon(std::move(weapon)), mLives(std::move(lives)),
+      mHull(std::move(hull)) {}
 
 void CPilotStats::Draw(CCanvas& canvas) const {
     canvas.Clear(canvas.GetMask()); //we don't want garbage

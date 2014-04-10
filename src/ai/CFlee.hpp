@@ -12,8 +12,7 @@ public:
 
  CFlee(CPilotBot &pilot);
 
- virtual void Think();
-
+ virtual void Think() override;
 
 private:
 

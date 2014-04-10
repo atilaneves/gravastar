@@ -31,8 +31,8 @@ private:
   std::string mTitle;
   std::string mWidthString;
   std::string mHeightString;
-  std::auto_ptr<CSprite> mSprite;
-  
+  std::unique_ptr<CSprite> mSprite;
+
   std::string GetDim(const std::string& name, int dim);
   std::string GetHeightDim(int h)  { return GetDim("Height", h); }
   int         GetStretchHeight(CCanvas &canvas) const;

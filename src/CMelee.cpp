@@ -38,7 +38,8 @@ CMelee::CMelee(const CGravOptions &options,
 
 CMelee::~CMelee() {
     mSong.Stop();
-    for(unsigned int p = 0; p < mPilots.size(); p++) mPilots[p]->GameOver();
+    for (auto &elem : mPilots)
+      elem->GameOver();
     CSpriteObjs::DeleteAll();
     CShips::RemoveAll();
     CProjectiles::RemoveAll();

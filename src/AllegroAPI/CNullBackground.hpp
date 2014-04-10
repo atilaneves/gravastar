@@ -12,9 +12,8 @@ public:
   CNullBackground() { }
   virtual ~CNullBackground() { }
 
-  virtual void Draw(CCanvas &canvas) { }
-  virtual void NewCanvas(int width, int height) { }
-
+  virtual void Draw(CCanvas &canvas) override {}
+  virtual void NewCanvas(int width, int height) override {}
 
 private:
 

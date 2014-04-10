@@ -14,12 +14,9 @@ public:
 
 
 protected:
-
-  virtual void Left()  { }
-  virtual void Right() { }
-  virtual  void Run(CRootMenu &rootMenu) { LeafAction(1); }
-
-
+  virtual void Left() override {}
+  virtual void Right() override {}
+  virtual void Run(CRootMenu &rootMenu) override { LeafAction(1); }
 };
 
 

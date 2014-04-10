@@ -13,11 +13,11 @@ public:
   CXbow(const CShipBluePrint& bluePrint, CPilot& pilot, CLevel &level);
 
           bool     CanSpecial() { return GetWeapons().GetSpecialGauge() > 0.2; }
-  virtual void     Hit(CProjectile& proj, CScreenPos pos, float dt);
-  virtual void 	   UseSpecial(float dt);
-  virtual void 	   UseSuper(float dt, bool use = true);
-  virtual void 	   UseWeapon(float dt);
-
+          virtual void Hit(CProjectile &proj, CScreenPos pos,
+                           float dt) override;
+          virtual void UseSpecial(float dt) override;
+          virtual void UseSuper(float dt, bool use = true) override;
+          virtual void UseWeapon(float dt) override;
 
 private:
 

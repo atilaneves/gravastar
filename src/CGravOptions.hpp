@@ -5,16 +5,16 @@
 #include "CMeleeOptions.hpp"
 #include "CClientOptions.hpp"
 #include <vector>
-
+#include <utility>
 
 class CGravOptions {
 
 public:
 
     CGravOptions() { }
-    CGravOptions(const CMeleeOptions &meleeOptions,
-                 const CClientOptions &clientOptions):
-        mMeleeOptions(meleeOptions), mClientOptions(clientOptions) { }
+    CGravOptions(CMeleeOptions meleeOptions, CClientOptions clientOptions)
+        : mMeleeOptions(std::move(meleeOptions)),
+          mClientOptions(std::move(clientOptions)) {}
 
     const CClientOptions& GetClientOptions() const { return mClientOptions; }
     const CMeleeOptions&  GetMeleeOptions()  const { return mMeleeOptions;  }

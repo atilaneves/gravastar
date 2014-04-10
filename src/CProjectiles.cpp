@@ -17,8 +17,7 @@ projPlace_t CProjectiles::AddProjectile(CProjectile *projectile) {
 
 
 void CProjectiles::RemoveProjectile(CProjectile *projectile) {
-  projPlace_t where = find(sProjectiles.begin(), sProjectiles.end(),
-			   projectile);
+  auto where = find(sProjectiles.begin(), sProjectiles.end(), projectile);
   if(where != sProjectiles.end()) sProjectiles.erase(where);
 }
 
@@ -30,9 +29,9 @@ void CProjectiles::RemoveAll() {
 
 void CProjectiles::DamageAll(const CVector2& collision,
 			     float damage) {
-  for(projPlace_t p = sProjectiles.begin(); p != sProjectiles.end(); ++p) {
-    CVector2 direction = (*p)->GetPos() - collision;
-    (*p)->LoseHull(damage * CShips::GetDistanceScaling(direction));
+  for (auto &sProjectile : sProjectiles) {
+    CVector2 direction = (sProjectile)->GetPos() - collision;
+    (sProjectile)->LoseHull(damage * CShips::GetDistanceScaling(direction));
   }
 }
 
@@ -40,9 +39,9 @@ void CProjectiles::DamageAll(const CVector2& collision,
 static const float kMaxDist = 150;
 bool CProjectiles::HasTowards(const CShip& ship) {
   //anybody heading towards this position?
-  for(projPlace_t p = sProjectiles.begin(); p != sProjectiles.end(); ++p) {
-    const CVector2 posDiff  = ship.GetPos() - (*p)->GetPos();
-    const CVector2& projVel = (*p)->GetVel();
+  for (auto &sProjectile : sProjectiles) {
+    const CVector2 posDiff = ship.GetPos() - (sProjectile)->GetPos();
+    const CVector2 &projVel = (sProjectile)->GetVel();
     const float maxAngle    = GetMaxAngle(ship.GetWidth(), posDiff.Radius());
     if(posDiff.Radius() < kMaxDist && posDiff.Angle(projVel) < maxAngle) 
       return true; //close enough and pointing towards us       

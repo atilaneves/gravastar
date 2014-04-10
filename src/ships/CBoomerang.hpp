@@ -11,15 +11,12 @@ public:
 
   CBoomerang(const CProjBluePrint &bluePrint, CShip& ship,
 	     const CVector2& pos, const CVector2& vel, bool shadow = false);
-  virtual ~CBoomerang() {} 
+  virtual ~CBoomerang() {}
 
-  virtual void Move(float dt);
-
+  virtual void Move(float dt) override;
 
 private:
-
-  virtual void HitShipEffect(CShip& ship, CScreenPos pos, float dt);
-
+  virtual void HitShipEffect(CShip &ship, CScreenPos pos, float dt) override;
 };
 
 #endif

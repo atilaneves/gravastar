@@ -18,11 +18,11 @@ public:
   CSoundMP3(const std::string &fileName);
   virtual ~CSoundMP3();
 
-  virtual void Adjust(bool loop = true);
+  virtual void Adjust(bool loop = true) override;
           void Play();
-  virtual void PlayLoop();
-  virtual bool Poll();
-  virtual void Stop();
+          virtual void PlayLoop() override;
+          virtual bool Poll() override;
+          virtual void Stop() override;
   static void SetMasterVolume(float v);
 
 

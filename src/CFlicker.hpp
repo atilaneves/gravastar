@@ -14,11 +14,14 @@ public:
 
     virtual CLevelSprite Draw() override { return mDraw ? mDecorated->Draw() : CLevelSprite{}; }
             void         Die() { mActive = false; }
-    virtual void         Erase() { mDecorated->Erase(); }
-    virtual const CGravSprite& GetSprite() const { return mDecorated->GetSprite(); }
-    virtual bool         IsActive()  { return mActive && mDecorated->IsActive(); }
-    virtual void         Update(float dt);
-
+            virtual void Erase() override { mDecorated->Erase(); }
+            virtual const CGravSprite &GetSprite() const override {
+              return mDecorated->GetSprite();
+            }
+            virtual bool IsActive() override {
+              return mActive && mDecorated->IsActive();
+            }
+            virtual void Update(float dt) override;
 
 private:
 

@@ -59,9 +59,9 @@ auto CMeleeOnServer::GetActivePilots() const -> Pilots {
     if(mWinner >= 0 && mPilots[mWinner]->IsAlive()) //winner gets display
         pilots.push_back(mPilots[mWinner]);
     else
-        for(unsigned p = 0; p < mPilots.size(); ++p)
-            if(mPilots[p]->IsAlive())
-                pilots.push_back(mPilots[p]);
+      for (auto &elem : mPilots)
+        if (elem->IsAlive())
+          pilots.push_back(elem);
     return pilots;
 }
 

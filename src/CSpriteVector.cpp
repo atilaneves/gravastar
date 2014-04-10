@@ -22,7 +22,8 @@ CSpriteVector::CSpriteVector(int nbCopies, const CGravSprite* sprite):
 
 CSpriteVector::~CSpriteVector() {
     if(!mDeleteSprites) return;
-    for(unsigned int s = 0; s < mSprites.size(); ++s) delete mSprites[s];
+    for (auto &elem : mSprites)
+      delete elem;
 }
 
 

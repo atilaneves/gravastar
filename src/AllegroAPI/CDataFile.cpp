@@ -49,7 +49,7 @@ bool CDataFile::FileExists(const std::string &filename) {
 
  file = fopen(filename.c_str(), "r");
 
- if(file==NULL)
+ if (file == nullptr)
     return false;
  else {
     fclose(file);

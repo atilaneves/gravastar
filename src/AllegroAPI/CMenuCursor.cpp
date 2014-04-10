@@ -5,9 +5,8 @@
 
 
 int CMenuCursor::sNbCursors = 0;
-CSound* CMenuCursor::sSelectSound = 0;
-CSound* CMenuCursor::sCancelSound = 0;
-
+CSound *CMenuCursor::sSelectSound = nullptr;
+CSound *CMenuCursor::sCancelSound = nullptr;
 
 CMenuCursor::CMenuCursor(CMenu &menu, const CSprite *sprite):
     mRow(0), mCol(0), mMenu(menu), mSprite(sprite),
@@ -23,8 +22,10 @@ CMenuCursor::CMenuCursor(CMenu &menu, const CSprite *sprite):
 CMenuCursor::~CMenuCursor() {
     sNbCursors--;
     if(!sNbCursors) {
-        delete sSelectSound; sSelectSound = 0;
-        delete sCancelSound; sCancelSound = 0;
+        delete sSelectSound;
+        sSelectSound = nullptr;
+        delete sCancelSound;
+        sCancelSound = nullptr;
     }
 }
 
@@ -56,7 +57,7 @@ CMenu* CMenuCursor::Update(CRootMenu &rootMenu) {
 
     if(mInput->Cancel()) {
         sCancelSound->PlayCentre();
-        return 0; //leaving menu
+        return nullptr; // leaving menu
     }
     else
         return &mMenu; //all ok

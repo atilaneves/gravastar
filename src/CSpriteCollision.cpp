@@ -12,11 +12,11 @@ positions_t CSpriteCollision::Collided(const CCanvas &canvas,
 				      int x, int y) const {
   indices_t indices = GetIndices(canvas, x, y);
   positions_t positions;
-  for(unsigned int i = 0; i < indices.size(); ++i) {
+  for (auto &indice : indices) {
     int size = (int)positions.size();
     const int kMinDim = 80;
     if(size && mWidth < kMinDim && mHeight < kMinDim) return positions;
-    int p = indices[i];
+    int p = indice;
     if(size && IsLessThanMinDiff(p, positions[size - 1])) continue;
     positions.push_back(CScreenPos(x + mPixels[p].x, y + mPixels[p].y));
   }
@@ -37,8 +37,8 @@ bool CSpriteCollision::Collided(const CCanvas &canvas,
 				const CSpriteCollision& collision,
 				int x1, int y1, int x2, int y2) const {
   indices_t indices = GetIndices(canvas, x1, y1);
-  for(unsigned int i = 0; i < indices.size(); ++i) {
-    int p = indices[i];
+  for (auto &indice : indices) {
+    int p = indice;
     if(collision.InSprite(x1 + mPixels[p].x -x2, y1 + mPixels[p].y - y2))
       return true;
   }
@@ -79,8 +79,8 @@ bool CSpriteCollision::OutOfBounds(const CCanvas &canvas,
 
 bool CSpriteCollision::InSprite(int x, int y) const {
 
- for(unsigned int p = 0; p < mPixels.size(); ++p)
-    if(mPixels[p].x == x && mPixels[p].y == y)
+  for (auto &elem : mPixels)
+    if (elem.x == x && elem.y == y)
        return true;
 
  return false; //nope, no pixel here

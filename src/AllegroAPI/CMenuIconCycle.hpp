@@ -16,10 +16,10 @@ public:
   
   CMenuIconCycle(const std::string &title, const CCycleLeaf &cycleMenu);
   virtual ~CMenuIconCycle() { }
-  
-  virtual int  GetHeight() const { return mTitle.GetHeight(); }
+
+  virtual int GetHeight() const override { return mTitle.GetHeight(); }
   const std::string& GetTitle() const { return mTitle.GetTitle(); }
-  virtual int  GetWidth()  const;
+  virtual int GetWidth() const override;
           void SetTitle(const std::string& t) { mTitle.SetTitle(t); }
 
   

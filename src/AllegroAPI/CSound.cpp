@@ -14,7 +14,7 @@ CSound::CSound(const std::string &name, float volume, float frequency):
 
  std::string fileName = CDataFile::GetFileName("Sounds/" + name + ".wav");
  mSample = load_sample(fileName.c_str());
- if(mSample == NULL)
+ if (mSample == nullptr)
     fprintf(stderr,"*** Error: Unable to open %s ***\n\n",fileName.c_str());
 
  if(mVolume > 1) mVolume=1;

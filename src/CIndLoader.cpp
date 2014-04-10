@@ -32,14 +32,14 @@ IndsPos_t CIndLoader::FindIndsPos(IndsBmp_t bmps) {
 
   IndsPos_t indsPos;
 
-  for(unsigned int i = 0; i < bmps.size(); ++i) {
+  for (auto &bmp : bmps) {
 
-    CCanvas ind(bmps[i]);
+    CCanvas ind(bmp);
     CScreenPos centre(ind.GetWidth()/2, ind.GetHeight()/2);
     Positions_t poss = CSpriteFinder::FindSprites(mCanvas, ind);
 
-    for(unsigned int j =0; j < poss.size(); j++)
-      indsPos.push_back(poss[j] + centre);
+    for (auto &pos : poss)
+      indsPos.push_back(pos + centre);
   }
 
   return indsPos;
@@ -76,10 +76,10 @@ void CIndLoader::SaveCoords() {
   
   if(fp) {
     fprintf(fp, "nbBases: %zu nbInds: %zu\n", mBasesPos.size(), mIndsPos.size());
-    for(unsigned int i = 0; i < mBasesPos.size(); i++)
-      fprintf(fp, "%d %d\n", mBasesPos[i].GetX(), mBasesPos[i].GetY());
-    for(unsigned int i = 0; i < mIndsPos.size(); i++)
-      fprintf(fp, "%d %d\n", mIndsPos[i].GetX(), mIndsPos[i].GetY());
+    for (auto &elem : mBasesPos)
+      fprintf(fp, "%d %d\n", elem.GetX(), elem.GetY());
+    for (auto &elem : mIndsPos)
+      fprintf(fp, "%d %d\n", elem.GetX(), elem.GetY());
     fclose(fp);
   }
   else

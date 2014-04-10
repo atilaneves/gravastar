@@ -40,11 +40,12 @@ int CMeleeFragTime::GetWinner() {
   int winTeam = -1;
   std::string tNames[] = {"Blue", "Red", "Green", "Yellow"};
   std::map<std::string, int> teams;
-  for(int t = 0; t < kMaxNbTeams; t++) teams[tNames[t]] = 0;
+  for (auto &tName : tNames)
+    teams[tName] = 0;
 
-  for(unsigned int p = 0; p < pilots.size(); p++) {
-    std::string name = pilots[p]->GetTeam().GetName();
-    teams[name] = teams[name] + pilots[p]->GetScore();
+  for (auto &pilot : pilots) {
+    std::string name = pilot->GetTeam().GetName();
+    teams[name] = teams[name] + pilot->GetScore();
   }
 
   //find winning team

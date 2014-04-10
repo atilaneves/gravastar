@@ -5,8 +5,7 @@
 
 bool     CResolution::sWindowed = true;
 bool     CResolution::sChangedWindowed = false;
-CCanvas* CResolution::sScreen = 0;
-
+CCanvas *CResolution::sScreen = nullptr;
 
 bool CResolution::SetMode(int width, int height) {
  //only change if we have to

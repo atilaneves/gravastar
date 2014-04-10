@@ -14,11 +14,10 @@ public:
   CRandomSong();
   virtual ~CRandomSong() { }
 
-  virtual void Adjust(bool loop = true) { mSong->Adjust(loop); }
-  virtual void PlayLoop() { mSong->PlayLoop(); }
-  virtual bool Poll() { return mSong->Poll(); }
-  virtual void Stop() { mSong->Stop(); }
-
+  virtual void Adjust(bool loop = true) override { mSong->Adjust(loop); }
+  virtual void PlayLoop() override { mSong->PlayLoop(); }
+  virtual bool Poll() override { return mSong->Poll(); }
+  virtual void Stop() override { mSong->Stop(); }
 
 private:
 

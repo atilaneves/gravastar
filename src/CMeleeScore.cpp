@@ -32,8 +32,8 @@ CMeleeScore::CMeleeScore(CCanvas &canvas, const std::string& meleeType,
 
 
 CMeleeScore::~CMeleeScore() {
-    for(soundPlace_t i = mSounds.begin(); i != mSounds.end(); ++i)
-        delete (*i).second;
+  for (auto &elem : mSounds)
+    delete (elem).second;
 }
 
 
@@ -48,8 +48,8 @@ void CMeleeScore::Draw(int winner, const std::string& title,
     const int colour = team.GetMainColour();
     DrawGeometry(x, y, colour);
 
-    for(unsigned int p = 0; p < scores.size(); p++)
-        scores[p].Draw(mFont, mCanvas, x, y);
+    for (auto &score : scores)
+      score.Draw(mFont, mCanvas, x, y);
 
     mFont.Print(mCanvas, x, y, colour, -1, title);
     mCanvas.Flip();

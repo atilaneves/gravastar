@@ -8,9 +8,7 @@
 #include "CInvulnerable.hpp"
 #include "CEMB.hpp"
 
-
-CPowerups* CActionPicker::sPowerups = 0;
-
+CPowerups *CActionPicker::sPowerups = nullptr;
 
 CActionPicker::CActionPicker(CPilotBot &pilot):
   mPilot(pilot), mWasRecharging(false), mFlee(pilot), mWait(pilot),

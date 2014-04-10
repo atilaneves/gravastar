@@ -22,9 +22,7 @@ private:
 
   CRedefineMenu& mRedefine;
 
-  virtual void Run(CRootMenu &rootMenu);
-
-
+  virtual void Run(CRootMenu &rootMenu) override;
 };
 
 

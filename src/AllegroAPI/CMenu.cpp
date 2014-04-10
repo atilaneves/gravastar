@@ -36,7 +36,8 @@ void CMenu::AddMenu(CMenuHolder&& menu, int col) {
     CMenuIcon *icon = menu->mIcon.get();
     if (icon->GetWidth()  > mMaxWidth)  mMaxWidth  = icon->GetWidth();
     if (icon->GetHeight() > mMaxHeight) mMaxHeight = icon->GetHeight();
-    for(unsigned int c = 0; c < mCursors.size(); ++c) mCursors[c]->SetRowsCols();
+    for (auto &elem : mCursors)
+      elem->SetRowsCols();
 }
 
 
@@ -64,8 +65,9 @@ bool CMenu::IsActive(CRootMenu &rootMenu) {
 
     bool active = true;
 
-    for(unsigned int c = 0; c < mCursors.size(); ++c)
-        if(!mCursors[c]->Update(rootMenu)) active = false;
+    for (auto &elem : mCursors)
+      if (!elem->Update(rootMenu))
+        active = false;
 
     return active;
 }
@@ -76,9 +78,9 @@ void CMenu::Draw(CCanvas &canvas) {
     for(unsigned int c = 0; c < mItems.size(); ++c)
         for(unsigned int r = 0; r < mItems[c].size(); ++r)
             mItems[c][r]->DrawIcon(canvas, GetSubMenuX(c), GetSubMenuY(r));
-  
-    for(unsigned int c = 0; c < mCursors.size(); ++c)
-        mCursors[c]->Draw(canvas);
+
+    for (auto &elem : mCursors)
+      elem->Draw(canvas);
 }
 
 

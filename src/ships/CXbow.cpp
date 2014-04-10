@@ -17,15 +17,8 @@ REG_FOLLOW_SHIP(gShipName, CXbow, gShotName, gFollowName,
 REG_WEAPON_PROJ(gShotName, CProjectile)
 REG_EXTRA_BLUEPRINT(gShipName, gSuperName)
 
-
-
-CXbow::CXbow(const CShipBluePrint& bluePrint,
-			     CPilot& pilot, CLevel &level):
-    CShip(bluePrint, pilot, level),
-    mDeflector(0) {
-
-}
-
+CXbow::CXbow(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level)
+    : CShip(bluePrint, pilot, level), mDeflector(nullptr) {}
 
 void CXbow::UseWeapon(float dt) {
   if(mWeapons.IsSpecialActive()) return;

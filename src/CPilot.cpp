@@ -10,16 +10,13 @@
 
 int CPilot::sIndex = 0;
 
-CPilot::CPilot(bool hasSplitScreen,
-               const CPilotOptions &options, const CShipYard &shipYard,
-               CMeleeScore &meleeScore):
-    mHasSplitScreen(hasSplitScreen),
-    mIndex(sIndex++),
-    mNbShips(options.GetNbShips() + 1), //gets dec'ed by 1 w NextShip
-    mNbFrags(0), mSuperGauge(0),
-    mShip(0),
-    mInput(CPilotInputFactory::CreateInput(options.GetInputOptions())),
-    mOptions(options), mShipYard(shipYard), mMeleeScore(meleeScore) {
+CPilot::CPilot(bool hasSplitScreen, const CPilotOptions &options,
+               const CShipYard &shipYard, CMeleeScore &meleeScore)
+    : mHasSplitScreen(hasSplitScreen), mIndex(sIndex++),
+      mNbShips(options.GetNbShips() + 1), // gets dec'ed by 1 w NextShip
+      mNbFrags(0), mSuperGauge(0), mShip(nullptr),
+      mInput(CPilotInputFactory::CreateInput(options.GetInputOptions())),
+      mOptions(options), mShipYard(shipYard), mMeleeScore(meleeScore) {
 
     NextShip();
     CPilots::AddPilot(this);

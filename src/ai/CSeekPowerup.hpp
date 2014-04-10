@@ -17,7 +17,7 @@ private:
 
   const CPowerups& mPowerups;
 
- virtual void   Think();
+  virtual void Think() override;
          int    GetBaseIndex();
          double GetNoseAngle();
 

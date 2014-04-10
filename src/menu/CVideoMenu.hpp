@@ -22,8 +22,7 @@ public:
           bool GetSmartSplit() const;
           int  GetWidth()      const;
           bool GetWindowed()   const;
-  virtual void Run(CRootMenu &rootMenu);
-
+          virtual void Run(CRootMenu &rootMenu) override;
 
 private:
 
@@ -32,9 +31,8 @@ private:
   CCycleString *mWindowed;
   CCycleString *mSmart;
   CCycleString *mResolution;
-  
-  virtual void Update(CRootMenu &rootMenu);
 
+  virtual void Update(CRootMenu &rootMenu) override;
 };
 
 #endif

@@ -26,8 +26,7 @@ public:
           int         GetLevelNb() const { return mLevelMenu.GetLevelNb(); }
           std::string GetShipType(int p, int s) const;
   const shipTypes_t&  GetShipTypes(int p) const { return mShipTypes[p]; }
-  virtual void        Run(CRootMenu &rootMenu);
-
+  virtual void Run(CRootMenu &rootMenu) override;
 
 private:
 
@@ -40,8 +39,8 @@ private:
 
   void Clear();
   void CreateCursors();
-  int  GetSubMenuX(int column) const;
-  int  GetSubMenuY(int row)    const;
+  int GetSubMenuX(int column) const override;
+  int GetSubMenuY(int row) const override;
   void RemoveDormantCursors();
   bool IsAllDone() const;
 

@@ -9,17 +9,12 @@
 #include "CTimeCounter.hpp"
 #include "CSpriteObjs.hpp"
 
-
-CShipAura::CShipAura(CLevel& level, CShip& ship,
-		     const CShipBluePrint& bluePrint):
-  mRepairing(false), mBaseHull(bluePrint.mBaseHull), 
-  mBaseSpecial(bluePrint.mBaseSpecial),
-  mLevel(level), mShip(ship),
-  mSprites(CNose::kNbNoses, &bluePrint.mAuraSprite),
-  mSound(bluePrint.mSounds.mRepairSound), mAura(0) {
-
-}
-
+CShipAura::CShipAura(CLevel &level, CShip &ship,
+                     const CShipBluePrint &bluePrint)
+    : mRepairing(false), mBaseHull(bluePrint.mBaseHull),
+      mBaseSpecial(bluePrint.mBaseSpecial), mLevel(level), mShip(ship),
+      mSprites(CNose::kNbNoses, &bluePrint.mAuraSprite),
+      mSound(bluePrint.mSounds.mRepairSound), mAura(nullptr) {}
 
 void CShipAura::Repair(float dt) { 
   if(mShip.GetHull() < mShip.GetMaxHull() ||
@@ -47,7 +42,7 @@ void CShipAura::Update() {
   else if(CSpriteObjs::HasFlicker(mAura) &&
 	  (!mRepairing || !mShip.IsAlive())) {
     mAura->Die();
-    mAura = 0;
+    mAura = nullptr;
   }
   
   mRepairing = false;

@@ -30,8 +30,7 @@ private:
     CSuperBeam*  mBeam;
     CTimeCounter mCounter;
 
-    virtual void HitShipEffect(CShip& ship, CScreenPos pos, float dt);
-
+    virtual void HitShipEffect(CShip &ship, CScreenPos pos, float dt) override;
 };
 
 #endif

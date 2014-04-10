@@ -11,16 +11,13 @@ public:
 
  CTempusSeek(CPilotBot &pilot);
 
-  virtual void Think();
-
+ virtual void Think() override;
 
 private:
 
   bool mDetonate;
 
- virtual void SetShootControl(CPilotInputBot &input);
-
-
+  virtual void SetShootControl(CPilotInputBot &input) override;
 };
 
 

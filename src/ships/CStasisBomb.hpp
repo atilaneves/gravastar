@@ -15,9 +15,7 @@ public:
 
 
 private:
-
-  virtual void AtDeath();
-
+  virtual void AtDeath() override;
 };
 
 #endif

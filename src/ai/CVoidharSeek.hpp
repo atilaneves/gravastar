@@ -13,10 +13,7 @@ public:
 
 
 private:
-
- virtual void SetShootControl(CPilotInputBot &input);
-
-
+  virtual void SetShootControl(CPilotInputBot &input) override;
 };
 
 

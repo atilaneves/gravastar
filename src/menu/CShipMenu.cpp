@@ -35,7 +35,8 @@ CShipMenu::~CShipMenu() {
 
 
 void CShipMenu::Clear() {
-    for(unsigned int i = 0; i < mCursors.size(); i++) delete mCursors[i];
+  for (auto &elem : mCursors)
+    delete elem;
     mCursors.clear();
     for(int i = 0; i < kMaxNbPilots; i++) mShipTypes[i].clear();
 }
@@ -66,7 +67,7 @@ void CShipMenu::CreateCursors() {
                 if(i == 0) firstMenuInputPilot = input;
             }
             else {
-                assert(firstMenuInputPilot != NULL);
+              assert(firstMenuInputPilot != nullptr);
                 mCursors[i]->AdoptInput(new CMenuInputBot(*firstMenuInputPilot));
             }
         }
@@ -91,21 +92,20 @@ void CShipMenu::Run(CRootMenu &rootMenu) {
 void CShipMenu::RemoveDormantCursors() {
     std::vector<CMenuCursor*> dormant;
 
-    for(unsigned int i = 0; i < mCursors.size(); i++) {
-        CShipMenuCursor *cursor = (CShipMenuCursor*)mCursors[i];
+    for (auto &elem : mCursors) {
+      CShipMenuCursor *cursor = (CShipMenuCursor *)elem;
         int index = cursor->GetIndex();
         if((int)mShipTypes[index].size() == mVersus.GetNbShips()) {
-            dormant.push_back(mCursors[i]);
-            mCursorsPos[index].SetX(mCursors[i]->GetCol());
-            mCursorsPos[index].SetY(mCursors[i]->GetRow());
+          dormant.push_back(elem);
+          mCursorsPos[index].SetX(elem->GetCol());
+          mCursorsPos[index].SetY(elem->GetRow());
         }
     }
 
-    for(unsigned int i = 0; i < dormant.size(); i++) {
-        cursorPlace_t where = find(mCursors.begin(), mCursors.end(),
-                                   dormant[i]);
+    for (auto &elem : dormant) {
+      auto where = find(mCursors.begin(), mCursors.end(), elem);
         mCursors.erase(where);
-        delete dormant[i];
+        delete elem;
     }
 }
 

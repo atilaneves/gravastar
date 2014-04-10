@@ -15,14 +15,9 @@ REG_PROJ_SHIP("Vulcan", CVulcan, gShotName, gMissName, CGravityProj,
 	      CProjSpecial)
 REG_EXTRA_BLUEPRINT("Vulcan", "clusterSpawn")
 
-
-CVulcan::CVulcan(const CShipBluePrint& bluePrint, CPilot& pilot,
-		 CLevel &level):
-    CShip(bluePrint, pilot, level),
-    mReleasedCluster(true), mReleasedSpawn(true), mCluster(0) {
-
-}
-
+CVulcan::CVulcan(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level)
+    : CShip(bluePrint, pilot, level), mReleasedCluster(true),
+      mReleasedSpawn(true), mCluster(nullptr) {}
 
 void CVulcan::UseWeapon(float dt) {
   const float dist = 0.6, velNorm = 375;
@@ -71,7 +66,7 @@ void CVulcan::LaunchSpawn() {
   }
   CSpriteObjs::RemoveObj(mCluster);
   delete mCluster;
-  mCluster = 0;
+  mCluster = nullptr;
   mReleasedCluster = true;
   mReleasedSpawn   = false;
 }
@@ -102,7 +97,8 @@ const CVector2& CVulcan::GetSpecialPos() const {
 
 
 bool CVulcan::IsSpecialActive() const {
-  CGravityProj* proj = mCluster && CSpriteObjs::HasObj(mCluster) ?
-    dynamic_cast<CGravityProj*>(mCluster) : 0;
+  CGravityProj *proj = mCluster && CSpriteObjs::HasObj(mCluster)
+                           ? dynamic_cast<CGravityProj *>(mCluster)
+                           : nullptr;
   return proj && fabs(proj->GetMaxDamage() - 10) < 1e-3;
 }

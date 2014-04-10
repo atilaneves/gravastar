@@ -57,7 +57,7 @@ const std::string CShipYard::GetID(const std::string &shipName,
 void CShipYard::InsertBluePrint(const std::string &shipName,
                                 const CTeam &team) {
 
-    auto* bluePrint = new CShipBluePrint(shipName, team, *this);
+  auto bluePrint = new CShipBluePrint(shipName, team, *this);
     const auto id = GetID(shipName, team); //use std::pair instead?
 
     bool success = mMap.insert(std::make_pair(id, bluePrint)).second;

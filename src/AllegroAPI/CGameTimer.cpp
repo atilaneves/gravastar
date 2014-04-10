@@ -3,8 +3,7 @@
 
 
 TIMER_INC()
-CGameTimer* CGameTimer::sGameTimer=0;
-
+CGameTimer *CGameTimer::sGameTimer = nullptr;
 
 CGameTimer::CGameTimer(int bps):
    CTimer(bps,update,&counter) {

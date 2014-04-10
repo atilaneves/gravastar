@@ -22,14 +22,14 @@ CLevel::CLevel(unsigned int levelNb):
   void*     baseBmp = dataFile.GetData(kBASE);
   CIndLoader indLoader(mCfgName, GetCanvas(), indBmps, baseBmp);
 
-  for(int i = 0; i < indLoader.GetNbBases(); ++i) { 
-    CGravSprite *sprite = new CGravSprite(baseBmp);
+  for(int i = 0; i < indLoader.GetNbBases(); ++i) {
+    auto sprite = new CGravSprite(baseBmp);
     mBases.push_back(new CBase(*this, indLoader.GetBasePos(i),
 			       sprite, mKlang));
   }
 
-  for(unsigned int i = 0; i < indBmps.size(); ++i) { 
-    CGravSprite *sprite = new CGravSprite(indBmps[i]);
+  for(unsigned int i = 0; i < indBmps.size(); ++i) {
+    auto sprite = new CGravSprite(indBmps[i]);
     mInds.push_back(new CIndestructible(*this, indLoader.GetIndPos(i), 
 					sprite, mKlang));
   }
@@ -57,7 +57,7 @@ CVector2 CLevel::GetFreePos(const CGravSprite &sprite) const {
    do {
      int vecIndex = rand() % indices.size();
      index = indices[vecIndex]; //random base
-     std::vector<int>::iterator where = indices.begin() + vecIndex; //location
+     auto where = indices.begin() + vecIndex; // location
      indices.erase(where); //not considering this one anymore
      pos = mBases[index]->GetFreePos(sprite);
    } while(pos.GetX() < 0 && indices.size() > 0); //til empty spot's found

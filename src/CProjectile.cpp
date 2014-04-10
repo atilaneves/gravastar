@@ -8,16 +8,14 @@
 #include "CInvulnerable.hpp"
 
 #include "CPilot.hpp"
-CProjectile::CProjectile(const CProjBluePrint &bluePrint, CShip& ship,
-			 const CVector2& pos, const CVector2& vel,
-			 bool shadow):
-  CExplosive(bluePrint.mExplosiveBluePrint, ship.GetLevel(),
-	     ship.GetPilot(), pos, vel,
-	     bluePrint.mMaxHull),
-  mMaxDamage(bluePrint.mMaxDamage), mDamage(mMaxDamage),
-  mNose(CNose::Angle2NoseIndex(vel.Theta())),
-  mShadowSprites(bluePrint.mShadowBluePrint.GetSprites()),
-  mHitObj(0) {
+CProjectile::CProjectile(const CProjBluePrint &bluePrint, CShip &ship,
+                         const CVector2 &pos, const CVector2 &vel, bool shadow)
+    : CExplosive(bluePrint.mExplosiveBluePrint, ship.GetLevel(),
+                 ship.GetPilot(), pos, vel, bluePrint.mMaxHull),
+      mMaxDamage(bluePrint.mMaxDamage), mDamage(mMaxDamage),
+      mNose(CNose::Angle2NoseIndex(vel.Theta())),
+      mShadowSprites(bluePrint.mShadowBluePrint.GetSprites()),
+      mHitObj(nullptr) {
 
   mMass = bluePrint.mMass;
   mShockWaveForce = bluePrint.mShockWaveForce;
@@ -38,7 +36,7 @@ void CProjectile::Update(float dt) {
 
 
 void CProjectile::CreateShadow() {
-  CSound *sound = 0;
+  CSound *sound = nullptr;
   const float frequency = 50;
   CVector2 offset = CVector2(0) * GetHeight() * -1.75;
   new CFlicker(frequency, mLevel,

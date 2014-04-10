@@ -6,7 +6,7 @@
 CBinaryFile::CBinaryFile(const std::string &fileName) {
 
   FILE *fp=fopen(fileName.c_str(), "rb");
-  if(fp==NULL) {
+  if (fp == nullptr) {
     fprintf(stderr, "\n*** Error: could not open %s ***\n\n",
 	    fileName.c_str());
     exit(1);

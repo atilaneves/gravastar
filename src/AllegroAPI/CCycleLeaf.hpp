@@ -35,9 +35,8 @@ private:
   std::string mTitle;
   CMenuIconCycle* mIconCycle;
 
-  virtual void Left()  { LeafAction(-1); }
-  virtual void Right() { LeafAction(1);  }
-
+  virtual void Left() override { LeafAction(-1); }
+  virtual void Right() override { LeafAction(1); }
 };
 
 
