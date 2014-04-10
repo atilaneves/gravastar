@@ -33,8 +33,6 @@ private:
                           std::deque<std::string> serverOptions,
                           const CClientOptions& vsClientOptions);
     void StopMeleeClient(int winner);
-    CGravOptions GetGravOptions(std::deque<std::string>& options,
-                                const CClientOptions& vsClientOptions) const;
     virtual void UdpReceived(const boost::system::error_code& error,
                              std::size_t numBytes, const Array& bytes) override;
 };

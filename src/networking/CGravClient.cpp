@@ -34,14 +34,12 @@ void CGravClient::Run(CSongPlayer& songPlayer, const CClientOptions& vsClientOpt
         const auto command = popFront(tokens);
 
         if(command == "Start") {
-            std::cout << "Starting the melee" << std::endl;
             //tokens gets modified, so no ref capture
             meleeThread = std::thread([&, tokens] {
                     StartMeleeClient(songPlayer, tokens, vsClientOptions);
             });
         } else if(command == "Stop")  {
             const auto winner = std::stoi(popFront(tokens));
-            std::cout << "Stopping the melee. Winner: " << winner << std::endl;
             StopMeleeClient(winner);
             meleeRunning = false;
             meleeThread.join();
@@ -55,41 +53,20 @@ void CGravClient::Run(CSongPlayer& songPlayer, const CClientOptions& vsClientOpt
     mTcpClient.Stop();
 }
 
-void CGravClient::StartMeleeClient(CSongPlayer& songPlayer,
-                                   std::deque<std::string> serverOptions,
-                                   const CClientOptions& vsClientOptions) {
-    songPlayer.StopSong();
-    CSound{"meleeStart"}.PlayCentre();
-
-    const unsigned pilotIndex = std::stoi(popFront(options));
-    mClientSocket.reset(new CClientSocket{pilotIndex, mUdpSender});
-
-    printCentre("Loading...");
-    mMelee.reset(new CMeleeClient{GetGravOptions(options, vsClientOptions),
-                                  *mClientSocket});
-    mMelee->Run();
-
-    songPlayer.PlaySong();
-}
-
-void CGravClient::StopMeleeClient(int winner) {
-    mMelee->Stop(winner);
-}
-
-CGravOptions CGravClient::GetGravOptions(std::deque<std::string>& options,
-                                         const CClientOptions& vsClientOptions) const {
-    const auto levelNb  = std::stoi(popFront(options));
-    const auto nbPilots = std::stoi(popFront(options));
-    const auto nbShips  = std::stoi(popFront(options));
+static CGravOptions getGravOptions(std::deque<std::string>& serverOptions,
+                                   const CClientOptions& vsClientOptions)  {
+    const auto levelNb  = std::stoi(popFront(serverOptions));
+    const auto nbPilots = std::stoi(popFront(serverOptions));
+    const auto nbShips  = std::stoi(popFront(serverOptions));
 
     std::vector<CPilotOptions> allPilotOpts;
     for(int i = 0; i < nbPilots; ++i) {
-        const auto name = popFront(options);
-        const auto type = popFront(options);
-        const auto& team = CTeam::FindByName(popFront(options));
+        const auto name = popFront(serverOptions);
+        const auto type = popFront(serverOptions);
+        const auto& team = CTeam::FindByName(popFront(serverOptions));
         std::vector<std::string> ships;
         for(int j = 0; j < nbShips; ++j) {
-            ships.push_back(popFront(options));
+            ships.push_back(popFront(serverOptions));
         }
 
         const CPilotInputOptions pilotInputOpts{"", 0, 0, 0, 0, 0, 0, 0, 0};
@@ -102,6 +79,27 @@ CGravOptions CGravClient::GetGravOptions(std::deque<std::string>& options,
 
     const CClientOptions clientOptions{allPilotOpts, vsClientOptions};
     return {meleeOptions, clientOptions};
+}
+
+void CGravClient::StartMeleeClient(CSongPlayer& songPlayer,
+                                   std::deque<std::string> serverOptions,
+                                   const CClientOptions& vsClientOptions) {
+    songPlayer.StopSong();
+    CSound{"meleeStart"}.PlayCentre();
+
+    const unsigned pilotIndex = std::stoi(popFront(serverOptions));
+    mClientSocket.reset(new CClientSocket{pilotIndex, mUdpSender});
+
+    printCentre("Loading...");
+    mMelee.reset(new CMeleeClient{getGravOptions(serverOptions, vsClientOptions),
+                                  *mClientSocket});
+    mMelee->Run();
+
+    songPlayer.PlaySong();
+}
+
+void CGravClient::StopMeleeClient(int winner) {
+    mMelee->Stop(winner);
 }
 
 void CGravClient::UdpReceived(const boost::system::error_code& error,
