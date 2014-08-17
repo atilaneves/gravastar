@@ -29,7 +29,7 @@ CGravMenu::CGravMenu(const CGravOptions &options):
     mAdFont(EmpireBuilderDocument9) {
 
     AddMenu(mVersusMenu = new CVersusMenu(cursorSprite, *this));
-    AddMenu(new COnlineMenu(cursorSprite, *this));
+    //AddMenu(new COnlineMenu(cursorSprite, *this));
     AddMenu(mOptionsMenu = new COptionsMenu(cursorSprite, *mVersusMenu,
                                             CClientOptions()));
     AdoptTitle(new CFontTitle(kFontSpaceAge52,
