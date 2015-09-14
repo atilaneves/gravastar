@@ -5,7 +5,7 @@
 #include "CPilot.hpp"
 #include "CSpriteObjs.hpp"
 #include "CPilotInputProxy.hpp"
-
+#include <iostream>
 
 CMeleeOnServer::CMeleeOnServer(const CGravOptions &options):
     CMelee(options, new CServerSocket(options, *this)) {

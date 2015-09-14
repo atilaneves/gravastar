@@ -1,6 +1,7 @@
 #include "CTcpServer.hpp"
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <iostream>
 
 
 using boost::asio::ip::tcp;

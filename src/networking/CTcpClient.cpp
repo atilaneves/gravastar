@@ -1,5 +1,6 @@
 #include "CTcpClient.hpp"
 #include "Cerealiser.hpp"
+#include <iostream>
 
 namespace asio = boost::asio;
 using namespace std;

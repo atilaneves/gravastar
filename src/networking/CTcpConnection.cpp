@@ -1,5 +1,6 @@
 #include "CTcpConnection.hpp"
 #include <boost/bind.hpp>
+#include <iostream>
 
 namespace asio = boost::asio;
 using namespace std;
