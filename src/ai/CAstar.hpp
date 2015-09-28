@@ -16,8 +16,8 @@ public:
 
 private:
 
-  std::auto_ptr<T> mGoalState;
-  std::auto_ptr<CSearchQueue<T> > mQueue;
+  std::unique_ptr<T> mGoalState;
+  std::unique_ptr<CSearchQueue<T> > mQueue;
 
 };
 

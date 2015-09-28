@@ -20,8 +20,7 @@ int CTeam::TransformColour(int colour) const {
     float h,s,v;
     CColour::RGBtoHSV(colour, h, s, v);
     if(h < sBlue.mStart || h > sBlue.mEnd) return colour;
-    float newHue = h;
-    newHue = mStart +
+    float newHue = mStart +
         ((h - (sBlue.mStart)) / (sBlue.mEnd - sBlue.mStart)) * (mEnd - mStart);
     if(newHue >= 360) newHue -= 360;
     return CColour::HSVtoRGB(newHue, s, v);

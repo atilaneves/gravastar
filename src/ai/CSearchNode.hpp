@@ -40,7 +40,7 @@ private:
   float  mCost;
   float  mHeuristic;
   float  mTotal;
-  std::auto_ptr<T> mState;
+  std::unique_ptr<T> mState;
   CSearchNode<T> *mParent;
 
 };

@@ -18,7 +18,7 @@ public:
                     int w, int h) const ;
   void         Blit(CBitmap &bitmap, int x1 = 0, int y1 = 0) const;
   void         Clear(int colour = CColour::GetBlack());
-  BitmapImp_t *CopyBitmap(void *data);
+  static BitmapImp_t *CopyBitmap(void *data);
   void         Draw(const CBitmap &bitmap, int x=0, int y=0, int fixAngle=0);
   void         Flip(int x=0, int y=0) const;
   void        *GetData() const              { return mData;        }
