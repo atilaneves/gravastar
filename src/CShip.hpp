@@ -33,6 +33,8 @@ public:
   CShip(const CShipBluePrint &bluePrint, CPilot &pilot, CLevel &level);
   virtual ~CShip();
 
+  using CExplosive::LoseHull;
+
   virtual void     ApplyInput(const CPilotInput &controls);
   virtual void AtDeath() override;
           void     BackTrack(float dt) { mPos -= mVel*dt; mNose.BackTrack();}
@@ -93,7 +95,7 @@ protected:
   const CProjBluePrint&   mExtraProjBluePrint;
   const CFollowBluePrint& mExtraFollowBluePrint;
 
-  virtual void HitTerrain(const CScreenPos &where, float dt) override;
+  void HitTerrain(const CScreenPos &where, float dt) override;
   virtual void OutOfBounds(float angle) override { Rebound(angle, 0.35); }
 };
 

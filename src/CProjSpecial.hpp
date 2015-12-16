@@ -25,7 +25,7 @@ private:
 
     const CProjBluePrint&  mBluePrint;
 
-    virtual float GetDepletionScale(float dt) const override { return 1; }
+    virtual float GetDepletionScale(float /*dt*/) const override { return 1; }
     virtual void  NotUsing() override { }
 
 };

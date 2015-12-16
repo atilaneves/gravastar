@@ -35,7 +35,7 @@ protected:
   const CSpriteVector& mExpSprites;
   CSound               mExpSound;
 
-  virtual void HitTerrain(const CScreenPos &where, float dt) = 0;
+  virtual void HitTerrain(const CScreenPos &where, float dt) override = 0;
 
 
 };

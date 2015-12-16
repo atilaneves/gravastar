@@ -36,13 +36,12 @@ void CDelta::SpawnShot(float dt, float dAngle) {
 }
 
 
-
 void CDelta::UseSpecial(float dt) {
   SpawnMissile(dt, 0);
 }
 
 
-void CDelta::UseSuper(float dt, bool use) {
+void CDelta::UseSuper(float dt, bool /*use*/) {
   static int counter = 0; //which way we'll fire
   const float dAngle = 0.15; //radians
   const float angle = (counter%3 -1)*dAngle;
