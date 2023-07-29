@@ -73,7 +73,7 @@ include_directories(src/networking)
 include_directories(src/cereal)
 
 add_definitions(-DDEV_DATAFILE_DIR="${CMAKE_SOURCE_DIR}")
-add_definitions(-D_WIN32_WINNT=0x0700) #boost asio
+#add_definitions(-D_WIN32_WINNT=0x0700) #boost asio
 if(UNIX)
   set(CMAKE_INSTALL_PREFIX "/usr")
   add_definitions(-DDATAFILE_DIR="${CMAKE_INSTALL_PREFIX}/${GRAV_DATA_DIR}")

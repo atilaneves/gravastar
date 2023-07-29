@@ -1,6 +1,6 @@
 #include "CTcpServer.hpp"
 #include <algorithm>
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <iostream>
 
 
@@ -23,11 +23,11 @@ CTcpServer::~CTcpServer() {
 }
 
 void CTcpServer::Accept() {
-    auto newConnection = CTcpConnection::Create(mAcceptor.get_io_service());
+    // auto newConnection = CTcpConnection::Create(mAcceptor.get_io_service());
 
-    mAcceptor.async_accept(newConnection->Socket(),
-                           boost::bind(&CTcpServer::HandleAccept, this, newConnection,
-                                       boost::asio::placeholders::error));
+    // mAcceptor.async_accept(newConnection->Socket(),
+    //                        boost::bind(&CTcpServer::HandleAccept, this, newConnection,
+    //                                    boost::asio::placeholders::error));
 }
 
 void CTcpServer::HandleAccept(CTcpConnection::Pointer newConnection,

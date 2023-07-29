@@ -1,5 +1,5 @@
 #include "CUdpReceiver.hpp"
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <array>
 #include <string>
 #include <iostream>
