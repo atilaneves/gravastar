@@ -12,8 +12,8 @@
 CControlsMenu::CControlsMenu(const CVersusMenu &versus,
                              const CClientOptions &options):
     CStringMenu("Controls"),
-    mCursor(*this),
-    mVersus(versus) {
+    mCursor(*this)
+{
 
     strings_t titles{ "Keyboard", "Joystick" };
     for(int i = 0; i < kMaxNbPilots; i++) {

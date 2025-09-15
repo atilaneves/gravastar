@@ -11,7 +11,7 @@ class CBitmap;
 
 class CDisplayPilot {
 
-    friend class SClientFrame;
+    friend struct SClientFrame;
 
 public:
 

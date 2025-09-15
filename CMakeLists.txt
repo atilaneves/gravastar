@@ -96,9 +96,13 @@ else()
 endif()
 
 target_compile_options(gravastar PRIVATE
-  $<$<COMPILE_LANGUAGE:CXX>:-Wall>
-  $<$<CONFIG:Debug>:-g -pg -fno-inline>
+  $<$<COMPILE_LANGUAGE:CXX>:-Wall -Wextra -Wpedantic -Werror -Wno-unused-parameter -Wno-invalid-utf8 -Wno-format-security -Wno-variadic-macros -Wno-unused-but-set-variable -Wno-format-pedantic>
+  $<$<CONFIG:Debug>:-g -pg -fno-inline -fsanitize=address -fno-omit-frame-pointer>
   $<$<CONFIG:Release>:-O2>
+)
+
+target_link_options(gravastar PRIVATE
+  $<$<CONFIG:Debug>:-fsanitize=address>
 )
 
 # ---- Windows resource (no-op on other platforms) ----------------------------------------------

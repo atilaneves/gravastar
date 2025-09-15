@@ -12,6 +12,7 @@ class CSeekAndDestroy:public CBotAction {
 public:
 
  CSeekAndDestroy(CPilotBot &pilot);
+ virtual ~CSeekAndDestroy() {}
 
  virtual void Think() override;
 

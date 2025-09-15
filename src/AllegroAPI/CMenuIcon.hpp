@@ -9,6 +9,7 @@ class CMenuIcon {
 
 public:
 
+  virtual ~CMenuIcon() {}
   virtual void Draw(CCanvas &canvas, int x, int y, bool highlight) const = 0;
   virtual int  GetHeight() const=0;
   virtual int  GetWidth()  const=0;

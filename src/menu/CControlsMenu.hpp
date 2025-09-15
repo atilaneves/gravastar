@@ -29,7 +29,6 @@ public:
 private:
 
     CMenuCursor mCursor;
-    const CVersusMenu& mVersus;
     std::vector<CCycleStringEnter*> mControlTypes;
     std::vector<CRedefineMenu*> mRedefines;
 

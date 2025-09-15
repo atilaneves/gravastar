@@ -53,7 +53,7 @@ void CSoliton::UseSpecial(float dt) {
   float force = 500;
   CShips::PushAll(mPos, force, this, GetPilot());
   CProjectiles::DamageAll(mPos, force / kScale);
-  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mShockwave, *this);
+  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mShockwave);
 }
 
 
@@ -64,5 +64,5 @@ void CSoliton::UseSuper(float dt, bool use) {
   mShockwave.Play(mPos);
   mShockwave.Play(mPos);
   mShockwave.Play(mPos);
-  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mShockwave, *this);
+  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mShockwave);
 }

@@ -43,14 +43,14 @@ void CVoidhar::UseWeapon(float dt) {
 void CVoidhar::UseSpecial(float dt) {
   float duration = 6;
   CShips::StartEffect(this, CEMP::GetID(), duration);
-  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mEMP, *this);
+  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mEMP);
 }
 
 
 void CVoidhar::UseSuper(float dt, bool use) {
   float duration = 15;
   CShips::StartEffect(this, CEMB::GetID(), duration);
-  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mEMP, *this);
+  new CSpecialExplosion(mLevel, mPos, mSpecialExpSprites, mEMP);
   mEMP.Play(mPos);
   mEMP.Play(mPos);
   mEMP.Play(mPos);

@@ -25,7 +25,7 @@ SClientFrame CClientSocket::GetFrame() const {
 void CClientSocket::UpdateFrame(Decerealiser& cereal) {
     if(!mReady) mReady = true;
     lock_guard<mutex> lock{mFrameMutex};
-    mFrame = move(SClientFrame{}); //reset
+    mFrame = SClientFrame{}; //reset
     cereal >> mFrame;
     mFrame.SetPilot(mPilotIndex);
 }

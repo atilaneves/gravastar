@@ -15,7 +15,7 @@ public:
   virtual ~CFontTitle() { }
 
   virtual void Draw(CCanvas &canvas) override;
-  virtual void NewCanvas(int width, int height) override {}
+  virtual void NewCanvas(int /*width*/, int /*height*/) override {}
 
 private:
 

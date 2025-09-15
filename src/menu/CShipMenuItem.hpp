@@ -5,7 +5,6 @@
 #include "CMenu.hpp"
 #include "CDirectory.hpp"
 #include <string>
-class CVersusMenu;
 class CDataFile;
 
 
@@ -13,7 +12,7 @@ class CShipMenuItem: public CMenu {
 
 public:
 
-  CShipMenuItem(const std::string &title, const CVersusMenu &versus);
+  CShipMenuItem(const std::string &title);
 
   const std::string& GetShipName()    const;
   const std::string& GetWeaponName()  const { return mWeaponName; }
@@ -23,7 +22,6 @@ public:
 
 private:
 
-  const CVersusMenu &mVersus;
   CDirectory mDir;
   std::string mShipName;
   std::string mWeaponName;

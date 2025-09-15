@@ -30,11 +30,11 @@ void CSuperBeam::Move(float dt) {
     bool updated = false; //no need to have been drawn 1st
     mPos = mStartPos;
 
-    while(mLevel.IsFreeSquare(CScreenPos(mPos), 2) &&
-          !CShips::Find(CScreenPos(mPos), updated) &&
+    while(mLevel.IsFreeSquare(CScreenPos(mPos.GetX(), mPos.GetY()), 2) &&
+          !CShips::Find(CScreenPos(mPos.GetX(), mPos.GetY()), updated) &&
           mPos.GetX() >= 0 && mPos.GetY() >= 0 &&
           mPos.GetX() < mLevel.GetWidth() && mPos.GetY() < mLevel.GetHeight()) {
-        CSpriteObj *sprObj = CSpriteObjs::HitObj(CScreenPos(mPos), updated);
+        CSpriteObj *sprObj = CSpriteObjs::HitObj(CScreenPos(mPos.GetX(), mPos.GetY()), updated);
         CProjectile *proj = dynamic_cast<CProjectile*>(sprObj);
         if(proj) proj->Die();
         mPos += dPos;
@@ -67,7 +67,7 @@ std::vector<CScreenPos> CSuperBeam::GetPositions() {
     CVector2 dPos = CVector2((mPos - mStartPos).Theta()) * 8;
     float dist = (mPos - mStartPos).Radius();
     for(CVector2 pos = mStartPos; (pos-mStartPos).Radius() < dist; pos += dPos)
-        positions.push_back(CScreenPos(pos));
+        positions.push_back(CScreenPos(pos.GetX(), pos.GetY()));
     return positions;
 }
 

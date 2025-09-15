@@ -8,7 +8,7 @@ CCanvas::CCanvas(void *data):
 
 
 CCanvas::CCanvas(const CBitmap &bitmap):
-  CBitmap(mData = CopyBitmap(bitmap.GetData())) {
+  CBitmap(CopyBitmap(bitmap.GetData())) {
 }
 
 

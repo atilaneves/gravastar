@@ -19,10 +19,10 @@ CShipMenu::CShipMenu(const CVersusMenu &versus):
     mShipTypes.resize(kMaxNbPilots);
     CDirectory dir("Ships");
 
-    mShipItems.push_back(new CShipMenuItem("Random", versus));
+    mShipItems.push_back(new CShipMenuItem("Random"));
 
     for(int i = 0; i < dir.GetNbEntries(); i++)
-        mShipItems.push_back(new CShipMenuItem(dir.GetEntryNoExt(i), versus));
+        mShipItems.push_back(new CShipMenuItem(dir.GetEntryNoExt(i)));
 
     for(unsigned int i = 0; i < mShipItems.size(); i++)
         AddMenu(mShipItems[i], i % 4); //add to a column
@@ -37,8 +37,8 @@ CShipMenu::~CShipMenu() {
 void CShipMenu::Clear() {
   for (auto &elem : mCursors)
     delete elem;
-    mCursors.clear();
-    for(int i = 0; i < kMaxNbPilots; i++) mShipTypes[i].clear();
+  mCursors.clear();
+  for(int i = 0; i < kMaxNbPilots; i++) mShipTypes[i].clear();
 }
 
 

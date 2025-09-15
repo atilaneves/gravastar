@@ -61,8 +61,10 @@ CScreenPos CSplitScreen::GetGrabPos(const DisplayPilots &pilots) {
     CScreenPos pos = GetCentre(pilots);
     const float velFactor = 0.25; //screen modifier for speed
 
-    if(pilots.size() == 1)
-        pos += CScreenPos(pilots[0].GetVelocity() * velFactor);
+    if(pilots.size() == 1) {
+        auto v = pilots[0].GetVelocity() * velFactor;
+        pos += CScreenPos(v.GetX(), v.GetY());
+    }
 
     int x = GetRealGrabPos(pos.GetX(),
                            mSubCanvas.GetWidth(), mLevelCanvas->GetWidth());

@@ -14,6 +14,7 @@ class CServerSocket: public CTcpConnectionObserver, public CUdpObserver {
 public:
 
     CServerSocket(const CGravOptions& options, CMeleeOnServer& melee);
+    virtual ~CServerSocket() {}
 
     void SendFrame(const std::vector<unsigned char>& frameBytes);
     void End(int winner);

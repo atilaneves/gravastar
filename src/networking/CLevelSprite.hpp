@@ -11,7 +11,7 @@ public:
     CLevelSprite(uint16_t hash, uint16_t x, uint16_t y):
         mWasDrawn(true), mHash(hash), mX(x), mY(y) { }
     CLevelSprite():mWasDrawn(false), mHash(), mX(), mY() { }
-    CLevelSprite(const CLevelSprite&) = default;
+    //CLevelSprite(const CLevelSprite&) = default;
     bool WasDrawn() const { return mWasDrawn; }
     std::size_t GetHash() const { return mHash; }
     int GetX() const { return mX; }

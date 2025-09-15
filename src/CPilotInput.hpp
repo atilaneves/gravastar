@@ -10,6 +10,7 @@ class CPilotInput {
 
 public:
 
+  virtual ~CPilotInput() {}
   static int GetNbControls() { return sNames.size(); }
   static const std::string& GetName(int i)  { return sNames[i]; }
 

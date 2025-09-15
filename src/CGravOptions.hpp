@@ -18,7 +18,7 @@ public:
 
     const CClientOptions& GetClientOptions() const { return mClientOptions; }
     const CMeleeOptions&  GetMeleeOptions()  const { return mMeleeOptions;  }
-    const int GetServerPort() const { return mServerPort; }
+    int GetServerPort() const { return mServerPort; }
 
     void push_back(const CClientOptions& clientOptions);
 

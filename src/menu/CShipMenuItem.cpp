@@ -10,11 +10,10 @@
 static CDataFile* gDataFile;
 
 
-CShipMenuItem::CShipMenuItem(const std::string &title,
-                             const CVersusMenu &versus):
+CShipMenuItem::CShipMenuItem(const std::string &title):
   CMenu(new CMenuIconShip(gDataFile = new CDataFile(GetFileName(title)),
                           GetIndex(title))),
-  mVersus(versus), mDir("Ships") {
+  mDir("Ships") {
 
   SetNames(title, *gDataFile);
   delete gDataFile;

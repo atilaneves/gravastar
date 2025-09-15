@@ -17,7 +17,7 @@ class CWeapon {
 
 public:
 
-  CWeapon(const CShipBluePrint &bluePrint, CShip& ship, CLevel& level);
+  CWeapon(const CShipBluePrint &bluePrint, CShip& ship);
 
   void  ApplyInput(const CPilotInput& input);
   const CGravSprite& GetSprite() const;
@@ -35,7 +35,6 @@ private:
   float mTemperature;
   const CProjBluePrint& mBluePrint;
   CShip& mShip;
-  CLevel& mLevel;
   CSound  mSound;
 
   int   GetRate() const;

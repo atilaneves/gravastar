@@ -29,7 +29,6 @@ private:
   enum {kMaxNbCounters = 100};
 
   int mFrequency;
-  int mNbCounters;
   int mPause[kMaxNbCounters];
   volatile int *mCounters;  //counters to be updated
   timerFunction_t mFunction;

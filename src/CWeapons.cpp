@@ -4,7 +4,7 @@
 
 CWeapons::CWeapons(const std::string& name, const CShipBluePrint& bluePrint,
                    CShip &ship, CLevel &level):
-    mWeapon(new CWeapon(bluePrint, ship, level)),
+    mWeapon(new CWeapon(bluePrint, ship)),
     mSpecial(CSpecialFactory::Instance().CreateObject(name, bluePrint,
                                                       ship, level)),
     mSuper(bluePrint, level, ship) {

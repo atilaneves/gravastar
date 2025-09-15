@@ -15,8 +15,6 @@ public:
 
 private:
 
- CSound *mSound;
-
  virtual void AffectShip(CShip &ship) override;
 };
 

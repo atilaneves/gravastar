@@ -65,7 +65,7 @@ void CXbow::Hit(CProjectile& proj, CScreenPos pos, float dt) {
       proj.Move(-1.5*dt);
       if(proj.IsUpdated()) proj.Draw();
     }
-    mDeflector->Hit(proj, CScreenPos(proj.GetPos()), dt);
+    mDeflector->Hit(proj, CScreenPos(proj.GetPos().GetX(), proj.GetPos().GetY()), dt);
   }
   else
     CShip::Hit(proj, pos, dt);

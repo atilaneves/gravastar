@@ -9,14 +9,13 @@
 #include "CEMB.hpp"
 
 
-CWeapon::CWeapon(const CShipBluePrint &shipBluePrint, CShip &ship,
-                 CLevel& level):
+CWeapon::CWeapon(const CShipBluePrint &shipBluePrint, CShip &ship):
   mFastRate(shipBluePrint.mFastRate), mSlowRate(shipBluePrint.mSlowRate),
   mMaxTemperature(shipBluePrint.mMaxTemperature),
   mCoolingRate(shipBluePrint.mCoolingRate),
   mFiring(false), mTemperature(0),
   mBluePrint(*shipBluePrint.mWeaponBluePrint),
-  mShip(ship), mLevel(level), mSound(mBluePrint.mSound) {
+  mShip(ship), mSound(mBluePrint.mSound) {
 
 
 }

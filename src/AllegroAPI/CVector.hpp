@@ -2,6 +2,7 @@
 #define CVECTOR_H
 
 #include "pi.hpp"
+#include <type_traits>
 
 template<typename T>
 class CVector {
@@ -9,7 +10,21 @@ class CVector {
 public:
 
     CVector(T x, T y):mX(x), mY(y) { }
-    CVector(const CVector<float> &v):mX((T)v.GetX()), mY((T)v.GetY()) { }
+
+    template<typename U>
+    CVector(const CVector<U> &v):mX((T)v.GetX()), mY((T)v.GetY()) { }
+
+    CVector(const CVector&) = default;
+    CVector& operator=(const CVector&) = default;
+    CVector(CVector&&) = default;
+    CVector& operator=(CVector&&) = default;
+
+    // converting ctor for different U (doesn't shadow the copy ctor)
+    template<typename U,
+             typename = typename std::enable_if<!std::is_same<U, T>::value>::type>
+    explicit CVector(const CVector<U>& v) : mX(static_cast<T>(v.GetX())),
+                                            mY(static_cast<T>(v.GetY())) {}
+
     CVector(T theta):mX(std::cos(theta)), mY(std::sin(theta)) { }
 
     T     Angle(const CVector<T>& v) const;
