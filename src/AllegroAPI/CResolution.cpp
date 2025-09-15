@@ -12,10 +12,8 @@ bool CResolution::SetMode(int width, int height) {
 
   if(width == GetWidth() && height == GetHeight() && !sChangedWindowed) return false;
 
-  if(sWindowed)
-    set_gfx_mode(GFX_AUTODETECT_WINDOWED, width, height, 0, 0);
-  else
-    set_gfx_mode(GFX_AUTODETECT, width, height, 0, 0);
+  const auto mode = sWindowed ? GFX_AUTODETECT_WINDOWED : GFX_AUTODETECT_FULLSCREEN;
+  set_gfx_mode(mode, width, height, 0, 0);
 
   sScreen = new CCanvas(screen);
 
