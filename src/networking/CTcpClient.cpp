@@ -8,7 +8,7 @@ using namespace std;
 CTcpClient::CTcpClient(const string& addr, int port):
     mStop(false),
     mSocket(mIoService),
-    mServerAddress(address_v4::from_string(addr)),
+    mServerAddress(boost::asio::ip::make_address_v4(addr)),
     mServerPort(port),
     mEndpoint(mServerAddress, mServerPort) {
 

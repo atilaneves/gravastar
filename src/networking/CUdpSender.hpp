@@ -16,7 +16,7 @@ public:
 
 private:
 
-    boost::asio::io_service mService;
+    boost::asio::io_context mService;
     boost::asio::ip::udp::socket mSocket;
     boost::asio::ip::udp::endpoint mEndpoint;
 };

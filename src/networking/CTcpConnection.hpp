@@ -15,7 +15,7 @@ public:
     using Array = std::array<unsigned char, 1024>;
     using TcpReaderFunc = std::function<void(const Array&, size_t)>;
 
-    static Pointer Create(boost::asio::io_service& io_service);
+    static Pointer Create(boost::asio::io_context& io_service);
     boost::asio::ip::tcp::socket& Socket();
     void SendBytes(const Bytes& bytes);
     void SendBytes(const std::string& bytes);
@@ -27,7 +27,7 @@ private:
     Array mRecd;
     TcpReaderFunc mTcpReaderFunc;
 
-    CTcpConnection(boost::asio::io_service& ioService);
+    CTcpConnection(boost::asio::io_context& ioService);
     void HandleWrite(const boost::system::error_code& error,
                      size_t bytes_transferred);
     void HandleRead(const boost::system::error_code& error,

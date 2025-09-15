@@ -19,7 +19,7 @@ public:
 
 private:
 
-    boost::asio::io_service mIoService;
+    boost::asio::io_context mIoService;
     CTcpConnectionObserver& mTcpObserver;
     boost::asio::ip::tcp::acceptor mAcceptor;
     std::thread mThread;

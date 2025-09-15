@@ -1,178 +1,178 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.16)
 
-project(gravastar)
+project(gravastar LANGUAGES C CXX)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR})
-
-find_package(Allegro REQUIRED)
-include_directories(${ALLEGRO_INCLUDE_DIR})
-
-find_package(Boost COMPONENTS system program_options REQUIRED)
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIR})
+# after cmake_minimum_required()/project()
+if(POLICY CMP0167)
+  cmake_policy(SET CMP0167 NEW)  # FindBoost module removed; use config package
+endif()
+if(POLICY CMP0177)
+  cmake_policy(SET CMP0177 NEW)  # Normalize install() DESTINATION paths
 endif()
 
 
-#set default build type
+# ---- Build type & language standards -----------------------------------------------------------
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release CACHE STRING
-      "Choose the type of build, options are: Debug Release"
-      FORCE)
-endif(NOT CMAKE_BUILD_TYPE)
-
-set(GRAV_FLAGS_DEBUG "-g -pg -fno-inline")
-set(GRAV_FLAGS_RELEASE "-O1")
-set(GRAV_FLAGS_C "") #not my code, don't care about warnings
-set(GRAV_FLAGS_CXX "-std=c++11 -Wall")
-
-set(CMAKE_C_FLAGS_DEBUG "${GRAV_FLAGS_C} ${GRAV_FLAGS_DEBUG}")
-set(CMAKE_CXX_FLAGS_DEBUG "${GRAV_FLAGS_CXX} ${GRAV_FLAGS_DEBUG}")
-
-set(CMAKE_C_FLAGS_RELEASE "${GRAV_FLAGS_C} ${GRAV_FLAGS_RELEASE} ")
-set(CMAKE_CXX_FLAGS_RELEASE "${GRAV_FLAGS_CXX} ${GRAV_FLAGS_RELEASE}")
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message("Debug   C   flags are ${CMAKE_C_FLAGS_DEBUG}")
-  message("Debug   C++ flags are ${CMAKE_CXX_FLAGS_DEBUG}")
-else()
-  message("Release C   flags are ${CMAKE_C_FLAGS_RELEASE}")
-  message("Release C++ flags are ${CMAKE_CXX_FLAGS_RELEASE}")
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Debug or Release" FORCE)
 endif()
 
-file(GLOB SRCS_ROOT src/*.cpp)
-file(GLOB SRCS_AI src/ai/*.cpp)
-file(GLOB SRCS_MP3 src/AllegroMP3/*.c)
-file(GLOB SRCS_API src/AllegroAPI/*.cpp)
-file(GLOB SRCS_MENU src/menu/*.cpp)
-file(GLOB SRCS_POWERUPS src/powerups/*.cpp)
-file(GLOB SRCS_SHIPS src/ships/*.cpp)
-file(GLOB SRCS_NETWORKING src/networking/*.cpp)
-file(GLOB SRCS_CEREAL src/cereal/*.cpp)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
-set(SRCS ${SRCS_NETWORKING} ${SRCS_ROOT} ${SRCS_AI} ${SRCS_MP3} ${SRCS_API} ${SRCS_MENU}
-         ${SRCS_POWERUPS} ${SRCS_SHIPS} ${SRCS_CEREAL}
-         ${CMAKE_SOURCE_DIR}/src/grav.rc)
+# ---- Dependencies -----------------------------------------------------------------------------
+# Allegro 4 on Arch exposes a pkg-config module named "allegro" (lib name: -lalleg)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(ALLEGRO4 REQUIRED allegro)
 
+# Boost (system, program_options)
+find_package(Boost REQUIRED COMPONENTS system program_options)
+
+# ---- Sources -----------------------------------------------------------------------------------
+
+file(GLOB_RECURSE GRAV_CPP CONFIGURE_DEPENDS
+  "${CMAKE_SOURCE_DIR}/src/*.cpp"
+)
+file(GLOB GRAV_C CONFIGURE_DEPENDS
+  "${CMAKE_SOURCE_DIR}/src/AllegroMP3/*.c"
+)
+
+set(GRAV_SRCS
+  ${GRAV_CPP}
+  ${GRAV_C}
+  "${CMAKE_SOURCE_DIR}/src/grav.rc"  # harmless on non-Windows
+)
+
+# ---- Executable --------------------------------------------------------------------------------
+add_executable(gravastar ${GRAV_SRCS})
+
+target_include_directories(gravastar PRIVATE
+  "${CMAKE_SOURCE_DIR}/src"
+  "${CMAKE_SOURCE_DIR}/src/ai"
+  "${CMAKE_SOURCE_DIR}/src/AllegroMP3"
+  "${CMAKE_SOURCE_DIR}/src/AllegroAPI"
+  "${CMAKE_SOURCE_DIR}/src/menu"
+  "${CMAKE_SOURCE_DIR}/src/powerups"
+  "${CMAKE_SOURCE_DIR}/src/ships"
+  "${CMAKE_SOURCE_DIR}/src/networking"
+  "${CMAKE_SOURCE_DIR}/src/cereal"
+  ${ALLEGRO4_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+)
+
+# Allegro 4 libs from pkg-config; on Arch this resolves to -lalleg plus rpath/include hints.
+target_link_directories(gravastar PRIVATE ${ALLEGRO4_LIBRARY_DIRS})
+target_link_libraries(gravastar PRIVATE ${ALLEGRO4_LIBRARIES})
+
+# Boost libraries (prefer imported targets if present)
+if(TARGET Boost::system AND TARGET Boost::program_options)
+  target_link_libraries(gravastar PRIVATE Boost::system Boost::program_options)
+else()
+  target_link_libraries(gravastar PRIVATE ${Boost_LIBRARIES})
+endif()
+
+# pthread on non-Windows
+if(NOT WIN32)
+  find_package(Threads REQUIRED)
+  target_link_libraries(gravastar PRIVATE Threads::Threads)
+endif()
+
+# ---- Compile options / defines -----------------------------------------------------------------
+# Replicate original flags via target properties (prefer per-config flags)
+target_compile_definitions(gravastar PRIVATE
+  "DEV_DATAFILE_DIR=\"${CMAKE_SOURCE_DIR}\""
+)
+
+if(UNIX)
+  set(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "" FORCE)
+  target_compile_definitions(gravastar PRIVATE
+    "DATAFILE_DIR=\"${CMAKE_INSTALL_PREFIX}/share/games/gravastar\""
+  )
+else()
+  target_compile_definitions(gravastar PRIVATE
+    "DATAFILE_DIR=\"${CMAKE_INSTALL_PREFIX}\""
+  )
+endif()
+
+# Original author flags:
+#   C   : (none), C++ : -std=c++11 -Wall
+#   Debug   : -g -pg -fno-inline
+#   Release : -O1
+target_compile_options(gravastar PRIVATE
+  $<$<COMPILE_LANGUAGE:CXX>:-Wall>
+  $<$<CONFIG:Debug>:-g -pg -fno-inline>
+  $<$<CONFIG:Release>:-O1>
+)
+
+# ---- Windows resource (no-op on other platforms) ----------------------------------------------
+if(WIN32)
+  enable_language(RC)
+  # If you truly need windres, keep the custom command; otherwise RC handles .rc.
+  # set(CMAKE_RC_COMPILER windres)
+  # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
+endif()
+
+# ---- Install layout ----------------------------------------------------------------------------
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  set(GRAV_BIN_DIR games)
+  set(GRAV_BIN_DIR  games)
   set(GRAV_DATA_DIR share/games/gravastar)
 else()
-  set(GRAV_BIN_DIR "foo/..")  #hack to keep it in the same dir
-  set(GRAV_DATA_DIR "foo/..") #same
+  # Keep legacy behavior: drop binaries & data next to the exe on non-Linux
+  set(GRAV_BIN_DIR  ".")
+  set(GRAV_DATA_DIR ".")
 endif()
 
+install(TARGETS gravastar RUNTIME DESTINATION ${GRAV_BIN_DIR})
 
-include_directories(src)
-include_directories(src/ai)
-include_directories(src/AllegroMP3)
-include_directories(src/AllegroAPI)
-include_directories(src/menu)
-include_directories(src/powerups)
-include_directories(src/ships)
-include_directories(src/networking)
-include_directories(src/cereal)
+file(GLOB CFG          "${CMAKE_SOURCE_DIR}/cfg/*.cfg")
+file(GLOB CFG_COLOURS  "${CMAKE_SOURCE_DIR}/cfg/colours/*.cfg")
+file(GLOB EXPLOSIONS   "${CMAKE_SOURCE_DIR}/Explosions/*")
+file(GLOB LEVELS       "${CMAKE_SOURCE_DIR}/Levels/*")
+file(GLOB POWERUPS     "${CMAKE_SOURCE_DIR}/Powerups/*")
+file(GLOB SHIPS        "${CMAKE_SOURCE_DIR}/Ships/*")
+file(GLOB SOUNDS       "${CMAKE_SOURCE_DIR}/Sounds/*")
+file(GLOB WEAPONS      "${CMAKE_SOURCE_DIR}/Weapons/*")
+file(GLOB MUSIC        "${CMAKE_SOURCE_DIR}/Music/*")
 
-add_definitions(-DDEV_DATAFILE_DIR="${CMAKE_SOURCE_DIR}")
-#add_definitions(-D_WIN32_WINNT=0x0700) #boost asio
+install(FILES ${CFG}          DESTINATION ${GRAV_DATA_DIR}/cfg)
+install(FILES ${CFG_COLOURS}  DESTINATION ${GRAV_DATA_DIR}/cfg/colours)
+install(FILES ${EXPLOSIONS}   DESTINATION ${GRAV_DATA_DIR}/Explosions)
+install(FILES ${LEVELS}       DESTINATION ${GRAV_DATA_DIR}/Levels)
+install(FILES ${POWERUPS}     DESTINATION ${GRAV_DATA_DIR}/Powerups)
+install(FILES ${SHIPS}        DESTINATION ${GRAV_DATA_DIR}/Ships)
+install(FILES ${SOUNDS}       DESTINATION ${GRAV_DATA_DIR}/Sounds)
+install(FILES ${WEAPONS}      DESTINATION ${GRAV_DATA_DIR}/Weapons)
+install(FILES ${MUSIC}        DESTINATION ${GRAV_DATA_DIR}/Music)
+install(FILES
+  "${CMAKE_SOURCE_DIR}/fonts.dat"
+  "${CMAKE_SOURCE_DIR}/grav.dat"
+  "${CMAKE_SOURCE_DIR}/menu.dat"
+  "${CMAKE_SOURCE_DIR}/stars.dat"
+  "${CMAKE_SOURCE_DIR}/Gravastar.mp3"
+  DESTINATION ${GRAV_DATA_DIR}
+)
+
 if(UNIX)
-  set(CMAKE_INSTALL_PREFIX "/usr")
-  add_definitions(-DDATAFILE_DIR="${CMAKE_INSTALL_PREFIX}/${GRAV_DATA_DIR}")
-else()
-  add_definitions(-DDATAFILE_DIR="${CMAKE_INSTALL_PREFIX}")
+  install(FILES "${CMAKE_SOURCE_DIR}/src/delta.png"          DESTINATION "${GRAV_DATA_DIR}/../../pixmaps")
+  install(FILES "${CMAKE_SOURCE_DIR}/src/menu/gravastar"     DESTINATION "${GRAV_DATA_DIR}/../../menu")
+  install(FILES "${CMAKE_SOURCE_DIR}/src/gravastar.desktop"  DESTINATION "${GRAV_DATA_DIR}/../../applications")
+  install(FILES "${CMAKE_SOURCE_DIR}/COPYING.txt" "${CMAKE_SOURCE_DIR}/LGPL.txt" "${CMAKE_SOURCE_DIR}/README.txt"
+          DESTINATION "${GRAV_DATA_DIR}/../../doc/gravastar")
 endif()
 
-if(WIN32 AND ${CMAKE_BUILD_TYPE} STREQUAL "Release")
-  set(CMAKE_EXE_LINKER_FLAGS "-mwindows")
-endif()
-
-message("Installation would be to ${CMAKE_INSTALL_PREFIX}/${GRAV_BIN_DIR}")
-
-
-set(GRAVRC_SRC "${CMAKE_SOURCE_DIR}/src/grav.rc")
-set(GRAVRC_OBJ "${CMAKE_BINARY_DIR}/grav.rc.o")
-set(WINDRES windres ${GRAVRC_SRC} ${GRAVRC_OBJ})
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  add_custom_command(OUTPUT ${GRAVRC_OBJ}
-                     COMMAND ${WINDRES})
-endif()
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  set(GRAV_SRCS ${SRCS} ${GRAVRC_OBJ})
-else()
-  set(GRAV_SRCS ${SRCS})
-endif()
-
-add_executable(gravastar src/server/grav_server.cpp ${GRAV_SRCS})
-
-target_link_libraries(gravastar ${ALLEGRO_LIBRARIES} ${Boost_LIBRARIES})
-if(WIN32)
-    target_link_libraries(gravastar ws2_32)
-else()
-    target_link_libraries(gravastar pthread)
-endif()
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  add_dependencies(gravastar gravrc)
-endif()
-
+# ---- CPack (trimmed; avoid Debian-specific deps) ----------------------------------------------
+include(CPack)
+set(CPACK_PACKAGE_NAME "gravastar")
 set(CPACK_PACKAGE_VERSION_MAJOR 1)
 set(CPACK_PACKAGE_VERSION_MINOR 0)
 set(CPACK_PACKAGE_VERSION_PATCH 3)
-set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_SOURCE_DIR}/README.txt)
-set(CPACK_PACKAGE_EXECUTABLES gravastar;gravastar)
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING.txt")
-set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.txt")
-set(CPACK_PACKAGE_NAME gravastar)
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.txt")
+set(CPACK_RESOURCE_FILE_LICENSE    "${CMAKE_SOURCE_DIR}/COPYING.txt")
+set(CPACK_RESOURCE_FILE_README     "${CMAKE_SOURCE_DIR}/README.txt")
 
 if(UNIX)
-  message("Setting CPACK generators for Linux/Unix")
-  set(CPACK_GENERATOR "DEB;RPM")
-  set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Atila Neves <regdae@gmail.com>")
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "liballegro4.2")
-  set(CPACK_DEBIAN_PACKAGE_SECTION "Games")
-  set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Arcade multiplayer shoot-em-up")
-
-  set(CPACK_SOURCE_GENERATOR TGZ)
+  set(CPACK_GENERATOR "TGZ") # portable; DEB/RPM meta left out to avoid distro-specific deps
 elseif(WIN32)
-  message("Setting CPACK generators for Windows")
-  set(CPACK_GENERATOR NSIS)
-  set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/delta.ico")
+  set(CPACK_GENERATOR "ZIP")
 endif()
-include(CPack)
-
-message("prefix is ${CMAKE_INSTALL_PREFIX}")
-file(GLOB CFG cfg/*.cfg)
-file(GLOB CFG_COLOURS cfg/colours/*.cfg)
-file(GLOB EXPLOSIONS Explosions/*)
-file(GLOB LEVELS Levels/*)
-file(GLOB POWERUPS Powerups/*)
-file(GLOB SHIPS Ships/*)
-file(GLOB SOUNDS Sounds/*)
-file(GLOB WEAPONS Weapons/*)
-file(GLOB MUSIC Music/*)
-
-install(FILES ${CFG}         DESTINATION ${GRAV_DATA_DIR}/cfg)
-install(FILES ${CFG_COLOURS} DESTINATION ${GRAV_DATA_DIR}/cfg/colours)
-install(FILES ${EXPLOSIONS}  DESTINATION ${GRAV_DATA_DIR}/Explosions)
-install(FILES ${LEVELS}      DESTINATION ${GRAV_DATA_DIR}/Levels)
-install(FILES ${POWERUPS}    DESTINATION ${GRAV_DATA_DIR}/Powerups)
-install(FILES ${SHIPS}       DESTINATION ${GRAV_DATA_DIR}/Ships)
-install(FILES ${SOUNDS}      DESTINATION ${GRAV_DATA_DIR}/Sounds)
-install(FILES ${WEAPONS}     DESTINATION ${GRAV_DATA_DIR}/Weapons)
-install(FILES ${MUSIC}       DESTINATION ${GRAV_DATA_DIR}/Music)
-install(FILES fonts.dat grav.dat menu.dat stars.dat Gravastar.mp3
-        DESTINATION ${GRAV_DATA_DIR})
-
-if(UNIX)
-  install(FILES src/delta.png DESTINATION "${GRAV_DATA_DIR}/../../pixmaps")
-  install(FILES src/menu/gravastar DESTINATION "${GRAV_DATA_DIR}/../../menu")
-  install(FILES src/gravastar.desktop DESTINATION "${GRAV_DATA_DIR}/../../applications")
-  install(FILES COPYING.txt LGPL.txt README.txt DESTINATION "${GRAV_DATA_DIR}/../../doc/gravastar")
-endif()
-
-if(WIN32)
-  install(FILES alleg42.dll DESTINATION ${GRAV_BIN_DIR})
-endif()
-
-install(TARGETS gravastar
-        RUNTIME DESTINATION ${GRAV_BIN_DIR})

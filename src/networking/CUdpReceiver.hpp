@@ -29,7 +29,7 @@ public:
 private:
 
     CUdpObserver& mObserver;
-    boost::asio::io_service mService;
+    boost::asio::io_context mService;
     boost::asio::ip::udp::socket mSocket;
     std::thread mThread;
     Array mRecvBuffer;

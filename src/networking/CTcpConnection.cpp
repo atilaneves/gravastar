@@ -5,11 +5,11 @@
 namespace asio = boost::asio;
 using namespace std;
 
-CTcpConnection::CTcpConnection(boost::asio::io_service& ioService)
+CTcpConnection::CTcpConnection(boost::asio::io_context& ioService)
         : mSocket(ioService) {
 }
 
-auto CTcpConnection::Create(boost::asio::io_service& io_service) -> Pointer {
+auto CTcpConnection::Create(boost::asio::io_context& io_service) -> Pointer {
     return Pointer{ new CTcpConnection(io_service) };
 }
 

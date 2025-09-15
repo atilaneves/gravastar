@@ -7,7 +7,9 @@
 
 CAllegro::CAllegro() {
 
-  assert(allegro_init() == 0);
+  if(allegro_init() != 0) {
+      fprintf(stderr, "\n*** Error: could not initialise allegro ***\n\n");
+  }
   install_keyboard();
   install_timer();
   reserve_voices(32, -1);

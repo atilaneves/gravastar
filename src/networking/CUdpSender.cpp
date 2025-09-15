@@ -6,7 +6,7 @@ using boost::asio::ip::address_v4;
 
 
 CUdpSender::CUdpSender(const std::string& address, int port): //client
-    CUdpSender(address_v4::from_string(address), port)
+    CUdpSender(boost::asio::ip::make_address_v4(address), port)
 {
 }
 

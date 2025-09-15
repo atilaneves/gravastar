@@ -27,7 +27,7 @@ public:
 private:
 
     std::atomic_bool mStop;
-    boost::asio::io_service mIoService;
+    boost::asio::io_context mIoService;
     tcp::socket mSocket;
     const address_v4 mServerAddress;
     const int mServerPort;
