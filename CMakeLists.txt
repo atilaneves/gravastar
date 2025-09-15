@@ -95,14 +95,10 @@ else()
   )
 endif()
 
-# Original author flags:
-#   C   : (none), C++ : -std=c++11 -Wall
-#   Debug   : -g -pg -fno-inline
-#   Release : -O1
 target_compile_options(gravastar PRIVATE
   $<$<COMPILE_LANGUAGE:CXX>:-Wall>
   $<$<CONFIG:Debug>:-g -pg -fno-inline>
-  $<$<CONFIG:Release>:-O1>
+  $<$<CONFIG:Release>:-O2>
 )
 
 # ---- Windows resource (no-op on other platforms) ----------------------------------------------
