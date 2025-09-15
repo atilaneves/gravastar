@@ -1,0 +1,132 @@
+=================================================================
+==333320==ERROR: AddressSanitizer: heap-use-after-free on address 0x7540464e9268 at pc 0x64cd1768689f bp 0x7ffd074d68f0 sp 0x7ffd074d68e8
+READ of size 8 at 0x7540464e9268 thread T0
+    #0 0x64cd1768689e in std::vector<CPowerup*, std::allocator<CPowerup*>>::size() const /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/stl_vector.h:1119:34
+    #1 0x64cd17685c06 in CPowerups::NearestPowerup(CVector<float> const&) const /home/atila/coding/cpp/gravastar/src/CPowerups.cpp:65:41
+    #2 0x64cd176f1ef9 in CSeekPowerup::Think() /home/atila/coding/cpp/gravastar/src/ai/CSeekPowerup.cpp:24:39
+    #3 0x64cd176ddde2 in CActionPicker::GetAction() /home/atila/coding/cpp/gravastar/src/ai/CActionPicker.cpp:27:10
+    #4 0x64cd176ec849 in CPilotBot::CheckControls(CClientSocket*) /home/atila/coding/cpp/gravastar/src/ai/CPilotBot.cpp:27:41
+    #5 0x64cd1765f194 in CMeleeOnServer::Update(float) /home/atila/coding/cpp/gravastar/src/CMeleeOnServer.cpp:47:46
+    #6 0x64cd1765eda4 in CMeleeOnServer::Run() /home/atila/coding/cpp/gravastar/src/CMeleeOnServer.cpp:34:9
+    #7 0x64cd1773370f in startMeleeFromMenu(CRootMenu&, CGravOptions const&) /home/atila/coding/cpp/gravastar/src/menu/MeleeStarter.cpp:22:16
+    #8 0x64cd1770ba2a in CMeleeStart::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CMeleeStart.cpp:15:5
+    #9 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #10 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #11 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #12 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #13 0x64cd1770791f in CLevelMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CLevelMenu.cpp:69:12
+    #14 0x64cd177158a7 in CShipMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CShipMenu.cpp:84:24
+    #15 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #16 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #17 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #18 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #19 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #20 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #21 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #22 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #23 0x64cd175fc3a0 in CRootMenu::Run() /home/atila/coding/cpp/gravastar/src/AllegroAPI/CRootMenu.cpp:55:14
+    #24 0x64cd177b3beb in main /home/atila/coding/cpp/gravastar/src/server/grav_server.cpp:16:8
+    #25 0x77b047227674 in __libc_start_call_main /usr/src/debug/glibc/glibc/csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #26 0x77b047227728 in __libc_start_main /usr/src/debug/glibc/glibc/csu/../csu/libc-start.c:360:3
+    #27 0x64cd1748fb24 in _start (/home/atila/coding/cpp/gravastar/bin/debug/gravastar+0xa5b24) (BuildId: 312cf0e619f64d871d470d16653bf0a26465cc28)
+
+0x7540464e9268 is located 744 bytes inside of 1024-byte region [0x7540464e8f80,0x7540464e9380)
+freed by thread T0 here:
+    #0 0x64cd175e1ca5 in operator delete(void*) (/home/atila/coding/cpp/gravastar/bin/debug/gravastar+0x1f7ca5) (BuildId: 312cf0e619f64d871d470d16653bf0a26465cc28)
+    #1 0x64cd17661739 in std::__new_allocator<unsigned char>::deallocate(unsigned char*, unsigned long) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/new_allocator.h:172:2
+    #2 0x64cd176616c8 in std::allocator_traits<std::allocator<unsigned char>>::deallocate(std::allocator<unsigned char>&, unsigned char*, unsigned long) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/alloc_traits.h:649:13
+    #3 0x64cd176616c8 in std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_M_deallocate(unsigned char*, unsigned long) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/stl_vector.h:396:4
+    #4 0x64cd1766160b in std::_Vector_base<unsigned char, std::allocator<unsigned char>>::~_Vector_base() /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/stl_vector.h:375:2
+    #5 0x64cd1766008d in std::vector<unsigned char, std::allocator<unsigned char>>::~vector() /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/stl_vector.h:805:7
+    #6 0x64cd176f45b1 in Cereal::~Cereal() /home/atila/coding/cpp/gravastar/src/cereal/Cereal.cpp:8:1
+    #7 0x64cd176c03d1 in Cerealiser::~Cerealiser() /home/atila/coding/cpp/gravastar/src/cereal/Cerealiser.hpp:7:7
+    #8 0x64cd176be003 in CSpriteObjs::Pack(std::vector<CDisplayPilot, std::allocator<CDisplayPilot>> const&) /home/atila/coding/cpp/gravastar/src/CSpriteObjs.cpp:137:1
+    #9 0x64cd1765f2b2 in CMeleeOnServer::Update(float) /home/atila/coding/cpp/gravastar/src/CMeleeOnServer.cpp:50:30
+    #10 0x64cd1765eda4 in CMeleeOnServer::Run() /home/atila/coding/cpp/gravastar/src/CMeleeOnServer.cpp:34:9
+    #11 0x64cd1773370f in startMeleeFromMenu(CRootMenu&, CGravOptions const&) /home/atila/coding/cpp/gravastar/src/menu/MeleeStarter.cpp:22:16
+    #12 0x64cd1770ba2a in CMeleeStart::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CMeleeStart.cpp:15:5
+    #13 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #14 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #15 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #16 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #17 0x64cd1770791f in CLevelMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CLevelMenu.cpp:69:12
+    #18 0x64cd177158a7 in CShipMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CShipMenu.cpp:84:24
+    #19 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #20 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #21 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #22 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #23 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #24 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #25 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #26 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #27 0x64cd175fc3a0 in CRootMenu::Run() /home/atila/coding/cpp/gravastar/src/AllegroAPI/CRootMenu.cpp:55:14
+    #28 0x64cd177b3beb in main /home/atila/coding/cpp/gravastar/src/server/grav_server.cpp:16:8
+    #29 0x77b047227674 in __libc_start_call_main /usr/src/debug/glibc/glibc/csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #30 0x77b047227728 in __libc_start_main /usr/src/debug/glibc/glibc/csu/../csu/libc-start.c:360:3
+
+previously allocated by thread T0 here:
+    #0 0x64cd175e11cd in operator new(unsigned long) (/home/atila/coding/cpp/gravastar/bin/debug/gravastar+0x1f71cd) (BuildId: 312cf0e619f64d871d470d16653bf0a26465cc28)
+    #1 0x64cd176c8873 in std::__new_allocator<unsigned char>::allocate(unsigned long, void const*) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/new_allocator.h:151:27
+    #2 0x64cd176c87e4 in std::allocator_traits<std::allocator<unsigned char>>::allocate(std::allocator<unsigned char>&, unsigned long) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/alloc_traits.h:614:20
+    #3 0x64cd176c87e4 in std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_M_allocate(unsigned long) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/stl_vector.h:387:20
+    #4 0x64cd176f58e9 in void std::vector<unsigned char, std::allocator<unsigned char>>::_M_realloc_append<unsigned char const&>(unsigned char const&) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/vector.tcc:572:33
+    #5 0x64cd176f55b7 in std::vector<unsigned char, std::allocator<unsigned char>>::push_back(unsigned char const&) /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/stl_vector.h:1427:4
+    #6 0x64cd176f53e5 in Cerealiser::grainByte(unsigned char&) /home/atila/coding/cpp/gravastar/src/cereal/Cerealiser.cpp:5:12
+    #7 0x64cd176f4946 in Cereal::grain(unsigned short&) /home/atila/coding/cpp/gravastar/src/cereal/Cereal.cpp:26:5
+    #8 0x64cd1774da14 in CLevelSprite::cerealise(Cereal&) /home/atila/coding/cpp/gravastar/src/networking/CLevelSprite.cpp:8:12
+    #9 0x64cd176c63f8 in void Cereal::grain<unsigned short, CLevelSprite, std::allocator<CLevelSprite>>(std::vector<CLevelSprite, std::allocator<CLevelSprite>>&) /home/atila/coding/cpp/gravastar/src/cereal/Cereal.hpp:77:11
+    #10 0x64cd176c5dd7 in SClientFrame::cerealise(Cereal&) /home/atila/coding/cpp/gravastar/src/networking/SClientFrame.hpp:22:16
+    #11 0x64cd176c5d71 in void Cereal::grain<SClientFrame>(SClientFrame&) /home/atila/coding/cpp/gravastar/src/cereal/Cereal.hpp:36:11
+    #12 0x64cd176bfc75 in Cerealiser& Cerealiser::operator<<<SClientFrame>(SClientFrame const&) /home/atila/coding/cpp/gravastar/src/cereal/Cerealiser.hpp:12:17
+    #13 0x64cd176bdfbc in CSpriteObjs::Pack(std::vector<CDisplayPilot, std::allocator<CDisplayPilot>> const&) /home/atila/coding/cpp/gravastar/src/CSpriteObjs.cpp:135:12
+    #14 0x64cd1765f2b2 in CMeleeOnServer::Update(float) /home/atila/coding/cpp/gravastar/src/CMeleeOnServer.cpp:50:30
+    #15 0x64cd1765eda4 in CMeleeOnServer::Run() /home/atila/coding/cpp/gravastar/src/CMeleeOnServer.cpp:34:9
+    #16 0x64cd1773370f in startMeleeFromMenu(CRootMenu&, CGravOptions const&) /home/atila/coding/cpp/gravastar/src/menu/MeleeStarter.cpp:22:16
+    #17 0x64cd1770ba2a in CMeleeStart::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CMeleeStart.cpp:15:5
+    #18 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #19 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #20 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #21 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #22 0x64cd1770791f in CLevelMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CLevelMenu.cpp:69:12
+    #23 0x64cd177158a7 in CShipMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/menu/CShipMenu.cpp:84:24
+    #24 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #25 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #26 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+    #27 0x64cd175f0da2 in CMenu::Run(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:50:11
+    #28 0x64cd175f6a5f in CMenuCursor::Update(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenuCursor.cpp:55:22
+    #29 0x64cd175f122a in CMenu::IsActive(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:69:18
+    #30 0x64cd175f0eeb in CMenu::RunStep(CRootMenu&) /home/atila/coding/cpp/gravastar/src/AllegroAPI/CMenu.cpp:57:19
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/atila/coding/cpp/gravastar/src/CPowerups.cpp:65:41 in CPowerups::NearestPowerup(CVector<float> const&) const
+Shadow bytes around the buggy address:
+  0x7540464e8f80: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7540464e9000: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7540464e9080: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7540464e9100: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7540464e9180: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+=>0x7540464e9200: fd fd fd fd fd fd fd fd fd fd fd fd fd[fd]fd fd
+  0x7540464e9280: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7540464e9300: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x7540464e9380: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7540464e9400: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7540464e9480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==333320==ABORTING
