@@ -23,8 +23,8 @@ CShip::CShip(const CShipBluePrint &bluePrint, CPilot& pilot, CLevel &level):
     mEMPSprites(bluePrint.mEMPBluePrint.GetSprites()),
     mEffects(bluePrint.mTeam, *this, level),
     mWeapons(bluePrint.mName, bluePrint, *this, level),
-    mExtraProjBluePrint(*bluePrint.mExtraProjBluePrint),
-    mExtraFollowBluePrint(*bluePrint.mExtraFollowBluePrint)
+    mExtraProjBluePrint(bluePrint.mExtraProjBluePrint.get()),
+    mExtraFollowBluePrint(bluePrint.mExtraFollowBluePrint.get())
 {
     mSpawn.Play(mPos);
     mMass    = bluePrint.mMass;

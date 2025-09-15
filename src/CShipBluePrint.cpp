@@ -11,7 +11,8 @@
 
 
 
-CShipBluePrint::CShipBluePrint(const std::string &name, const CTeam &team,
+CShipBluePrint::CShipBluePrint(const std::string &name,
+                               const CTeam &team,
                                const CShipYard &shipYard):
   mName(name), mDataFile(new CDataFile("Ships/" + name + ".dat")),
   mTeam(team),
@@ -25,8 +26,8 @@ CShipBluePrint::CShipBluePrint(const std::string &name, const CTeam &team,
   mSounds(shipYard.GetSounds()),
   mStatSprite(mDataFile->GetData(BLUE_000), team),
   mAuraSprite(mDataFile->GetData(AURA_000), team),
-  mSuperSprite(CDataFile("grav.dat").GetData(GRAV_SUPER_ICON), team) {
-
+  mSuperSprite(CDataFile("grav.dat").GetData(GRAV_SUPER_ICON), team)
+{
   SetAttributes((char*)mDataFile->GetData(ATTRIBUTES_SHIP));
   delete mDataFile;
 

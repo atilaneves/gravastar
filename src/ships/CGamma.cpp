@@ -14,6 +14,7 @@
 #include "CShipBluePrint.hpp"
 #include "CShipSounds.hpp"
 #include <math.h>
+#include <assert.h>
 
 
 static std::string gShipName = "Gamma";
@@ -62,7 +63,8 @@ void CGamma::UseSuper(float dt, bool use) {
         mSuperBeamSound.Stop();
     }
     else if(use && !mSuperBeam) {
-        const CSpriteVector &sprites = mExtraFollowBluePrint.GetSprites();
+        assert(mExtraFollowBluePrint);
+        const CSpriteVector &sprites = mExtraFollowBluePrint->GetSprites();
         const float kFrequency = 70;
         mSuperBeam = new CSuperBeam(sprites, mLevel, *this);
         new CFlicker(kFrequency, mLevel, mSuperBeam);

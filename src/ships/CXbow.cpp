@@ -6,6 +6,7 @@
 #include "CDeflector.hpp"
 #include "CSpriteObjs.hpp"
 #include <math.h>
+#include <assert.h>
 
 static std::string gShipName = "Xbow";
 static std::string gFollowName = "deflector";
@@ -42,10 +43,11 @@ void CXbow::UseSpecial(float dt) {
 
 void CXbow::UseSuper(float dt, bool use) {
   CVector2 vel = CProjLauncher::GetLaunchVel(*this, 800);
-  const CSpriteVector& sprites = mExtraProjBluePrint.GetSprites();
+  assert(mExtraProjBluePrint);
+  const CSpriteVector& sprites = mExtraProjBluePrint->GetSprites();
   CVector2 pos = CProjLauncher::GetLaunchPos(*sprites[0], dt, *this, 0.8);
   bool shadow = true;
-  new CProjectile(mExtraProjBluePrint, *this, pos, vel, shadow);
+  new CProjectile(*mExtraProjBluePrint, *this, pos, vel, shadow);
 }
 
 

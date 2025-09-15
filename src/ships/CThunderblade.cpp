@@ -8,6 +8,7 @@
 #include "CThrustUp.hpp"
 #include "CSpriteObjs.hpp"
 #include <math.h>
+#include <assert.h>
 
 static std::string gShipName = "Thunderblade";
 static std::string gFollowName = "lightning";
@@ -51,9 +52,10 @@ void CThunderblade::UseSuper(float dt, bool use) {
     mTempest = nullptr;
   }
   else if (use && !mTempest) {
-    static CSound sound = mExtraFollowBluePrint.GetSound();
+    assert(mExtraFollowBluePrint);
+    static CSound sound = mExtraFollowBluePrint->GetSound();
     const CVector2 offset(0, 0);
-    const CSpriteVector &sprites = mExtraFollowBluePrint.GetSprites();
+    const CSpriteVector &sprites = mExtraFollowBluePrint->GetSprites();
     const float kFrequency = 70;
     mTempest = new CWeaponFollow(sprites, mLevel, *this, nullptr, offset);
     mTempest->SetDamage(75);

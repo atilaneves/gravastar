@@ -92,8 +92,8 @@ protected:
   const CSpriteVector&    mEMPSprites;
   CShipEffects            mEffects;
   CWeapons                mWeapons;
-  const CProjBluePrint&   mExtraProjBluePrint;
-  const CFollowBluePrint& mExtraFollowBluePrint;
+  const CProjBluePrint*   mExtraProjBluePrint;
+  const CFollowBluePrint* mExtraFollowBluePrint;
 
   void HitTerrain(const CScreenPos &where, float dt) override;
   virtual void OutOfBounds(float angle) override { Rebound(angle, 0.35); }

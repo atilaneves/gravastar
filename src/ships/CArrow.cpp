@@ -5,6 +5,7 @@
 #include "CNose.hpp"
 #include "CGravityProj.hpp"
 #include <math.h>
+#include <assert.h>
 
 
 static std::string gMissName = "homingMissile";
@@ -46,9 +47,10 @@ void CArrow::UseSuper(float dt, bool use) {
   const float dist = 0.85, velNorm = 500;
   const float velAngle = CNose::NoseIndex2Angle(GetNose());
   CVector2 vel = CVector2(velAngle) * velNorm;
-  const CSpriteVector& sprites = mExtraProjBluePrint.GetSprites();
+  assert(mExtraProjBluePrint);
+  const CSpriteVector& sprites = mExtraProjBluePrint->GetSprites();
   CVector2 pos = CProjLauncher::GetLaunchPos(*sprites[0], dt, *this, dist);
   bool shadow = true;
-  new CProjectile(mExtraProjBluePrint, *this, pos, vel, shadow);
+  new CProjectile(*mExtraProjBluePrint, *this, pos, vel, shadow);
 
 }

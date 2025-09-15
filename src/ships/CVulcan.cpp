@@ -7,6 +7,7 @@
 #include "CSpriteObjs.hpp"
 #include "CPilotInput.hpp"
 #include <math.h>
+#include <assert.h>
 
 
 static std::string gMissName = "cluster";
@@ -59,10 +60,11 @@ void CVulcan::ApplyInput(const CPilotInput &controls) {
 
 
 void CVulcan::LaunchSpawn() {
+    assert(mExtraProjBluePrint);
   for(float angle = 0; angle < 2*M_PI; angle += M_PI/4) {
     CVector2 pos = mCluster->GetPos() + CVector2(angle) * 10;
     CVector2 vel = mCluster->GetVel() + CVector2(angle) * 30;
-    new CGravityProj(mExtraProjBluePrint, *this, pos, vel);
+    new CGravityProj(*mExtraProjBluePrint, *this, pos, vel);
   }
   CSpriteObjs::RemoveObj(mCluster);
   delete mCluster;

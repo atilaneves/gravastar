@@ -24,8 +24,8 @@ CShip* CShipYard::CreateShip(const std::string &shipName, const CTeam &team,
                              CPilot &pilot) const {
     //creates a ship, fetching the necessary blueprint
     auto& factory = CShipFactory::Instance();
-    return factory.CreateObject(shipName, GetBluePrint(shipName, team),
-                                pilot, mLevel);
+    auto& bluePrint = GetBluePrint(shipName, team);
+    return factory.CreateObject(shipName, bluePrint, pilot, mLevel);
 }
 
 
