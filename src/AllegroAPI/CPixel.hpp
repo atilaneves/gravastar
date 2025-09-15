@@ -10,7 +10,7 @@ class CPixel: public CDrawable {
 public:
 
   CPixel(int colour):mColour(colour) { }
-  virtual void Draw (const CCanvas &canvas, int x, int y);
+  virtual void Draw (CCanvas &canvas, int x, int y) const override;
   virtual void Erase(const CCanvas &canvas, int x, int y);
 
 

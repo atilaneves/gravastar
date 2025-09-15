@@ -63,7 +63,8 @@ bool CLevelGfx::IsFreeSquare(int xc, int yc, int side) const {
 
 
 static int gDim(float x, int dim) {
- if(x < 0) x = 0; if(x >= dim) x = dim - 1;
+ if(x < 0) x = 0;
+ if(x >= dim) x = dim - 1;
  return int(x);
 }
 

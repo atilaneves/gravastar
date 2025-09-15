@@ -2,7 +2,7 @@
 #include "CCanvas.hpp"
 
 
-void CPixel::Draw(const CCanvas &canvas, int x, int y) {
+void CPixel::Draw(CCanvas &canvas, int x, int y) const {
     _putpixel((BITMAP*)canvas.GetData(), x, y, mColour);
 }
 
