@@ -1,5 +1,6 @@
 #include "CResolution.hpp"
 #include "CCanvas.hpp"
+#include "CSound.hpp"
 #include <allegro.h>
 
 
@@ -18,7 +19,7 @@ bool CResolution::SetMode(int width, int height) {
   sScreen = new CCanvas(screen);
 
   set_display_switch_mode(SWITCH_BACKGROUND);
-  //CSound::SetMaxX(width);
+  CSound::SetMaxX(width);
   sChangedWindowed = false; //reset
   return true; //actually changed the gfx mode
 }

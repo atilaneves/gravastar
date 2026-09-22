@@ -10,40 +10,79 @@ bool CMenuInput::sRight=false;
 bool CMenuInput::sSelect=false;
 bool CMenuInput::sCancel=false;
 
+namespace {
+
+bool JoystickPressedNow(bool pressed, bool &wasPressing, bool &initialized) {
+    if(!initialized) {
+        wasPressing = pressed;
+        initialized = true;
+        return false;
+    }
+    if(pressed && !wasPressing) {
+        wasPressing = true;
+        return true;
+    }
+    if(!pressed)
+        wasPressing = false;
+    return false;
+}
+
+}
+
 
 bool CMenuInput::Up() {
-    return PressedNow(CKeyboard::KeyPressed(CKeyboard::kUp) ||
-                      CJoystick::JoyUp(), sUp);
+    static bool joyWasPressing = false, joyInitialized = false;
+    const bool keyPressed = PressedNow(CKeyboard::KeyPressed(CKeyboard::kUp), sUp);
+    const bool joyPressed = JoystickPressedNow(CJoystick::JoyUp(),
+                                               joyWasPressing, joyInitialized);
+    return keyPressed || joyPressed;
 }
 
 
 bool CMenuInput::Down() {
-    return PressedNow(CKeyboard::KeyPressed(CKeyboard::kDown) ||
-                      CJoystick::JoyDown(), sDown);
+    static bool joyWasPressing = false, joyInitialized = false;
+    const bool keyPressed = PressedNow(CKeyboard::KeyPressed(CKeyboard::kDown), sDown);
+    const bool joyPressed = JoystickPressedNow(CJoystick::JoyDown(),
+                                               joyWasPressing, joyInitialized);
+    return keyPressed || joyPressed;
 }
 
 
 bool CMenuInput::Left() {
-    return PressedNow(CKeyboard::KeyPressed(CKeyboard::kLeft) ||
-                      CJoystick::JoyLeft(), sLeft);
+    static bool joyWasPressing = false, joyInitialized = false;
+    const bool keyPressed = PressedNow(CKeyboard::KeyPressed(CKeyboard::kLeft), sLeft);
+    const bool joyPressed = JoystickPressedNow(CJoystick::JoyLeft(),
+                                               joyWasPressing, joyInitialized);
+    return keyPressed || joyPressed;
 }
 
 
 bool CMenuInput::Right() {
-    return PressedNow(CKeyboard::KeyPressed(CKeyboard::kRight) ||
-                      CJoystick::JoyRight(), sRight);
+    static bool joyWasPressing = false, joyInitialized = false;
+    const bool keyPressed = PressedNow(CKeyboard::KeyPressed(CKeyboard::kRight), sRight);
+    const bool joyPressed = JoystickPressedNow(CJoystick::JoyRight(),
+                                               joyWasPressing, joyInitialized);
+    return keyPressed || joyPressed;
 }
 
 
 bool CMenuInput::Select() {
-    return PressedNow(CKeyboard::KeyPressed(CKeyboard::kEnter) ||
-                      CJoystick::JoyPressed(0), sSelect);
+    static bool joyWasPressing = false, joyInitialized = false;
+    const bool keyPressed = PressedNow(CKeyboard::KeyPressed(CKeyboard::kEnter),
+                                       sSelect);
+    const bool joyPressed = JoystickPressedNow(CJoystick::JoyPressed(0),
+                                               joyWasPressing, joyInitialized);
+    return keyPressed || joyPressed;
 }
 
 
 bool CMenuInput::Cancel() {
-    return PressedNow(CKeyboard::KeyPressed(CKeyboard::kEsc) ||
-                      CJoystick::JoyPressed(1), sCancel);
+    static bool joyWasPressing = false, joyInitialized = false;
+    const bool keyPressed = PressedNow(CKeyboard::KeyPressed(CKeyboard::kEsc),
+                                       sCancel);
+    const bool joyPressed = JoystickPressedNow(CJoystick::JoyPressed(1),
+                                               joyWasPressing, joyInitialized);
+    return keyPressed || joyPressed;
 }
 
 

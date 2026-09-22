@@ -13,6 +13,7 @@ bool CKeyboard::KeyPressed() {
 
 
 bool CKeyboard::KeyPressed(int keyNb) {
+ poll_keyboard();
  return (bool)key[keyNb];
 }
 
