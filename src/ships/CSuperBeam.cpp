@@ -15,7 +15,7 @@ CSuperBeam::CSuperBeam(const CSpriteVector &sprites, CLevel &level,
     CWeaponFollow(sprites, level, ship),
     mPulseLaser(pulseLaser),
     mStartPos(0, 0) {
-    DEBUG("superBeam %p\n", this);
+    DEBUG("superBeam %p\n", static_cast<void*>(this));
     SetDamage(75);
 }
 

@@ -8,8 +8,9 @@ CTimer::CTimer(int bps, timerFunction_t function,
 
  if(nbCounters == 1)
     LOCK_VARIABLE(*mCounters);
- else
+ else {
     LOCK_VARIABLE(mCounters);
+ }
 
  LOCK_FUNCTION(mFunction);
  install_int_ex(function, BPS_TO_TIMER(mFrequency));

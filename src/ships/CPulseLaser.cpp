@@ -10,7 +10,7 @@ CPulseLaser::CPulseLaser(const CProjBluePrint &bluePrint, CShip& ship,
                          bool shadow):
     CProjectile(bluePrint, ship, pos, vel, shadow),
     mBeam(new CSuperBeam(bluePrint.GetSprites(), mLevel, ship, this)) {
-    DEBUG("pulse beam %p\n", mBeam);
+    DEBUG("pulse beam %p\n", static_cast<void*>(mBeam));
     mCounter.Start(0.075);
 }
 

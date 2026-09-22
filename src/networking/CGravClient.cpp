@@ -63,7 +63,8 @@ static CGravOptions getGravOptions(std::deque<std::string>& serverOptions,
     for(int i = 0; i < nbPilots; ++i) {
         const auto name = popFront(serverOptions);
         const auto type = popFront(serverOptions);
-        const auto& team = CTeam::FindByName(popFront(serverOptions));
+        const auto teamName = popFront(serverOptions);
+        const auto& team = CTeam::FindByName(teamName);
         std::vector<std::string> ships;
         for(int j = 0; j < nbShips; ++j) {
             ships.push_back(popFront(serverOptions));

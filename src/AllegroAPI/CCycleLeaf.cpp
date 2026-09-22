@@ -4,13 +4,13 @@
 #include <stdio.h>
 
 
-static CMenuIconCycle *gIconCycle;
-
 CCycleLeaf::CCycleLeaf(const std::string& title, int max, int min):
-   CMenu(gIconCycle = new CMenuIconCycle(title, *this)),
+   CMenu(nullptr),
    mCycle(max, min),
    mTitle(title),
-   mIconCycle(gIconCycle) {
+   mIconCycle(nullptr) {
+  mIconCycle = new CMenuIconCycle(title, *this);
+  AdoptIcon(mIconCycle);
 }
 
 
